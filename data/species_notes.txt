@@ -1,0 +1,48 @@
+
+
+## 1st Check Notes
+
+In addition to the manual terrestriality / alphas in `species_range_fixes.r`,
+here are some notes: 
+
+ - Lates calcarifer is catadromous, but I've listed it as terrestrial.
+
+ - Oncorhynchus is anadramous and are listed as terrestrial
+
+ - Sciaenops ocellatus -- TODO
+
+ - Strongylocentrotus purpuratus -- CHECK
+
+ Most Drosophilids are wrong.
+
+ ## 2nd Check Notes
+
+ - With default alpha, Nasonia vitripennis had an inferred area of 24079 km^2.
+   This is far smaller than this indicates:
+   http://www.sas.rochester.edu/bio/labs/WerrenLab/WerrenLab-NasoniaDistribution.html
+   and https://www.nature.com/articles/hdy2009160 This species is broadly
+   cosmopolitan but occurrences are low in the GBIF data. As a conservative
+   estimate, I added the areas of US and Central Europe.
+
+
+## Manually Assigned ranges
+
+- Caenorhabditis -- this one's hard. Looking [this
+  map](https://onlinelibrary.wiley.com/doi/full/10.1002/bies.201500053?), and
+  [this article](https://elifesciences.org/articles/05849), it seems a
+  conservative range estimate is North America and Europe for C. elegans. It
+  seems C. elegans hasn't been found in Asia, South America, or Africa.
+
+
+## Marked as Missing
+
+I marked some inferred ranges as missing, as the number off occurrences was too
+low to make a quality range estimate. These are generally microorganisms often
+not logged.
+
+ - Chlamydomonas
+ - Plasmodium
+ - Neurospora
+ - Phytophthora
+
+

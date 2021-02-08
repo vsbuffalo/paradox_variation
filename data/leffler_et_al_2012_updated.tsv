@@ -1,0 +1,192 @@
+species	phylum	size	site_type	diversity	habitat	mating_system	range_cat	genus
+Acyrthosiphon pisum	Arthropoda	NA	non-coding	0.0088125	Terrestrial	Partial selfing	Cosmopolitan	Acyrthosiphon
+Aedes aegypti	Arthropoda	NA	non-coding	0.01421	Terrestrial	Obligatory outcrossing	Cosmopolitan	Aedes
+Agelaius phoeniceus	Chordata	0.22	intronic	0.0059	Terrestrial	Obligatory outcrossing	Broad endemic	Agelaius
+Ailuropoda melanoleuca	Chordata	1.53924	genome-wide	0.00135	Terrestrial	Obligatory outcrossing	Narrow endemic	Ailuropoda
+Amphimedon queenslandica	Porifera	0.15	genome-wide	0.023700000000000002	Marine	Partial selfing	Broad endemic	Amphimedon
+Anopheles arabiensis	Arthropoda	0.00295	mixed	0.022000000000000002	Terrestrial	Obligatory outcrossing	Broad endemic	Anopheles
+Anopheles baimaii	Arthropoda	NA	mixed	0.00541	Terrestrial	Obligatory outcrossing	Broad endemic	Anopheles
+Anopheles cruzii	Arthropoda	NA	mixed	0.01439	Terrestrial	Obligatory outcrossing	Broad endemic	Anopheles
+Anopheles dirus	Arthropoda	NA	mixed	0.009715	Terrestrial	Obligatory outcrossing	Broad endemic	Anopheles
+Anopheles gambiae	Arthropoda	0.00295	mixed	0.0288	Terrestrial	Obligatory outcrossing	Broad endemic	Anopheles
+Anopheles melas	Arthropoda	NA	mixed	0.005699999999999999	Terrestrial	Obligatory outcrossing	Broad endemic	Anopheles
+Anopheles merus	Arthropoda	0.00303	mixed	0.0124	Terrestrial	Obligatory outcrossing	Broad endemic	Anopheles
+Anopheles quadriannulatus	Arthropoda	0.0055	mixed	0.022799999999999997	Terrestrial	Obligatory outcrossing	Broad endemic	Anopheles
+Anopheles scanloni	Arthropoda	NA	mixed	0.0058	Terrestrial	Obligatory outcrossing	Narrow endemic	Anopheles
+Aphanarthrum subglabrum/glabrum	Arthropoda	0.00155	mixed	0.00189	Terrestrial	Obligatory outcrossing	Island	Aphanarthrum
+Apis cerana	Arthropoda	NA	non-coding	0.00848	Terrestrial	Partial selfing	Broad endemic	Apis
+Apis mellifera	Arthropoda	NA	non-coding	0.00848	Terrestrial	Partial selfing	Cosmopolitan	Apis
+Aquila clanga/pomarina	Chordata	0.65	intronic	0.001143	Terrestrial	Obligatory outcrossing	Broad endemic	Aquila
+Aquilegia formosa/pubescens	Magnoliophyta	0.6	synonymous	0.00228	Terrestrial	Partial selfing	Broad endemic	Aquilegia
+Arabidopsis halleri	Magnoliophyta	NA	silent	0.01502	Terrestrial	Obligatory outcrossing	Broad endemic	Arabidopsis
+Arabidopsis lyrata	Magnoliophyta	0.25	silent	0.009116666666666667	Terrestrial	Obligatory outcrossing	Cosmopolitan	Arabidopsis
+Arabidopsis thaliana	Magnoliophyta	NA	4-fold degenerate	0.0055000000000000005	Terrestrial	Partial selfing	Cosmopolitan	Arabidopsis
+Arabidopsis thaliana	Magnoliophyta	NA	intronic	0.006500000000000001	Terrestrial	Partial selfing	Cosmopolitan	Arabidopsis
+Arabidopsis thaliana	Magnoliophyta	NA	non-coding	0.0060999999999999995	Terrestrial	Partial selfing	Cosmopolitan	Arabidopsis
+Bactrocera depressa	Arthropoda	0.00745	mixed	0.0023	Terrestrial	Obligatory outcrossing	Broad endemic	Bactrocera
+Balaenoptera bonaerensis	Chordata	5.4864	intronic	0.00387	Marine	Obligatory outcrossing	Cosmopolitan	Balaenoptera
+Boechera stricta	Magnoliophyta	0.6	silent	0.0034999999999999996	Terrestrial	Partial selfing	Broad endemic	Boechera
+Caenorhabditis briggsae	Nematoda	0.0014	silent	3.7749999999999996e-4	Terrestrial	Partial selfing	Cosmopolitan	Caenorhabditis
+Caenorhabditis elegans	Nematoda	0.0014	silent	0.003715	Terrestrial	Partial selfing	Cosmopolitan	Caenorhabditis
+Caenorhabditis remanei	Nematoda	0.0014	silent	0.0567	Terrestrial	Obligatory outcrossing	Cosmopolitan	Caenorhabditis
+Callithrix jacchus	Chordata	0.18669	synonymous	0.00123	Terrestrial	Obligatory outcrossing	Narrow endemic	Callithrix
+Canis latrans/lupus	Chordata	0.80772	intronic	0.001712	Terrestrial	Obligatory outcrossing	Cosmopolitan	Canis
+Capsella grandiflora	Magnoliophyta	0.3	synonymous	0.03202	Terrestrial	Obligatory outcrossing	Narrow endemic	Capsella
+Capsella rubella	Magnoliophyta	0.2	synonymous	0.00666	Terrestrial	Partial selfing	Cosmopolitan	Capsella
+Cecidostiba fungosa	Arthropoda	0.0018	intronic	0.01165	Terrestrial	Obligatory outcrossing	Broad endemic	Cecidostiba
+Cecidostiba fungosa	Arthropoda	0.0018	synonymous	0.01088	Terrestrial	Obligatory outcrossing	Broad endemic	Cecidostiba
+Ceratitis capitata	Arthropoda	0.004	intronic	0.02951	Terrestrial	Obligatory outcrossing	Cosmopolitan	Ceratitis
+Chlamydomonas reinhardtii	Chlorophyta	NA	intronic	0.03613	Terrestrial and freshwater	Partial selfing	Cosmopolitan	Chlamydomonas
+Chlamydomonas reinhardtii	Chlorophyta	NA	synonymous	0.02086	Terrestrial and freshwater	Partial selfing	Cosmopolitan	Chlamydomonas
+Chlorocebus aethiops	Chordata	0.458	synonymous	0.00233	Terrestrial	Obligatory outcrossing	Narrow endemic	Chlorocebus
+Cichla pleiozona	Chordata	0.4572	intronic	0.010333333333333333	Freshwater	Obligatory outcrossing	Narrow endemic	Cichla
+Ciona intestinalis	Chordata	0.2	non-coding	0.025035	Marine	Obligatory outcrossing	Cosmopolitan	Ciona
+Ciona roulei	Chordata	0.2	mixed	0.03238	Marine	Obligatory outcrossing	Narrow endemic	Ciona
+Ciona savignyi	Chordata	0.15	4-fold degenerate	0.0801	Marine	Obligatory outcrossing	Broad endemic	Ciona
+Crassostrea gigas	Mollusca	NA	intronic	0.0333	Marine	Partial selfing	Broad endemic	Crassostrea
+Crassostrea gigas	Mollusca	NA	synonymous	0.03306	Marine	Partial selfing	Broad endemic	Crassostrea
+Cryptococcus neoformans	Basidiomycota	NA	mixed	0.00517575	Terrestrial	Partial selfing	Cosmopolitan	Cryptococcus
+Cryptomeria japonica	Pinophyta	NA	intronic	0.00619	Terrestrial	Partial selfing	Cosmopolitan	Cryptomeria
+Cryptomeria japonica	Pinophyta	NA	synonymous	0.00421	Terrestrial	Partial selfing	Cosmopolitan	Cryptomeria
+Daphnia arenata	Arthropoda	0.002	intronic	0.00248	Freshwater	Partial selfing	Narrow endemic	Daphnia
+Daphnia arenata	Arthropoda	0.002	synonymous	0.00172	Freshwater	Partial selfing	Narrow endemic	Daphnia
+Daphnia magna	Arthropoda	0.002	non-coding	0.011279999999999998	Freshwater	Partial selfing	Cosmopolitan	Daphnia
+Daphnia magna	Arthropoda	0.002	synonymous	0.01508	Freshwater	Partial selfing	Cosmopolitan	Daphnia
+Daphnia obtusa	Arthropoda	0.002	intronic	0.014150000000000001	Freshwater	Selfing	Broad endemic	Daphnia
+Daphnia obtusa	Arthropoda	0.002	synonymous	0.00938	Freshwater	Selfing	Broad endemic	Daphnia
+Daphnia pulex	Arthropoda	0.002	synonymous	0.022029999999999998	Freshwater	Partial selfing	Cosmopolitan	Daphnia
+Daphnia pulicaria	Arthropoda	0.002	intronic	0.02458	Freshwater	Partial selfing	Narrow endemic	Daphnia
+Daphnia pulicaria	Arthropoda	0.002	synonymous	0.01587	Freshwater	Partial selfing	Narrow endemic	Daphnia
+Dasypus novemcinctus	Chordata	0.7	synonymous	0.00153	Terrestrial	Obligatory outcrossing	Broad endemic	Dasypus
+Daubentonia madagascariensis	Chordata	0.4064	synonymous	7.3e-4	Terrestrial	Obligatory outcrossing	Island	Daubentonia
+Drosophila americana	Arthropoda	0.0025409090909090906	intronic	0.01786	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila americana	Arthropoda	0.0025409090909090906	synonymous	0.0252	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila ananassae	Arthropoda	0.0025409090909090906	synonymous	0.0236	Terrestrial	Partial selfing	Cosmopolitan	Drosophila
+Drosophila arizonae	Arthropoda	0.0025409090909090906	mixed	0.008285	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila bipectinata	Arthropoda	0.0025409090909090906	non-coding	0.020099999999999996	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila bogotana	Arthropoda	0.0025409090909090906	non-coding	0.00622	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila buzzatii	Arthropoda	0.0025409090909090906	anonymous	0.01936	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila kikkawai	Arthropoda	0.0025409090909090906	silent	0.0323	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila malerkotliana	Arthropoda	0.0025409090909090906	non-coding	0.0168	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila melanogaster	Arthropoda	0.0025	non-coding	0.0172	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila melanogaster	Arthropoda	0.0025	synonymous	0.0232	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila miranda	Arthropoda	0.00295	intronic	0.0037	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila miranda	Arthropoda	0.00295	non-coding	0.0036	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila miranda	Arthropoda	0.00295	synonymous	0.00597	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila mojavensis	Arthropoda	0.0025409090909090906	mixed	0.00781	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila navojoa	Arthropoda	0.0025409090909090906	mixed	0.00804	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila novamexicana	Arthropoda	0.0025409090909090906	non-coding	0.00202	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila parabipectinata	Arthropoda	0.0025409090909090906	non-coding	0.013300000000000001	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila persimilis	Arthropoda	0.0025409090909090906	non-coding	0.00777	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila pseudoananassae	Arthropoda	0.0025409090909090906	non-coding	0.018340000000000002	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila pseudoobscura	Arthropoda	0.0026	intronic	0.012	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila pseudoobscura	Arthropoda	0.0026	non-coding	0.011000000000000001	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila pseudoobscura	Arthropoda	0.0026	synonymous	0.02265	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila sechellia	Arthropoda	0.0025409090909090906	silent	9.6e-4	Terrestrial	Obligatory outcrossing	Island	Drosophila
+Drosophila simulans	Arthropoda	0.0021	intronic	0.0212	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila simulans	Arthropoda	0.0021	non-coding	0.0204	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila simulans	Arthropoda	0.0021	synonymous	0.0352	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila subobscura	Arthropoda	0.0025409090909090906	silent	0.00988	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Eichhornia paniculata	Magnoliophyta	NA	silent	0.001396	Freshwater	Partial selfing	Broad endemic	Eichhornia
+Eschrichtius robustus	Chordata	11.8872	intronic	0.00117	Marine	Obligatory outcrossing	Broad endemic	Eschrichtius
+Eulemur coronatus	Chordata	0.3556	synonymous	0.0028100000000000004	Terrestrial	Obligatory outcrossing	Island	Eulemur
+Eulemur mongoz	Chordata	0.82296	synonymous	0.00244	Terrestrial	Obligatory outcrossing	Island	Eulemur
+Ficedula albicollis	Chordata	0.1275	intronic	0.0038	Terrestrial	Obligatory outcrossing	Broad endemic	Ficedula
+Ficedula hypoleuca	Chordata	0.12954	intronic	0.0031	Terrestrial	Obligatory outcrossing	Broad endemic	Ficedula
+Galago moholi	Chordata	0.3683	synonymous	0.0020399999999999997	Terrestrial	Obligatory outcrossing	Broad endemic	Galago
+Gasterosteus aculeatus	Chordata	NA	genome-wide	0.002328	Marine and freshwater	Obligatory outcrossing	Cosmopolitan	Gasterosteus
+Gorilla beringei/gorilla	Chordata	1.675	non-coding	0.0011915	Terrestrial	Obligatory outcrossing	Narrow endemic	Gorilla
+Gryllus firmus	Arthropoda	0.0058	intronic	0.00889	Terrestrial	Obligatory outcrossing	Broad endemic	Gryllus
+Gryllus pennsylvanicus	Arthropoda	0.022	intronic	0.00928	Terrestrial	Obligatory outcrossing	Broad endemic	Gryllus
+Gulo gulo	Chordata	0.86	intronic	2.9e-4	Terrestrial	Obligatory outcrossing	Broad endemic	Gulo
+Heliconius cydno	Arthropoda	0.0405	mixed	0.024249999999999997	Terrestrial	Obligatory outcrossing	Broad endemic	Heliconius
+Heliconius hecale	Arthropoda	0.018	mixed	0.02106	Terrestrial	Obligatory outcrossing	Broad endemic	Heliconius
+Heliconius melpomene	Arthropoda	NA	mixed	0.01996	Terrestrial	Obligatory outcrossing	Broad endemic	Heliconius
+Heliconius pachinus	Arthropoda	0.0375	mixed	0.01881	Terrestrial	Obligatory outcrossing	Narrow endemic	Heliconius
+Histoplasma capsulatum	Ascomycota	NA	mixed	0.021949999999999997	NA	Partial selfing	Cosmopolitan	Histoplasma
+Homo sapiens	Chordata	1.64592	non-coding	0.0010666666666666667	Terrestrial	Obligatory outcrossing	Cosmopolitan	Homo
+Homo sapiens	Chordata	1.64592	synonymous	0.0011899999999999999	Terrestrial	Obligatory outcrossing	Cosmopolitan	Homo
+Hoolock leuconedys	Chordata	0.75	unclear	0.0021	Terrestrial	Obligatory outcrossing	Narrow endemic	Hoolock
+Hylobates agilis/lar/moloch/pileatus	Chordata	0.5375	unclear	0.0025525	Terrestrial	Obligatory outcrossing	Broad endemic	Hylobates
+Ixodes ricinus	Arthropoda	0.011	mixed	0.0087	Terrestrial	Obligatory outcrossing	Broad endemic	Ixodes
+Limenitis arthemis	Arthropoda	0.079	anonymous	0.014280000000000001	Terrestrial	Obligatory outcrossing	Broad endemic	Limenitis
+Lutzomyia intermedia	Arthropoda	0.003	mixed	0.01165	Terrestrial	Obligatory outcrossing	Broad endemic	Lutzomyia
+Lutzomyia whitmani	Arthropoda	0.003	mixed	0.01592	Terrestrial	Obligatory outcrossing	Broad endemic	Lutzomyia
+Lynx lynx	Chordata	0.87	intronic	1.03e-4	Terrestrial	Obligatory outcrossing	Broad endemic	Lynx
+Macaca mulatta	Chordata	0.50038	synonymous	0.0028799999999999997	Terrestrial	Obligatory outcrossing	Broad endemic	Macaca
+Malurus melanocephalus	Chordata	0.115	anonymous	0.015	Terrestrial	Obligatory outcrossing	Broad endemic	Malurus
+Malurus melanocephalus	Chordata	0.115	intronic	0.009000000000000001	Terrestrial	Obligatory outcrossing	Broad endemic	Malurus
+Melanoplus oregonensis	Arthropoda	0.03125	anonymous	0.00935	Terrestrial	Obligatory outcrossing	Narrow endemic	Melanoplus
+Mesobuthus cyprius/gibbosus	Arthropoda	0.06	mixed	0.0125172	Terrestrial	Obligatory outcrossing	Broad endemic	Mesobuthus
+Monodelphis domestica	Chordata	0.14732	synonymous	0.00164	Terrestrial	Obligatory outcrossing	Broad endemic	Monodelphis
+Mus musculus	Chordata	0.0875	intronic	0.0033766666666666667	Terrestrial	Obligatory outcrossing	Broad endemic	Mus
+Mus musculus	Chordata	0.0875	non-coding	0.0035	Terrestrial	Obligatory outcrossing	Broad endemic	Mus
+Mus musculus	Chordata	0.0875	synonymous	0.0055899999999999995	Terrestrial	Obligatory outcrossing	Broad endemic	Mus
+Nasonia vitripennis	Arthropoda	0.003	silent	0.0016	Terrestrial	Obligatory outcrossing	Cosmopolitan	Nasonia
+Neurospora crassa	Ascomycota	NA	genome-wide	0.0023499999999999997	Terrestrial	Partial selfing	Cosmopolitan	Neurospora
+Nomascus gabriellae/leucogenys	Chordata	0.7	unclear	0.002385	Terrestrial	Obligatory outcrossing	Narrow endemic	Nomascus
+Nycticebus coucang	Chordata	0.3048	synonymous	0.00214	Terrestrial	Obligatory outcrossing	Broad endemic	Nycticebus
+Oncorhynchus tshawytscha	Chordata	NA	synonymous	0.0026075	Marine and freshwater	Obligatory outcrossing	Broad endemic	Oncorhynchus
+Oryctolagus cuniculus	Chordata	NA	silent	0.00843	Terrestrial	Obligatory outcrossing	Broad endemic	Oryctolagus
+Pan paniscus	Chordata	0.762	non-coding	0.001	Terrestrial	Obligatory outcrossing	Narrow endemic	Pan
+Pan troglodytes	Chordata	0.79248	non-coding	0.0014666666666666667	Terrestrial	Obligatory outcrossing	Broad endemic	Pan
+Pan troglodytes	Chordata	0.79248	synonymous	0.0020599999999999998	Terrestrial	Obligatory outcrossing	Broad endemic	Pan
+Papilio dardanus	Arthropoda	0.075	mixed	0.017	Terrestrial	Obligatory outcrossing	Broad endemic	Papilio
+Paracoccidioides brasiliensis PS2/PS3/S1	Ascomycota	NA	mixed	0.00189	NA	Partial selfing	Broad endemic	Paracoccidioides
+Paracoccidioides lutzii	Ascomycota	NA	mixed	0.01695	NA	Partial selfing	Broad endemic	Paracoccidioides
+Paramecium biaurelia	Ciliophora	1.5e-4	synonymous	0.0038	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium decaurelia	Ciliophora	1.2e-4	synonymous	0.0104	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium dodecaurelia	Ciliophora	1.2e-4	synonymous	0.0078000000000000005	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium novaurelia	Ciliophora	1.275e-4	synonymous	0.0091	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium octaurelia	Ciliophora	1.2e-4	synonymous	0.0036	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium pentaurelia	Ciliophora	3.3e-4	synonymous	0.0017000000000000001	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium primaurelia	Ciliophora	1.275e-4	synonymous	0.022799999999999997	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium quadecaurelia	Ciliophora	1.275e-4	synonymous	0.0345	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium septaurelia	Ciliophora	1.275e-4	synonymous	0.0034000000000000002	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium sexaurelia	Ciliophora	1.275e-4	synonymous	0.0038	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium tetraurelia	Ciliophora	1.275e-4	synonymous	0.0079	Freshwater	Partial selfing	Unknown	Paramecium
+Paramecium triaurelia	Ciliophora	1.275e-4	synonymous	0.0066	Freshwater	Partial selfing	Unknown	Paramecium
+Peromyscus maniculatus	Chordata	0.09652	silent	0.01313	Terrestrial	Obligatory outcrossing	Broad endemic	Peromyscus
+Phlebotomus ariasi	Arthropoda	0.00225	mixed	0.004156111111111111	Terrestrial	Obligatory outcrossing	Broad endemic	Phlebotomus
+Phytophthora capsici	Heterokontophyta	NA	mixed	0.00617	NA	Partial selfing	Cosmopolitan	Phytophthora
+Phytophthora infestans	Heterokontophyta	NA	mixed	0.00115	NA	Partial selfing	Cosmopolitan	Phytophthora
+Picea abies	Pinophyta	NA	silent	0.00709	Terrestrial	Partial selfing	Broad endemic	Picea
+Picea breweriana	Pinophyta	30	silent	0.00201	Terrestrial	Partial selfing	Narrow endemic	Picea
+Picea glauca	Pinophyta	21	silent	0.00905	Terrestrial	Partial selfing	Broad endemic	Picea
+Picea mariana	Pinophyta	10	silent	0.00461	Terrestrial	Partial selfing	Broad endemic	Picea
+Pieris rapae	Arthropoda	0.05	synonymous	0.020954999999999998	Terrestrial	Obligatory outcrossing	Cosmopolitan	Pieris
+Pinus pinaster	Pinophyta	NA	non-coding	0.00244	Terrestrial	Partial selfing	Narrow endemic	Pinus
+Pinus pinaster	Pinophyta	NA	synonymous	2.8000000000000003e-4	Terrestrial	Partial selfing	Narrow endemic	Pinus
+Pinus radiata	Pinophyta	NA	non-coding	6.98e-4	Terrestrial	Partial selfing	Broad endemic	Pinus
+Pinus radiata	Pinophyta	NA	synonymous	7.539999999999999e-4	Terrestrial	Partial selfing	Broad endemic	Pinus
+Pinus sylvestris	Pinophyta	35	synonymous	0.005600000000000001	Terrestrial	Partial selfing	Broad endemic	Pinus
+Pinus taeda	Pinophyta	NA	silent	0.00746	Terrestrial	Partial selfing	Broad endemic	Pinus
+Plasmodium falciparum	Apicomplexa	NA	4-fold degenerate	0.00151	NA	Partial selfing	Cosmopolitan	Plasmodium
+Plasmodium falciparum	Apicomplexa	NA	intronic	0.00148	NA	Partial selfing	Cosmopolitan	Plasmodium
+Plasmodium falciparum	Apicomplexa	NA	non-coding	0.00126	NA	Partial selfing	Cosmopolitan	Plasmodium
+Plasmodium vivax	Apicomplexa	NA	mixed	6.16e-4	NA	Partial selfing	Cosmopolitan	Plasmodium
+Pongo abelii/pygmaeus	Chordata	0.82296	non-coding	0.0031	Terrestrial	Obligatory outcrossing	Island	Pongo
+Populus balsamifera	Magnoliophyta	NA	intronic	0.0034999999999999996	Terrestrial	Obligatory outcrossing	Broad endemic	Populus
+Populus balsamifera	Magnoliophyta	NA	synonymous	0.0045000000000000005	Terrestrial	Obligatory outcrossing	Broad endemic	Populus
+Populus tremula	Magnoliophyta	NA	silent	0.01455	Terrestrial	Obligatory outcrossing	Broad endemic	Populus
+Populus trichocarpa	Magnoliophyta	NA	silent	0.00449	Terrestrial	Obligatory outcrossing	Broad endemic	Populus
+Propithecus coquereli	Chordata	0.46	synonymous	0.00681	Terrestrial	Obligatory outcrossing	Island	Propithecus
+Saccharomyces cerevisiae	Ascomycota	NA	synonymous	0.0015133333333333335	Terrestrial	Partial selfing	Cosmopolitan	Saccharomyces
+Saccharomyces paradoxus	Ascomycota	NA	synonymous	0.0027333333333333333	Terrestrial	Partial selfing	Cosmopolitan	Saccharomyces
+Sceloporus undulatus	Chordata	NA	anonymous	0.00623	Terrestrial	Obligatory outcrossing	Broad endemic	Sceloporus
+Silene latifolia	Magnoliophyta	NA	silent	0.0288	Terrestrial	Obligatory outcrossing	Broad endemic	Silene
+Sistrurus catenatus	Chordata	0.68	anonymous	2.35e-4	Terrestrial	Obligatory outcrossing	Broad endemic	Sistrurus
+Sistrurus catenatus	Chordata	0.68	intronic	3.88e-4	Terrestrial	Obligatory outcrossing	Broad endemic	Sistrurus
+Spermophilus parryii	Chordata	0.39	anonymous	0.0025900000000000003	Terrestrial	Obligatory outcrossing	Broad endemic	Spermophilus
+Strongylocentrotus droebachiensis	Echinodermata	0.05	mixed	0.014499999999999999	Marine	Obligatory outcrossing	Broad endemic	Strongylocentrotus
+Strongylocentrotus pallidus	Echinodermata	0.08	mixed	0.02492	Marine	Obligatory outcrossing	Broad endemic	Strongylocentrotus
+Strongylocentrotus purpuratus	Echinodermata	0.1	mixed	0.0169	Marine	Obligatory outcrossing	Broad endemic	Strongylocentrotus
+Symphalangus syndactylus	Chordata	0.57912	unclear	0.00168	Terrestrial	Obligatory outcrossing	Narrow endemic	Symphalangus
+Taeniopygia guttata	Chordata	0.10414	intronic	0.0055	Terrestrial	Obligatory outcrossing	Broad endemic	Taeniopygia
+Taeniopygia guttata	Chordata	0.10414	non-coding	0.0066500000000000005	Terrestrial	Obligatory outcrossing	Broad endemic	Taeniopygia
+Takifugu rubripes	Chordata	0.4	genome-wide	0.004	Marine	Obligatory outcrossing	Broad endemic	Takifugu
+Tupaia belangeri	Chordata	0.17	synonymous	0.00532	Terrestrial	Obligatory outcrossing	Broad endemic	Tupaia
+Varecia variegata variegata	Chordata	0.503	synonymous	0.00375	Terrestrial	Obligatory outcrossing	Island	Varecia
+Volvox carteri	Chlorophyta	NA	intronic	0.00534	Freshwater	Partial selfing	Unknown	Volvox
+Volvox carteri	Chlorophyta	NA	synonymous	0.00358	Freshwater	Partial selfing	Unknown	Volvox
+Zonotrichia albicollis	Chordata	0.17018	silent	0.0066	Terrestrial	Obligatory outcrossing	Broad endemic	Zonotrichia

@@ -1,0 +1,12 @@
+library(tidyverse)
+library(readxl)
+
+dpf <- read_tsv("./palstra_fraser_2012_fig2_fig3_data.tsv")
+colnames(dpf) <-c("publication", "species", "population_label", "Ne", "lower", 
+                  "upper", "N", "Ne_N", "Nemin_N", "Nemax_N", "+", "-", "body_length", "source")
+
+dpf$upper[dpf$upper == '∞'] = Inf
+dpf$upper <- as.numeric(dpf$upper)
+
+# look ma, no relationship!
+ggplot(dpf) + geom_point(aes(body_length, Ne_N)) + scale_x_log10() + scale_y_log10()

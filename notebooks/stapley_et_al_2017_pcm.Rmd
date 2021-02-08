@@ -1,0 +1,958 @@
+# Main Analysis of Stapley et al. (2017) Data
+
+```{r, include=FALSE}
+options(warnPartialMatchArgs = FALSE,
+        warnPartialMatchDollar = FALSE, 
+        warnPartialMatchAttr = FALSE)
+
+
+```
+
+
+```{r, message=FALSE}
+
+library(ape)
+library(phytools)
+library(rotl)
+library(scales)
+library(tidyverse)
+library(rstan)
+library(loo)
+library(coda)
+source('../R/utilities.r')
+
+```
+
+## Data Loading 
+
+We load the tree from Open Tree of Life downloaded via `rotl` for the taxa in
+the Stapley et al. (2017) data. This is for animals, and we've removed all
+missing `log10_size` and `map_length` data.
+
+```{r}
+load('../data/stapley_et_al_2017_otl.Rdata')
+stopifnot(exists('dsatr') && exists('tr'))
+```
+
+We lost a few species in matching taxa to the R Open Tree of Life tree; we
+quantify that here:
+
+```{r}
+total <- suppressMessages(read_tsv('../data/stapley_et_al_2017.tsv')) %>% 
+  filter(kingdom %in% 'Animalia') %>%
+  nrow()
+
+msg <- "Size of animalia in Stapley et al (2017), total: %d
+                            after matching tree: %d"
+message(sprintf(msg, total, nrow(dsatr)))
+```
+
+## Phylogenetic Tree
+
+Unfortunately, the Open Tree of Life data lacks branch lengths. Like the
+original Stapley et al. (2017) analysis, we use unit branch lengths.
+
+```{r, fig.width=6, fig.height=8}
+# now, we force an ultrametric tree, just to get the number 
+# of edges we need to set to one
+utr <- force.ultrametric(tr)
+
+# set all edges to one, as Stapley et al did.
+tr$edge.length  <- rep(1, length(utr$edge.length))
+
+# resolve polytomies
+trb <- multi2di(tr)
+```
+
+What does the tree look like?
+
+```{r}
+stopifnot(dsatr$species == tr$tip.label)
+nphyla <- length(unique(dsatr$phylum))
+phyla_cols <- hue_pal()(nphyla)
+
+# nfamilies <- length(unique(dsatr$family))
+# families_cols <- hue_pal()(nfamilies)
+
+# plot(force.ultrametric(trb), cex=0.6, tip.color=phyla_cols[as.factor(dsatr$family)])
+plot(force.ultrametric(trb), cex=0.6, tip.color=phyla_cols[as.factor(dsatr$phylum)])
+
+```
+
+## Some Map Length, Body Size, and Chromosome Number EDA
+
+```{r}
+
+dsatr  %>% ggplot(aes(hcn, map_length)) + geom_point() + 
+  geom_smooth(method='lm') + xlab('haploid chromosome number') + 
+  ylab('map length (Morgans)')
+
+dsatr %>% ggplot(aes(hcn, log10_size)) + geom_point() + 
+  geom_smooth() + xlab('body size') + 
+  ylab('haploid chromosome number')
+
+dsatr  %>% ggplot(aes(log10_size, hcn)) + geom_point() + 
+  geom_smooth(method='lm') + ylab('haploid chromosome number') + 
+  xlab('log10(size)')
+
+
+dsatr %>% ggplot(aes(hcn, map_length/hcn)) + 
+  geom_point() + 
+  geom_smooth(method='lm') + xlab('haploid chromosome number') + 
+  ylab('Morgans per chromosome (map length / haploid chromosome number)')
+
+```
+
+What do number of Morgans / chromosome across the data look like?
+
+```{r}
+
+dsatr %>% mutate(morgans_per_chrom = map_length/hcn) %>% 
+  pull(morgans_per_chrom) %>% hist(50, main='Morgans / chromosome')
+
+```
+
+
+## The Relationship Between Map Length and Body Size
+
+The relationship we'd like to assess is whether map length is positive
+correlated with body size; here body size is a proxy for population density,
+where they have a negative relationship (e.g. Damuth (1981)).
+
+For quantitative genetic models of linked selection to decouple diversity from
+population size, we need a relationship like: $\log(N) = \alpha / L$ where $L$
+is map length in Morgans, and $\alpha$ is an unknown positive constant. Since
+$\log(N) \propto -\log(S)$ where $S$ is body size, we have: $\log(S) = -\alpha
+/ L$, or $L = -\alpha / \log(S)$.
+
+This is the form of the relationship in the Stapley et al (2017), with my body
+size data:
+
+```{r}
+
+with(dsatr, plot(map_length, log10_size, pch=19))
+
+```
+
+This obviously does **not** correct for phylogenetic dependencies in the data. 
+Currently, I do not see a way to do all of the following things.
+
+1. Keep the units untransformed, as the theory requires the total map length be
+in Morgans. For the sake of evalulating the theory, it does not make sense to
+calculate the reduction of diversity on a phylogentically corrected value; the
+map length in Morgans of a taxa is known. 
+
+2. Ideally, a proper PCM would model the evolution of the traits, map length
+and body size. Ideally, all the Metazoan taxa included here would have
+well-calibrated phylogeny with branch lengths, and we could actually compare
+different trait evolution models (early burst, OU, etc) and control for
+phylogenetic non-independence more carefully. However, the current phylogeny of
+these taxa from the Open Tree of Life has unit branch lengths. Estimating a
+phylgoeny for these Metazoan taxa would be outside the scope of this paper.
+
+3. Model the non-linear nature of the data. Ideally, we would have a way to
+test whether there's not only a relationship, but a specific non-linear
+relationship between the traits measured. But given the lack of branch lengths
+(and as far as I know, methods for this) this is not feasible.
+
+Thus, we have two statistical problems: (1) does the body size / map length
+trend exist when we remove the effects of pseudoreplication? (2) does the
+general trend fit the non-linear relationship needed to decouple diversity?
+
+My plan is two approach (1) assess the linear relationship with PICs, and (2)
+find the non-linear least squared fit on both family, and phylum-level averaged
+data. I do this first with non-linear least squares, (3) use Bayesian models
+(mostly to address issues with the confidence intervals that occurred with the
+non-linear least squares fits).
+
+First, we calculate the family and phylum-level averages of the data, used in
+both least-squares and Bayesian model fits.
+
+```{r}
+
+# Side note about what I do below: I also take the log of the mean of groups.
+# This makes little difference in practice, but *is* different in theory
+# (Jensen's inequality). log10_size2 below is doing the
+# *incorrect* thing of taking the mean of the values, then the log. This is
+# incorrect for the following reason:
+#
+# x <- rlnorm(100000, 5, 1)
+# hist(log(x), 100, col = "grey", border = "grey")
+# abline(v=log(mean(x)), col='red')
+# abline(v=mean(log(x)), col='black')
+#
+# The real mean is 5.
+
+family_mean <- dsatr %>% group_by(family) %>%
+                 summarize(log10_size=mean(log10_size, na.rm=TRUE), 
+                           log10_size2=log10(mean(size, na.rm=TRUE)),
+                           map_length=mean(map_length, na.rm=TRUE),
+                           hcn=mean(hcn, na.rm=TRUE),
+                           n=n())
+
+phyla_mean <- dsatr %>% group_by(phylum) %>%
+                 summarize(log10_size=mean(log10_size, na.rm=TRUE), 
+                           log10_size2=log10(mean(size, na.rm=TRUE)),
+                           map_length=mean(map_length, na.rm=TRUE), 
+                           hcn=mean(hcn, na.rm=TRUE),
+                           n=n())
+
+```
+
+
+### Non-linear Least Squares
+
+First, we use the `nls()` function to fit a few different models, and then use
+AIC for model comparisons.
+
+```{r}
+
+## WARNING: I label my models differently here than I do in the Bayesian 
+## modeling section, so be cautious in assuming what's what.
+
+# family average
+mf0 <- nls(log10_size ~ a + b*map_length, data = family_mean, 
+         start = list(a=1, b=-2))
+
+mf1 <- nls(log10_size ~ a + b*map_length^power, data = family_mean, 
+         start = list(a=1, b=-2, power = -2))
+
+mf2 <- nls(log10_size ~  b*map_length^power, data = family_mean, 
+         start = list(b=-2, power = -2))
+
+
+# phylum average
+mp0 <- nls(log10_size ~ a + b*map_length, data = phyla_mean,
+           start = list(a=1, b=-2))
+
+mp1 <- nls(log10_size ~ a + b*map_length^power, data = phyla_mean, 
+           start = list(a=1, b=1, power = 1),
+           control=list(maxiter = 500))
+
+mp2 <- nls(log10_size ~ b*map_length^power, data = phyla_mean, 
+           start = list(b=1, power = 1),
+           control=list(maxiter = 500))
+
+summary(mp2)
+summary(mf2)
+
+BIC(mp0, mp1, mp2)
+BIC(mf0, mf1, mf2)
+
+```
+
+With both phylum and family averages, the best fitting model according to BIC
+is the non-linear model without an intercept term.
+
+```{r}
+# TODO
+mf0hcn <- nls(log10_size ~ a + b*hcn, data = family_mean, 
+         start = list(a=1, b=-2))
+
+mf1hcn <- nls(log10_size ~ a + b*hcn^power, data = family_mean, 
+         start = list(a=1, b=1, power = 1))
+
+mf2hcn <- nls(log10_size ~  b*hcn^power, data = family_mean, 
+         start = list(b=-2, power = -2))
+
+
+```
+
+
+Let's bootstrap these model fits.
+
+```{r}
+
+best_model <- function(x, start=NULL) {
+  if (is.null(start)) {
+    start <- list(b=-2, power=-1)
+  }
+  nls(log10_size ~  b*map_length^power, data = x,
+         start=start, trace = FALSE)
+}
+
+bootstrap_sample <- function(x) {
+  n <- nrow(x)
+  x[sample(n, n, replace=TRUE), ]
+}
+
+best_model_safe <- possibly(best_model, NULL)
+
+# x sequences for prediction
+sf <- seq(0, 53, length.out=100)
+sp <- seq(0, 53, length.out=100)
+
+bs_p <- tibble(rep=1:10000) %>%
+  # phylum averages
+  mutate(fit = map(rep, ~ best_model_safe(bootstrap_sample(phyla_mean)))) %>%
+  mutate(keep = !map_lgl(fit, is.null)) %>% filter(keep)
+
+predict_df <- function(fit, x) {
+  tibble(x=x, y=predict(fit, newdata=tibble(map_length=x)))
+}
+
+bs_p_ci <- bs_p[sample(nrow(bs_p), 5000), ] %>% 
+            mutate(pred = map(fit, predict_df, x=sp)) %>% 
+            unnest(pred) %>%
+            group_by(x) %>% 
+            summarize(lower = quantile(y, probs=0.05/2),
+                      upper = quantile(y, probs=1-0.05/2)) 
+
+
+bs_f <- tibble(rep=1:10000) %>%
+  # family averages
+  mutate(fit = map(rep, ~ best_model_safe(bootstrap_sample(family_mean)))) %>%
+  mutate(keep = !map_lgl(fit, is.null)) %>% filter(keep)
+
+
+bs_f_ci <- bs_f[sample(nrow(bs_f), 5000), ] %>% 
+            mutate(pred = map(fit, predict_df, x=sf)) %>% 
+            unnest(pred) %>%
+            group_by(x) %>% 
+            summarize(lower = quantile(y, probs=0.05/2),
+                      upper = quantile(y, probs=1-0.05/2)) 
+
+# save the averaged data for plots
+save(family_mean, phyla_mean, mp2, mf2, 
+     sf, sp,
+     bs_f_ci, bs_p_ci, file='../data/body_size_map_length.Rdata')
+
+```
+
+Draft plot (see the `notebooks/figures/` directory for actual figure plots).
+Now, I prefer the plot below from the HPD intervals.
+
+```{r}
+
+with(family_mean, plot(map_length, log10_size, pch=19, axes=FALSE, cex=0.7,
+                       ylab='', xlab='', xlim=c(0, 50), ylim=c(-4.3, 1.1), col='gray48'))
+
+axis(1, seq(0, 50, 10))
+axis(2, seq(-4, 1), seq(-4, 1), labels=latex2exp::TeX(sprintf("$10^{%d}$", seq(-4, 1))))
+
+with(bs_p_ci, polygon(c(x, rev(x)), c(lower, rev(upper)), 
+                    col=scales::alpha('cornflowerblue', 0.2), lty=0))
+
+with(bs_f_ci, polygon(c(x, rev(x)), c(lower, rev(upper)), 
+                    col=scales::alpha('gray42', 0.2), lty=0))
+
+with(phyla_mean, points(map_length, log10_size, pch=19, col='blue', cex=0.7))
+
+#bs_f %>% mutate(pred = map(fit, predict_df, x=sf)) %>%
+#  mutate(x=map(pred, ~ lines(.$x, .$y)))
+#
+#bs_p %>% mutate(pred = map(fit, predict_df, x=sf)) %>%
+#  mutate(x=map(pred, ~ lines(.$x, .$y)))
+
+lines(sf, predict(mf2, newdata=tibble(map_length=sf)), lty='dashed', col='gray32')
+lines(sp, predict(mp2, newdata=tibble(map_length=sp)), lty='dashed', col='cornflowerblue')
+
+pivot_ci <- function(x, theta, alpha=0.05) 2*theta - rev(quantile(x, probs=c(alpha/2, 1 - alpha/2)))
+
+bs_f %>% mutate(power = map_dbl(fit, ~ coef(.)[2])) %>% 
+  pull(power) %>% pivot_ci(coef(mf2)[2])
+
+```
+
+### Bayesian Models -- Family-level Averages
+
+First model is just a simple regression:
+
+$$ log10(\text{size}) ~ \text{Normal}(\alpha + \beta L, \sigma) $$
+
+```{r}
+
+# Stan models use this range for mu_rep and y_rep, used to calculate
+# the HPDI and posterior predictive distribution
+x_new <- seq(0.1, 53, length.out=100)
+
+bmf0 <- stan(file='../stan/maplength_log10size_linear_family.stan',
+             data=list(N = nrow(family_mean), 
+                      map_length=family_mean$map_length,
+                      log10_size=family_mean$log10_size,
+                      x_new = x_new),
+             seed=50127839,
+             iter=5000, cores=4, control=list(adapt_delta=0.95))
+
+```
+
+Let's assess model convergence:
+
+```{r}
+
+bmf0_pars <- c('alpha', 'beta', 'sigma', 'lp__')
+print(bmf0, pars=bmf0_pars)
+pairs(bmf0, pars=bmf0_pars)
+
+```
+
+The Rhats show great mixing among chains, we have a high number of effective
+samples, and there are no divergences. 
+
+Now we look at the next model:
+
+$$ log10(\text{size}) ~ \text{Normal}(\beta L^\gamma, \sigma) $$
+
+(log10 here is a transformation; this is not log normal).
+
+```{r}
+
+bmf1 <- stan(file='../stan/maplength_log10size_power_no_intercept_family.stan',
+            data=list(N = nrow(family_mean), 
+                      map_length=family_mean$map_length,
+                      log10_size=family_mean$log10_size,
+                      x_new=x_new),
+             seed=59912951,
+             iter=10000, cores=4, control=list(adapt_delta=0.95))
+
+bmf1_pars <- c('beta', 'power', 'sigma', 'lp__')
+print(bmf1, pars=bmf1_pars)
+
+```
+
+Again, good mixing; let's look at the pairs plot:
+
+```{r}
+pairs(bmf1, pars=bmf1_pars)
+```
+
+Next, the most complicated model:
+
+$$ log10(\test{size}) ~ \text{Normal}(\alpha + \beta L^\gamma, \sigma) $$
+
+```{r}
+
+bmf2 <- stan(file='../stan/maplength_log10size_power_family.stan',
+            data=list(N = nrow(family_mean), 
+                      map_length=family_mean$map_length,
+                      log10_size=family_mean$log10_size,
+                      x_new = x_new),
+             seed=125192,
+             iter=5000, cores=4, control=list(adapt_delta=0.95))
+
+```
+
+Now, we check the convergence. 
+
+```{r}
+
+bmf2_pars <- c('alpha', 'beta', 'power', 'sigma', 'lp__')
+print(bmf2, pars=bmf2_pars)
+pairs(bmf2, pars=bmf2_pars)
+
+```
+
+Finally, we estimate the coefficients for a model where we decouple N and L
+directly, by setting `power = -1`.
+
+```{r}
+
+bmf3 <- stan(file='../stan/maplength_log10size_inverse_family.stan',
+            data=list(N = nrow(family_mean), 
+                      map_length=family_mean$map_length,
+                      log10_size=family_mean$log10_size,
+                      x_new = x_new),
+             seed=7814,
+             iter=5000, cores=4, control=list(adapt_delta=0.95))
+
+bmf3_pars <- c('alpha', 'beta', 'sigma', 'lp__')
+print(bmf3, pars=bmf3_pars)
+
+```
+
+Now, we need to compare these models.
+
+```{r}
+
+loow <- function(fit) {
+  # a loo() wrapper
+  log_lik <- extract_log_lik(fit, merge_chains = FALSE)
+  r_eff <- relative_eff(exp(log_lik), cores = 2) 
+  loo(log_lik, r_eff = r_eff, cores = 2)
+}
+
+loow(bmf0)
+loow(bmf1)
+loow(bmf2)
+
+loo_compare(loow(bmf0), loow(bmf1), loow(bmf2), loow(bmf3))
+
+```
+
+This shows model 2 (mind they index by 1, not zero) does best, but it's not
+significantly different from model 1 (see this answer by the `loo` package's
+creator arguing at least a few SDs are necessary to say one model is better
+than another).
+
+Looking at WAIC:
+
+```{r}
+
+loo_compare(waic(extract_log_lik(bmf0)),
+            waic(extract_log_lik(bmf1)),
+            waic(extract_log_lik(bmf2)),
+            waic(extract_log_lik(bmf3)))
+
+```
+
+So, again model 2 looks to be the best, though the standard error of the
+difference is not very large. Still, arguably we should choose the simpler
+model that does best, model 1. This indicates we are not over fitting the power
+term compared the linear-terms-only model, which is what we want to see.
+
+
+### Bayesian Models -- Phylum Averages
+
+Next, we fit these same models on the phylum-level averaged data. Note that
+it's worth looking at the Stan files in detail. I had to tweak priors quite a
+bit, as an early bad prior choice was leading to divergent transitions, and in
+some cases, high `Rhat` values. I still use weakly informative priors, option
+for pretty diffuse Student's t distribution for the $\alpha$ and $\beta$
+parameters, while using a standard Normal for the power, and a tighter prior on
+the standard deviation. This last point deserves some justification. These
+phyla-level averages are averages of *many* taxa, and thus, the our prior
+expectation of what the standard deviation should be decreases. Early on in
+testing, I was using the same prior as the family-level averages. The fits were
+very different from the non-linear least squares approach, which was
+suspicious. Essentially, we were underfitting the data; our expectation should
+be averages of more points have less variance. Changing the priors accordingly
+lead to fits more consistent (but still different) from those found with
+non-linear least squares. See the Stan model files for more details.
+
+
+```{r}
+
+
+bmp0 <- stan(file='../stan/maplength_log10size_linear_phylum.stan',
+             data=list(N = nrow(phyla_mean), 
+                      map_length=phyla_mean$map_length,
+                      log10_size=phyla_mean$log10_size,
+                      x_new=x_new),
+             seed = 84914,
+             iter=10000, cores=4, control=list(adapt_delta=0.99))
+
+bmp1 <- stan(file='../stan/maplength_log10size_power_no_intercept_phylum.stan',
+             data=list(N = nrow(phyla_mean), 
+                      map_length=phyla_mean$map_length,
+                      log10_size=phyla_mean$log10_size,
+                      x_new = x_new),
+             # increasing adapt_delta decreases the number of divergent transitions
+             seed = 41123,
+             iter=10000, cores=4, control=list(adapt_delta=0.999))
+
+bmp2 <- stan(file='../stan/maplength_log10size_power_phylum.stan',
+                  data=list(N = nrow(phyla_mean), 
+                      map_length=phyla_mean$map_length,
+                      log10_size=phyla_mean$log10_size,
+                      x_new=x_new),
+             seed = 874891,
+             # we increase the number of iterations and warmup to reduce divergent 
+             # transitions
+             iter=12000, cores=4, 
+             warmup = 5000,
+             # increasing adapt_delta decreases the number of divergent transitions
+             control=list(adapt_delta=0.999))
+
+bmp3 <- stan(file='../stan/maplength_log10size_inverse_phylum.stan',
+            data=list(N = nrow(phyla_mean), 
+                      map_length=phyla_mean$map_length,
+                      log10_size=phyla_mean$log10_size,
+                      x_new = x_new),
+             seed=519459,
+             iter=5000, cores=4, control=list(adapt_delta=0.95))
+
+```
+
+Next, we let's look at the model output, checking `Rhat` and the number of
+effective samples:
+
+```{r}
+
+print(bmp0, pars=bmf0_pars)
+print(bmp1, pars=bmf1_pars)
+print(bmp2, pars=bmf2_pars)
+print(bmp3, pars=bmf3_pars)
+
+```
+
+Next, we look at the pairs plots:
+
+```{r}
+
+pairs(bmp0, pars=bmf0_pars)
+pairs(bmp1, pars=bmf1_pars)
+pairs(bmp2, pars=bmf2_pars)
+pairs(bmp3, pars=bmf2_pars)
+
+```
+
+Again, all of these look reasonable. Notice there are no (or very, very few
+divergent transitions). All `Rhat` values are < 1.
+
+
+Next, let's look at the estimated expected log posteriors:
+
+```{r}
+print(loow(bmp0))
+print(loow(bmp1))
+print(loow(bmp2))
+print(loow(bmp3))
+```
+
+And we compare them, using `loo`'s compare function and WAIC:
+
+```{r}
+
+loo_compare(loow(bmp0), loow(bmp1), loow(bmp2), loow(bmp3))
+
+loo_compare(waic(extract_log_lik(bmp0)),
+            waic(extract_log_lik(bmp1)),
+            waic(extract_log_lik(bmp2)),
+            waic(extract_log_lik(bmp3)))
+
+```
+
+These indicate that in terms of expected log predictive density, models 1
+(again, mind the fact my model numbers are zero-indexed and theirs are
+1-indexed), is much better than the linear model.
+
+
+Next, let's look at the HPD intervals:
+
+```{r}
+
+maplength_bodysize_plot(phyla_mean)
+ci_polygon(x_new, bmp1, color='gray', type='hpdi', par='mu_rep')
+ci_polygon(x_new, bmp2, color='orange', type='hpdi', par='mu_rep')
+ci_polygon(x_new, bmp3, color='red', type='hpdi', par='mu_rep')
+
+```
+
+For models 1 and 2, what do the posterior predictive distributions look like?
+
+```{r}
+
+maplength_bodysize_plot(family_mean)
+ci_polygon(x_new, bmf2, color='gray', type='quantile', par='y_rep')
+ci_polygon(x_new, bmf1, color='green', type='quantile', par='y_rep')
+
+```
+
+So, we output these models 
+
+```{r}
+
+save(family_mean, phyla_mean, 
+     bmf1, bmp1,
+     bmf2, bmp2,
+     bmf3, bmp3,
+     x_new,
+     file='../data/body_size_map_length_bayesian.Rdata')
+
+```
+
+
+
+## Phylogenetic Independent Contrast
+
+Next, I want to establish that the relationship between map length and body
+size is significant with phylogenetic corrections. Again, these results would
+be greatly improved by having non-unit branch lengths. Given that unit branch
+lengths probably over-corrects for phylogenetic signal over these long
+evolutionary timeframes, this is a conservative approach.
+
+
+```{r}
+# TODO
+plot(trb)
+
+plotTree(force.ultrametric(tr))
+# remove polytomies
+utrb <- multi2di(tr)
+
+log_ml <- log10(dsatr$map_length)
+log_size <- dsatr$log10_size
+
+log_ml_pic = as_tibble(pic(log_ml, utrb, var.contrasts=TRUE))
+log_size_pic = as_tibble(pic(log_size, utrb, var.contrasts=TRUE))
+
+plot(sqrt(log_ml_pic$variance), abs(log_ml_pic$contrasts))
+plot(sqrt(log_size_pic$variance), abs(log_size_pic$contrasts))
+
+m_pic <- lm(log_size_pic$contrasts ~ log_ml_pic$contrasts)
+summary(m_pic)
+
+plot(log_ml_pic$contrasts, log_size_pic$contrasts)
+abline(m_pic)
+
+
+
+
+plot(a$contrasts, b$contrasts)
+abline(lm(a$contrasts ~ b$contrasts))
+m <- lm(a$contrasts ~ b$contrasts)
+
+dsic <- tibble(maplength_contrast=a$contrasts, size_contrast=b$contrasts)
+
+fit_contrast_lm <- function(d) {
+  n <- nrow(d)
+  lm(size_contrast ~ maplength_contrast, data=d[sample(n, n, replace=TRUE), ])
+}
+
+bs <- tibble(rep = 1:5000) %>% 
+  mutate(fit = map(rep, ~ fit_contrast_lm(dsic))) %>% 
+  mutate(pval = map_dbl(fit, ~ coef(.)[2])) 
+
+alpha <- 0.05
+quantile(bs$pval, c(alpha/2, 1-alpha/2))
+
+bs %>% ggplot(aes(x=pval)) + geom_histogram()
+
+
+par(opar)
+```
+
+## Diversity and Map Length
+
+First, we merge in all the animal data we have.
+
+```{r}
+
+# load in the Corbett-Detig et al (2015) data
+dc <- read_tsv('../data/corbett_detig_2015_updated.tsv') %>% 
+         filter(kingdom == 'animal') %>%
+         select(species, size, diversity=obs_pi, map_length)
+
+lds <- read_tsv('../data/leffler_et_al_2012_updated.tsv') %>%
+         filter(kingdom == 'Animalia') %>%
+         select(species, size, diversity) 
+
+# The Stapley data has size (that I've added) and map length, but not diversity.
+# The Corbett-Detig data has all three. 
+# The Leffer data has size (that I've added) and diversity, but not map length.
+dsatr2 <- dsatr %>% select(species, size, map_length)
+
+dt <- lds %>% left_join(dsatr2)  %>% 
+        filter(!is.na(size), !is.na(diversity), !is.na(map_length)) %>%
+        # we join in the Corbett-Detig data
+        full_join(dc, by=c('species'))  
+
+```
+
+This last join didn't merge like columns. Which is good, because they allow us
+to do some quality control (in the good sense, not the Iowa Caucus sense).
+
+```{r}
+
+ggplot(dt, aes(diversity.x, diversity.y)) + geom_point() +
+  geom_abline(yintercept=0, slope=1, color='gray')
+
+ggplot(dt, aes(size.x, size.y)) + geom_point() + ylim(0, 0.8) +
+  geom_abline(yintercept=0, slope=1, color='gray')
+
+ggplot(dt, aes(map_length.x, map_length.y/100)) + geom_point() + 
+  geom_abline(yintercept=0, slope=1, color='gray')
+
+```
+
+The values all look good. I'll average them for the final dataframe:
+
+```{r}
+
+merge_average <- function(x, y) rowMeans(cbind(x, y), na.rm=TRUE)
+
+# final dataframe
+dtf <- dt %>% mutate(size = map2_dbl(size.x, size.y, merge_average),
+              diversity = map2_dbl(diversity.x, diversity.y, merge_average),
+              # the map_length.y / 100 below is converting cM in M
+              map_length = map2_dbl(map_length.x, map_length.y/100, merge_average)) %>%
+  select(-size.x, -size.y, -diversity.x, -diversity.y, -map_length.x, -map_length.y)
+
+
+```
+
+Now, we use the SC98 and HK94 reductions in $N_e$ to calculate the shift. This
+data creates Figure 2. For SC98, we use $\alpha = 1$, where $\alpha = C^2 /
+(1-Z)$. This value is greater than we'd expect under Drosophila. For HK94, we
+use the Elyashiv et al data.
+
+$$
+\pi = 4 N \mu \exp\{- U / L\}
+$$
+
+$$
+\pi = \pi_0 \exp\{- U / L\}
+$$
+
+Elyashiv et al report the average reduction, which is the ratio of $\bar{\pi} /
+\pi_0$. They report under the BG+CS model an average reduction of 77% to 89%.
+
+$$
+\pi = \pi_0 \exp\{- U / L\}
+$$
+
+```{r}
+
+SC98 <- function(L, alpha) exp(-alpha /L)
+HK94 <- function(L, U) exp(-U / L)
+
+dtft <- dtf %>%  
+  filter(species != 'Ciona savignyi') %>%
+  mutate(Ne_N_SC98 = SC98(map_length, alpha=1))  %>%
+  mutate(Ne_N_HK94 = HK94(map_length, U=1.6)) # estimate from Elyashiv et al.
+
+dtft %>%
+  filter(species != 'Ciona savignyi') %>%
+  mutate(decoupled_diversity = size) %>%
+  ggplot(aes(-log10(size), (diversity))) + geom_point()  + 
+   # geom_smooth(aes(-log10(size), decoupled_diversity), color='red', method='lm') + 
+  geom_segment(aes(-log10(size), (diversity), 
+                   xend=-log10(size), yend=(diversity / Ne_N_HK94))) + 
+  geom_segment(aes(-log10(size), (diversity), 
+                   xend=-log10(size), yend=(diversity / Ne_N_SC98)), color='red') +
+  scale_y_log10() 
+
+save(dtft, file='../data/diversity_size_theory.Rdata')
+```
+
+## Fecundity and body size
+
+Next, I look at the relationship between fecundity and body size. If we imagine
+a Poisson number of offspring, the mean level of fecundity is equal to the
+variance; this is a conservative model, as overdispersion is very likely. 
+
+Note that we violate a key assumption from the start: independence between
+points. Each of these points are taxa, so they are phylogenetically
+non-independent (Felsenstein, 1985). Knowing this is a serious problem, I still
+first fit this relationship as a simple linear model, which illustrates some
+pathologies with model fit.
+
+```{r}
+
+dr <- read_tsv('../data/romiguier_et_al_2014_updated.tsv') %>%
+        mutate(log10_fecundity = log10(fecundity)) %>%
+        #filter(fecundity < 1e5) %>% # optional remove an outlier
+        filter(!is.na(log10_fecundity), !is.na(log10_size))
+
+size_fecundity_plot <- function() {
+  with(dr %>% filter(fecundity < 8e4),
+       plot(log10_size, log10_fecundity, 
+            axes=FALSE, 
+            pch=19,
+            xlim=c(-3.1, 1),
+            col='gray42'))
+  axis(1, seq(-3, 1), labels=latex2exp::TeX(sprintf("$10^{%d}$", seq(-3, 1))))
+  axis(2, seq(-3, 5), labels=latex2exp::TeX(sprintf("$10^{%d}$", seq(-3, 5))))
+}
+
+size_fecundity_plot()
+
+lmf <- lm(log10_fecundity ~ log10_size, dr)
+abline(lmf)
+
+```
+
+We see two things: (1) a great deal of heteroscedasticity, (2) a poor fit
+around the right end of the plot (all points are below the line of best fit).
+Looking at a plot of the residuals vs fitted:
+
+```{r}
+plot(lmf, which=1)
+```
+
+This pathology is also reflected in the QQ-plot:
+
+
+```{r}
+plot(lmf, which=2)
+```
+
+So instead, I will try to fit this with a Bayesian model using Stan. As before,
+I ameliorate non-independence by considering family and phylum-level averages.
+
+```{r}
+
+dr_family_averages  <- dr %>% group_by(family) %>% 
+  summarize(log10_size = mean(log10_size, na.rm=TRUE),
+            log10_fecundity=mean(log10_fecundity, na.rm=TRUE),
+            fecundity=mean(fecundity, na.rm=TRUE),
+            n=n()) 
+
+dr_phylum_averages  <- dr %>% group_by(phylum) %>% 
+  summarize(log10_size = mean(log10_size, na.rm=TRUE),
+            log10_fecundity=mean(log10_fecundity, na.rm=TRUE),
+            fecundity=mean(fecundity, na.rm=TRUE),
+            n=n())
+
+```
+
+We first fit a log-normal regression model on the family-level averaged data.
+
+
+```{r}
+
+lnf_xnew <- seq(-3, 1, length.out=100)
+
+lnf <- stan(file='../stan/fecundity_log10size.stan',
+            data=list(N = nrow(dr_family_averages), 
+                      log10_fecundity=dr_family_averages$log10_fecundity,
+                      log10_size=dr_family_averages$log10_size,
+                      x_new = lnf_xnew),
+            seed = 861234,
+            iter=5000, cores=4, control=list(adapt_delta=0.95))
+
+```
+
+Looking at model diagnostics, we see good number of effective samples, and
+`Rhat`, showing good mixing of the chains.
+
+
+```{r}
+lnf_pars <- c('beta', 'sigma', 'lp__')
+print(lnf, pars=lnf_pars)
+```
+
+And finally, in our pair plot, we see no divergent transitions.
+
+```{r}
+pairs(lnf, pars=lnf_pars)
+```
+
+Next, I do some posterior predictive checks, visualizing it along side the
+HPDI. Overall the model fit is good.
+
+```{r}
+
+size_fecundity_plot()
+ci_polygon(lnf_xnew, y=extract(lnf, pars='mu_rep')$mu_rep,
+           color='gray', type='hpdi')
+ci_polygon(lnf_xnew, y=extract(lnf, pars='y_rep')$y_rep,
+           color='red', type='quantile', transp=0.1)
+lnf_p <- colMeans(as_tibble(extract(lnf, pars='mu_rep')))
+lines(lnf_xnew, lnf_p, col=alpha('black', 0.4), lwd=3)
+
+```
+
+We save these data for prettier publication-quality plots.
+
+```{r}
+save(dr,
+     dr_family_averages, dr_phylum_averages,
+     lnf_xnew, lnf, 
+     file='../data/body_size_fecundity.Rdata')
+```
+
+## Fecundity and Body Size
+
+Now, we look at the relationship between fecundity, body size, and diversity.
+
+```{r}
+
+dr %>% ggplot() + geom_point(aes(log10_size, log10(piS))) + 
+   geom_segment(aes(log10_size, log10(piS), 
+                    xend=log10_size, yend=log10(piS*(fecundity))))
+
+
+```
+
+

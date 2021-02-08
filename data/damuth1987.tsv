@@ -1,0 +1,697 @@
+species	group	type	trophic	mass_g	mass_reference	density	density_reference
+Alouatta caraya	mammals	primates	primary consumers	7250	123	25	486
+Alouatta palliata	mammals	primates	primary consumers	6550	123	51	"181, 185"
+Alouatla seniculus	mammals	primates	primary consumers	7250	123	74	"181, 486"
+Aotus trivirgatus	mammals	primates	primary consumers	960	123	100	714
+Ateles belzebuth	mammals	primates	primary consumers	6000	123	13.5	181
+Ateles geoffroy	mammals	primates	primary consumers	6000	123	45	181
+Avahi laniger	mammals	primates	primary consumers	1070	39	150	"111, 562"
+Callicebus moloch	mammals	primates	primary consumers	680	123	255	181
+Callicebus torquatus	mammals	primates	primary consumers	1200	181	15	361
+Callithrix jacchus	mammals	primates	primary consumers	241	182	900	181
+Cebus albifrons	mammals	primates	primary consumers	2520	"147, 181"	37	147
+Cebus capucinus	mammals	primates	primary consumers	2600	"123, 124, 181"	80	"26, 181"
+Cebus olivaceous	mammals	primates	primary consumers	2600	123	35	183
+Cercocebus albigena	mammals	primates	primary consumers	8000	123	33	"106, 685, 686"
+Cercocebus galeritus	mammals	primates	primary consumers	6000	123	45	"124, 550"
+Cercopithecus aethiops	mammals	primates	primary consumers	4050	123	53	"160, 165, 240,273, 636, 637, 638"
+Cercopithecus ascanius	mammals	primates	primary consumers	3550	123	108	639
+Cercopithecus campbelli	mammals	primates	primary consumers	3600	123	20	68
+Cercopithecus cephus	mammals	primates	primary consumers	3500	123	20	"243, 550"
+Cercopithecus mitis	mammals	primates	primary consumers	4500	123	42	"123, 124"
+Cercopithecus neglectus	mammals	primates	primary consumers	4350	123	34	"123, 124"
+Cercopithecus nictitans	mammals	primates	primary consumers	4950	123	22.5	550
+Cercopithecus pogonias	mammals	primates	primary consumers	2700	123	22.5	550
+Cheirogaleus intermedius	mammals	primates	primary consumers	177	39	250	109
+Colobus badius	mammals	primates	primary consumers	8150	123	230	"123, 124"
+Colobus guereza	mammals	primates	primary consumers	9850	123	112	"166, 360, 725"
+Colobus salanas	mammals	primates	primary consumers	9500	124	30	124
+Erythrocebus patas	mammals	primates	primary consumers	7800	124	0.3	124
+Euoticus elegantulus	mammals	primates	primary consumers	300	"109, 124"	17.5	109
+Galago alleni	mammals	primates	primary consumers	260	"109, 124"	17.5	109
+Gorilla gorilla	mammals	primates	primary consumers	127000	123	1.8	124
+Hylobates klossi	mammals	primates	primary consumers	5800	123	30	124
+Hylobates lar	mammals	primates	primary consumers	5800	123	6.2	445
+Hylobates muelleri ( - moloch)	mammals	primates	primary consumers	6100	123	22	705
+Indri indri	mammals	primates	primary consumers	12500	123	12	"540, 541"
+Lepilemur mustelinus	mammals	primates	primary consumers	600	123	288	111
+Lemur catta	mammals	primates	primary consumers	2700	123	250	562
+Lemnur fulvus	mammals	primates	primary consumers	2100	123	1030	"643, 656"
+Lemur mongoz	mammals	primates	primary consumers	1700	"39, 124"	350	562
+Macaca fascicularis	mammals	primates	primary consumers	5000	123	25	"124, 425, 445,622, 705"
+Macaca mulatta	mammals	primates	primary consumers	7850	123	35	"294, 485"
+Macaca nemestrina	mammals	primates	primary consumers	9100	123	20	"124, 425, 445"
+Macaca sinica	mammals	primates	primary consumers	5150	123	100	124
+Microcebus coquereli	mammals	primates	primary consumers	385	526	121	"525, 526"
+Microcebus murinus	mammals	primates	primary consumers	725	526	215	"525, 526"
+Miopithecus lalapoin	mammals	primates	primary consumers	1250	123	26.2	242
+Pan paniscus	mammals	primates	primary consumers	22700	534	4	384
+Pan troglodytes	mammals	primates	primary consumers	5000	123	2.5	124
+Papio anubis	mammals	primates	primary consumers	19500	123	10.3	"116, 165, 261,"
+Papio oynocephalus	mammals	primates	primary consumers	17500	123	4	"285, 578, 675 124"
+Papio hamadryas	mammals	primates	primary consumers	13900	123	1.8	382
+Papio papio	mammals	primates	primary consumers	19500	123	12.5	172
+Papio ursinus	mammals	primates	primary consumers	8600	123	2.3	"124, 145"
+Perodicticus potto	mammals	primates	primary consumers	1150	109	9	"108, 109"
+Phaner furcifer	mammals	primates	primary consumers	425	276	675	525
+Pithecta pithecia	mammals	primates	primary consumers	1024	182	40	181
+Pongo pygmaeus	mammals	primates	primary consumers	53000	123	2	"424, 425"
+Presbytis aygula	mammals	primates	primary consumers	6250	123	29	"124, 425"
+Presbytis entellus	mammals	primates	primary consumers	12800	123	57	124
+Presbytis cristatus	mammals	primates	primary consumers	8350	123	150	123
+Presbytis johni	mammals	primates	primary consumers	8150	123	107	123
+Presbytis melalophos	mammals	primates	primary consumers	6300	123	42	"123, 445, 622"
+Presbytis obscurus	mammals	primates	primary consumers	8350	123	33	"123, 445, 622"
+Presbytis rubicunda	mammals	primates	primary consumers	6300	123	11.4	705
+Presbytis senex	mammals	primates	primary consumers	8150	123	154	124
+Propithecus verreauxi	mammals	primates	primary consumers	3600	123	175	562
+Saguinus midas	mammals	primates	primary consumers	315	123	33	726
+Saguinus oedipus	mammals	primates	primary consumers	600	181	23	181
+Saimiri sciureus	mammals	primates	primary consumers	665	123	25	181
+Saimiri oerstedi	mammals	primates	primary consumers	665	123	25	181
+Symphalangus syndactylus	mammals	primates	primary consumers	10700	123	5.2	"117, 425, 445,"
+Theropithecus gelada	mammals	primates	primary consumers	17100	123	69.5	"622 164, 165"
+Adenota kob	mammals	artiodactyla	primary consumers	3400	"261, 327, 396, 495"	7.76	"66, 67, 194, 198, 208, 245,"
+Aepyceros melampus	mammals	artiodactyla	primary consumers	52400	"160, 300, 301, 327, 386, 463, 495, 568, 681, 727"	13.1	"261 66, 67, 141, 142, 160, 223, 224, 265, 293, 298, 326, 368, 386, 404, 463,"
+Alces alces	mammals	artiodactyla	primary consumers	403000	"93, 226, 593, 674"	0.72	"4, 74, 199, 319, 335, 343,367, 374, 468, 518, 532, 535, 603, 728"
+Ammodorcas clarkei	mammals	artiodactyla	primary consumers	31000	327	0.83	597
+Antidorcas marsupialis	mammals	artiodactyla	primary consumers	1800	"144, 327, 495,"	4.65	"144, 440"
+Antilocapra americana	mammals	artiodactyla	primary consumers	46500	"681, 727 93"	0.93	"40, 82, 85. 271, 511, 730"
+Antilope cervicapra	mammals	artiodactyla	primary consumers	29800	"184, 260"	4.8	184
+Axis axis	mammals	artiodactyla	primary consumers	48100	"184, 294"	13	"184, 294, 465"
+Axis porcinus	mammals	artiodactyla	primary consumers	31000	184	35	184
+Bison bison	mammals	artiodactyla	primary consumers	551000	"93, 274"	0.32	"235, 236"
+Bison bonasus	mammals	artiodactyla	primary consumers	850000	674	1	"64, 373, 374"
+Blastocerus dichotomus	mammals	artiodactyla	primary consumers	125000	683	0.146	591
+Bos banteng	mammals	artiodactyla	primary consumers	263000	184	0.85	"184, 305, 528"
+Bos gaurus	mammals	artiodactyla	primary consumers	568000	184	0.61	"184, 353, 465"
+Boselaphus tragocamelus	mammals	artiodactyla	primary consumers	149000	184	2.7	184
+Bubalus bubalis	mammals	artiodactyla	primary consumers	274000	184	1.2	"184, 528, 669"
+Capra hircus	mammals	artiodactyla	primary consumers	75000	674	3.1	"89, 589, 590"
+Capra waalie	mammals	artiodactyla	primary consumers	100000	164	4.6	164
+Capreolus capreolus	mammals	artiodactyla	primary consumers	1700	"674, 683"	8.6	"4, 64, 89,"
+Cephalophus natalensis	mammals	artiodactyla	primary consumers	14000	327	8	"374, 549 153"
+Cephalophus rufilatus	mammals	artiodactyla	primary consumers	12500	327	4	675
+Cervus canadensis	mammals	artiodactyla	primary consumers	310000	93	0.93	"306, 366, 423,730"
+Cervus elaphus	mammals	artiodactyla	primary consumers	175000	"674, 683"	5.48	"37, 62, 64, 89,107, 365, 374,415, 416, 489, 549, 628"
+Cerous duvauceli	mammals	artiodactyla	primary consumers	170000	184	12.7	"184, 303, 587"
+Cervus unicolor	mammals	artiodactyla	primary consumers	138000	184	1.42	"184, 305, 465,"
+Connochaetes taurinus	mammals	artiodactyla	primary consumers	203000	"160, 299, 301, 327, 386, 397, 495, 568, 681, 727"	7.59	"528 66, 69, 153, 160, 223, 224, 293, 298, 492, 521, 569, 631, 682"
+Damaliscus dorcas	mammals	artiodactyla	primary consumers	70000	"327, 681, 727"	18.8	"144, 171"
+Damaliscus lunatus	mammals	artiodactyla	primary consumers	122000	"327, 681, 727"	11	"66, 67, 261, 265, 293, 368,463, 609, 626 630, 63!"
+Gazella granti	mammals	artiodactyla	primary consumers	58800	"327, 386, 495, 681"	1.06	"57, 66, 223, 224, 293, 386,"
+Gazella thomsoni	mammals	artiodactyla	primary consumers	21000	"326, 396, 495, 681"	6.64	"404, 576, 631 57, 66, 223, 224, 293, 631,"
+Giraffa camelopardalis	mammals	artiodactyla	primary consumers	912000	"386, 681, 727"	0.937	"651 57, 66, 67, 139, 179, 198,222, 223, 224, 265, 293, 298, 386, 402, 404, 493, 576, 609, 675"
+Artiodactyla (cont.) Hippotragus equinus	mammals	artiodactyla	primary consumers	225000	"160, 261, 327, 495, 681"	0.774	"67, 160, 198, 261, 368, 537,"
+Hippotragus niger	mammals	artiodactyla	primary consumers	197000	"160, 327, 495, 681"	0.66	"569, 626, 675 160"
+Hyemoschus aquaticus	mammals	artiodactyla	primary consumers	13300	162	17.9	162
+Kobus defassa	mammals	artiodactyla	primary consumers	211000	"160, 261, 327,397, 495, 681"	9.11	"66, 67, 160,192, 194, 208,223, 224, 261, 265, 293, 385, 463, 609, 625, 626"
+Kobus ellipsiprymus	mammals	artiodactyla	primary consumers	194000	"295, 327, 463, 681"	1.69	"66, 67, 295, 298, 386, 404,"
+Kobus leche	mammals	artiodactyla	primary consumers	90600	"13, 47, 327, 495, 568, 569,681"	15.5	"675 13, 47, 569, 586"
+Kobus vardoni	mammals	artiodactyla	primary consumers	9300	"17, 160, 327,568, 681"	0.15	160
+Lama guanacoe	mammals	artiodactyla	primary consumers	9000	458	0.51	225
+Litocranius walleri	mammals	artiodactyla	primary consumers	12000	"327, 397, 495"	1.03	"404, 729"
+Madoqua kirkii	mammals	artiodactyla	primary consumers	4940	"327, 663, 681"	111	"293, 386, 663"
+Mazama americana	mammals	artiodactyla	primary consumers	20000	182	10	183
+Muntiacus muntjak	mammals	artiodactyla	primary consumers	14200	184	3.53	"36, 184, 294,"
+Odocoileus hemionus	mammals	artiodactyla	primary consumers	9300	"93, 730"	10	"528, 529 50, 118, 180, 279, 306, 423, 594, 649, 650,730"
+Odocoileus virginianus	mammals	artiodactyla	primary consumers	85100	93	12.6	"6, 100, 132, 190, 218, 275, 319, 343, 378, 389, 417, 433, 451, 502, 658, 672"
+Oreotragus oreotragus	mammals	artiodactyla	primary consumers	14300	"164, 327, 495, 681"	4.6	"66, 164, 293"
+Oryx gazella	mammals	artiodactyla	primary consumers	167000	"327, 495"	0.75	"404, 631"
+Ourebia ourebi	mammals	artiodactyla	primary consumers	13600	"160, 261, 327,463, 495, 501,568, 681"	1.9	"67, 160, 261,293, 368, 446,463, 464, 501,569,626,675"
+Ouibos moschatus	mammals	artiodactyla	primary consumers	250000	"93, 311, 700"	0.36	"206, 228, 311, 453, 454, 455,624 "
+Oois canadensis	mammals	artiodactyla	primary consumers	75900	"93, 246"	1.68	"84, 246, 401, 604"
+Pelea capreolus	mammals	artiodactyla	primary consumers	24000	"327, 494, 501"	5.71	"144,446, 501"
+Phacochoerus aethiopicus	mammals	artiodactyla	primary consumers	60900	"160, 261, 301,386, 397, 463,568, 681, 727"	1.3	"66, 67, 69,194, 198, 208, 223, 224, 261, 293, 298, 386, 404, 463, 626,675"
+Potamochoerus porcus	mammals	artiodactyla	primary consumers	65700	"160, 568, 681, 727"	0.27	"66, 153, 160"
+Rangifer tarandus	mammals	artiodactyla	primary consumers	100000	"87, 93, 260, 414"	2.88	"27, 227, 238,288, 292, 324, 340, 349, 400, 414, 453, 454, 455, 503, 509, 513, 560, 602, 610, 659, 676, 699"
+Raphicerus campestris	mammals	artiodactyla	primary consumers	12300	"327, 495"	0.6	"66, 153,2 293"
+Raphicerus sharpei	mammals	artiodactyla	primary consumers	8210	"160, 327, 568,681"	0.85	160
+Redunca arundinum	mammals	artiodactyla	primary consumers	59400	"160, 327, 495,568, 681, 727"	1.46	"69, 160, 569"
+Redunca fulvorufula	mammals	artiodactyla	primary consumers	28000	"327, 495, 681, 727"	6.69	"317, 318, 501 317, 318,"
+Redunca redunca	mammals	artiodactyla	primary consumers	43500	"261, 327, 495"	0.81	"66, 67, 198, 66, 67, 198, 208, 261, 293,304, 368, 463, 626, 675"
+Saiga tatarica	mammals	artiodactyla	primary consumers	42500	674	0.8	28
+Sus scrofa	mammals	artiodactyla	primary consumers	55300	"184, 294, 305, 674"	2.84	"4, 184, 287, 294, 529, 536, 549"
+Sylvicapra grimmia	mammals	artiodactyla	primary consumers	11300	"160, 164, 261, 327, 350, 357, 495, 568, 681"	1.53	"66, 67, 153, 160, 164, 261, 293, 357, 626, 675"
+Syncerus caffer	mammals	artiodactyla	primary consumers	544000	"160, 261, 327,386, 463, 495, 568, 681"	3.81	"66, 67, 69,160, 192, 195, 208, 261, 293,326, 348, 403, 404, 463, 493, 533, 576, 626, 631, 651"
+Taurotragus oryx	mammals	artiodactyla	primary consumers	453000	"160, 327, 386,463, 495, 568,681, 727"	0.345	"57, 66, 67,265, 293, 404,463, 493, 569,576, 609, 626,631, 651, 670"
+Tayassu tajacu	mammals	artiodactyla	primary consumers	1700	"93, 683"	7.46	"52, 191, 601, 723"
+Tragelaphus angasi	mammals	artiodactyla	primary consumers	90600	"301, 327, 727"	0.209	153
+Tragelaphus imberbis	mammals	artiodactyla	primary consumers	110000	"327, 386, 397,"	0.182	"386, 404"
+Tragelaphus scriptus	mammals	artiodactyla	primary consumers	40800	"681 160, 164, 301, 327, 495, 568, 681, 707"	10.3	"14, 67, 160, 164, 192, 208, 261, 293, 323,"
+Tragelaphus spekei	mammals	artiodactyla	primary consumers	74800	"327, 495, 681"	110	675 505
+Tragelaphus strepsiceros	mammals	artiodactyla	primary consumers	171000	"160, 326, 327,495, 681, 706,727"	1.79	"66, 153, 160,298, 326, 569"
+Tragulus memmina	mammals	artiodactyla	primary consumers	3200	184	3.1	184
+Vicugna vicugna	mammals	artiodactyla	primary consumers	47500	458	3.5	"370, 458"
+Ceratotherium simum	mammals	perissodactyla	primary consumers	2220000	"204, 727"	0.74	"67, 69, 204,"
+Diceros bicornis	mammals	perissodactyla	primary consumers	952000	"301, 386, 681"	0.84	"66, 69, 255, 256, 293, 300,326, 386, 404, 431, 473, 493, 577, 631, 651, 675, 697"
+Dicerorhinus sumatrensis	mammals	perissodactyla	primary consumers	1120000	184	0.093	"459, 635"
+Equus burchelli	mammals	perissodactyla	primary consumers	259000	"463, 568, 681,727"	3.74	"66, 67, 69,160, 179, 223,224, 293, 298,404, 463, 493, 569, 576, 626, 630, 631, 651"
+Equus greuyi	mammals	perissodactyla	primary consumers	390000	"159, 396"	2.57	"630, 631"
+Equus zebra	mammals	perissodactyla	primary consumers	270000	159	1.5	336
+Rhinoceros unicornis	mammals	perissodactyla	primary consumers	1255000	184	6.27	184
+Rhinoceros sondaicus	mammals	perissodactyla	primary consumers	997000	184	0.12	"184, 305"
+Tapirus bairdi	mammals	perissodactyla	primary consumers	300000	185	0.63	660
+Tapirus terrestris	mammals	perissodactyla	primary consumers	175000	182	0.8	183
+Elephas maximus	mammals	proboscidea	primary consumers	1810000	184	0.49	"184, 351, 352,353, 465, 472,529"
+L.oxodonta africana	mammals	proboscidea	primary consumers	2860000	"160, 293, 386, 523, 681"	1.09	"7, 66, 67, 86, 95, 103, 160, 179, 192, 193, 198, 207, 208, 254, 261, 293, 326, 404, 493, 533, 538, 576, 618, 631, 651, 675, 692, 693, 708"
+Dendrohyrax validus	mammals	hyracoidea	primary consumers	2430	358	25.6	383
+Lepus americanus	mammals	lagomorpha	primary consumers	1360	93	141	"5, 10, 154, 156, 355, 713"
+Lepus californicus	mammals	lagomorpha	primary consumers	2420	"93, 263"	13	"115, 216, 266, 289, 730"
+Lepus capensis	mammals	lagomorpha	primary consumers	3030	"96, 187, 398,674"	9.97	555
+Lepus nigricollis	mammals	lagomorpha	primary consumers	2710	184	101	184
+Lepus timidus	mammals	lagomorpha	primary consumers	3020	"219, 674"	18.6	"219, 691"
+Lepus townsendi	mammals	lagomorpha	primary consumers	3400	93	5.84	"216, 730"
+Ochotona princeps	mammals	lagomorpha	primary consumers	154	"93, 341, 434"	558	"75, 88, 452"
+Oryctolagus cuniculus	mammals	lagomorpha	primary consumers	1640	"398, 674"	131	"170, 712"
+Sylvilagus auduboni	mammals	lagomorpha	primary consumers	854	"93, 115, 260,296"	35.4	"115, 209, 216,730"
+Sylvilagus bachmani	mammals	lagomorpha	primary consumers	692	93	544	131
+Sylvilagus floridanus	mammals	lagomorpha	primary consumers	1130	"93, 260"	588	"575, 667"
+Sylvilagus nuttalli	mammals	lagomorpha	primary consumers	1020	93	68.8	422
+Acomys subspinosus	mammals	rodentia	primary consumers	22	732	3450	563
+Aethomys hindei	mammals	rodentia	primary consumers	146	500	1590	500
+Aethomys namaquensis	mammals	rodentia	primary consumers	42	"557, 647"	3300	563
+Agouti paca	mammals	rodentia	primary consumers	8200	182	25	183
+Akodon olivaceus	mammals	rodentia	primary consumers	29.1	"233, 497"	3626	"233, 515"
+Ammospermophilus harrist	mammals	rodentia	primary consumers	127	"93, 115"	32	115
+Apodemus agrarius	mammals	rodentia	primary consumers	20	674	1240	"16, 113,3 333,"
+Apodemus flavicollis	mammals	rodentia	primary consumers	36	"398, 552"	949	"719 16, 22, 60, 61, 113, 280, 474,"
+Apodemus sylvaticus	mammals	rodentia	primary consumers	33	398	2550	"715 79, 217, 270, 280, 457, 496,"
+Arvicanthus abyssinicus	mammals	rodentia	primary consumers	70	475	12400	"654, 715 475"
+Arvicanthus niloticus	mammals	rodentia	primary consumers	103	"151, 309, 519,607"	862	"150, 546, 657"
+Arvicola terrestris	mammals	rodentia	primary consumers	143	674	30900	"8, 9,467 9, 467"
+Auliscomys micropus	mammals	rodentia	primary consumers	71	515	257	515
+Baiomys taylori	mammals	rodentia	primary consumers	7	"93, 291"	1550	"522, 632"
+Callomyscus bailwardi	mammals	rodentia	primary consumers	22.5	683	400	232
+Callosciurus caniceps	mammals	rodentia	primary consumers	257	"580, 731"	21	287
+Callosciurus nigrovillalus	mammals	rodentia	primary consumers	170	"408, 580, 731"	6.5	287
+Callosciurus notatus	mammals	rodentia	primary consumers	210	"408, 580, 731"	111	287
+Calomys callosus	mammals	rodentia	primary consumers	40	497	400	497
+Calomys expulsus	mammals	rodentia	primary consumers	40	497	1350	497
+Calomys musculinus	mammals	rodentia	primary consumers	40	497	286	497
+Cavia aperea	mammals	rodentia	primary consumers	487	398	2040	570
+Citellus fulvus	mammals	rodentia	primary consumers	1020	"496, 732"	278	354
+Citellus pygmaeus	mammals	rodentia	primary consumers	222	1	1250	"1, 221"
+Clethrionomys gapperi	mammals	rodentia	primary consumers	27	93	1160	"83, 470, 584"
+Clethrionomys glareolus	mammals	rodentia	primary consumers	23	"398, 412, 582,674"	1890	"3, 16, 22, 23,60, 61, 113,280, 281, 325, 435, 444, 474, 520, 551, 611, 654, 715"
+Clethrionomys occidentalis	mammals	rodentia	primary consumers	31	732	556	241
+Clethrionomys rutilus	mammals	rodentia	primary consumers	28	"93, 582"	4600	702
+Coendu prehensalis	mammals	rodentia	primary consumers	4000	110	40.3	"110, 183"
+Cricetulus migratorius	mammals	rodentia	primary consumers	30.5	490	250	232
+Cryptomys hottentotus	mammals	rodentia	primary consumers	68.7	"247, 607, 617"	741	247
+Ctenomys opimus	mammals	rodentia	primary consumers	241	516	247	"497, 516"
+Ctenomys peruanus	mammals	rodentia	primary consumers	400	497	4200	"497, 516"
+Cynomys ludovicianus	mammals	rodentia	primary consumers	1130	93	2470	369
+Dasymys incomptus	mammals	rodentia	primary consumers	88	"18, 151, 283,398, 553, 607,617"	1940	"48, 148, 150,461, 606"
+Dasyprocta leporina	mammals	rodentia	primary consumers	2700	182	90	183
+Dasyprocta punctata	mammals	rodentia	primary consumers	2000	185	100	"212, 619"
+Delanymys brooksi	mammals	rodentia	primary consumers	5	151	985	"149, 150"
+Dendromus mesomelas	mammals	rodentia	primary consumers	13.5	"149, 151, ,553"	1980	"148, 150, 461"
+Dendromus mysticalis	mammals	rodentia	primary consumers	8.2	"149, 151"	1170	"150, 461"
+Desmodillus auricularis	mammals	rodentia	primary consumers	55	617	1429	119
+Dicrostonyx groenlandicus	mammals	rodentia	primary consumers	56	"87, 237"	585	"205, 237, 375"
+Dipodomys agilis	mammals	rodentia	primary consumers	60	"93, 260"	504	"120, 418, 449"
+Dipodomys deserti	mammals	rodentia	primary consumers	108	"76, 93"	469	"41, 42"
+Dipodomys elator	mammals	rodentia	primary consumers	145	732	1450	567
+Dipodomys heermanni	mammals	rodentia	primary consumers	72	93	950	129
+Dipodomys merriami	mammals	rodentia	primary consumers	38.5	"93, 115, 260,346, 347, 620"	1209	"41, 42, 56,114, 115, 120,114, 115, 120,599, 620, 701 "
+Dipodomys microps	mammals	rodentia	primary consumers	65	"76, 93, 346, 347"	1310	"41, 42"
+Dipodomys ordii	mammals	rodentia	primary consumers	53	"76, 93"	449	"56, 229, 522,"
+Dipodomys spectabilis	mammals	rodentia	primary consumers	145	93	205	"599, 701 598, 701"
+Echimys chrysurus	mammals	rodentia	primary consumers	475	269	7	269
+Echimys semivillosus	mammals	rodentia	primary consumers	400	497	40	183
+Eothenomys smithi	mammals	rodentia	primary consumers	35	"134, 732"	1610	653
+Erethizon dorsatum	mammals	rodentia	primary consumers	8620	93	3.9	547
+Eutamias minimus	mammals	rodentia	primary consumers	39	"76, 93, 677"	1700	677
+Eutamias townsendi	mammals	rodentia	primary consumers	97	93	531	241
+Gerbillurus paeba	mammals	rodentia	primary consumers	26	617	1950	119
+Glaucomys volans	mammals	rodentia	primary consumers	69	"93, 429"	293	429
+Heteromys anomalus	mammals	rodentia	primary consumers	69	427	1090	"183, 497, 572"
+Heteromys desmarestianus	mammals	rodentia	primary consumers	65	215	695	"212, 215"
+Hybomys trivirgatus	mammals	rodentia	primary consumers	63	282	91	282
+Hydrochaerus hydrochaerus	mammals	rodentia	primary consumers	32800	"398, 683"	104	"183, 184, 733"
+Irenomys tarsalis	mammals	rodentia	primary consumers	44.5	515	325	515
+Lagurus curtatus	mammals	rodentia	primary consumers	30	93	666	379
+Lemmus trimucronatus	mammals	rodentia	primary consumers	81	"87, 93"	2900	"87, 375"
+Lemniscomys griselda	mammals	rodentia	primary consumers	54	"607, 617"	387	648
+Lemniscomys striatus	mammals	rodentia	primary consumers	65	"151, 282, 398,553"	777	"48, 112, 149,150, 398, 461"
+Liomys pictus	mammals	rodentia	primary consumers	44	182	1380	127
+Liomys salvini	mammals	rodentia	primary consumers	39	215	620	215
+Makalata armatus	mammals	rodentia	primary consumers	400	110	175	110
+Malacomys edwardsi	mammals	rodentia	primary consumers	64	"126, 283"	256	"283, 284"
+Marmota flaviventris	mammals	rodentia	primary consumers	3400	93	296	"21, 645"
+Marmota marmota	mammals	rodentia	primary consumers	3950	"398, 674"	616	721
+Melomys cervinipes	mammals	rodentia	primary consumers	65	"33, 97, 574"	667	"33, 34, 711"
+Meriones persicus	mammals	rodentia	primary consumers	116	398	150	232
+Microcavia australis	mammals	rodentia	primary consumers	250	570	2390	570
+Microtus agrestis	mammals	rodentia	primary consumers	36	"582, 674"	2200	"280, 281, 477"
+Microtus arvalis	mammals	rodentia	primary consumers	27	"398, 399, 674"	3770	"22, 161, 520"
+Microtus californicus	mammals	rodentia	primary consumers	71	93	9900	"38, 376, 406"
+Microtus longicaudatus	mammals	rodentia	primary consumers	47	93	7500	130
+Microtus mexicanus	mammals	rodentia	primary consumers	35	93	3000	130
+Microtus montanus	mammals	rodentia	primary consumers	43	"93, 677"	6750	"210, 677"
+Microtus ochrogaster	mammals	rodentia	primary consumers	35	93	12000	"377, 436, 437,448"
+Microtus oeconomus	mammals	rodentia	primary consumers	49	"93, 582"	4500	"244, 272, 702"
+Microtus pennsylvanicus	mammals	rodentia	primary consumers	49	93	4040	"55, 83, 249,257, 377, 584"
+Mus bufo	mammals	rodentia	primary consumers	8.6	"151, 553"	380	"148, 150"
+Mus minutoides	mammals	rodentia	primary consumers	6.4	"18, 151, 290,553, 607, 617"	868	"48, 112, 148,150, 461"
+Mus musculoides	mammals	rodentia	primary consumers	8.5	282	699	282
+Mus triton	mammals	rodentia	primary consumers	11.8	"20, 151, 553,607"	919	"112, 148, 150,461"
+Mylomys dybowskii	mammals	rodentia	primary consumers	108	"151, 553"	189	"48, 112"
+Myomys daltoni	mammals	rodentia	primary consumers	34	283	3170	283
+Neacomys guianae	mammals	rodentia	primary consumers	17.8	269	31	269
+Neofiber alleni	mammals	rodentia	primary consumers	254	"54, 683"	9880	54
+Neotoma floridana	mammals	rodentia	primary consumers	250	291	140	31
+Neotoma fuscipes	mammals	rodentia	primary consumers	248	"77, 93"	93	418
+Neotoma lepida	mammals	rodentia	primary consumers	130	"77, 78, 93,600"	1610	"58, 78, 418"
+Neotoma micropus	mammals	rodentia	primary consumers	260	93	1600	"556, 701"
+Ochrotomys nuttalli	mammals	rodentia	primary consumers	21	93	351	"410, 616"
+Octodon degus	mammals	rodentia	primary consumers	218	"233, 394"	4000	394
+Oenomys hypoxanthus	mammals	rodentia	primary consumers	86	"19, 151, 553"	4220	"148, 150, 461"
+Oryzomys bauri	mammals	rodentia	primary consumers	65	121	2300	121
+Oryzomys bicolor	mammals	rodentia	primary consumers	49	269	50.2	"183, 269, 497"
+Oryzomys capito	mammals	rodentia	primary consumers	42	"201, 212"	532	"183, 201, 212,213, 269"
+Oryzomys concolor	mammals	rodentia	primary consumers	35	110	129	"110, 183, 269"
+Oryzomys eliurus	mammals	rodentia	primary consumers	40	497	1050	497
+Oryzomys longicaudatus	mammals	rodentia	primary consumers	30	233	620	233
+Oryzomys macconnelli	mammals	rodentia	primary consumers	76.5	269	58.8	269
+Oryzomys nigripes	mammals	rodentia	primary consumers	24.1	679	2455	"497, 679"
+Oryzomys oniscus	mammals	rodentia	primary consumers	40	497	200	497
+Oryzomys palustris	mammals	rodentia	primary consumers	59	93	1900	614
+Oryzomys simplex	mammals	rodentia	primary consumers	40	497	1700	497
+Oryzomys subflavus	mammals	rodentia	primary consumers	50	269	100	269
+Otomys angoniensis	mammals	rodentia	primary consumers	136	"20, 607, 617"	2970	657
+Otomys irroratus	mammals	rodentia	primary consumers	121	"146, 151"	2700	"148, 150, 461"
+Pelomys fallax	mammals	rodentia	primary consumers	112	"553, 606, 607,617"	1110	"148, 150"
+Perognathus flavus	mammals	rodentia	primary consumers	7.4	"93, 115"	294	"115, 522, 701"
+Perognathus intermedius	mammals	rodentia	primary consumers	17	93	480	701
+Perognathus longimembris	mammals	rodentia	primary consumers	7.5	"76, 93, 346,347"	214	"114, 449"
+Perognathus parous	mammals	rodentia	primary consumers	20	"76, 93"	2970	379
+Perognathus penicillatus	mammals	rodentia	primary consumers	15	"76, 93, 115"	701	701
+Peromyscus boylii	mammals	rodentia	primary consumers	28	93	585	"80, 127"
+Peromyscus californicus	mammals	rodentia	primary consumers	42	"93, 291"	4790	"447, 449"
+Peromyscus eremicus	mammals	rodentia	primary consumers	23	"93, 291"	293	"115, 418, 449,"
+Peromyscus gossypinus	mammals	rodentia	primary consumers	35	"53, 93, 291"	4650	"701 53, 614, 616"
+Peromyscus leucopus	mammals	rodentia	primary consumers	21	"93, 291"	1890	"286, 419, 478,"
+Peromyscus maniculatus	mammals	rodentia	primary consumers	20	"76, 93, 291, 677"	1060	"615, 633, 701 38, 118, 203, 229, 241, 379,418, 449, 470, 522, 527, 558, 581, 615, 640, 677, 701"
+Peromyscus polionotus	mammals	rodentia	primary consumers	15	291	1040	"143, 499"
+Peromyscus truei	mammals	rodentia	primary consumers	24	"76, 93"	4450	447
+Phyllotis darwini	mammals	rodentia	primary consumers	52	233	4090	233
+Phyllotis osilae	mammals	rodentia	primary consumers	39	"157, 516"	434	"157, 516"
+Phyllotis pictus	mammals	rodentia	primary consumers	44	157	263	157
+Praomys erythroleucus	mammals	rodentia	primary consumers	53	"309, 310, 398"	876	309
+Praomys natalensis	mammals	rodentia	primary consumers	50	"151, 283, 479,553, 606, 607,617, 648"	777	"112, 148, 150,283, 606, 648,657"
+Praomys tullbergi	mammals	rodentia	primary consumers	38	"186, 282, 398"	1900	"283, 284"
+Proechimys guyannensis	mammals	rodentia	primary consumers	316	201	1060	201
+Proechimys semispinosus	mammals	rodentia	primary consumers	800	"185, 253"	583	"212, 213"
+Psammomys obesus	mammals	rodentia	primary consumers	70	260	79	140
+Rattus cremoriventer	mammals	rodentia	primary consumers	72	"408, 580"	27	287
+Rattus exulans	mammals	rodentia	primary consumers	62	"408, 709"	4480	"173, 287, 652,"
+Rattus fuscipes	mammals	rodentia	primary consumers	125	"33, 71, 574"	1770	"703, 709 33, 34, 711"
+Rattus muelleri	mammals	rodentia	primary consumers	321	"407, 408, 580,717"	38	287
+Rattus rattus	mammals	rodentia	primary consumers	122	"151, 260, 408,491, 553, 607"	3650	652
+Rattus tiomanicus	mammals	rodentia	primary consumers	112	408	227	287
+Rattus villosissimus	mammals	rodentia	primary consumers	251	45	3350	101
+Rattus whiteheadi	mammals	rodentia	primary consumers	54	"408, , 580"	50	287
+Reithrodon auritus	mammals	rodentia	primary consumers	85	497	69	497
+Reithrodontomys fulvescens	mammals	rodentia	primary consumers	21	93	598	"337, 506, 522"
+Reithrodontomys megalotis	mammals	rodentia	primary consumers	16	"76, 93, 115"	1530	"38, 118, 418,"
+Rhabdomys pumilio	mammals	rodentia	primary consumers	44	"20, 617, 648,"	224	"449, 522, 701 119"
+Rhipidomys mastacalis	mammals	rodentia	primary consumers	115	"497, 734"	144	183
+Saccostomus campestris	mammals	rodentia	primary consumers	45	"18, 151, 607,"	870	648
+Sciurus carolinensis	mammals	rodentia	primary consumers	530	617 93	701	"32, 65, 220, 466, 471, 673"
+Sciurus granatensis	mammals	rodentia	primary consumers	275	497	45	183
+Sciurus griseus	mammals	rodentia	primary consumers	680	93	431	316
+Sciurus langsdorf	mammals	rodentia	primary consumers	275	497	300	497
+Sigmodon fulviventer	mammals	rodentia	primary consumers	120	"25, 93, 329"	1460	522
+Sigmodon hispidus	mammals	rodentia	primary consumers	129	"93, 291, 338,498"	2220	"118, 211, 337,498, 522, 595,"
+Sigmomys alstoni	mammals	rodentia	primary consumers	50	497	50	"614, 632, 701 183"
+Spermophilus armatus	mammals	rodentia	primary consumers	350	93	5130	612
+Spermophilus franklini	mammals	rodentia	primary consumers	500	93	500	476
+Spermophilus richardsonii	mammals	rodentia	primary consumers	351	"93, 720"	3280	720
+Spermophilus spilosoma	mammals	rodentia	primary consumers	107	"93, 115"	105	"115, 701"
+Spermophilus tridecemlineatus	mammals	rodentia	primary consumers	200	93	318	"200, 229"
+Spermophilus undulatus	mammals	rodentia	primary consumers	800	93	330	99
+Stochomys longicaudatus	mammals	rodentia	primary consumers	71	"282, 398, 553"	94	283
+Sundasciurus tenuis	mammals	rodentia	primary consumers	100	"580, 731"	23	287
+Synaptomys cooperi	mammals	rodentia	primary consumers	27	239	1850	239
+Tachyoryctes splendens	mammals	rodentia	primary consumers	200	"359, 553, 554"	3822	"148, 150, 554"
+Tamias striatus	mammals	rodentia	primary consumers	97	"93, 260"	2060	"646, 716"
+Tamiasciurus hudsonicus	mammals	rodentia	primary consumers	207	"93, 155"	148	"345, 392, 724"
+Tatera kempii	mammals	rodentia	primary consumers	101	283	725	"48, 283"
+Taterillus gracilis	mammals	rodentia	primary consumers	51	"283, 309, 310"	528	283
+Talerillus pygargus	mammals	rodentia	primary consumers	62	310	550	"544, 545"
+Thamnomys dolichurus	mammals	rodentia	primary consumers	42	"151, 359, 553"	343	"148, 150, 461"
+Thomomys bottae	mammals	rodentia	primary consumers	154	"51, 93"	2200	"308, 512"
+Thomomys talpoides	mammals	rodentia	primary consumers	93	"93, 677"	2480	"278, 559, 677"
+Uranomys ruddi	mammals	rodentia	primary consumers	34	282	214	"48, 283"
+Zapus hudsonicus	mammals	rodentia	primary consumers	18	93	6430	584
+Zapus princeps	mammals	rodentia	primary consumers	29	93	330	81
+Zygodontomys brevicauda	mammals	rodentia	primary consumers	56	734	279	"183, 497"
+Ailuropoda melanoleuca	mammals	carnivora	primary consumers	118000	683	0.121	605
+Bradypus infuscatus	mammals	edentata	primary consumers	2700	182	407	"182, 183"
+Choloepus hofmanni	mammals	edentata	primary consumers	3500	182	190	182
+Caluromys philander	mammals	marsupialia	primary consumers	300	110	150	110
+Lasiorhinus latifrons	mammals	marsupialia	primary consumers	25000	695	20.8	695
+Macropus parryi	mammals	marsupialia	primary consumers	12000	182	47	182
+Macropus robustus	mammals	marsupialia	primary consumers	31900	655	15	"174, 175"
+Megaleia rufa	mammals	marsupialia	primary consumers	41400	152	0.7	"104, 487, 488"
+Phascolarctos cinereus	mammals	marsupialia	primary consumers	11000	182	100	182
+Potorous apicalis	mammals	marsupialia	primary consumers	1360	"182, 268"	19.6	363
+Pseudocheirus peregrinus	mammals	marsupialia	primary consumers	872	"182, 655"	125	"182, 661"
+Schoinobates volans	mammals	marsupialia	primary consumers	1250	671	83	671
+Selonix brachyurus	mammals	marsupialia	primary consumers	3000	"167, 182"	511	"182, 363"
+Trichosurus caninus	mammals	marsupialia	primary consumers	2800	35	150	182
+Trichosurus oulpecula	mammals	marsupialia	primary consumers	2080	"167, 167, 65: 655"	75	"136, 168, 169,"
+Vombatus ursinus	mammals	marsupialia	primary consumers	22500	"182, 683"	11	621 421
+Wallabia agilis	mammals	marsupialia	primary consumers	10000	182	20	182
+Blarina brevicauda	mammals	insectivora	secondary consumers insect eaters	17.8	"39, 9 93"	621	616
+Crocidura bicolor	mammals	insectivora	secondary consumers insect eaters	3.8	"20, 607"	153	148
+Crocidura hildegardeae	mammals	insectivora	secondary consumers insect eaters	10.6	39	392	148
+Crocidura occidentalis	mammals	insectivora	secondary consumers insect eaters	33.4	"20, 39, 607"	81.7	148
+Elephantulus edwardii	mammals	insectivora	secondary consumers insect eaters	55	276	1400	563
+Erinaceus europeaus	mammals	insectivora	secondary consumers insect eaters	805	"39, 735"	600	621
+Sorex araneus	mammals	insectivora	secondary consumers insect eaters	9.3	"39, 582"	1046	"280, 281, 621,736, 737, 738,739"
+Sorex arcticus	mammals	insectivora	secondary consumers insect eaters	8	93	564	"83, 736"
+Sorex cinereus	mammals	insectivora	secondary consumers insect eaters	4.2	93	1207	"83, 741"
+Sorex longirostris	mammals	insectivora	secondary consumers insect eaters	4.5	93	69	616
+Sorex minutus	mammals	insectivora	secondary consumers insect eaters	5.3	39	621	"280, 281, 738,"
+Sorex vagrans	mammals	insectivora	secondary consumers insect eaters	7	93	717	739 674
+Sylvisorex lunaris	mammals	insectivora	secondary consumers insect eaters	18.5	39	949	148
+Sylvisorex megalura	mammals	insectivora	secondary consumers insect eaters	5.3	39	1103	148
+Talpa europea	mammals	insectivora	secondary consumers insect eaters	76	39	1045	"621, 740"
+Tupaia glis	mammals	insectivora	secondary consumers insect eaters	134	"39, 580"	74	287
+Arctocebus calabarensis	mammals	primates	secondary consumers insect eaters	210	109	7	109
+Loris tardigradus	mammals	primates	secondary consumers insect eaters	220	"39, 109"	59	524
+Akodon azarae	mammals	rodentia	secondary consumers insect eaters	25	291	8670	497
+Akodon longipilis	mammals	rodentia	secondary consumers insect eaters	51.4	233	3815	233
+Akodon urichi	mammals	rodentia	secondary consumers insect eaters	45	497	200	183
+Bolomys amoenus	mammals	rodentia	secondary consumers insect eaters	25.4	"157, 158, 516"	2020	"157, 516"
+Lophuromys flavopunctatus	mammals	rodentia	secondary consumers insect eaters	50	"125, 151"	1610	"149, 150, 277,461"
+Lophuromys sikapusi	mammals	rodentia	secondary consumers insect eaters	64	"151, 282, 290,151, 282, 290,"	319	"48, 112, 283"
+Notiomys valdivianus	mammals	rodentia	secondary consumers insect eaters	27.1	515	45	515
+Notiomys macronyx	mammals	rodentia	secondary consumers insect eaters	70.9	515	297	515
+Onychomys torridus	mammals	rodentia	secondary consumers insect eaters	23.8	115	294	"56, 115, 522,"
+Oxymycterus rutilans	mammals	rodentia	secondary consumers insect eaters	85	497	620	497
+Rhinosciurus laticaudatus	mammals	rodentia	secondary consumers insect eaters	253	731	10.8	287
+Zelotomys hildegardeae	mammals	rodentia	secondary consumers insect eaters	51	"18, 151"	69	"112, 607 607"
+Conepalus semistriatus	mammals	carnivora	secondary consumers insect eaters	1800	183	10.75	183
+Meles meles	mammals	carnivora	secondary consumers insect eaters	10900	479	2.82	"380, 479"
+Mephitis mephitis	mammals	carnivora	secondary consumers insect eaters	2404	678	8.5	"202, 678"
+Melursus ursinus	mammals	carnivora	secondary consumers insect eaters	105000	642	0.29	"135, 390, 642"
+Mungos mungo	mammals	carnivora	secondary consumers insect eaters	1430	"571, 579"	18.1	571
+Nasua narica	mammals	carnivora	secondary consumers insect eaters	9070	93	1.6	387
+Otocyon megalotis	mammals	carnivora	secondary consumers insect eaters	3750	276	1.88	687
+Proteles cristatus	mammals	carnivora	secondary consumers insect eaters	8000	"276, 579"	0.75	687
+Spilogale putorius	mammals	carnivora	secondary consumers insect eaters	595	93	5	202
+Vulpes pallida	mammals	carnivora	secondary consumers insect eaters	3250	276	6.9	545
+Manis tricuspis	mammals	pholidota	secondary consumers insect eaters	2800	182	50	182
+Dasypus novemcinctatus	mammals	edentata	secondary consumers insect eaters	3500	182	13.3	182
+Myrmecophaga tridactyla	mammals	edentata	secondary consumers insect eaters	20000	182	0.18	183
+Tamandua tetradactyla	mammals	edentata	secondary consumers insect eaters	4000	182	6	183
+Antechinus stuartii	mammals	marsupialia	secondary consumers insect eaters	35	"33, 71, 182"	1689	"33, 34, 182"
+Isoodon obesulus	mammals	marsupialia	secondary consumers insect eaters	560	182	19.8	182
+Marmosa cinerea	mammals	marsupialia	secondary consumers insect eaters	80	"110, 183"	51	"110, 183"
+Marmosa murina	mammals	marsupialia	secondary consumers insect eaters	45	110	63	110
+Marmosa robinsoni	mammals	marsupialia	secondary consumers insect eaters	40	182	180	"183, 214"
+Sminthopsis crassicaudata	mammals	marsupialia	secondary consumers insect eaters	15	742	50	742
+Philander opossum	mammals	marsupialia	secondary consumers vertebrate flesh eaters	338	"110, 128, 269, 314"	105	"110, 214"
+Sarcophilus harrisii	mammals	marsupialia	secondary consumers vertebrate flesh eaters	5700	182	11.6	182
+Acinonyx jubatus	mammals	carnivora	secondary consumers vertebrate flesh eaters	50000	276	0.06	"160, 176, 202, 259, 588"
+Alopex lagopus	mammals	carnivora	secondary consumers vertebrate flesh eaters	5500	"46, 93,"	0.175	676
+Bassariscus astutus	mammals	carnivora	secondary consumers vertebrate flesh eaters	1020	93	2.2	666
+Canis adustus	mammals	carnivora	secondary consumers vertebrate flesh eaters	5440	160	0.23	160
+Canis aureus	mammals	carnivora	secondary consumers vertebrate flesh eaters	12500	276	0.258	"293, 545"
+Canis latrans	mammals	carnivora	secondary consumers vertebrate flesh eaters	14000	"46, 93, 252"	0.296	"98, 122, 202,482, 664"
+Canis lupus	mammals	carnivora	secondary consumers vertebrate flesh eaters	5600	"46, 93, 260 46, 93, 260"	0.02	"202, 230, 234, 335, 509, 710"
+Canis simensis	mammals	carnivora	secondary consumers vertebrate flesh eaters	10000	276	2	469
+Crocuta crocuta	mammals	carnivora	secondary consumers vertebrate flesh eaters	65000	"160, 276"	0.506	"160, 588, 687,698"
+Cryptoprocta ferox	mammals	carnivora	secondary consumers vertebrate flesh eaters	9500	11	1	11
+Cuon alpinus	mammals	carnivora	secondary consumers vertebrate flesh eaters	16000	"46, 305"	0.625	330
+Dusicyon thous	mammals	carnivora	secondary consumers vertebrate flesh eaters	6500	70	4	183
+Eira barbara	mammals	carnivora	secondary consumers vertebrate flesh eaters	5000	539	2	183
+Felis concolor	mammals	carnivora	secondary consumers vertebrate flesh eaters	59500	"93, 267, 665"	0.02	"267, 306, 371"
+Felis onca	mammals	carnivora	secondary consumers vertebrate flesh eaters	85500	"93, 260"	0.01	372
+Felis pardalis	mammals	carnivora	secondary consumers vertebrate flesh eaters	13600	"93, 182"	0.25	183
+Felis sylvestris	mammals	carnivora	secondary consumers vertebrate flesh eaters	4380	"267, 276, 579"	0.414	"545, 592, 687"
+Felis yagouaroundi	mammals	carnivora	secondary consumers vertebrate flesh eaters	7480	93	0.73	183
+Fossa fossana	mammals	carnivora	secondary consumers vertebrate flesh eaters	1800	11	3.85	11
+Galictis vittata	mammals	carnivora	secondary consumers vertebrate flesh eaters	4800	183	2.4	183
+Galidia elegans	mammals	carnivora	secondary consumers vertebrate flesh eaters	820	11	6	11
+Genetta genetta	mammals	carnivora	secondary consumers vertebrate flesh eaters	1780	276	2.13	"545, 687"
+Herpestes sanguineus	mammals	carnivora	secondary consumers vertebrate flesh eaters	525	"276, 573, 579,617"	1.5	573
+Ichneumia albicauda	mammals	carnivora	secondary consumers vertebrate flesh eaters	3700	"276, 579"	1.93	687
+Lutra perspillata	mammals	carnivora	secondary consumers vertebrate flesh eaters	5000	294	5	294
+Lycaon pictus	mammals	carnivora	secondary consumers vertebrate flesh eaters	20700	"46, 276, 568"	0.022	588
+Lynx canadensis	mammals	carnivora	secondary consumers vertebrate flesh eaters	10200	93	0.13	510
+Lynx lynx	mammals	carnivora	secondary consumers vertebrate flesh eaters	28600	267	0.043	"202, 267, 320"
+Martes americana	mammals	carnivora	secondary consumers vertebrate flesh eaters	883	93	1.2	623
+Martes pennanti	mammals	carnivora	secondary consumers vertebrate flesh eaters	3250	"547, 548"	0.235	"547, 548"
+Mungotictis decemlineata	mammals	carnivora	secondary consumers vertebrate flesh eaters	670	"11, 12"	8.2	"11, 12"
+Mustela erminea	mammals	carnivora	secondary consumers vertebrate flesh eaters	78.9	608	10.53	608
+Mustela nivalis	mammals	carnivora	secondary consumers vertebrate flesh eaters	80	"197, 356"	36	"197, 257, 356,"
+Panthera pardus	mammals	carnivora	secondary consumers vertebrate flesh eaters	11400	"160, 177, 568,743"	0.21	"160, 177, 293,465"
+Panthera ligris	mammals	carnivora	secondary consumers vertebrate flesh eaters	130000	"267, 294, 305"	0.056	"63, 294, 465"
+Panthera uncia	mammals	carnivora	secondary consumers vertebrate flesh eaters	71700	267	0.012	321
+Taxidea taxus	mammals	carnivora	secondary consumers vertebrate flesh eaters	8620	93	2.2	"450, 480"
+Ursus maritimus	mammals	carnivora	secondary consumers vertebrate flesh eaters	386000	93	0.0162	388
+Vulpes oulpes	mammals	carnivora	secondary consumers vertebrate flesh eaters	5440	"93, 411"	1.6	411
+Canis mesomelas	mammals	carnivora	diet unknown	8160	"276, 579 276, 579"	2.26	"153, 588, 687"
+Potos flavus	mammals	carnivora	diet unknown	2490	"110, 182"	14.4	"110, 183"
+Procyon lotor	mammals	carnivora	diet unknown	10700	93	3.4	"202, 231"
+Procyon cancrivorus	mammals	carnivora	diet unknown	7050	183	7.1	183
+Ursus americanus	mammals	carnivora	diet unknown	153000	93	0.818	"44, 135, 196, 334, 344, 395,409, 420, 718"
+Ursus arctos	mammals	carnivora	diet unknown	233000	"93, 362"	0.129	"44, 362, 438, 514"
+Didelphis marsupialis	mammals	marsupialia	diet unknown	1070	"110, 182, 269,"	69	"110, 182, 183,"
+Desmognathus fuscus	amphibia	NA	NA	1.56	94	34800	94
+Eurycea bislineata	amphibia	NA	NA	0.12	94	657000	94
+Gyrinophilus porphyriticus	amphibia	NA	NA	4.4	94	27500	94
+Plethodon cinereus	amphibia	NA	NA	0.63	94	28900	94
+Agama agama	reptilian	NA	NA	16	696	4820	696
+Agama rupelli	reptilian	NA	NA	35.2	696	400	696
+Ameiva quadrilineata	reptilian	NA	NA	58.4	745	3100	30
+Anolis angusticeps	reptilian	NA	NA	2.76	745	98300	596
+Anolis bonairensis	reptilian	NA	NA	3.15	49	131800	49
+Anolis carolinensis	reptilian	NA	NA	9.44	629	400	596
+Anolis distichus	reptilian	NA	NA	1.93	596	95700	596
+Anolis sagrei	reptilian	NA	NA	6.53	629	391000	596
+Bassiliscus vittatus	reptilian	NA	NA	182	745	750	30
+Cnemidophorus murinus	reptilian	NA	NA	27.7	49	55600	49
+Eremias spekei	reptilian	NA	NA	2.3	696	21000	696
+Eumeces fasciatus	reptilian	NA	NA	6.05	662	18500	662
+Gonatodes antillensis	reptilian	NA	NA	0.843	49	420000	49
+Hemidactylus brookit	reptilian	NA	NA	4.1	696	3000	696
+Holodactylus sp.	reptilian	NA	NA	5.7	696	1200	696
+Latastia longicauda	reptilian	NA	NA	13.3	696	467	696
+Lgodaclylus picturatus	reptilian	NA	NA	3.22	696	3580	696
+Mabuya brevicollis	reptilian	NA	NA	34	696	700	696
+Mabuya buettneri	reptilian	NA	NA	129	745	1528	29
+Mabuya maculilabris	reptilian	NA	NA	58.4	745	891	29
+Mabuya quinquetaeniata	reptilian	NA	NA	26.6	696	200	696
+Pachydactylus tuberculosus	reptilian	NA	NA	9.75	696	2133	696
+Panaspis nimbaensis	reptilian	NA	NA	17.9	745	272	29
+Riopa sundevalli	reptilian	NA	NA	10.8	696	1200	696
+Sceloporus olivaceus	reptilian	NA	NA	25	732	3090	662
+Uromastix acanthinurus	reptilian	NA	NA	2170	262	181	262
+Uta stansburiana	reptilian	NA	NA	1.96	662	13600	662
+Varanus exanthematicus	reptilian	NA	NA	1500	696	26.7	696
+Varanus komodoensis	reptilian	NA	NA	12000	629	2	30
+Varanus niloticus	reptilian	NA	NA	750	696	50	696
+Abramis brama	pisces	NA	NA	238	"43, 302"	1400	"43, 302"
+Acerina cernua	pisces	NA	NA	9.1	302	234000	302
+Acerina schratser	pisces	NA	NA	11	302	450	302
+Alburnus alburnus	pisces	NA	NA	1.95	"302, 441"	6.39E+06	"302, 441"
+Aspius aspius	pisces	NA	NA	17	302	14400	302
+Barbus barbus	pisces	NA	NA	1100	302	200	302
+Blicca bjoerkna	pisces	NA	NA	7.75	302	120000	302
+Chaenobryttus coronarius	pisces	NA	NA	51.4	248	10200	248
+Chondrostoma nasus	pisces	NA	NA	24	302	21600	302
+Cotlus gobio	pisces	NA	NA	5	"137, 432"	1.13E+07	"137, 432"
+Cprinus carpio	pisces	NA	NA	175	302	10000	302
+Esox lucius	pisces	NA	NA	549	302	1639	302
+Gasterosteus aculeatus	pisces	NA	NA	0.5	432	2.50E+06	432
+Gobio albipinnatus	pisces	NA	NA	11	302	200	302
+Gobio gobio	pisces	NA	NA	2.48	"302, 441"	18100	"302, 44]"
+Hippoglossoides platessoides	pisces	NA	NA	200	426	33400	426
+Ictalurus natalis	pisces	NA	NA	151	248	3020	248
+Ictalurus nebulosus	pisces	NA	NA	300	248	1630	248
+Lepomis gibbosus	pisces	NA	NA	29.6	248	1140	248
+Lepomis macrochirus	pisces	NA	NA	30	248	355000	248
+Lepomis microlophus	pisces	NA	NA	48.7	248	20500	248
+Leuciscus cephalus	pisces	NA	NA	54.5	302	200	302
+Leuciscus idus	pisces	NA	NA	74.7	302	41100	302
+Leuciscus leuciscus	pisces	NA	NA	2.17	"302, 441"	33000	"302, 441"
+Micropterus dolomieui	pisces	NA	NA	130	508	12500	508
+Nemacheilus barbatula	pisces	NA	NA	11	432	400000	432
+Nolemigonus crysoleucas	pisces	NA	NA	0.7	105	9200	105
+Perca flavescens	pisces	NA	NA	1.57	105	524000	105
+Perca fluviatalis	pisces	NA	NA	34.6	302	62000	302
+Phoxinus phoxinus	pisces	NA	NA	2.5	432	1.80E+06	432
+Pimephales promelas	pisces	NA	NA	0.289	105	523000	105
+Pomoxis negromaculalus	pisces	NA	NA	105	248	16900	248
+Rutilus rutilus	pisces	NA	NA	9.46	"43, 302, 441"	586000	"43, 302, 441"
+Salmo gairdnerii	pisces	NA	NA	239	302	58500	302
+Salmo salar	pisces	NA	NA	41	432	400000	432
+Salmo trutta	pisces	NA	NA	19	"138, 302, 432,746"	193000	"138, 302, 432,746"
+Salvelinus fontinalis	pisces	NA	NA	7.22	"105, 585"	13600	"105, 585"
+Scardinius erythropthalamus	pisces	NA	NA	51.6	302	3830	302
+Semolilus atromaculatus	pisces	NA	NA	0.766	105	23900	105
+Semotilus margarita	pisces	NA	NA	0.922	105	14300	105
+Stizostedion lucioperca	pisces	NA	NA	379	302	279	302
+Stizostedion vitreum	pisces	NA	NA	335	684	1880	684
+Tinca tinca	pisces	NA	NA	525	302	300	302
+Timba vimba	pisces	NA	NA	76.6	302	2800	302
+Anomma nigricans	terrestrial arthropods	NA	NA	0.00917	405	3.49E+07	405
+Armadillidium vulgare	terrestrial arthropods	NA	NA	0.024	583	4.30E+08	583
+Bootettix punctatus	terrestrial arthropods	NA	NA	0.086	460	42560	460
+Camponotus acvapimensis	terrestrial arthropods	NA	NA	0.005	405	2.20E+08	405
+Carabodes minusculus	terrestrial arthropods	NA	NA	0.0000284	59	9.70E+09	59
+Chamobates schiitzi	terrestrial arthropods	NA	NA	0.0000083	59	4.20E+09	59
+Leptopterna dolabrata	terrestrial arthropods	NA	NA	0.0183	428	2.29E+06	428
+Ligidium hypnorum	terrestrial arthropods	NA	NA	0.0069	627	1.30E+08	627
+Nanhermannia nana	terrestrial arthropods	NA	NA	0.0000172	59	1.59E+09	59
+Narceus americanus	terrestrial arthropods	NA	NA	2.5	564	2.90E+05	564
+Neophilaenus lineatus	terrestrial arthropods	NA	NA	0.00254	297	2.94E+07	297
+Olodiscus minima	terrestrial arthropods	NA	NA	0.0000156	59	2.10E+09	59
+Orchelimum fidicinium	terrestrial arthropods	NA	NA	0.156	613	2.21E+07	613
+Philoscia muscorum	terrestrial arthropods	NA	NA	0.00241	"641, 644"	2.12E+08	"641, 644"
+Platynothrus peltifer	terrestrial arthropods	NA	NA	0.000056	59	1.30E+09	59
+Pogonomyrmex badius	terrestrial arthropods	NA	NA	0.0066	"72, 258"	1.16E+07	"72, 258"
+Porcellio scaber	terrestrial arthropods	NA	NA	0.009	583	7.00E+07	583
+Tetramorium caespitum	terrestrial arthropods	NA	NA	0.000603	73	4.87E+09	73
+Trichoniscus pusillus	terrestrial arthropods	NA	NA	0.000664	"530, 644"	8.11E+08	"530, 644"
+Tracheoniscus rathkei	terrestrial arthropods	NA	NA	0.021	564	1.61E+07	564
+Trimerotopsis saxatalis	terrestrial arthropods	NA	NA	0.144	163	201250	163
+Acanthinula aculeata	other terrestrial invertebrates	NA	NA	0.00943	439	7.15E+07	439
+Agriolimax laevis	other terrestrial invertebrates	NA	NA	0.0737	328	380000	328
+Agriolimax reticulatus	other terrestrial invertebrates	NA	NA	2.07	328	1.29E+06	328
+Allolobophora caliginosa	other terrestrial invertebrates	NA	NA	0.218	531	5.39E+07	531
+Allolobophora chlorotica	other terrestrial invertebrates	NA	NA	0.153	531	2.97E+06	531
+Allolobophora longa	other terrestrial invertebrates	NA	NA	1.18	531	3.58E+06	531
+Allolobophora muldali	other terrestrial invertebrates	NA	NA	0.0155	531	1.24E+07	531
+Allolobophora rosea	other terrestrial invertebrates	NA	NA	0.116	531	3.44E+07	531
+Arianta arbustorum	other terrestrial invertebrates	NA	NA	0.554	439	4.40E+06	439
+Arion ater	other terrestrial invertebrates	NA	NA	1.25	328	1.21E+06	328
+Arion fasciatus	other terrestrial invertebrates	NA	NA	0.158	328	6.13E+06	328
+Arion hortensis	other terrestrial invertebrates	NA	NA	0.155	328	5.88E+06	328
+Arion intermedius	other terrestrial invertebrates	NA	NA	0.0638	328	1.90E+07	328
+Arion subfuscus	other terrestrial invertebrates	NA	NA	0.272	328	790000	328
+Carychium tridentatum	other terrestrial invertebrates	NA	NA	0.0002	439	1.20E+08	439
+Cepaea nemoralis	other terrestrial invertebrates	NA	NA	0.15	704	4.03E+06	704
+Clausilia bidentata	other terrestrial invertebrates	NA	NA	0.00947	439	450000	439
+Cochlicopa lubrica	other terrestrial invertebrates	NA	NA	0.00383	439	900000	439
+Columella edentula	other terrestrial invertebrates	NA	NA	0.000837	439	3.37E+06	439
+Dendrobaena mammalis	other terrestrial invertebrates	NA	NA	0.0282	531	2.54E+07	531
+Dendrobaena rubida	other terrestrial invertebrates	NA	NA	0.0529	531	2.31E+06	531
+Discus rotundatus	other terrestrial invertebrates	NA	NA	0.00519	439	1.35E+07	439
+Ena obscura	other terrestrial invertebrates	NA	NA	0.0184	439	3.82E+06	439
+Euconulus fulvus	other terrestrial invertebrates	NA	NA	0.00166	439	1.57E+06	439
+Hygromia hispida	other terrestrial invertebrates	NA	NA	0.00112	439	670000	439
+Hygromia striolata	other terrestrial invertebrates	NA	NA	0.0281	439	8.54E+06	439
+Lehmannia marginata	other terrestrial invertebrates	NA	NA	0.544	328	250000	328
+Lumbricus castaneus	other terrestrial invertebrates	NA	NA	0.0585	531	1.36E+07	531
+Lumbricus lerrestris	other terrestrial invertebrates	NA	NA	1.86	53|	9.09E+06	531
+Marpessa laminata	other terrestrial invertebrates	NA	NA	0.0045	439	1.80E+06	439
+Millsonia anomala	other terrestrial invertebrates	NA	NA	0.944	391	1.80E+06	391
+Octolasion cyaneum	other terrestrial invertebrates	NA	NA	0.606	531	7.51E+06	531
+Punctum pygmaeum	other terrestrial invertebrates	NA	NA	0.000186	439	6.72E+07	439
+Pupilla muscorum	other terrestrial invertebrates	NA	NA	0.000314	439	670000	439
+Retinella nitidula	other terrestrial invertebrates	NA	NA	0.00488	439	7.86E+06	439
+Retinella pura	other terrestrial invertebrates	NA	NA	0.00123	439	2.47E+07	439
+Retinella radiatula	other terrestrial invertebrates	NA	NA	0.0024	439	450000	439
+Vallonia pulchella	other terrestrial invertebrates	NA	NA	0.00112	439	670000	439
+Vitrea contract	other terrestrial invertebrates	NA	NA	0.000717	439	3.91E+07	439
+Vitrea pellucida	other terrestrial invertebrates	NA	NA	0.00275	439	1.57E+06	439
+Alona quadrangularis	aquatic invertebrates	NA	NA	4.78E-06	264	9.27E+09	264
+Ampelisca brevicornis	aquatic invertebrates	NA	NA	0.0126	364	9.15E+07	364
+Anatopynia goetghebueri	aquatic invertebrates	NA	NA	0.0000476	264	8.93E+09	264
+Anodonta anatina	aquatic invertebrates	NA	NA	5.53	481	1.17E+07	481
+Anodonta minima	aquatic invertebrates	NA	NA	5.39	481	388000	481
+Anodonta piscinalis	aquatic invertebrates	NA	NA	6.47	668	1.49E+06	668
+Asellus aquaticus	aquatic invertebrates	NA	NA	0.000939	"331, 430"	2.19E+07	"331, 430"
+Arthripsodes ancylus	aquatic invertebrates	NA	NA	0.0005	561	6.00E+06	561
+Baetis thodani	aquatic invertebrates	NA	NA	0.00216	722	2.90E+08	722
+Baetis vagans	aquatic invertebrates	NA	NA	0.000486	688	2.68E+09	688
+Bithynia tentaculata	aquatic invertebrates	NA	NA	0.0255	"331, 443"	1.84E+07	"331, 443"
+Calospecta dives	aquatic invertebrates	NA	NA	0.00198	564	2.66E+10	564
+Chaoborus flavicans	aquatic invertebrates	NA	NA	0.00446	331	1.75E+09	331
+Chironomus anthracinus	aquatic invertebrates	NA	NA	0.00722	331	8.95E+09	331
+Chironomus longistylus	aquatic invertebrates	NA	NA	0.000166	264	2.44E+08	264
+Chironomus plumosus	aquatic invertebrates	NA	NA	0.00455	"430, 542"	1.07E+08	"430, 542"
+Cladotanylarsus mancus	aquatic invertebrates	NA	NA	0.000128	542	9.40E+08	542
+Corixa germari	aquatic invertebrates	NA	NA	0.0222	137	1.91E+09	137
+Crangonyx richmondensis	aquatic invertebrates	NA	NA	0.000715	442	2.83E+08	442
+Cryplochironomus supplicans	aquatic invertebrates	NA	NA	0.000301	430	4.28E+08	430
+Cypria opthalmica	aquatic invertebrates	NA	NA	5.56E-06	264	1.71E+10	264
+Daphnia cucullata	aquatic invertebrates	NA	NA	6.52E-06	322	1.19E+10	322
+Daphnia hyalina	aquatic invertebrates	NA	NA	6.52E-06	322	2.27E+10	322
+Ephemerella subvarica	aquatic invertebrates	NA	NA	0.0021	690	3.06E+09	690
+Erpobdella octoculata	aquatic invertebrates	NA	NA	0.00423	"188, 430"	1.17E+08	"188, 430"
+Eurycercus lamellatus	aquatic invertebrates	NA	NA	0.0000119	"24, 331"	1.05E+08	"24, 331"
+Ferrissia rivularis	aquatic invertebrates	NA	NA	0.00229	92	7.03E+08	92
+Gammarus ligrinus	aquatic invertebrates	NA	NA	0.00424	43	3.40E+09	43
+Glyptotendipes glaucus	aquatic invertebrates	NA	NA	0.000112	264	1.87E+09	264
+Glvptotendipes paripes	aquatic invertebrates	NA	NA	0.0021	"430, 542"	2.17E+09	"430, 542"
+Gyraulus deflectus	aquatic invertebrates	NA	NA	0.00114	251	5.37E+09	251
+Gyraulus parous	aquatic invertebrates	NA	NA	0.000864	178	6.00E+07	178
+Hedriodiscus truquit	aquatic invertebrates	NA	NA	0.075	634	1.40E+07	634
+Helobdella stagnalis	aquatic invertebrates	NA	NA	0.00186	"331, 393, 430"	2.33E+08	"331, 393, 430"
+Heterotrissocladius oliveri	aquatic invertebrates	NA	NA	0.00027	694	1.64E+09	694
+Hexagenia limbata	aquatic invertebrates	NA	NA	0.011	307	4.74E+07	307
+Hyalella azteca	aquatic invertebrates	NA	NA	0.00418	"15, 133, 442,564"	1.91E+09	"15, 133, 442,564"
+Hydra oligactis	aquatic invertebrates	NA	NA	0.0000629	430	4.13E+08	430
+Hydrozetes lacustris	aquatic invertebrates	NA	NA	4.46E-06	264	4.10E+10	264
+Ilyocryptus sordidus	aquatic invertebrates	NA	NA	8.87E-06	264	3.22E+09	264
+Ilyodrilus hammoniensis	aquatic invertebrates	NA	NA	0.00978	331	5.50E+09	331
+Isoplastis monilis	aquatic invertebrates	NA	NA	0.0000281	264	3.33E+08	264
+Lacuna vincta	aquatic invertebrates	NA	NA	0.003	91	1.00E+07	91
+Limnephilus lunatus	aquatic invertebrates	NA	NA	0.00119	264	4.40E+07	264
+Limnocalanus macrurus	aquatic invertebrates	NA	NA	0.000011	565	2.55E+10	565
+Limnochironomus pulsus	aquatic invertebrates	NA	NA	0.000556	"430, 542"	9.55E+08	"430, 542"
+Littorina saxatalis	aquatic invertebrates	NA	NA	0.00158	91	2.36E+08	91
+Lumbriculus variegatus	aquatic invertebrates	NA	NA	0.00181	430	6.58E+08	430
+Lymnaea palustris	aquatic invertebrates	NA	NA	0.0366	"178, 315"	8.00E+08	"178, 315"
+Melampus lineatus	aquatic invertebrates	NA	NA	0.006	91	1.29E+08	91
+Microtendipes chloris	aquatic invertebrates	NA	NA	0.000128	339	4.95E+09	339
+Microtendipes sp	aquatic invertebrates	NA	NA	0.00171	542	8.95E+08	542
+Modiolus demissus	aquatic invertebrates	NA	NA	0.49	381	7.80E+06	38!
+Monodacna pontica	aquatic invertebrates	NA	NA	1.49	668	786000	668
+Mytilus edulus	aquatic invertebrates	NA	NA	0.02	91	4.71E+08	91
+Vassarius obsoletus	aquatic invertebrates	NA	NA	0.025	91	3.50E+07	91
+Veanthes virens	aquatic invertebrates	NA	NA	2.75	342	5.19E+06	342
+Oligophleboides sigma	aquatic invertebrates	NA	NA	0.00154	517	4.50E+09	517
+Orconectes virilis	aquatic invertebrates	NA	NA	9	462	1.02E+06	462
+Otomesostoma auditivum	aquatic invertebrates	NA	NA	0.000133	430	2.40E+08	430
+Pacifastacus lenuisculus	aquatic invertebrates	NA	NA	20	2	925000	2
+Parachironomus tener	aquatic invertebrates	NA	NA	0.000156	542	7.78E+08	542
+Pentaneura monilis	aquatic invertebrates	NA	NA	0.0000184	430	1.63E+08	430
+Physa gyrina	aquatic invertebrates	NA	NA	0.0054	251	7.78E+08	251
+Physa integra	aquatic invertebrates	NA	NA	0.0057	178	3.11E+08	178
+Pisaster ochraceus	aquatic invertebrates	NA	NA	629	507	200000	507
+Pisidium casertanum	aquatic invertebrates	NA	NA	0.000633	"264, 331"	5.20E+09	"264, 331"
+Pisidium compressum	aquatic invertebrates	NA	NA	0.00102	251	4.00E+09	251
+Potamophylax cingulatus	aquatic invertebrates	NA	NA	0.0486	504	3.38E+07	504
+Potamothrix hammoniensis	aquatic invertebrates	NA	NA	0.00348	332	2.90E+10	332
+Pristina idrensis	aquatic invertebrates	NA	NA	0.000059	264	5.05E+10	264
+Procladius choreus	aquatic invertebrates	NA	NA	0.000439	"430, 542"	1.83E+09	"430, 542"
+Procladius pectinatus	aquatic invertebrates	NA	NA	0.00233	331	3.00E+08	331
+Procladius sagittalis	aquatic invertebrates	NA	NA	0.0000776	264	8.89E+08	264
+Pseudodiamensa arctica	aquatic invertebrates	NA	NA	0.0027	694	1.22E+08	694
+Psilotanypus rufovittatus	aquatic invertebrates	NA	NA	0.000556	542	6.70E+09	542
+Rhitrogena semicolorata	aquatic invertebrates	NA	NA	0.00819	722	2.32E+08	722
+Scobicularia plana	aquatic invertebrates	NA	NA	0.000083	"312, 313, 564,"	1.14E+08	"312, 313, 564"
+Sialis lutaria	aquatic invertebrates	NA	NA	0.0056	"250, 264"	1.53E+08	"250, 264 250, 264"
+Skistodiaptomus oregonensis	aquatic invertebrates	NA	NA	0.000015	566	1.57E+11	566
+Strongylocentrotus droebachensis	aquatic invertebrates	NA	NA	2.64	456	3.68E+07	456
+Tanytarsus eminulus	aquatic invertebrates	NA	NA	0.000015	264	4.60E+09	264
+Tanytarsus holochlorus	aquatic invertebrates	NA	NA	0.000334	542	4.31E+09	542
+Tanytarsus inopterus	aquatic invertebrates	NA	NA	0.000284	542	3.59E+09	542
+Tanytarsus jucundus	aquatic invertebrates	NA	NA	0.00205	15	7.19E+09	15
+Tanytarsus lugens	aquatic invertebrates	NA	NA	0.000426	542	4.51E+09	542
+Tegula funebralis	aquatic invertebrates	NA	NA	0.702	564	6.00E+08	564
+Thermocyclops hyalinus	aquatic invertebrates	NA	NA	2.22E-06	90	7.54E+11	90
+Triplya sp.	aquatic invertebrates	NA	NA	3.13E-06	264	1.56E+06	264
+Unio pictorum	aquatic invertebrates	NA	NA	5.84	"481,668 668"	5.26E+06	"481, 668"
+Unio tumidus	aquatic invertebrates	NA	NA	6.97	"481, 668 481, 668"	2.50E+06	"481, 668"
+Valvata humeralis	aquatic invertebrates	NA	NA	0.00192	251	2.09E+09	251
+Vejdouskyella comata	aquatic invertebrates	NA	NA	8.23E-06	264	4.19E+10	264

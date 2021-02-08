@@ -1,0 +1,91 @@
+species,size_cm,notes,source
+Abatus_agassizi,2.45,,1
+Abatus_cordatus,2.77,,2
+Allolobophora_chlorotica_L1,5.5,,3
+Allolobophora_chlorotica_L1,5.5,,3
+Allolobophora_chlorotica_L4,5.5,,3
+Aporrectodea_icterica,9.5,,4
+Aptenodytes_patagonicus,90,,5
+Armadillidium_nasatum,1.8,,6
+Armadillidium_vulgare,1.8,,6
+Artemia_franciscana,1,,7
+Artemia_salina,1,,7
+Artemia_sinica,1,,7
+Artemia_tibetana,1,,7
+Bostrycapulus_aculeatus,2.5,,8
+Caenorhabditis_brenneri,0.15,,9
+Caenorhabditis_sp.10,0.15,,9
+Callithrix_jacchus,13.5,,10
+Camponotus_aethiops,1.4,Measured (queen),
+Camponotus_ligniperdus,1.9,Measured (queen),
+Carcinus_aestuarii,2.79,,11
+Chelonoidis_nigra,110,,12
+Chlorocebus_aethiops,50,,13
+Ciona_intestinalis_A,15.5,,14
+Ciona_intestinalis_B,15.5,,14
+Crepidula_fornicata,3.5,,14
+Crepidula_plana,1,,15
+Culex_hortensis,0.5,Measured (female),
+Culex_pipiens,0.5,Measured (female),
+Culex_torrentium,0.5,Measured (female),
+Cystodytes_dellechiajei_blue,0.5,,16
+Cystodytes_dellechiajei_purple,0.5,,16
+Echinocardium_cordatum_B2,6.5,,14
+Echinocardium_mediterraneum,4.5,,17
+Emys_orbicularis,25,,18
+Eudyptes_filholi,55,,19
+Eudyptes_moseleyi,55,,19
+Eulemur_coronatus,34,,20
+Eulemur_mongoz,35,,21
+Eunicella_cavolinii,30,,22
+Eunicella_verrucosa,37.5,,14
+Galago_senegalensis,13,,23
+Halictus_scabiosae,1.5,Measured (female),
+Hippocampus_guttulatus,13.3,,24
+Hippocampus_hippocampus,10,,24
+Hippocampus_kuda,12,,25
+Homo_sapiens,163,,26
+Leptogorgia_sarmentosa,40,,27
+Lepus_granatensis,45.9,,28
+Liocarcinus_depurator,5.1,,29
+Lineus_lacteus,17.5,,30
+Lineus_longissimus,1000,,"30,31"
+Lineus_ruber,5,,"30,32"
+Macaca_mulatta,55.5,,28
+Melitaea_cinxia,3.96,,33
+Melitaea_didyma,4.4,,33
+Mellicta_athalia,3.9,,33
+Mellicta_parthenoides,3.9,,33
+Messor_barbarus,1.5,Measured (queen),
+Microtus_arvalis,11.1,,28
+Monodelphis_domestica,12.5,,34
+Mus_musculus,8,,35
+Mytilus_californianus,7.5,,14
+Mytilus_edulis,7.5,,14
+Mytilus_galloprovincialis,7.5,,14
+Mytilus_trossulus,7.5,,14
+Necora_puber,6,,36
+Nycticebus_coucang,30,,28
+Ophioderma_longicauda_L1,1.53,,37
+Ophioderma_longicauda_L3,1.23,,37
+Ostrea_chilensis,10,,38
+Ostrea_edulis,10,,38
+Ostreola_stentina,3.9,,39
+Pan_troglodytes,79.6,,28
+Parus_caeruleus,11.5,,40
+Pectinaria_koreni_nord,2.5,,41
+Pectinaria_koreni_sud,2.5,,41
+Pheidole_pallidula,0.8,Measured (queen),
+Physa_acuta,0.85,,42
+Physa_gyrina,1.55,,42
+Propithecus_coquereli,46.3,,43
+Reticulitermes_flavipes,4.75,,44
+Reticulitermes_grassei,4.75,,44
+Reticulitermes_lucifugus,4.75,,44
+Sepia_officinalis,22,,45
+Thymelicus_lineola,1.3,,33
+Thymelicus_sylvestris,1.36,,33
+Trachemys_scripta,20.7,,33
+Tripylus_abatoides,3.8,,46
+Tupaia_belangeri,18.5,,28
+Varecia_variegata_variegata,54.7,,28

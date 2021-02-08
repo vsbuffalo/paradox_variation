@@ -1,0 +1,91 @@
+species,bodymass_g,notes,source
+Abatus_agassizi,9.28,,2
+Abatus_cordatus,9.28,,2
+Allolobophora_chlorotica_L1,0.3,,48
+Allolobophora_chlorotica_L2,0.3,,48
+Allolobophora_chlorotica_L4,0.3,,48
+Aporrectodea_icterica,0.95,,49
+Aptenodytes_patagonicus,11800,,5
+Armadillidium_nasatum,0.04,,50
+Armadillidium_vulgare,0.04,,50
+Artemia_franciscana,0.004,Estimated (dry to wet weight),"51,47"
+Artemia_salina,0.004,Estimated (dry to wet weight),"51,47"
+Artemia_sinica,0.004,Estimated (dry to wet weight),"51,47"
+Artemia_tibetana,0.004,Estimated (dry to wet weight),"51,47"
+Bostrycapulus_aculeatus,NA,,
+Caenorhabditis_brenneri,5.12E-06,Estimated from length and diameter,"9,52"
+Caenorhabditis_sp.10,5.12E-06,Estimated from length and diameter,"9,52"
+Callithrix_jacchus,255,,53
+Camponotus_aethiops,NA,,
+Camponotus_ligniperdus,NA,,
+Carcinus_aestuarii,8.05,,11
+Chelonoidis_nigra,175000,,12
+Chlorocebus_aethiops,5620,,53
+Ciona_intestinalis_A,29.7,Estimated (for a 150 mm length),54
+Ciona_intestinalis_B,29.7,Estimated (for a 150 mm length),54
+Crepidula_fornicata,2.1,,55
+Crepidula_plana,NA,,
+Culex_hortensis,0.0025,,56
+Culex_pipiens,0.0025,,56
+Culex_torrentium,0.0025,,56
+Cystodytes_dellechiajei_blue,0.000903,Estimated (dry to wet weight),"47,57"
+Cystodytes_dellechiajei_purple,0.000903,Estimated (dry to wet weight),"47,57"
+Echinocardium_cordatum_B2,38,,58
+Echinocardium_mediterraneum,38,,58
+Emys_orbicularis,977,,59
+Eudyptes_filholi,2500,,19
+Eudyptes_moseleyi,2500,,19
+Eulemur_coronatus,2500,,53
+Eulemur_mongoz,2060,,53
+Eunicella_cavolinii,NA,,
+Eunicella_verrucosa,NA,,
+Galago_senegalensis,192,,53
+Halictus_scabiosae,0.093,Estimated (dry to wet weight),"47,60"
+Hippocampus_guttulatus,4.76,Estimated from size,61
+Hippocampus_hippocampus,1.85,Estimated from size,61
+Hippocampus_kuda,3.41,Estimated from size,61
+Homo_sapiens,62000,,53
+Leptogorgia_sarmentosa,NA,,
+Lepus_granatensis,2440,,28
+Liocarcinus_depurator,NA,,
+Lineus_lacteus,NA,,
+Lineus_longissimus,NA,,
+Lineus_ruber,NA,,
+Macaca_mulatta,8240,,53
+Melitaea_cinxia,0.165,Personal communication (I. Hanski),
+Melitaea_didyma,0.165,Personal communication (I. Hanski),
+Mellicta_athalia,0.165,Personal communication (I. Hanski),
+Mellicta_parthenoides,0.165,Personal communication (I. Hanski),
+Messor_barbarus,0.14,Measured (queen),
+Microtus_arvalis,27.5,,53
+Monodelphis_domestica,105,,53
+Mus_musculus,20.5,,53
+Mytilus_californianus,37.5,,62
+Mytilus_edulis,37.5,,62
+Mytilus_galloprovincialis,37.5,,62
+Mytilus_trossulus,37.5,,62
+Necora_puber,90,,36
+Nycticebus_coucang,891,,53
+Ophioderma_longicauda_L1,2.18,,63
+Ophioderma_longicauda_L2,1.07,,63
+Ostrea_chilensis,268,Estimated (size to weight),64
+Ostrea_edulis,268,Estimated (size to weight),64
+Ostreola_stentina,13.1,Estimated (size to weight),64
+Pan_troglodytes,45000,,53
+Parus_caeruleus,10.3,,53
+Pectinaria_koreni_nord,0.258,,65
+Pectinaria_koreni_sud,0.258,,65
+Pheidole_pallidula,0.03,Estimates from L. niger weight,66
+Physa_acuta,0.0095,,67
+Physa_gyrina,0.0095,,67
+Propithecus_coquereli,4000,,53
+Reticulitermes_flavipes,0.0155,,68
+Reticulitermes_grassei,0.0155,,68
+Reticulitermes_lucifugus,0.0155,,68
+Sepia_officinalis,1000,Personal Communication (L. Bonnaud),
+Thymelicus_lineola,NA,,
+Thymelicus_sylvestris,NA,,
+Trachemys_scripta,240,,53
+Tripylus_abatoides,NA,,
+Tupaia_belangeri,200,,53
+Varecia_variegata_variegata,3670,,53

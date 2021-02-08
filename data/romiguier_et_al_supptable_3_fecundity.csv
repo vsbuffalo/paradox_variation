@@ -1,0 +1,91 @@
+species,fecundity,notes,source
+Abatus_agassizi,0.299,A. cordatus,86
+Abatus_cordatus,0.299,,86
+Allolobophora_chlorotica_L1,0.74,,69
+Allolobophora_chlorotica_L2,0.74,,69
+Allolobophora_chlorotica_L4,0.74,,69
+Aporrectodea_icterica,2.67,,108
+Aptenodytes_patagonicus,0.0027,,5
+Armadillidium_nasatum,0.959,A. vulgare,"109,110"
+Armadillidium_vulgare,0.959,,"109,110"
+Artemia_franciscana,40,,111
+Artemia_salina,40,,111
+Artemia_sinica,40,,111
+Artemia_tibetana,40,,111
+Bostrycapulus_aculeatus,NA,,
+Caenorhabditis_brenneri,77.8,C. elegans,112
+Caenorhabditis_sp.10,77.8,C. elegans,112
+Callithrix_jacchus,0.011,,53
+Camponotus_aethiops,0.266,Pogonomyrmex barbatus,113
+Camponotus_ligniperdus,0.266,Pogonomyrmex barbatus,113
+Carcinus_aestuarii,348,,11
+Chelonoidis_nigra,0.0274,,12
+Chlorocebus_aethiops,0.0027,,53
+Ciona_intestinalis_A,1000,,54
+Ciona_intestinalis_B,1000,,54
+Crepidula_fornicata,548,,114
+Crepidula_plana,3.29,,15
+Culex_hortensis,100,,115
+Culex_pipiens,100,,115
+Culex_torrentium,100,,115
+Cystodytes_dellechiajei_blue,NA,,
+Cystodytes_dellechiajei_purple,NA,,
+Echinocardium_cordatum_B2,2740,,14
+Echinocardium_mediterraneum,2740,E. cordatum,14
+Emys_orbicularis,0.0877,,116
+Eudyptes_filholi,0.0055,,19
+Eudyptes_moseleyi,0.0055,,19
+Eulemur_coronatus,0.0041,,53
+Eulemur_mongoz,0.003,,53
+Eunicella_cavolinii,33.1,E. verrucosa,117
+Eunicella_verrucosa,33.1,,117
+Galago_senegalensis,0.0082,,53
+Halictus_scabiosae,NA,,
+Hippocampus_guttulatus,2.47,,118
+Hippocampus_hippocampus,2.47,H. guttulatus,118
+Hippocampus_kuda,2.47,H. guttulatus,118
+Homo_sapiens,0.0016,,53
+Leptogorgia_sarmentosa,NA,,
+Lepus_granatensis,0.0198,,119
+Liocarcinus_depurator,630,,120
+Lineus_longissimus,NA,,
+Lineus_ruber,NA,,
+Liocarcinus_depurator,NA,,
+Macaca_mulatta,0.0023,,53
+Melitaea_cinxia,95.2,,121
+Melitaea_didyma,95.2,M. cinxia,121
+Mellicta_athalia,95.2,M. cinxia,121
+Mellicta_parthenoides,95.2,M. cinxia,121
+Messor_barbarus,0.266,Pogonomyrmex barbatus,113
+Microtus_arvalis,0.0768,,53
+Monodelphis_domestica,0.0986,,53
+Mus_musculus,0.104,,53
+Mytilus_californianus,110000,M. edulis,14
+Mytilus_edulis,110000,,14
+Mytilus_galloprovincialis,110000,M. edulis,14
+Mytilus_trossulus,110000,M. edulis,14
+Necora_puber,1100,,36
+Nycticebus_coucang,0.0027,,53
+Ophioderma_longicauda_L1,1500,,122
+Ophioderma_longicauda_L3,1048,,101
+Ostrea_chilensis,416,,102
+Ostrea_edulis,5480,,14
+Ostreola_stentina,NA,,
+Pan_troglodytes,0.0027,,53
+Parus_caeruleus,0.0247,,123
+Pectinaria_koreni_nord,1170,,124
+Pectinaria_koreni_sud,1170,,124
+Pheidole_pallidula,1.22,,125
+Physa_acuta,14.2,,126
+Physa_gyrina,14.2,P. acuta,126
+Propithecus_coquereli,0.0027,,43
+Reticulitermes_flavipes,2.74,,"127,128"
+Reticulitermes_grassei,2.74,,"127,128"
+Reticulitermes_lucifugus,2.74,,"127,128"
+Sepia_officinalis,2.2,,129
+Thymelicus_lineola,13.2,,"85,130"
+Thymelicus_sylvestris,13.2,T. lineola,"85,130"
+Trachemys_scripta,0.0822,,131
+Tripylus_abatoides,NA,,
+Tupaia_belangeri,0.0205,,53
+Varecia_variegata_variegata,0.006,,53

@@ -1,0 +1,1736 @@
+---
+title: "Main Analyses of the Combined Dataset"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+# Main Analyses of the Combined Dataset
+
+
+```{r, include=FALSE}
+options(warnPartialMatchArgs = FALSE,
+        warnPartialMatchDollar = FALSE, 
+        warnPartialMatchAttr = FALSE)
+
+knitr::opts_chunk$set(warning = FALSE, message=FALSE)
+```
+
+
+```{r, message=FALSE}
+
+library(nlme)
+library(ape)
+library(geiger)
+library(phytools)
+library(broom)
+library(xtable)
+library(brms)
+library(rotl)
+library(HDInterval)
+library(scales)
+library(tidyverse)
+library(rstan)
+library(loo)
+library(viridis)
+library(coda)
+library(ggrepel)
+library(nls.multstart)
+source('../R/utilities.r')
+source('../R/node_height.r')
+set.seed(0)
+
+```
+
+## Overall Plan
+
+This is the main analysis. Publication-quality figures are in
+`notebooks/figures` and are each made by their own scripts. This R markdown
+notebook uses curated data that's created in `data/` using the
+`combined_dataset.r` R script. The sources for this file are all managed by the
+`Makefile` in `../data/`.
+
+## Load the Combined Final Merged Dataset
+
+The combined dataset includes data from Leffler et al. (2012), Corbett-Detig
+(2015), Stapley et al. (2017), and Romiguier et al. (2014) data. It's all
+merged and processed in `data/combined_dataset.r`, which also uses the `taxadb`
+and `ritis` to get taxonomical groupings, and the `datelife` package to get a
+tree from the Open Tree of Life and calibrate it using datelife.org. 
+
+Note that I filter out the parasite/pathogen species because range size
+estimates are unreliable (since they depend on host and occurrence data is more
+shoddy).
+
+```{r}
+d <- read_tsv('../data/combined_data.tsv')
+
+```
+
+Also, I load the Open Tree of Life phylogeny (`otl_tr`) and calibrated datelife
+phylogeny (`tr`) created from the `combined_dataset.r` pipeline.
+
+```{r}
+load('../data/calibrated_phylogeny.Rdata')
+stopifnot(exists('da_tr') && exists('otl_tr') && exists('tr')) 
+```
+
+
+## Curate the main datasets
+
+Our main dataset has a great deal of missing data, since not all taxa have
+population sizes, diversity, and map length data. Here, create the main
+datasets of the subsequent analyses.
+
+Main datasets (all of metazoan taxa only):
+
+ - `d`: full dataset, with taxa not in phylogeny and missing variables.
+ - `dtr`: the subset of the full dataset with taxa in the phylogeny.
+ - `da_cc`: all complete cases: map length, diversity, and pop size.
+ - `dt_cc`: all complete cases with phylo taxa: map length, diversity, and pop size.
+ - `dt_dps`: diversity/population size complete cases with phylo taxa.
+ - `da_dps`: diversity/population size complete cases all taxa.
+
+Note: `dt` prefixes are for tree taxa only (`dtr` is used for no suffix, since
+`dt` is a function), `da` prefix are for all taxa.
+
+
+```{r}
+
+# easier to type phyla taxa dataset
+dtr <- da_tr
+stopifnot(length(tr$tip.label) == nrow(dtr))
+
+# complete data 
+da_cc <- d %>% filter(is.finite(log10_popsize), 
+                      is.finite(map_length), 
+                      is.finite(log10_diversity), 
+                      is.finite(log10_body_mass), 
+                      is.finite(log10_range))
+
+dt_cc <- dtr %>% filter(is.finite(log10_popsize), 
+                        is.finite(map_length), 
+                        is.finite(log10_diversity), 
+                        is.finite(log10_body_mass), 
+                        is.finite(log10_range))
+# now, prune the tree
+tr_cc <- keep.tip(tr, dt_cc$species)
+stopifnot(length(tr_cc$tip.label) == nrow(dt_cc))
+
+# diversity/popsize data
+dt_dps <- dtr %>% filter(is.finite(log10_popsize), 
+                         is.finite(log10_body_mass), 
+                         is.finite(log10_diversity), 
+                         is.finite(log10_range))
+# now, prune the tree
+tr_dps <- keep.tip(tr, dt_dps$species)
+stopifnot(length(tr_dps$tip.label) == nrow(dt_dps))
+
+da_dps <- d %>% filter(is.finite(log10_popsize), 
+                       is.finite(log10_body_mass), 
+                       is.finite(log10_diversity), 
+                       is.finite(log10_range))
+
+# map length / popsize data
+dt_ml <- dtr %>% filter(is.finite(log10_popsize), 
+                        is.finite(log10_body_mass), 
+                        is.finite(log10_map_length))
+# now, prune the tree
+tr_ml <- keep.tip(tr, dt_ml$species)
+stopifnot(length(tr_ml$tip.label) == nrow(dt_ml))
+
+da_ml <- d %>% filter(is.finite(log10_popsize), 
+                      is.finite(log10_body_mass), 
+                      is.finite(log10_map_length))
+
+save(d, dtr, 
+     da_cc, dt_cc, tr_cc, 
+     dt_dps, tr_dps, da_dps, 
+     dt_ml, tr_ml, da_ml, file='../data/main_datasets.Rdata')
+
+```
+
+
+We lost a few species in matching taxa to the R Open Tree of Life tree; we
+quantify that here:
+
+```{r, message=TRUE}
+
+msg <- "Size of animalia in combined dataset, total: %d
+                        after matching tree: %d"
+message(sprintf(msg, nrow(d), nrow(dtr)))
+
+msg <- "Size of animalia in complete dataset, total: %d
+                        after matching tree: %d"
+message(sprintf(msg, nrow(da_cc), nrow(dt_cc)))
+
+msg <- "Size of animalia in popsize/diversity dataset, total: %d
+                        after matching tree: %d"
+message(sprintf(msg, nrow(da_dps), nrow(dt_dps)))
+
+msg <- "Size of animalia in map length/popsize dataset, total: %d
+                        after matching tree: %d"
+message(sprintf(msg, nrow(da_ml), nrow(dt_ml)))
+
+
+```
+
+Finally, we load in the posterior draws of the predicted population sizes.
+
+```{r}
+
+load('../data/post_pred_draws.Rdata')
+
+post_popsizes <- post_popsizes %>% 
+                  mutate(log10_mean = map_dbl(log10_popsize, mean),
+                         log10_sd = map_dbl(log10_popsize, sd)) 
+
+
+```
+
+## Diversity Data Source
+
+Is there good mixing across data sources in the combined diversity date set?
+
+```{r}
+
+ggplot(d, aes(log10_popsize, log10_diversity, color=diversity_data_source)) + geom_point()
+
+```
+
+Yes, looks like so.
+
+
+## Some Map Length, Body Size, and Chromosome Number EDA
+
+Here, are some quick EDA plots. first, chromosome number and the map length
+(mostly from Stapley et al data):
+
+```{r}
+
+d  %>% ggplot(aes(hcn, map_length)) + geom_point() + 
+  geom_smooth(method='lm') + xlab('haploid chromosome number') + 
+  ylab('map length (Morgans)')
+
+```
+
+Body size and map length: 
+
+```{r}
+
+d %>% 
+  filter_at(vars(hcn, log10_size), ~ !is.na(.)) %>%
+  ggplot(aes(log10_size, hcn)) + geom_point() + 
+  geom_smooth(method='lm') + ylab('haploid chromosome number') + 
+  xlab('log10(size)')
+
+```
+
+Morgans per chromosome by chromosome number:
+
+```{r}
+d %>% ggplot(aes(hcn, map_length/hcn)) + 
+  geom_point() + 
+  geom_smooth(method='lm') + xlab('haploid chromosome number') + 
+  ylab('Morgans per chromosome (map length / haploid chromosome number)')
+
+```
+
+What do number of Morgans / chromosome across the data look like?
+
+```{r}
+
+d %>% mutate(morgans_per_chrom = map_length/hcn) %>% 
+  pull(morgans_per_chrom) %>% hist(50, main='Morgans / chromosome')
+
+```
+
+## Population Size Biomass Analysis
+ 
+As a quality control on population size estimates, we can look at humans (we
+know they have a modern population size of ~8 billion):
+
+```{r}
+d %>% filter(species == 'Homo sapiens') %>% 
+  select(log10_popsize, size, log10_density, log10_range)
+```
+
+This is low, but not terribly so.
+
+What proportion are terrestrial? 
+
+```{r}
+
+prop.table(table(d$is_terrestrial))
+
+```
+
+Based on the predictions of Mora et al. 2011
+
+```{r}
+
+nspecies <- c(terrestrial= 7.770e6, marine=2.15e5)
+prop.table(nspecies)
+
+```
+
+
+Now we do a simple biomass analysis -- back of the envelop type stuff.
+
+```{r}
+
+# https://bionumbers.hms.harvard.edu/bionumber.aspx?&id=107256 
+# 18-23% of human body is carbon; seems reasonable this holds
+# for other animals
+
+# only complete data
+xd <- d %>% filter(is.finite(log10_body_mass))
+
+
+
+# in Gt
+prop_carbon <- signif(sqrt(0.18 * 0.23), 1)  # ~ 0.2
+# 1Gt = 1e12 kg
+xd$carbon_mass <- (prop_carbon*(10^xd$pred_log10_body_mass) / 1e3 * 10^xd$log10_popsize) / 1e12
+
+mass_d <- xd %>% 
+  # filter so we don't include NA species in nspecies
+  filter(is.finite(carbon_mass), is.finite(log10_popsize)) %>%
+  group_by(phylum) %>% 
+  summarize(total_carbon_mass=sum(carbon_mass, na.rm=TRUE),
+            total_log10_popsize=log10(sum(10^log10_popsize, na.rm=TRUE)),
+            nspecies = n()) %>%
+  mutate(total = sum(total_carbon_mass), prop_carbon_mass = total_carbon_mass / total)
+
+# chordates are incredibly over-represented in my data set by biomass
+baron_d <- tribble(~ phylum, ~ bd_mass,
+                   'Arthropoda', 0.2 + 1, # terrestrial + marine
+                             # fish + livestock + humans + wild mammals + wild birds
+                   'Chordata', 0.7 + 0.1 + 0.06 + 0.007 + 0.002,
+                   'Annelida', 0.2, 
+                   'Mollusca', 0.2, 
+                   'Cnidaria', 0.1,
+                   'Nematoda', 0.02) %>% 
+           mutate(bd_total_biomass = sum(bd_mass), 
+                  bd_prop_mass = bd_mass/bd_total_biomass) %>%
+           left_join(mass_d, by='phylum')  %>%
+           # not we need to reweight the original proportions as some phyla were
+           # dropped
+           mutate(prop_carbon_mass = prop_carbon_mass / sum(prop_carbon_mass))
+           
+
+ggplot(baron_d, aes(bd_prop_mass, prop_carbon_mass, color=phylum))  + 
+  geom_point(size=5) + geom_abline(slope=1, intercept=0) + 
+  xlab('Bar-On et al. 2018 proportion') + 
+  ylab('My proportion')
+
+```
+
+Arthropods are under sampled here, and chordates are way over sampled (at least
+by biomass).
+
+```{r}
+
+ggplot(baron_d) + 
+  geom_point(aes(phylum, total_carbon_mass), size=5) 
+
+ggplot(baron_d) + 
+  geom_point(aes(phylum, bd_mass), size=5) 
+
+baron_d <- baron_d %>% mutate(prop_bd_biomass = total_carbon_mass / bd_mass) 
+
+baron_d %>%
+  select(phylum, prop_bd_biomass)
+
+# using the Bar-On weights
+baron_d <- baron_d %>% 
+              mutate(reweight = bd_prop_mass / prop_carbon_mass) %>%
+              mutate(reweighted_total_carbon_mass = reweight * total_carbon_mass) 
+
+total_sample_carbon_mass <- baron_d %>% pull(reweighted_total_carbon_mass) %>% sum()
+
+# total species here
+n <- nrow(xd)
+total_animal_species <- sum(nspecies)
+
+print(paste0("fraction of animal species in this data set: ", 
+             signif(n/total_animal_species, 2)))
+
+# Bar-On et al. (2018) estimate is 2Gt C
+# 1e12 kg = 1Gt
+total_animal_cmass <- 2 
+
+# if the species here were random
+signif(total_animal_cmass * n / total_animal_species, 2)
+signif(total_sample_carbon_mass, 2)
+
+0.058 / total_animal_cmass
+
+```
+
+Note: initially it was my plan to see if we could get a sense of what fraction
+of the total biomass this dataset contains (which is about 3%). This seems
+unreasonably high, even after reweighting as above. The problem is that the
+3.4e-5 fraction of animal species is obviously not a random sample based on
+size / population, and includes humans, domesticated species, etc. -- this
+probably is accentuated by the overabundance of chordates compared arthropods
+here.
+
+
+## Stan Model for Map Length and log10 Population Size
+
+Fit the log-normal model, which seems to be a good fit to the data given the
+heteroscedasticity.
+
+```{r}
+# no social taxa here; excluded 
+
+dt_ml_ns <- dt_ml %>% filter(!social)
+tr_ml_ns <- keep.tip(tr_ml, dt_ml_ns$species)
+
+# correlation matrix from the tree
+ml_cor_ns <- vcv(tr_ml_ns, cor=TRUE)
+
+# data for the log-normal fit
+log10_popsize_seq <- seq(5, 18, length.out=100)
+ml_dat <- list(N = nrow(dt_ml_ns), 
+              log10_popsize = dt_ml_ns$log10_popsize,
+              map_length = dt_ml_ns$map_length, 
+              cor = ml_cor_ns,
+              x_new = log10_popsize_seq)
+
+PHYLO_MM_LOGNORMAL_CACHE <- '../data/phylo_mm_lognormal_chains.Rdata'
+
+if (!file.exists(PHYLO_MM_LOGNORMAL_CACHE)) {
+  ln_fit <- stan('../stan/phylo_mm_lognormal.stan', 
+                 data=ml_dat, iter=5000, cores=4)
+  save(ln_fit, file=PHYLO_MM_LOGNORMAL_CACHE)
+} else {
+  load(PHYLO_MM_LOGNORMAL_CACHE)
+}
+
+print(ln_fit, pars=c('phi', 'beta', 'sigma_p', 'sigma_r'))
+beta <- extract(ln_fit, pars=c('beta'))
+
+mu_ln_fit <- rstan:::extract(ln_fit, 'mu_rep')$mu_rep
+
+save(ln_fit, log10_popsize_seq, mu_ln_fit,
+     file='../data/lognorm_popsize_chains.Rdata')
+
+```
+
+Any serious pathologies? Rhats are low; I'm looking for divergent transitions.
+
+```{r}
+pairs(ln_fit, pars=c('phi', 'beta', 'sigma_p', 'sigma_r'))
+```
+
+Doesn't look like it.
+
+
+What is phylogenetic heritability? 
+
+```{r}
+lambda_est(ln_fit)
+
+```
+
+What is the credible interval?
+
+```{r}
+hdi(beta)
+
+```
+
+What does the posterior predictive distribution look like? Social taxa are
+outliers (they have higher levels of recombination) and are shown in blue:
+
+```{r}
+
+
+mu_rep <- extract(ln_fit, pars='mu_rep')$mu_rep
+cols <- c('gray32', 'cornflowerblue')
+plot(map_length ~ log10_popsize, dt_ml, pch=19, 
+     col=cols[factor(dt_ml$social)])
+pred  <- colMeans(mu_rep)
+lines(log10_popsize_seq, pred)
+
+```
+
+
+## Continuous Trait Map
+
+Here I generate a bunch of continuous trait maps, and output data for plots.
+First, a convenience function.
+
+```{r}
+
+# this simplifies things, since we're working with dataframes
+# ordered by the tip labels, and phytools:::contMap requires
+# named vectors
+contmap <- function(tree, df, col, ...) {
+  stopifnot(all(tree$tip.label == df$species))
+  x <- setNames(df[[col]], df$species)
+  phytools:::contMap(tree, x, ...)
+}
+
+```
+
+```{r}
+
+pscm <- contmap(tr_dps, dt_dps, 'log10_popsize', res=200)
+dvcm <- contmap(tr_dps, dt_dps, 'log10_diversity', res=200)
+
+save(pscm, dvcm, tr_dps, dt_dps, file='../data/biconmap_data.Rdata')
+
+```
+
+Now, for the map length / population size dataset.
+
+```{r}
+
+psmlcm <- contmap(tr_ml, dt_ml, 'log10_popsize', res=200)
+mlcm <- contmap(tr_ml, dt_ml, 'log10_map_length', res=200)
+
+save(mlcm, psmlcm, tr_ml, dt_ml, file='../data/biconmap_maplen_data.Rdata')
+
+```
+
+
+## Phylogenetic Mixed-Effects Model of Diversity Population Size Relationship
+
+This is a primary relationship we want to fit, accounting for phylogeny:
+
+```{r}
+
+dps_cor <- vcv(tr_dps, corr=TRUE)
+log10_popsize_seq <- seq(4, 16, length.out=100)
+
+dps_dat <- list(N = nrow(dt_dps),
+          x = dt_dps$log10_popsize,
+          y = dt_dps$log10_diversity,
+          x_new=log10_popsize_seq,
+          cor=dps_cor)
+
+PHYLO_MM_REGRESSION_CACHE <- '../data/phylo_mm_regression_chains.Rdata'
+if (!file.exists(PHYLO_MM_REGRESSION_CACHE)) {
+  dps_fit <- stan('../stan/phylo_mm_regression.stan', 
+                  seed=0,
+                  data=dps_dat, iter=5000, cores=4)
+  save(dps_fit, file=PHYLO_MM_REGRESSION_CACHE)
+} else {
+  load(PHYLO_MM_REGRESSION_CACHE)
+}
+
+print(dps_fit, pars=c('phi', 'beta', 'sigma_p', 'sigma_r'))
+pairs(dps_fit, pars=c('phi', 'beta', 'sigma_p', 'sigma_r', 'lp__'))
+
+phi <- extract(dps_fit, pars='phi')$phi
+beta <- extract(dps_fit, pars='beta')$beta
+dps_mu_rep <- extract(dps_fit, pars='mu_rep')$mu_rep
+plot(dps_dat$x, dps_dat$y, pch=19, xlab='log10 pop size', 
+     ylab='log10 diversity')
+lines(log10_popsize_seq, colMeans(dps_mu_rep))
+
+dps_ols <- lm(log10_diversity ~ log10_popsize, dt_dps)
+summary(dps_ols)
+
+```
+
+The chains mixed well. For quality assurance I compare this to a PGLS, to check
+my Stan model is working not too differently than a pre-packaged solution.
+
+```{r}
+
+# compare with pgls
+summary(gls(log10_diversity ~ log10_popsize, 
+            correlation = corBrownian(phy=tr_dps), 
+            data=dt_dps, method = "ML"))
+
+```
+
+This is reasonably close to the phylogenetic mixed-effects model.
+
+Now, let's do a simple bootstrap to get the CIs for the OLS fit.
+
+```{r}
+
+fit_fun <- function(x) {
+  lm(log10_diversity ~ log10_popsize, data=x)
+}
+
+nboot <- 10000
+dps_bs <- tibble(i = 1:nboot) %>%
+       mutate(data = map(i, ~ bs_samp(dt_dps))) %>%
+       mutate(fit = map(data, fit_fun)) %>%
+       mutate(slope = map_dbl(fit, ~ coef(.)[2])) %>%
+       mutate(intercept = map_dbl(fit, ~ coef(.)[1])) %>%
+       # don't save the permuted data sets
+       select(-data)
+
+dps_bs_cis <- rbind(ci(dps_bs$intercept, coef(dps_ols)[1]),
+                    ci(dps_bs$slope, coef(dps_ols)[2]))
+dps_bs_cis
+```
+
+Now, save all these data
+
+```{r}
+
+save(dps_fit, dps_ols, dt_dps, dps_bs_cis,
+     file='../data/diversity_popsize_chains.Rdata')
+
+```
+
+How many taxa?
+
+```{r}
+dps_dat$N
+```
+
+Credible intervals:
+
+```{r}
+round(hdi(beta), 2)
+round(lambda_est(dps_fit), 2)
+```
+
+## Diversity Population Size Relationship by Phylum
+
+Next, let's look at phyla separately. 
+
+```{r}
+
+min_taxa <- 10
+dt_dps_phyla <- dt_dps %>% group_by(phylum) %>%
+                  nest() %>% 
+                  mutate(n = map_int(data, nrow)) %>%
+                  filter(n > min_taxa)
+
+
+fit_phylo_mm <- function(df, full_tree,
+                         stan_file='../stan/phylo_mm_regression.stan', 
+                         iter=5000) {
+  tr <- keep.tip(tr, df$species)
+  cor <- vcv(tr, corr=TRUE)
+  log10_popsize_seq <- seq(4, 16, length.out=100)
+  
+  dat <- list(N = nrow(df),
+              x = df$log10_popsize,
+              y = df$log10_diversity,
+              x_new=log10_popsize_seq,
+              cor=cor)
+
+  fit <- stan(stan_file,
+              data=dat, iter=iter, seed=0, cores=4)
+  fit
+}
+
+# fit all models: 
+PHYLO_MM_REGRESSION_BY_PHYLA_CACHE <- '../data/phylo_mm_regression_by_phyla_chainsdf.Rdata'
+
+if (!file.exists(PHYLO_MM_REGRESSION_BY_PHYLA_CACHE)) {
+  dt_dps_phyla <- dt_dps_phyla %>% 
+                   mutate(fit = map(data, fit_phylo_mm, full_tree=tr_dps))
+  save(dt_dps_phyla, file=PHYLO_MM_REGRESSION_BY_PHYLA_CACHE)
+} else {
+  load(PHYLO_MM_REGRESSION_BY_PHYLA_CACHE)
+}
+
+```
+
+Now, we have to ensure convergence worked. For arthropods:
+
+```{r}
+
+dps_pars <- c('phi', 'beta', 'sigma_p', 'sigma_r', 'lp__')
+
+pairs(dt_dps_phyla$fit[[3]], pars=dps_pars)
+
+print(dt_dps_phyla$fit[[3]], pars=dps_pars)
+
+```
+
+This looks fine -- all Rhats are below 1.01 now. 
+
+For molluscs:
+
+```{r}
+
+pairs(dt_dps_phyla$fit[[2]], pars=dps_pars)
+
+print(dt_dps_phyla$fit[[2]], pars=dps_pars)
+
+```
+
+Again, all Rhats are below 1.01, though clearly there is a high
+degree of correlation between slope and intercept (low information
+in data to differentiate these). We have some divergent
+transitions but this seems to not indicate any pathologies in the
+geometry of the posterior.
+
+
+For chordates (hardest for last):
+
+```{r}
+
+pairs(dt_dps_phyla$fit[[1]], pars=dps_pars)
+print(dt_dps_phyla$fit[[1]], pars=dps_pars)
+
+```
+
+Now, something is has gone wrong; Rhats are high and we have many
+divergent transitions. The pairs plot shows many pathologies in
+the geometry of the posterior surface. The histogram of `sigma_r`
+shows that there's a posterior mode with low residual variance
+that has a very high log posterior. This seems to indicate that
+all the variance could be explained by phylogenetic effects,  not
+residual tips.
+
+This requires we fit a special model without `sigma_r` as a term. 
+
+
+```{r}
+
+alt_stan_file <- '../stan/phylo_mm_regression_noresid.stan'
+
+PHYLO_MM_REGRESSION_BY_PHYLA_ALT_CACHE <- '../data/phylo_mm_regression_phyla_alt_chains.Rdata'
+
+if (!file.exists(PHYLO_MM_REGRESSION_BY_PHYLA_ALT_CACHE)) {
+  chor_fit <- fit_phylo_mm(dt_dps_phyla$data[[1]], tr_dps, stan_file=alt_stan_file, iter=2000)
+  save(chor_fit, file=PHYLO_MM_REGRESSION_BY_PHYLA_ALT_CACHE)
+} else {
+  load(PHYLO_MM_REGRESSION_BY_PHYLA_ALT_CACHE)
+}
+
+dps_pars_alt <- c('phi', 'beta', 'sigma_p', 'lp__')
+pairs(chor_fit, pars=dps_pars_alt)
+print(chor_fit, pars=dps_pars_alt)
+
+```
+
+This greatly helped in the model fitting process. Note that
+parameter estimates have not changed:
+
+```{r}
+hdi(rstan:::extract(chor_fit, 'beta')$beta)
+hdi(rstan:::extract(dt_dps_phyla$fit[[1]], 'beta')$beta)
+
+```
+
+Note that while it's tempting to compare log posteriors between
+these two models as some sort of model comparison approach, this is
+[not
+appropriate](https://discourse.mc-stan.org/t/model-comparison-lp--/1849/3).
+
+Now, we do simple OLS estimates and bootstraps, and save everything:
+
+```{r}
+
+dt_dps_phyla <- dt_dps_phyla %>% 
+                 mutate(ols = map(data, fit_fun)) %>%
+                 mutate(intercept = map_dbl(ols, ~ coef(.)[1]),
+                        slope = map_dbl(ols, ~ coef(.)[2]))
+
+nboot <- 10000
+
+chor_bs <- tibble(i = 1:nboot) %>%
+       mutate(data = map(i, ~ bs_samp(dt_dps_phyla$data[[1]]))) %>%
+       mutate(fit = map(data, fit_fun)) %>%
+       mutate(slope = map_dbl(fit, ~ coef(.)[2])) %>%
+       mutate(intercept = map_dbl(fit, ~ coef(.)[1])) %>%
+       # don't save the permuted data sets
+       select(-data)
+
+arth_bs <- tibble(i = 1:nboot) %>%
+       mutate(data = map(i, ~ bs_samp(dt_dps_phyla$data[[2]]))) %>%
+       mutate(fit = map(data, fit_fun)) %>%
+       mutate(slope = map_dbl(fit, ~ coef(.)[2])) %>%
+       mutate(intercept = map_dbl(fit, ~ coef(.)[1])) %>%
+       # don't save the permuted data sets
+       select(-data)
+
+mols_bs <- tibble(i = 1:nboot) %>%
+       mutate(data = map(i, ~ bs_samp(dt_dps_phyla$data[[3]]))) %>%
+       mutate(fit = map(data, fit_fun)) %>%
+       mutate(slope = map_dbl(fit, ~ coef(.)[2])) %>%
+       mutate(intercept = map_dbl(fit, ~ coef(.)[1])) %>%
+       # don't save the permuted data sets
+       select(-data)
+
+dt_dps_phyla$boot <- list(chor_bs, arth_bs, mols_bs)
+
+get_cis <- function(boot, slope, intercept) {
+  cis <- ci(boot$slope, slope, with_est=FALSE)
+  cii <- ci(boot$intercept, intercept, with_est=FALSE)
+  tibble(slope_lower=cis[1], slope_upper=cis[2],
+         intercept_lower = cii[1], intercept_upper=cii[2])
+}
+
+dt_dps_phyla <- dt_dps_phyla  %>%
+      mutate(ci_bs = pmap(list(boot, slope, intercept), get_cis)) %>% unnest(ci_bs) %>%
+      select(-boot)
+
+save(dt_dps_phyla, chor_fit, 
+     file='../data/phyla_diversity_popsize_chains.Rdata')
+
+# just the OLS
+ols_phyla <- dt_dps_phyla %>% select(-fit)
+save(ols_phyla, file='../data/phyla_diversity_popsize_ols.Rdata')
+
+
+
+
+```
+
+## Phylogenetic Mixed-Effects Model of Diversity and Body Size Relationship
+
+Is the relationship between diversity and population size driven by body mass?
+We fit that here to take a look:
+
+```{r}
+
+log10_body_mass_seq <- seq(min(dt_dps$log10_body_mass),
+                       max(dt_dps$log10_body_mass), length.out=100)
+ 
+# body mass version
+dbm_dat <- list(N = nrow(dt_dps),
+          x = dt_dps$log10_body_mass,
+          y = dt_dps$log10_diversity,
+          x_new=log10_body_mass_seq,
+          cor=dps_cor)
+
+
+PHYLO_MM_REGRESSION_BODY_SIZE_CACHE <- '../data/phylo_mm_regression_body_size_chains.Rdata'
+
+if (!file.exists(PHYLO_MM_REGRESSION_BODY_SIZE_CACHE)) {
+  dbm_fit <- stan('../stan/phylo_mm_regression.stan', 
+                  seed=0,
+                  data=dbm_dat, iter=5000, cores=4)
+  save(dbm_fit, file=PHYLO_MM_REGRESSION_BODY_SIZE_CACHE)
+} else {
+  load(PHYLO_MM_REGRESSION_BODY_SIZE_CACHE)
+}
+
+
+print(dbm_fit, pars=c('phi', 'beta', 'sigma_p', 'sigma_r'))
+pairs(dbm_fit, pars=c('phi', 'beta', 'sigma_p', 'sigma_r', 'lp__'))
+
+phi <- extract(dbm_fit, pars='phi')$phi
+beta <- extract(dbm_fit, pars='beta')$beta
+dbm_mu_rep <- extract(dbm_fit, pars='mu_rep')$mu_rep
+plot(dbm_dat$x, dbm_dat$y, pch=19, xlab='log10 body mass', 
+     ylab='log10 diversity')
+lines(log10_body_mass_seq, colMeans(dbm_mu_rep))
+
+dbm_ols <- lm(log10_diversity ~ log10_body_mass, dt_dps)
+summary(dbm_ols)
+
+```
+
+The chains mixed well (Rhats < 1.01 and the pair plots look good). What's the
+HDI of beta?
+
+```{r}
+hdi(beta)
+```
+
+For quality assurance, I run the PGLS and compare parameter estimates. They are
+very similar (though it should be noted this model doesn't account for residual
+variance):
+
+```{r}
+# compare with pgls
+summary(gls(log10_diversity ~ log10_body_mass, 
+            correlation = corBrownian(phy=tr_dps), 
+            data=dt_dps, method = "ML"))
+
+```
+
+## Phylogenetic Mixed-Effects Model of Diversity and Range
+
+Next, we look to see if the diversity population size relationship is driven by
+another variable used in population size estimates: range.
+
+```{r}
+
+log10_range_seq <- seq(min(dt_dps$log10_range),
+                       max(dt_dps$log10_range), length.out=100)
+ 
+# body mass version
+drn_dat <- list(N = nrow(dt_dps),
+          x = dt_dps$log10_range,
+          y = dt_dps$log10_diversity,
+          x_new=log10_range_seq,
+          cor=dps_cor)
+
+PHYLO_MM_REGRESSION_RANGE_CACHE <- '../data/phylo_mm_regression_range_chains.Rdata'
+if (!file.exists(PHYLO_MM_REGRESSION_RANGE_CACHE)) {
+  drn_fit <- stan('../stan/phylo_mm_regression.stan', 
+                  seed=0,
+                  data=drn_dat, iter=5000, cores=4)
+  save(drn_fit, file=PHYLO_MM_REGRESSION_RANGE_CACHE)
+} else {
+  load(PHYLO_MM_REGRESSION_RANGE_CACHE)
+}
+
+print(drn_fit, pars=c('phi', 'beta', 'sigma_p', 'sigma_r'))
+pairs(drn_fit, pars=c('phi', 'beta', 'sigma_p', 'sigma_r', 'lp__'))
+
+phi <- extract(drn_fit, pars='phi')$phi
+beta <- extract(drn_fit, pars='beta')$beta
+drn_mu_rep <- extract(drn_fit, pars='mu_rep')$mu_rep
+plot(drn_dat$x, drn_dat$y, pch=19, xlab='log10 range', 
+     ylab='log10 diversity')
+lines(log10_range_seq, colMeans(drn_mu_rep))
+
+drn_ols <- lm(log10_diversity ~ log10_range, dt_dps)
+summary(drn_ols)
+
+```
+
+Again, we compare to the PGLS fit:
+
+```{r}
+
+# compare with pgls
+summary(gls(log10_diversity ~ log10_range, 
+            correlation = corBrownian(phy=tr_dps), 
+            data=dt_dps, method = "ML"))
+
+```
+
+And again the estimates are close, but the PGLS slope estimates are weakened a
+bit, likely by allowing for an additional source of variance (the diagonal
+residual variance).
+
+Now, we save all these fits for yet another supplementary figure.
+
+```{r}
+
+save(drn_fit, dbm_fit, drn_ols, dbm_ols, 
+     log10_body_mass_seq, log10_range_seq,
+     file='../data/diversity_range_bodymass_chains.Rdata')
+
+```
+
+
+## Node Height Tests
+
+Now, let's look at node height.
+
+```{r}
+
+psnh <- node_height(dt_dps$log10_popsize, multi2di(tr_dps))
+rnnh <- node_height(dt_dps$log10_range, multi2di(tr_dps))
+bmnh <- node_height(dt_dps$log10_body_mass, multi2di(tr_dps))
+dvnh <- node_height(dt_dps$diversity, multi2di(tr_dps))
+
+save(psnh, rnnh, bmnh, dvnh, file='../data/nodeheights.Rdata')
+
+```
+
+Just to ensure there's nothing weird going on, let's simulate
+Brownian motion 1000 times and see how many times we see a
+significant relationship:
+
+```{r}
+
+mtr <- multi2di(tr_dps)
+nhsims <- tibble(i=1:5000) %>% 
+           mutate(bm_trait = map(i, ~ fastBM(mtr))) %>%
+           mutate(nh_rlm = map(bm_trait, ~ node_height(., mtr))) %>%
+           mutate(nh_lm = map(bm_trait, ~ node_height(., mtr, method='lm')))
+
+get_lm_pval <- function(x) {
+  summary(x$fit)$coefficients[2, 4]
+}
+
+get_rlm_pval <- function(x) {
+  tval <- summary(x$fit)$coefficients[2, 3]
+  df <- summary(x$fit)$df[2]
+  dt(abs(tval), df)
+}
+
+nhsims %>% mutate(pval = map_dbl(nh_rlm, get_rlm_pval)) %>%
+  ggplot(aes(x=pval)) + geom_histogram()
+
+```
+
+This is the distribution of p-values under robust regression. This shows the null-model is a bit wrong (overly conservative); see [David Robinson's great article on this](http://varianceexplained.org/statistics/interpreting-pvalue-histogram/). This is a bit concerning, but note that the p-value histogram under the linear model looks better:
+
+```{r}
+
+nhsims %>% mutate(pval = map_dbl(nh_lm, get_lm_pval)) %>%
+  ggplot(aes(x=pval)) + geom_histogram(binwidth=0.02)
+
+```
+
+So the odd `rlm()` p-value distribution seems to be an artifact of
+the robust regression.
+
+Overall, simulating Brownian motion shows that there isn't a
+strong reason to suspect the shape of this phylogeny affects the
+node-height test.
+
+What does a random BM node height test?
+
+```{r}
+plot_nh(nhsims$nh_rlm[[2]])
+```
+
+
+
+```{r}
+
+# no drosophila
+dt_dps_nd <- dt_dps %>% filter(genus != 'Drosophila')
+tr_dps_nd <- keep.tip(tr_dps, dt_dps_nd$species)
+
+# diversity
+dvnh_nd <- node_height(dt_dps_nd$diversity,
+                       multi2di(tr_dps_nd))
+plot_nh(dvnh_nd)
+summary(dvnh_nd$fit)
+
+# popsize
+psnh_nd <- node_height(dt_dps_nd$log10_popsize, 
+                    multi2di(tr_dps_nd))
+plot_nh(psnh_nd)
+
+# 
+outliers <- dvnh_nd$d  %>% filter(pic > 0.001) %>% pull(tips) 
+not_outliers <- dvnh_nd$d  %>% filter(pic < 0.001) %>% pull(tips) 
+
+outliers_ranges <- sapply(outliers, function(x) diff(range(dt_dps_nd$log10_range[dt_dps_nd$species %in% x])))
+
+not_outliers_ranges <- sapply(not_outliers, function(x) diff(range(dt_dps_nd$log10_range[dt_dps_nd$species %in% x])))
+
+
+tibble(range = c(not_outliers_ranges, outliers_ranges), 
+       group = c(rep('outlier', length(not_outliers_ranges)), 
+                 rep('not outlier', length(outliers_ranges)))) %>%
+  ggplot(aes(x=group, y=range)) + 
+geom_boxplot()
+
+  geom_histogram(position='dodge')
+
+
+
+```
+
+
+
+## Genome Size
+
+A quick EDA plot of log genome size and log population size:
+
+```{r}
+
+d %>% filter(species != "Ambystoma tigrinum", 
+             is.finite(log10_popsize),
+             is.finite(genome_size)) %>%
+  ggplot(aes(log10_popsize, genome_size)) + geom_point() + 
+    scale_y_log10()
+
+```
+
+A simple PGLS of log genome size and log population size:
+
+```{r}
+
+# TODO
+
+```
+
+## Simple Hitchhiking Effects Model based on Elyashiv et al. (2016)
+
+Based on the model of Coop and Ralph (2012) and Elyashiv et al. (2016).
+
+Elyashiv et al. 2016's selection coefficient distribution, based on
+Supplementary Table S1.
+
+```{r}
+
+# Table S1, with "missing substitutions"; introns/intergenic are all NA
+# so not included (same as Table S11)
+dm_s <- tribble(~ log10_s, ~ feature, ~ alpha,
+                     -1.5,   'exon',       NA,
+                     -1.5,   'utr',        NA, 
+                     -2.5,   'exon',       0.6,
+                     -2.5,   'utr',        NA,
+                     -3.5,   'exon',       3.5,
+                     -3.5,   'utr',        NA,
+                     -4.5,   'exon',       NA,
+                     -4.5,   'utr',        5.1,
+                     -5.5,   'exon',       36.3,
+                     -5.5,   'utr',        42.1) %>% 
+         mutate(alpha = alpha/100., s=10^log10_s) # convert from percentage
+
+```
+
+Next are the substitution rates, from Supplementary Text Section A.
+
+```{r}
+
+
+# Substitution rates
+# These are taken from Supplementary Text Section A, p. 5
+# Original source: Hu et al. 
+# exon is nonsyn
+dm_subs <- tribble(~ feature,       ~ prop_data, ~ num_subs,  ~ rate,
+                         'exon',            0.7,      64205,  0.0092,
+                          'utr',           0.45,     153765,   0.025,
+                       'intron',           0.43,     456401,   0.032)
+
+dm_subs <- tribble(~ feature,    ~ num_subs,  ~ rate,
+                      'exon',         64205,  0.0092,
+                       'utr',        153765,   0.025,
+                    'intron',        456401,   0.032)
+
+```
+
+Next, to get a sense of the proportion of base pairs in each annotation
+feature, I load in the summary created  in `../data/dmel/`. Note that these are
+only for the chromosomes in the Elyashiv et al. study.
+
+```{r}
+# annotation 
+dm_ann <- read_tsv('../data/dmel/dmel_annotation_summary.tsv')
+dm_sl <- read_tsv('../data/dmel/dmel_seqlens.tsv')
+
+# total genome length 
+G <- sum(dm_sl$length)
+
+# genic total bp, including CDS, introns, UTRs
+Ggenic <- dm_ann %>% filter(feature %in% c('cds', 'intron', 'UTR')) %>% 
+  pull(total_bp) %>% sum()
+
+```
+
+For my approximations, I use Drosophila melanogaster values of $\alpha$ and
+$m/T$. The main thing is $J_{2,2}$ based on (1) exogenous $N$ and $L$ and (2)
+the inferred Elyashiv et al. Drosophila distribution of selection coefficients.
+
+I first average over the features to get a marginalized selection coefficient
+distribution. I weight by proportions of UTRs to exonic sequences in the
+annotation.
+
+```{r}
+
+# dm_seldist_simple <- tribble(~ log10_s, ~ prop,
+#                                   -3.5,    0.04,
+#                                   -5.5,     0.4)
+
+dm_seldist<- dm_s %>% left_join(dm_ann)  %>%
+  group_by(feature) %>%
+  # Total alpha by feature. Sanity check: these match Table S6
+  mutate(alpha_feature = sum(alpha, na.rm=TRUE)) %>%
+  # calc the selection coefficient distribution by feature 
+  mutate(g_feature = alpha / alpha_feature)  %>%
+  filter(is.finite(g_feature)) %>%
+  ungroup() %>%
+  group_by(log10_s, s) %>%
+  summarize(g = weighted.mean(g_feature, prop_genome, na.rm=TRUE)) %>%
+  ungroup() %>%
+  mutate(g = g/sum(g))
+
+dm_seldist
+
+```
+
+Now, I estimate the $\alpha$, averaging across annotation features.
+
+```{r}
+
+# alpha is the fraction of substitutions (in genic regions) that are beneficial
+dm_alphas <- dm_s %>% left_join(dm_ann) %>% 
+               group_by(feature, prop_genome) %>% 
+               summarize(alpha = sum(alpha, na.rm=TRUE), 
+                         total_bp = unique(total_bp)) %>%
+               ungroup() %>%
+               mutate(alpha_mean = weighted.mean(alpha, prop_genome))
+
+ 
+dm_alpha <- unique(dm_alphas$alpha_mean)
+stopifnot(length(dm_alpha) == 1)
+
+dm_alphas
+
+```
+
+These values seem entirely reasonable given Table 1 of Sella et al. (2009).
+
+Next I estimate $m$, the number of substitutions occurring in coding regions.
+This uses Elyashiv et al.'s Supplementary Text which reports the substitutions
+per feature (input above as `dm_subs`). Again, this is just for the automsomal
+chromosomes.
+
+```{r}
+
+# total_bps is the number of bps per feature 
+dm_ms <- dm_subs %>% left_join(dm_ann) %>%
+          # note, we exclude introns since Elyashiv found 
+          # no evidence of adaptive substitutions in introns, 
+          # but see note on p. 13 2nd to last paragraph.
+          filter(feature %in% c('exon', 'utr')) %>%
+          mutate(m = rate * total_bp)  
+
+
+dm_m <- sum(dm_ms$m)
+
+dm_ms %>% select(feature, num_subs, rate, total_bp, m, prop_genome)
+dm_m
+
+```
+
+Next, we sanity check this. To get an idea of whether this is reasonable, we
+need the divergence times between *D. melanogaster* and *D. simulans*.
+
+```{r}
+# parameters
+dmel_sim_div <- 4.2e6 # Mya, from Obbard
+
+# assuming Ne of D. mel is 1e6
+dm_mu <- 2.8e-9
+dm_Ne <- 1e6
+
+dm_pi = da_cc %>% filter(species == "Drosophila melanogaster") %>% pull(diversity)
+# 0.2 from syn subs per site in Supp. p. 5
+dmel_sim_div2 <- (0.2 / 2) / dm_pi * dm_Ne # Mya, from method in Elyashiv
+
+# I use Obbard's -- both are similar
+T <- dmel_sim_div * 10 # gens
+
+dm_m / (2*T * sum(dm_ms$total_bp))
+
+```
+
+This substitution rate is a bit lower than the mutation rate, but given these
+are genic regions, this is not too surprising. Overall, nothing too out of the
+ordinary here.
+
+Finally, we work to get an estimate of $J_{2,2}$. Here I explore two
+approaches, one a simplified version of Elyashiv et al. where I use their
+inferred selection coefficient distribution, and another with fixed $s$. First,
+some functions:
+
+```{r}
+
+# fixation time, based on diffusion theory (Elyashiv et al. eqn 4)
+tau <- function(s, N) {
+  gamma <- -digamma(1)
+  2*(log(4*N*s) + gamma - 1/(4*N*s)) / s
+}
+
+# simple J22 with fixed s, without haldane
+J22 <- function(s, N, L){
+  t <- tau(s, N)
+  # from Mathematica 
+  (1 - exp(-2*L*t))/(2*t)
+}
+
+# J22 for distribution of s
+J22s <- Vectorize(function(s, w, N, L) {
+  ts <- tau(s, N)
+  # Inf out any negative fixation times (when Ns is small)
+  if (any(ts < 0)) warning("some fixation times < 0")
+  ts[ts < 0] <- Inf
+  sum(w * (1 - exp(-2*L*ts))/(2*ts))
+}, c('N', 'L'))
+
+```
+
+What is the $\nu_{BP}$? I also extract some other relevant parameters.
+
+```{r}
+# implied nu_bp
+dm_nu_bp <- dm_alpha * dm_m / (G*2*T)
+dm_nu_bp
+
+dm_log10_Nc <- da_ml %>% filter(species == "Drosophila melanogaster") %>% pull(log10_popsize) 
+dm_Nc <- 10^dm_log10_Nc
+
+# some other Drosophila params
+dm_L <- da_ml %>% filter(species == "Drosophila melanogaster") %>% pull(map_length)
+dm_U <- 1.6 # from Elyashiv
+dm_rbp <- mean(c(2.14, 2.77, 2.2, 1.97)) * 1e-2 / 1e6 # from Petrov's website
+
+```
+
+
+What about $J_{2,2}$? Here, I find that my simple model that marginalizes over
+the distribution of selection coefficients seems to estimate a $J_{2,2}$ that
+is much weaker (two orders of magnitude) than estimates that have been
+previously published and compared to the rate of coalescent events
+(Supplementary Table S6). Here is the $J_{2,2}$ from the distribution of
+selection coefficients:
+
+```{r}
+# J22 
+# NOTE: taking L = Inf does not matter since ts is so high.
+# What drives this is the 1/fixation_time term.
+dm_J22_Elyashiv <- J22s(dm_seldist$s,  dm_seldist$g, dm_Ne, Inf)  
+dm_J22_Elyashiv 
+
+# 2 N nu_bp J22 / rbp
+twoSN_Elyashiv <- 2 * dm_Ne * dm_nu_bp / dm_rbp * dm_J22_Elyashiv
+twoSN_Elyashiv
+
+2 * dm_nu_bp / dm_rbp * dm_J22_Elyashiv
+
+```
+
+How does this compare to the value published in the Supplementary Table (S6) of
+Elyashiv et al? 
+
+```{r}
+
+rs <- 0.92 # from Table S6
+# implied by the rs = 0.92 value in Supplementary Table S3
+dm_J22_Elyashiv2 <- rs / (2 * dm_Ne * dm_nu_bp / dm_rbp)
+
+# implied J22
+signif(rs / (2 * dm_Ne * dm_nu_bp / dm_rbp), 3)
+
+```
+
+Let's compare these to the numbers from Sella et al. 2009.
+
+
+```{r}
+
+# from Sella et al. 2009
+sweep_ests <-
+  tribble(            ~ study,                  ~ s,          ~ nu,   ~ nu_gamma,
+     'Wiehe and Stephan 1992',             NA_real_,      NA_real_,   1.3e-8,
+        'Li and Stephan 2006',      (0.2 + 0.5)/200,  (6+9)/2*1e-11,      NA,
+            'Andolfatto 2007',                 1e-5,        7.5e-10,    3e-8,
+      'Macpherson et al 2007',                 0.01,        3.6e-12,    1e-7,
+          'Jensen et al 2008',              0.2/100,          4e-11,    4e-7) %>%
+        mutate(twoSN = nu_gamma * 0.075 / dm_rbp) %>%
+        mutate(approx_J22 = twoSN / (2 * dm_Ne * nu / dm_rbp))  %>%
+        add_row(study="***", s=NA, nu=dm_nu_bp, approx_J22 = dm_J22_Elyashiv2)
+sweep_ests
+
+write_tsv(sweep_ests, "../data/sweep_param_ests.tsv")
+
+```
+
+
+Below we show all of these, mine is `***`:
+
+```{r}
+
+sweep_ests %>%
+  mutate(color=ifelse(study == '***', 'red', 'black')) %>%  
+  ggplot() + 
+  geom_hline(yintercept=0, color='gray32') + 
+  geom_point(aes(nu, 0, color=color), size=4) + 
+  geom_text_repel(aes(nu, 0, label=study), point.padding=1, box.padding=3, seed=1) +
+  scale_x_log10() +   scale_colour_identity()+
+  xlab("beneficial substitutions per bp (ν_bp)") + ylab('')
+
+```
+
+Is this reasonable?  This seems roughly in line with previous findings.
+
+How does our $J_{2,2}$ compare to other published estimates of $J_{2,2}$?
+
+```{r}
+
+# dataset from Graham's notes
+dshap_raw <- read_tsv('../data/shapiro_et_al_2007.tsv', col_names=FALSE)
+
+# unsure what all the columns are, but this is what matters
+dshap <- tibble(rec = dshap_raw$X3, pi = dshap_raw$X4)
+
+hh_nls <- nls(pi ~ neutral.pi*rec/(rec + alpha), dshap, 
+              start=list(neutral.pi=2, alpha=1e-9))
+
+plot(pi ~ rec, dshap, pch=19, xlab='recombination (cM/Mb)', 
+     ylab=latex2exp::TeX('$\\pi$'))
+rec <- seq(0, 2.5, length.out=100)
+y <- predict(hh_nls, data.frame(rec=rec))
+lines(rec, y, col='red', lwd=3)
+
+pi0 <- coef(hh_nls)['neutral.pi']
+alpha <- coef(hh_nls)['alpha']
+lines(rec, pi0/(1 + alpha/rec), col='red', lwd=3)
+lines(rec, pi0/(1 + twoSN_Elyashiv/rec), col='blue', lwd=3)
+
+lines(rec, pi0/(1 + rs/rec), col='green', lwd=3, lty=2)
+
+legend(0, 0.06, c('non-linear least squares', 
+                  latex2exp::TeX("sel coef $J_{2,2}$"),
+                  latex2exp::TeX('Elyashiv et al. $r_S$')),
+        fill=c('red', 'blue', 'green'),
+        bty='n', border=0, cex=1, ncol=1)
+
+# the implied 2NS / rbp is below -- this is the same 
+# as in Coop and Ralph (2012) Table 1
+alpha / (100 * 1e6) # units are changed to cM/Mb
+
+# the J22 is
+alpha / (100 * 1e6 * 2*dm_Ne * dm_nu_bp)
+dm_J22_Elyashiv
+
+```
+
+Overall the selection coefficient distribution approach underestimates
+$J_{2,2}$. Looking at Elyashiv et al., this is because the homogeneous sweep
+model spaces substitutions too evenly. I use the empirical $J_{2,2}$ which is
+stronger and more realistic. Let's look at some comparisons:
+
+
+```{r}
+
+       
+sweep_ests %>%
+   # implied by cs parameter estimate in supp
+   add_row(study="Elyashiv et al. 2012", s=NA, nu=dm_nu_bp, twoSN=0.92, 
+           approx_J22=0.92 / (2*dm_Ne * dm_nu_bp / dm_rbp)) %>%
+   # roughly the homogeneous sweep model
+   mutate(one_over_fix= 0.5 / tau(s, dm_Ne), off=one_over_fix/approx_J22)
+
+```
+
+How do the diffusion and deterministic fixation times compare? Could this be an
+issue?
+
+```{r}
+
+# how does our diffusion fixation time compare to the deterministic?
+crossing(log10_s = -(1:5), log10_N = 3:10) %>%
+  mutate(s=10^log10_s, N = 10^log10_N) %>%
+  mutate(`simple` = 4/s * log(2 * N), diffusion=tau(s, N)) %>% 
+  filter(diffusion > 0) %>%
+  ggplot(aes(simple, diffusion, color=as.factor(log10_s), shape=as.factor(log10_N))) + 
+  geom_point() + scale_x_log10() + scale_y_log10() + geom_abline(slope=1, intercept=0)
+
+
+```
+No, those look roughly the same.
+
+Now, let's crunch some more parameter estimates, this time
+$\gamma_\text{Dmel}$, as well as define some functions for the reductions due
+to RHH and BGS.
+
+```{r}
+
+# nu_bp without the 1/G (since we use L)
+dm_gamma <- dm_alpha * dm_m / (2*T)
+signif(dm_gamma, 2)
+
+# Hudson and Kaplan (1995) equation 8
+HK95 <- function(L, U) exp(-U / L)
+
+RHH_S2N <- function(L, N, gamma, J22) {
+  S <- gamma / L * J22
+  2*N*S
+}
+
+RHH_BGS <- function(theta, L, N, B, gamma, J22) {
+  S <- gamma / L * J22
+  # generally theta is small, so we approx as theta / (1 + theta) ~ theta
+  # (Coop and Ralph 2012 do this, e.g. eqns 18, 19). This allows 
+  # for me to treat this as a proportion reduction.
+  # theta / (theta + 1/B + 2*N*S)
+  theta / (1/B + 2*N*S)
+}
+
+```
+
+Quickly, what are the relative strengths?
+
+```{r}
+
+x <- 10^da_ml$log10_diversity / 4e-9
+bgs <- 1/(HK95(da_ml$map_length, 1.6))
+rhh <- RHH_S2N(da_ml$map_length, x, dm_gamma, dm_J22_Elyashiv)
+# plot(x, bgs, col='red', pch=19)
+# points(x, rhh, col='green', pch=19)
+# plot(x, rhh, col='green', pch=19)
+
+plot(log10(x),bgs/(rhh + bgs), xlab='log10 pop size', pch=19)
+
+```
+
+What about the S&C 2016 stuff?
+
+```{r}
+
+fixT <- function(s, Ne, U) (exp(2*s*Ne) - 1) / (2*U*s*Ne)
+
+SC16_R <- function(Ne, U, L, s) {
+  T <- fixT(s, Ne, U)
+  exp((-2*U / (exp(2*s) + L))*(1 - 1/(U*T))^3)
+}
+
+SC16_R(Ne=dm_Ne, U=dm_U, L=dm_L, s=10^{-1.5}) # s from Elyashiv
+HK95(U=dm_U, dm_L)
+
+
+```
+
+Not much of a difference...
+
+
+## Diversity Changes Due to Linked Selection
+
+First we try to extrapolate what the effect of linked selection would be in the
+Corbett-Detig dataset.
+
+```{r}
+
+# load corbett-detig data, which is data with impact_of_sel
+dca <- d[!is.na(d$impact_of_sel), ]
+# check against real dataset
+dc <- read_tsv('../data/corbett_detig_2015_updated.tsv')  %>%
+        mutate(data_source = 'Corbett-Detig et al.',
+               range_cd = range) %>%
+        rename(diversity = obs_pi)
+# should be same size if joins were right
+stopifnot(sum(dc$kingdom == 'Animalia')  == nrow(dca))
+
+dca_noself <- dca[dca$selfing != 1, ]
+
+```
+
+First, do we see the same diversity / population size relationship as we do
+with the Leffler et al diversity data? Yes:
+
+```{r}
+
+ggplot(dca) + 
+  geom_smooth(aes(log10_popsize, log10(diversity)), method='lm', se=FALSE) + 
+  geom_point(aes(log10_popsize, log10(diversity))) + 
+  geom_text_repel(aes(log10_popsize, log10(diversity), label=species))
+
+```
+
+What does impact of selection's relation with our population size look like? We
+confirm a finding of Corbett-Detig et al. with our own N estimate, that impact
+of selection increases with N:
+
+
+```{r}
+
+ggplot(dca_noself) + geom_point(aes(log10_popsize, impact_of_sel)) + 
+  geom_smooth(aes(log10_popsize, impact_of_sel), method='lm', se=FALSE) + 
+  geom_text_repel(aes(log10_popsize, impact_of_sel, label=species))  + 
+  xlab("log10 population size") + ylab("impact_of_sel")
+
+```
+
+What's this linear relationship?
+
+```{r}
+
+save(dca, dca_noself, file="../data/corbett_detig_data.Rdata")
+
+plot(dca$log10_popsize, log10(dca$diversity), pch=19)
+cd_div_fit <- lm(log10(diversity) ~ log10_popsize, dca_noself)
+abline(cd_div_fit)
+
+
+plot(dca_noself$log10_popsize, dca_noself$impact_of_sel, 
+     pch=19)
+ios_fit <- lm(impact_of_sel ~ log10_popsize, dca_noself)
+abline(ios_fit)
+summary(ios_fit)
+
+```
+
+Fit a simple linear model of the impact of selection / popsize relationship.
+
+
+```{r}
+a <- coef(ios_fit)[1]
+b <- coef(ios_fit)[2]
+
+```
+
+This is on a subset of the data with population size, diversity,
+and map lengths -- about 40 taxa.
+
+```{r}
+
+# here, we use the complete dataset, which we copy here
+dml <- da_cc
+
+dml$ios_ls <- predict(ios_fit, 
+                         newdata=tibble(log10_popsize=dml$log10_popsize))
+dml$Ne_N_CD15 <- 1-dml$ios_ls
+
+# this uses Ne implied by diversity and μ = 1e-9
+dml <- dml %>% 
+     # estimate from Elyashiv et al.
+     mutate(Ne_N_HK95 = HK95(map_length, U=dm_U)) %>% 
+     # mutate(J22 = J22s(10^dm_seldist$log10_s,  dm_seldist$g, dm_Ne, Inf)) %>%
+     mutate(J22 = dm_J22_Elyashiv2) %>%
+
+     # both BGS and RHH
+     mutate(Ne_N_RHH_BGS = RHH_BGS(1, L=map_length, N=diversity/(4e-9), 
+                                   B=Ne_N_HK95, gamma=dm_gamma, 
+                                   J22=J22),
+            Ne_N_RHH_BGS_strongsel = RHH_BGS(1, L=map_length, N=10^log10_popsize,
+                                              B=Ne_N_HK95, gamma=dm_gamma, 
+                                              J22=J22 * 10)) %>%
+     mutate(Ne_N_HK95_CD15 = Ne_N_HK95 * Ne_N_CD15) %>% 
+     mutate(log10_CD15_diversity = log10(diversity / Ne_N_CD15),
+            log10_HK95_diversity = log10(diversity / Ne_N_HK95),
+            log10_RHH_BGS_diversity = log10(diversity / Ne_N_RHH_BGS),
+            log10_RHH_BGS_strongsel_diversity = 
+              log10(diversity / Ne_N_RHH_BGS_strongsel),
+            log10_diversity = log10(diversity))
+
+# this is the one used in figures -- assumes Ne = Nc
+# this got a bit unwieldy as I tried different things... oh well.
+dml_full <- da_ml %>%
+     # estimate from Elyashiv et al.
+     # mutate(J22 = 100*J22s(dm_seldist$s,  dm_seldist$g, 10^log10_popsize, Inf)) %>%
+     mutate(J22 = dm_J22_Elyashiv2) %>%
+     mutate(Ne_N_HK95 = HK95(map_length, U=dm_U)) %>% 
+     mutate(Ne_N_HK95_strongBGS = HK95(map_length, U=10*dm_U)) %>% 
+     # both BGS and RHH
+     mutate(Ne_N_RHH_BGS = RHH_BGS(1, L=map_length, N=10^log10_popsize,
+                                   B=Ne_N_HK95, gamma=dm_gamma, 
+                                   J22=J22)) %>%
+     mutate(Ne_N_RHH_BGS_strongsel = RHH_BGS(1, L=map_length, N=10^log10_popsize,
+                                             B=Ne_N_HK95, gamma=dm_gamma, 
+                                             J22=J22 * 10)) %>%
+
+     mutate(Ne_N_RHH_BGS_strongsel_strongBGS = RHH_BGS(1, L=map_length, 
+                                                       N=10^log10_popsize,
+                                             B=Ne_N_HK95_strongBGS, gamma=dm_gamma, 
+                                             J22=J22 * 10)) %>%
+     # 10-folder greater Nc
+     mutate(Ne_N_RHH_BGS2 = RHH_BGS(1, L=map_length, N=10*10^log10_popsize,
+                                   B=Ne_N_HK95, gamma=dm_gamma, 
+                                   J22=J22)) %>%
+
+     # 100-folder greater Nc
+     mutate(Ne_N_RHH_BGS3 = RHH_BGS(1, L=map_length, N=100*10^log10_popsize,
+                                   B=Ne_N_HK95, gamma=dm_gamma, 
+                                   J22=dm_J22_Elyashiv)) 
+
+
+save(dml, dml_full, file='../data/linked_sel_div_changes.Rdata')
+
+```
+
+
+```
+
+What do the reductions using $N_e = 10^6$ (not $N_c$!) for *Drosophila
+melanogaster* look like under these parameters for *Drosophila melanogaster*,
+under RHH only (no BGS)? 
+
+```{r}
+# rough approximation, with Ne = 1e6
+1-RHH_BGS(1, dm_L, dm_Ne, B=1, gamma=dm_gamma, J22=dm_J22_Elyashiv2)
+```
+
+These strong selection reduction, roughly cutting diversity by 66%, is roughly
+consistent with Wiehe and Stephan and Elyashiv et al.'s classic sweep only
+model (see Figure 6B, CS column). 
+
+ 
+Using census size, what are the percent reductions in *D. melanogaster*?
+
+```{r}
+
+dml_full %>% filter(species == "Drosophila melanogaster") %>% 
+  select(Ne_N_HK95, Ne_N_RHH_BGS) 
+
+```
+
+This is a monumental decrease in diversity... it implies we'd be severely
+underestimating $\pi_0$.
+
+Ok, now what about the full RHH + BGS model, with *D. melanogaster* $N_e =
+10^6$? 
+
+```{r}
+
+1-RHH_BGS(1, dm_L, dm_Ne, B=HK95(U=dm_U, L=dm_L), gamma=dm_gamma, J22=dm_J22_Elyashiv2)
+
+```
+
+84% is surprisingly close to Elyashiv et al.'s Figure 6 value of 77% under
+BGS+CS, give this simple model.
+
+
+A draft plot of the effects, red is RHH, blue is BGS. Ultimately I use a
+different figure, but this one is still interesting.
+
+```{r}
+
+plot(dml$log10_popsize, dml$log10_diversity, pch=19, 
+                  xlim=c(5, 18),
+                  ylim=c(-3, 1))
+
+with(dml, segments(log10_popsize, log10_diversity, 
+                      log10_popsize, log10_RHH_BGS_diversity, 
+                      lty=3, col='red'))
+with(dml, segments(log10_popsize, log10_diversity, 
+                      log10_popsize, log10_HK95_diversity, 
+                      lty=1, col='blue'))
+
+abline(a = log10(4) + -8, b=1)
+abline(a = log10(4) + -10, b=1)
+
+```
+
+## IUCN Red List Analysis
+
+Here's a basic analysis of redlist categories and diversity.
+
+```{r}
+
+drl <- da_dps
+drl$redlist_cat[is.na(drl$redlist_cat)] <- "NA/DD"
+# ordered in terms of endangeredness
+iucn_levels <- c("NA/DD", "LC", "NT", "VU", "EN", "CR")
+drl$redlist_cat[drl$redlist_cat == 'DD'] <- "NA/DD"
+drl$redlist_cat <- factor(drl$redlist_cat, levels=iucn_levels)
+
+drl %>% group_by(redlist_cat) %>% summarize(ntaxa=n()) 
+
+# use all data, but notice some categories have few species
+drl %>% group_by(redlist_cat) %>% summarize(ntaxa=n()) 
+
+f0_div <- lm(log10_diversity ~ log10_popsize, drl)
+f1_div <- lm(log10_diversity ~ redlist_cat + log10_popsize, drl)
+f2_div <- lm(log10_diversity ~ redlist_cat, drl)
+AIC(f0_div, f1_div, f2_div)
+summary(f1_div)
+summary(f2_div)
+
+f0_ps <- lm(log10_popsize ~ redlist_cat, drl)
+summary(f0_ps)
+
+ggplot(drl, aes(redlist_cat, log10_diversity)) + geom_boxplot()
+
+```
+
+Table for paper:
+
+```{r}
+
+cis <- signif(cbind(coef(f1_div), confint(f1_div)), 2)
+xtable(cis)
+
+```
+
+
+
+## Session Info
+
+```{r}
+sessionInfo()
+```
+

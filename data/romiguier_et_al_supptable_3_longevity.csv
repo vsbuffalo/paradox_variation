@@ -1,0 +1,91 @@
+species,longevity_years,notes,source
+Abatus_agassizi,NA,,
+Abatus_cordatus,NA,,
+Allolobophora_chlorotica_L1,1.25,,69
+Allolobophora_chlorotica_L2,1.25,,69
+Allolobophora_chlorotica_L4,1.25,,69
+Aporrectodea_icterica,NA,,
+Aptenodytes_patagonicus,41,,70
+Armadillidium_nasatum,3.42,,71
+Armadillidium_vulgare,3.42,,71
+Artemia_franciscana,4,,72
+Artemia_salina,4,A. franciscana,72
+Artemia_sinica,4,A. franciscana,72
+Artemia_tibetana,4,A. franciscana,72
+Bostrycapulus_aculeatus,NA,,
+Caenorhabditis_brenneri,0.16,C. elegans,53
+Caenorhabditis_sp.10,0.16,C. elegans,53
+Callithrix_jacchus,22.8,,53
+Camponotus_aethiops,26,C. fellah,73
+Camponotus_ligniperdus,26,C. fellah,73
+Carcinus_aestuarii,7,C. maenas,74
+Chelonoidis_nigra,177,,53
+Chlorocebus_aethiops,30.1,,53
+Ciona_intestinalis_A,3,,14
+Ciona_intestinalis_B,3,,14
+Crepidula_fornicata,10,,14
+Crepidula_plana,2,,15
+Culex_hortensis,0.205,C. pipiens,75
+Culex_pipiens,0.205,,75
+Culex_torrentium,0.205,C. pipiens,75
+Cystodytes_dellechiajei_blue,NA,,
+Cystodytes_dellechiajei_purple,NA,,
+Echinocardium_cordatum_B2,10,,36
+Echinocardium_mediterraneum,10,,36
+Emys_orbicularis,120,,53
+Eudyptes_filholi,29,,19
+Eudyptes_moseleyi,29,,19
+Eulemur_coronatus,27,,53
+Eulemur_mongoz,36.2,,53
+Eunicella_cavolinii,100,,14
+Eunicella_verrucosa,100,,14
+Galago_senegalensis,17.1,,76
+Halictus_scabiosae,1,,77
+Hippocampus_guttulatus,7,,61
+Hippocampus_hippocampus,7,H. guttulatus,61
+Hippocampus_kuda,7,H. guttulatus,61
+Homo_sapiens,123,,53
+Leptogorgia_sarmentosa,NA,,
+Lepus_granatensis,18,Lepus timidus,53
+Liocarcinus_depurator,4,,78
+Lineus_lacteus,NA,,
+Lineus_longissimus,NA,,
+Lineus_ruber,NA,,
+Macaca_mulatta,40,,53
+Melitaea_cinxia,1,,79
+Melitaea_didyma,1,,79
+Mellicta_athalia,1,,79
+Mellicta_parthenoides,1,,79
+Messor_barbarus,20,Pogonomyrmex barbatus,80
+Microtus_arvalis,4.8,,53
+Monodelphis_domestica,5.1,,53
+Mus_musculus,4,,53
+Mytilus_californianus,25,,62
+Mytilus_edulis,25,,62
+Mytilus_galloprovincialis,25,,62
+Mytilus_trossulus,25,,62
+Necora_puber,10,,36
+Nycticebus_coucang,25.8,,53
+Ophioderma_longicauda_L1,NA,,
+Ophioderma_longicauda_L3,NA,,
+Ostrea_chilensis,34,O. edulis,81
+Ostrea_edulis,34,,81
+Ostreola_stentina,NA,,
+Pan_troglodytes,59.4,,53
+Parus_caeruleus,14.6,,53
+Pectinaria_koreni_nord,1.42,,82
+Pectinaria_koreni_sud,1.42,,82
+Pheidole_pallidula,15,Pogonomyrmex barbatus,80
+Physa_acuta,1.5,,83
+Physa_gyrina,1.5,P. acuta,83
+Propithecus_coquereli,31,,53
+Reticulitermes_flavipes,30,R. hesperus,80
+Reticulitermes_grassei,30,R. hesperus,80
+Reticulitermes_lucifugus,30,R. hesperus,80
+Sepia_officinalis,2,,84
+Thymelicus_lineola,1,,85
+Thymelicus_sylvestris,1,,85
+Trachemys_scripta,41.3,,53
+Tripylus_abatoides,NA,,
+Tupaia_belangeri,11.1,,53
+Varecia_variegata_variegata,37,,53
