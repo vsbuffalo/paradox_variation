@@ -85,9 +85,23 @@
 \maketitle
 
 
-\begin{abstract} 
+% Neutral theory predicts that genetic diversity increases with population size,
+% yet observed levels of diversity across species vary only two orders of
+% magnitude while population sizes likely vary over several. The causes of this
+% discrepancy, known as Lewontin's Paradox of Variation, remain unknown. Here I
+% revisit Lewontin's Paradox by quantifying the relationship between pairwise
+% diversity and approximate census size for 172 metazoan species. Using
+% phylogenetic comparative methods, I show this relationship is significant
+% accounting for phylogeny, but has high phylogenetic signal and some lineages
+% experience shifts in diversity deep in the past. I find a negative relationship
+% between recombination map length and census size, suggesting abundant species
+% have less recombination and could experience greater reductions in diversity
+% due to linked selection. However, I show that even using strong selection
+% parameter estimates, models of linked selection are unlikely to explain the
+% observed relationship between diversity and census sizes across species.
 
-  Under neutral theory, the level of polymorphism in an equilibrium population
+\begin{abstract} 
+  Under neutral theory, genetic diversity in an equilibrium population
   is expected to increase with population size. However, observed levels of
   diversity across metazoans vary only two orders of magnitude, while census
   population sizes ($N_c$) are expected to vary over several. This unexpectedly
@@ -167,7 +181,8 @@ A resolution of Lewontin's Paradox would involve a mechanistic description and
 quantification of the evolutionary processes that prevent diversity from
 scaling with census sizes across species. This would necessarily connect to the
 broader literature on the empirical relationship between diversity and
-population size \parencite{Frankham1996-yb,Nei1984-zi,Soule1976-he}, and the
+population size
+\parencite{Frankham1996-yb,Nei1984-zi,Soule1976-he,Leroy2021-gy}, and the
 ecological and life history correlates of genetic diversity
 \parencite{Nevo1978-wh,Powell1975-lg,Nevo1984-hp}. Three categories of
 processes stand out as potentially capable of decoupling census sizes from
@@ -259,11 +274,6 @@ Nevertheless, while these diversity correlates are important clues, they do not
 propose a mechanism by which these traits act to constrain diversity within a
 few orders of magnitude. 
 
-% Furthermore, Coop's re-analysis finds no evidence
-% of a remaining correlation between recombination and diversity among the
-% highest recombination windows, as would be expected if these $\pi_0$ estimates
-% were still impacted by linked selection. 
-
 Here, I revisit Lewontin's Paradox by integrating a variety of data sets and
 assessing the predicted reductions in diversity under different selection
 models. Prior surveys of genetic diversity either lacked census population size
@@ -288,7 +298,7 @@ by estimating phylogenetic signal in the diversity census size relationship,
 and investigating how these traits evolve along the phylogeny.
 
 Finally, I explore whether the predicted reductions of diversity under
-background selection and recurrent hitchhiking are sufficiently strong enough
+background selection and recurrent hitchhiking are sufficiently strong 
 to resolve Lewontin's Paradox. These predicted reductions in diversity across
 species are generously estimated using selection strength parameters from
 \emph{Drosophila melanogaster}, a species known to be strongly affected by
@@ -375,9 +385,9 @@ estimates are from three sources: \textcite{Leffler2012-zj},
 predominantly from either synonymous or non-coding DNA (see Methods:
 \Newnameref{sec:methods-diversity}). Overall, an ordinary least squares (OLS)
 relationship on a log-log scale fits the data well (Figure \ref{fig:figure-1}).
-The OLS slope estimate is significant and implies an increase in diversity of
-0.09 differences per basepair for every order of magnitude census size grows
-(95\% confidence interval $[0.08, 0.12]$; see also the OLS fit per-phyla,
+The OLS slope estimate is significant and implies a 0.09 percent increase in
+differences per basepair for every order of magnitude census size grows (95\%
+confidence interval $[0.08, 0.12]$; see also the OLS fit per-phyla,
 Supplementary Figure \ref{suppfig:figure-1-ave}). 
 
 Notably, this relationship has few outliers and is relatively homoscedastic.
@@ -464,7 +474,7 @@ accounting for phylogeny, for the 166 taxa with non-missing data and present in
 the synthetic chronogram. As with the non-phylogenetic regression, this
 relationship was positive and significant (95\% credible interval $0.04,
 0.11$), though somewhat attenuated compared to the OLS estimates (Figure
-\ref{fig:figure-1}B). Since the population size estimates are based on range
+\ref{fig:figure-2}B). Since the population size estimates are based on range
 and body mass, they are essentially a composite trait; fitting phylogenetic
 mixed-effects models separately on body mass and range indicates these have
 significant negative and positive effects, respectively (Supplementary Figure
@@ -514,9 +524,9 @@ constant rate BM, this relationship should be flat. For both diversity and
 population size, node-height tests indicate a significant increase in the rate
 of evolution towards the present (robust regression p-values 0.028 and 0.00070
 respectively; Figure \ref{fig:figure-2}C).  Considering the constituents of the
-population size estimate, range and body mass, separately, range but not body
-mass shows a significant increase (p-value $1.9 \times 10^{-7}$) in rate
-towards the present. 
+population size estimate, range and body mass, separately, the rate of
+evolution of range but not body mass shows a significant increase (p-value $1.9
+\times 10^{-7}$) towards the present. 
 
 Interestingly, the diversity node-height test reveals two rate shifts at deeper
 splits (Figure \ref{fig:figure-2}C, top left) around 570 Mya. These nodes
@@ -565,14 +575,14 @@ using methods that exploit the spatial heterogeneity in recombination and
 functional density across the genome to fit linked selection models that
 incorporate both hitchhiking and background selection
 \parencite{Elyashiv2016-vt,Corbett-Detig2015-gt}. The second difficulty is
-understanding how $R$ varies across taxa, since we lack estimates of critical
-model parameters for most species. Still, I can address a key question: if
-diversity levels were determined by census sizes ($\pi_0 = 4N_c \mu$), are the
-combined effects of background selection and recurrent hitchhiking sufficient
-to reduce diversity to observed levels? Furthermore, does the relationship
-between census size and predicted diversity under linked selection across
-species, $\pi_{BGS+HH} = R \pi_0$, match the observed relationship in Figure
-\ref{fig:figure-1}? 
+understanding of how $R$ varies across taxa, since we lack estimates of
+critical model parameters for most species. Still, I can address a key
+question: if diversity levels were determined by census sizes ($\pi_0 = 4N_c
+\mu$), are the combined effects of background selection and recurrent
+hitchhiking sufficient to reduce diversity to observed levels? Furthermore,
+does the relationship between census size and predicted diversity under linked
+selection across species, $\pi_{BGS+HH} = R \pi_0$, match the observed
+relationship in Figure \ref{fig:figure-1}? 
 
 Since we lack estimates of key linked selection parameters across species, I
 generously parameterize the hitchhiking and BGS models using estimates from
@@ -602,11 +612,11 @@ per generation, and $J$ is the probability a lineage is trapped by sweeps as
 they occur across the genome (c.f. $J_{2,2}$ in equation 15 of
 \cite{Coop2012-cd}). 
 
-Parameterizing the model this way, I then set the key parameters that
-determine the impact of recurrent hitchhiking and background selection
-($\gamma$, $J$, and $U$) to high values estimated from \emph{Drosophila
-melanogaster} by \textcite{Elyashiv2016-vt}. My estimate of
-$\gamma_\text{Dmel}$ based Elyashiv et al. implies $\nu_\text{BP,Dmel} \approx
+Parameterizing the model this way, I then set the key parameters that determine
+the impact of recurrent hitchhiking and background selection ($\gamma$, $J$,
+and $U$) to high values estimated from \emph{Drosophila melanogaster} by
+\textcite{Elyashiv2016-vt}. My estimate of $\gamma_\text{Dmel}$ based Elyashiv
+et al. implies a rate of sweeps per basepair of $\nu_\text{BP,Dmel} \approx
 2.34 \times 10^{-11}$, which is close to other estimates from \emph{D.
 melanogaster} (see Supplementary Figure \ref{suppfig:linked-sel-params}A). The
 rate of deleterious mutations per diploid genome, per generation is
@@ -913,13 +923,13 @@ Lewontin's Paradox shows the extent to which the effective population sizes
 implied by diversity, $\widetilde{N}_e$, diverge from census population sizes.
 However, there are a variety other effective population size estimates
 calculable from different data and summary statistics
-\parencite{Wang2016-mi,Caballero1994-ao,Caballero2020-wm}. These include
-estimators based on the observed decay in linkage disequilibrium or temporal
-estimators that use the variance in allele frequency change. These alternate
-estimators capture summaries of the effective population size on shorter
-timescales than coalescent-based estimators \parencite{Wang2005-wy}, and thus
-could be used to tease out processes that impact the $N_e$-$N_c$ relationship
-in the more recent past. 
+\parencite{Wang2016-mi,Caballero1994-ao,Caballero2020-wm,Galtier2020-fb}. These
+include estimators based on the observed decay in linkage disequilibrium or
+temporal estimators that use the variance in allele frequency change. These
+alternate estimators capture summaries of the effective population size on
+shorter timescales than coalescent-based estimators \parencite{Wang2005-wy},
+and thus could be used to tease out processes that impact the $N_e$-$N_c$
+relationship in the more recent past. 
 
 Temporal $N_e$ estimators already play an important role in understanding
 another summary of the $N_e$-$N_c$ relationship: the ratio
@@ -1163,9 +1173,9 @@ I would like to thank Andy Kern and Peter Ralph for helpful discussions and
 supporting me during this work, and Graham Coop for inspiration and helpful
 feedback during socially distanced nature walks at Yolo Basin. I thank Jessica
 Stapley for kindly providing the recombination map length data, and Yaniv
-Brandvain, Amy Collins, Doc Edge, Tyler Kent, Chuck Langley, Sally Otto, Jeff
-Ross-Ibarra, Aaron Stern, Anastasia Teterina, Michael Turelli, and my
-Kern-Ralph labmates for helpful discussions. Sarah Friedman, Katherine Corn,
+Brandvain, Amy Collins, Doc Edge, Tyler Kent, Chuck Langley, Matt Osmond, Sally
+Otto, Jeff Ross-Ibarra, Aaron Stern, Anastasia Teterina, Michael Turelli, and
+my Kern-Ralph labmates for helpful discussions. Sarah Friedman, Katherine Corn,
 and Josef Uyeda provided very useful advice about phylogenetic comparative
 methods; yet I take full responsibility for any shortcomings of my analysis.  I
 would like to also thank UO librarian Dean Walton for helping me track down
