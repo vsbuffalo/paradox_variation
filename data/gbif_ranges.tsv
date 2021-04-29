@@ -32,7 +32,7 @@ Caenorhabditis elegans	Caenorhabditis elegans	Leffler	TRUE	Caenorhabditis	TRUE	2
 Caenorhabditis remanei	Caenorhabditis remanei	Leffler	TRUE	Caenorhabditis	FALSE	3	-Inf
 Callithrix jacchus	Callithrix jacchus	Leffler	TRUE	Callithrix	TRUE	1026	966535.5153203342
 Canis latrans/lupus	Canis latrans	Leffler	TRUE	Canis	TRUE	30000	13676282.852331135
-Canis latrans/lupus	Canis lupus	Leffler	TRUE	Canis	TRUE	30000	63514902.46829881
+Canis latrans/lupus	Canis lupus	Leffler	TRUE	Canis	TRUE	30000	148373909.9264706
 Capsella grandiflora	Capsella grandiflora	Leffler	TRUE	Capsella	TRUE	207	51903.66685189125
 Capsella rubella	Capsella rubella	Leffler	TRUE	Capsella	TRUE	8660	3233869.9641888705
 Cecidostiba fungosa	Cecidostiba fungosa	Leffler	TRUE	Cecidostiba	TRUE	109	72617.60168997907
@@ -174,7 +174,7 @@ Ananas comosus	Ananas comosus	Stapley	TRUE	Ananas	FALSE	11401	24356515.74182128
 Anas platyrhynchos	Anas platyrhynchos	Stapley	TRUE	Anas	TRUE	30000	18560060.839350823
 Anguilla japonica	Anguilla japonica	Stapley	FALSE	Anguilla	FALSE	5533	10067876.271851877
 Anopheles funestus	Anopheles funestus	Stapley	TRUE	Anopheles	TRUE	2517	479617.1503047994
-Anoplopoma fimbria	Anoplopoma fimbria	Stapley	FALSE	Anoplopoma	FALSE	4211	19887093.9568192
+Anoplopoma fimbria	Anoplopoma fimbria	Stapley	FALSE	Anoplopoma	FALSE	4211	3350522.7552288286
 Apostichopus japonicus	Apostichopus japonicus	Stapley	FALSE	Apostichopus	FALSE	190	717411.3329405262
 Arachis duranensis	Arachis duranensis	Stapley	TRUE	Arachis	TRUE	992	1025883.7721985113
 Arachis hypogaea	Arachis hypogaea	Stapley	TRUE	Arachis	TRUE	30000	64143898.82508784
@@ -474,7 +474,7 @@ Abatus agassizi	Abatus agassizi	Romiguier	FALSE	Abatus	FALSE	72	4302298.53378700
 Abatus cordatus	Abatus cordatus	Romiguier	TRUE	Abatus	TRUE	442	11602.571846746216
 Allolobophora chlorotica	Allolobophora chlorotica	Romiguier	TRUE	Allolobophora	TRUE	3070	3806987.16874359
 Aporrectodea icterica	Aporrectodea icterica	Romiguier	TRUE	Aporrectodea	TRUE	128	657169.6682033325
-Aptenodytes patagonicus	Aptenodytes patagonicus	Romiguier	FALSE	Aptenodytes	FALSE	30000	75633675.37930672
+Aptenodytes patagonicus	Aptenodytes patagonicus	Romiguier	TRUE	Aptenodytes	FALSE	30000	681444.7804142707
 Armadillidium nasatum	Armadillidium nasatum	Romiguier	TRUE	Armadillidium	TRUE	4271	4563057.416761417
 Armadillidium vulgare	Armadillidium vulgare	Romiguier	TRUE	Armadillidium	TRUE	25652	21822882.904560436
 Artemia salina	Artemia salina	Romiguier	TRUE	Artemia	TRUE	313	2909361.9455268686

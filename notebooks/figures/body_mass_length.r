@@ -43,7 +43,7 @@ axis(2, yseq, labels=latex2exp::TeX(sprintf("$10^{%d}$", yseq)),
      cex.axis=0.8, line=0.5)
 legend(-0.8, -2, tools:::toTitleCase(levels(as.factor(d$phylum))), fill=group_cols,
        bty='n', border=0, cex=0.6, ncol=2)
-title(xlab=latex2exp::TeX("mass length (meters)"), line=2.1)
+title(xlab=latex2exp::TeX("body length (meters)"), line=2.1)
 title(ylab=latex2exp::TeX("body mass (grams)"), line=2.3)
 
 dev.off()

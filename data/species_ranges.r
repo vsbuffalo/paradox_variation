@@ -11,6 +11,10 @@ source('../R/range_funcs.r')
 
 #### Load the data in 
 
+# we don't load in Corbett-Detig data, which has ranges though some are off.
+# This is merged in combined_dataset.r. I make one correction here though, to
+# Equus ferus przewalskii.
+
 ## Leffler data
 message('loading Leffler et al data...')
 dl <- read_tsv('./leffler_et_al_2012_updated.tsv')
@@ -93,7 +97,6 @@ message('done.')
 #   user="vsbuffalo", pwd="hidden", email="vsbuffalo@gmail.com")
 
 
-
 # combine in alphas
 DEFAULT_ALPHA <- c(8, 70)
 RANGE_DIR <- 'total_range_plots'
@@ -102,6 +105,8 @@ if (!file.exists(RAW_RANGES)) {
   ### Infer terrestriality
   # filter entries without lat/long and infer terrestriality 
   ranges <- uniq_species_df %>% 
+              #filter(species == 'Anoplopoma fimbria') %>%
+              #filter(species == 'Aptenodytes patagonicus') %>%
               mutate(valid_geo = map_lgl(occs, valid_occurs)) %>%
               filter(valid_geo) %>%
               distinct(species, .keep_all=TRUE) %>%
@@ -115,10 +120,10 @@ if (!file.exists(RAW_RANGES)) {
     mutate(is_terrestrial_fixed =
            pmap_lgl(list(genus, species, is_terrestrial),
                     function(g, s, it) {
-                     case_when(g %in% marine_gnr ~ FALSE,
-                               g %in% terrestrial_gnr ~ TRUE,
-                               s %in% marine_sps ~ FALSE,
-                               s %in% terrestrial_sps ~ TRUE,
+                     case_when((g %in% marine_gnr) || 
+                               (s %in% marine_sps) ~ FALSE,
+                               (g %in% terrestrial_gnr) ||
+                               (s %in% terrestrial_sps) ~ TRUE,
                                TRUE ~ it)
                     })) %>%
     mutate(is_terrestrial_orig = is_terrestrial, 
@@ -127,8 +132,6 @@ if (!file.exists(RAW_RANGES)) {
 
   # how many terrestriality fixes?
   table(ranges$is_terrestrial != ranges$is_terrestrial_orig)
-
-
 
   ### Infer Range
   ranges <- ranges %>%  
@@ -343,6 +346,14 @@ australia_rel_area2 <- 5203 # 2, for the second map in this range map pair
 panaeus_area <- panaeus_rel_area / australia_rel_area2 * australia_area
 ranges_df[ranges_df$species == 'Penaeus monodon', ]$range <- panaeus_area
 
+## Canis lupus
+# the occurrence dataset has a bunch of odd entries. I instead 
+# use the IUCN redlist range maps
+australia_rel_area <- 1632
+canisl_rel_area <- 31281
+canisl_area <- canisl_rel_area  / australia_rel_area * australia_area
+ranges_df[ranges_df$species == 'Canis lupus', ]$range <- canisl_area
+
 
 ## Argopecten irradians -- bay scallop
 # like shrimp, these are coastal and their range is poorly inferred by 
@@ -358,6 +369,24 @@ bahamas_rel_area <- 369
 bahamas_area <- 13880 # km2, wolfram alpha
 argo_area <- argo_rel_area / bahamas_rel_area * bahamas_area
 ranges_df[ranges_df$species == 'Argopecten irradians', ]$range <- argo_area
+
+## Equus ferus przewalskii
+# from: https://ielc.libguides.com/sdzg/factsheets/przewalskishorse/behavior
+# Hustai National Park: 120-2,400 ha (King and Gurnell 2005)
+# Great Gobi B Strictly Protected Area: 150-825 km² (Kaczensky et al. 2008).
+# note that the Corbett-Detig dataset lists this range as 10^7.13, which is around
+# what regular horsies have... and this just seems wrong.
+# 
+# since this is a correction to Corbett Detig's data, which hasn't been 
+# merged in yet, I add this row first.
+stop()
+eqfp <- tibble(key = "Equus ferus przewalskii", 
+               species = "Equus ferus przewalskii",
+               dataset = "Corbett-Detig", is_terrestrial = TRUE, 
+               is_terrestrial_orig = TRUE, n_occ = NA, range = NA)
+ranges_df <- rbind(ranges_df, eqfp)
+geom_mean <- function(x) prod(x)^(1/length(x))
+ranges_df[ranges_df$species == 'Equus ferus przewalskii', ]$range <- geom_mean(0.01 * c(120, 2400)) + geom_mean(c(150, 825))
 
 
 ## Metriaclima zebra, an endemic cichlid

@@ -3,6 +3,7 @@ library(tidyverse)
 terrestriality_fixes <- tribble(~ name, ~ is_terrestrial,
         'Anopheles scanloni', TRUE,
         'Arabidopsis', TRUE,
+        'Aptenodytes', TRUE,
         'Aphanarthrum subglabrum/glabrum', TRUE,
         'Ciona', FALSE, 
         'Caenorhabditis', TRUE,
@@ -77,6 +78,7 @@ terrestriality_fixes <- tribble(~ name, ~ is_terrestrial,
 )
 
 alpha_fixes <- tribble(~name, ~alpha,
+       'Anoplopoma', c(NA, 10),
        'Crassostrea', c(NA, 10),
        'Eunicella', c(NA, 10),
        'Haliotis', c(NA, 10),

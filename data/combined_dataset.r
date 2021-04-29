@@ -48,7 +48,22 @@ dc <- read_tsv('corbett_detig_2015_updated.tsv')  %>%
                # rename the original Corbett-Detig range
                range_cd = range) %>%
         rename(diversity = obs_pi) %>%
+        # 
         select(-range, -kingdom)
+
+
+# Corbett-Detig's data has Dmel as 1.5mm which is 60% of what it should be.
+# This was leading the average length across datasets to be too small, 
+# and in turn leading to a much larger density, 10^9.4 rather than 10^9
+# which is what it is for other species 
+# I correct this here manually, based on Wikipedia's value (REVISIONS)
+dc[dc$species == 'Drosophila melanogaster', ]$size <- 2.5e-3
+
+# Corbett-Detig's data has przewalskii's horse's range as 10^7. These strange
+# little horsies have a range that's more about ~300km² forcing it to be NA
+# here should allow the correction in in species_range.r data to go through
+dc[dc$species == 'Equus ferus przewalskii', ]$log10_range <- NA
+dc[dc$species == 'Equus ferus przewalskii', ]$range_cd <- NA
 
 # Romiguier et al data
 dr <- read_tsv('romiguier_et_al_2014_updated.tsv') %>%
@@ -136,7 +151,7 @@ d$parpath <- case_when(is.na(d$parpath) & d$species %in% parpath ~ TRUE,
                        is.na(d$parpath) & !(d$species %in% parpath) ~ FALSE,
                        TRUE ~ d$parpath)
 
-# not used yet, and not complete
+# list of social insects, for recomb plot
 social <- c("Acromyrmex echinatior",
             "Apis mellifera",
             "Apis cerana",
@@ -154,7 +169,6 @@ d$social <- FALSE
 d$social[d$species %in% social] <- TRUE
 
 stopifnot(nrow(d) == length(unique(d$species)))
-
 
 #### Load in Range Data Estimated from Occurrence Data
 ## Load and clean up range size
@@ -185,10 +199,13 @@ d <- d %>%
          unnest(ranges) %>%
          ungroup() %>%
          rowwise() %>%
+         # this averages the ranges from Corbett-Detig and mine
+         # ignoring NAs
          mutate(range = mean(c(range, range_cd), na.rm=TRUE),
                 range = ifelse(is.nan(range), NA, range)) %>%
          select(-range_cd) 
 stopifnot(nrow(d) == length(unique(d$species)))
+stop()
 
 #### Get Taxonomical Info
 # get the taxonomial datas from taxadb (via Catalog of Life)
@@ -348,16 +365,31 @@ pred_log10_mass <- function(log10_size) {
 # linear models; the final data uses Stan
 
 # Damuth 1987 data
-dd <- read_tsv('./damuth1987.tsv') %>%
-        mutate(log10_mass_g = log10(mass_g), log10_density = log10(density))
+dd <- read_tsv('./damuth1987.tsv') 
+
+# poikilotherms densities are divided by 30
+poikilotherms <- c('pisces', 'reptilian', 'amphibia', "terrestrial arthropods", 
+                   "other terrestrial invertebrates")
+terrestrial_animals <- c("mammals", "amphibia", "reptilian", 
+                         "terrestrial arthropods", "other terrestrial invertebrates")
+dd <- dd %>% mutate(poikilothermic = group %in% poikilotherms) %>%
+       mutate(density = density) %>%
+       mutate(raw_density = density, 
+              density = ifelse(poikilothermic, density / 30, density)) %>%
+        mutate(log10_mass_g = log10(mass_g), log10_density = log10(density)) %>%
+        filter(group %in% terrestrial_animals)
+
 mass_density_fit <- lm(log10_density ~ log10_mass_g, data=dd)
 summary(mass_density_fit)
+predict(mass_density_fit, newdata=data.frame(log10_mass_g=-3.6))
 
 dd_groups <- dd %>% group_by(group) %>% nest() %>% 
                mutate(fit = map(data, ~ lm(log10_density ~ log10_mass_g, data=.))) 
 
 ggplot(dd) + geom_point(aes(log10_mass_g, log10_density, color=group)) + 
-  geom_smooth(mapping=aes(log10_mass_g, log10_density), method='lm')
+  geom_smooth(mapping=aes(log10_mass_g, log10_density), method='lm') +
+  scale_x_continuous(breaks = seq(-5, 5, 2)) + 
+  scale_y_continuous(breaks = seq(-3, 9, 2), limits=c(-3, 9)) 
 
 # save the linear models
 save(size_mass_fit, mass_density_fit, file='size_mass_density_lms.Rdata')

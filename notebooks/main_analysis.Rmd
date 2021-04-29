@@ -276,25 +276,36 @@ prop.table(nspecies)
 
 ```
 
+So, marine species are over represented in my dataset.
 
 Now we do a simple biomass analysis -- back of the envelop type stuff.
 
-```{r}
 
-# https://bionumbers.hms.harvard.edu/bionumber.aspx?&id=107256 
-# 18-23% of human body is carbon; seems reasonable this holds
-# for other animals
+A lot of the sources here are from the Bar-on et al. (2018) study. 
+
+Across arthropods and chordates, Baron-On et al use a wet weight to carbon
+factor equal to 0.15. Description: "we convert wet weight values to carbon mass
+assuming 70% water content and 50% carbon content out of dry weight." 
+
+For molluscs, cnidarians, nematodes, and annelids, they do something slightly
+differently, often basing their conversion on the carbon of a single individual
+(nematode, say). Here I forgo this and just use the conversion factor.
+
+```{r}
 
 # only complete data
 xd <- d %>% filter(is.finite(log10_body_mass))
 
+# https://bionumbers.hms.harvard.edu/bionumber.aspx?&id=107256 
+# 18-23% of human body is carbon; his is close to the Bar-On et al. (2018) 
+# estimate
+prop_carbon <- 0.15 # from Bar-On et al.
 
-
-# in Gt
-prop_carbon <- signif(sqrt(0.18 * 0.23), 1)  # ~ 0.2
 # 1Gt = 1e12 kg
-xd$carbon_mass <- (prop_carbon*(10^xd$pred_log10_body_mass) / 1e3 * 10^xd$log10_popsize) / 1e12
+xd$carbon_mass <- (prop_carbon*(10^xd$pred_log10_body_mass) / 1e3 * # to kg
+                   10^xd$log10_popsize) / 1e12
 
+# take my data set and find the total carbon biomass of species, grouped by phyla
 mass_d <- xd %>% 
   # filter so we don't include NA species in nspecies
   filter(is.finite(carbon_mass), is.finite(log10_popsize)) %>%
@@ -305,7 +316,7 @@ mass_d <- xd %>%
   mutate(total = sum(total_carbon_mass), prop_carbon_mass = total_carbon_mass / total)
 
 # chordates are incredibly over-represented in my data set by biomass
-baron_d <- tribble(~ phylum, ~ bd_mass,
+baron_d <- tribble(~ phylum, ~ bd_mass, 
                    'Arthropoda', 0.2 + 1, # terrestrial + marine
                              # fish + livestock + humans + wild mammals + wild birds
                    'Chordata', 0.7 + 0.1 + 0.06 + 0.007 + 0.002,
@@ -314,14 +325,22 @@ baron_d <- tribble(~ phylum, ~ bd_mass,
                    'Cnidaria', 0.1,
                    'Nematoda', 0.02) %>% 
            mutate(bd_total_biomass = sum(bd_mass), 
-                  bd_prop_mass = bd_mass/bd_total_biomass) %>%
-           left_join(mass_d, by='phylum')  %>%
-           # not we need to reweight the original proportions as some phyla were
-           # dropped
-           mutate(prop_carbon_mass = prop_carbon_mass / sum(prop_carbon_mass))
-           
+                  bd_prop_mass = bd_mass/bd_total_biomass) 
 
-ggplot(baron_d, aes(bd_prop_mass, prop_carbon_mass, color=phylum))  + 
+# merge my carbon masses in with Bar-On et al's
+baron_mine <- baron_d %>%
+           left_join(mass_d, by='phylum')  %>%
+           # note, we need to reweight the original proportions as some phyla were
+           # dropped because they are not in Bar-On's data set (e.g. Porifera, Echinoderms)
+           mutate(prop_carbon_mass = prop_carbon_mass / sum(prop_carbon_mass))
+
+```
+
+How are the proportions?
+
+```{r}
+
+ggplot(baron_mine, aes(bd_prop_mass, prop_carbon_mass, color=phylum))  + 
   geom_point(size=5) + geom_abline(slope=1, intercept=0) + 
   xlab('Bar-On et al. 2018 proportion') + 
   ylab('My proportion')
@@ -329,20 +348,88 @@ ggplot(baron_d, aes(bd_prop_mass, prop_carbon_mass, color=phylum))  +
 ```
 
 Arthropods are under sampled here, and chordates are way over sampled (at least
-by biomass).
+by biomass)!
+
+Let's look at the biomass totals, in my small data set and Bar-On's:
 
 ```{r}
 
-ggplot(baron_d) + 
+ggplot(baron_mine) + 
   geom_point(aes(phylum, total_carbon_mass), size=5) 
 
-ggplot(baron_d) + 
+ggplot(baron_mine) + 
   geom_point(aes(phylum, bd_mass), size=5) 
 
-baron_d <- baron_d %>% mutate(prop_bd_biomass = total_carbon_mass / bd_mass) 
+```
 
-baron_d %>%
-  select(phylum, prop_bd_biomass)
+This shows the extent to which arthropods are under represented in my dataset
+and chordates are overrepresented.
+
+What fraction of the total biomasses in Bar-On are present in my dataset?
+
+```{r}
+baron_mine <- baron_mine %>% mutate(prop_bd_biomass = total_carbon_mass / bd_mass) 
+
+baron_mine %>% select(phylum, prop_bd_biomass)
+```
+
+4% of chordate biomass in my dataset seems high -- let's look at it. 
+
+First the top mammalian species by biomass:
+
+```{r}
+
+xd %>% filter(class == 'Mammalia') %>% arrange(desc(carbon_mass)) %>% 
+  select(species, carbon_mass) %>% 
+  as.data.frame()
+
+```
+
+Baleen whales have a carbon mass of `0.0114e9 / 1e6 = 11.4` megatons! No way.
+
+Actually this isn't wrong --- "In terms of their size and potential to store
+carbon for years or decades, marine vertebrates are the only organisms in the
+ocean comparable to large trees". This is from [this
+paper](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0012444)
+which says ~10 megatons of carbon biomass is what we'd expect, pre-whaling.
+
+```{r}
+
+mamd <- xd %>% filter(class == 'Mammalia') 
+mamd$species  <- factor(mamd$species,
+                        mamd$species[order(mamd$carbon_mass, decreasing=TRUE)], 
+                        ordered=TRUE)
+igno <- c("Balaenoptera bonaerensis", "Homo sapiens", "Eschrichtius robustus")
+mamd %>% arrange(desc(carbon_mass)) %>% pull(species) 
+
+mamd %>% 
+  filter(!(species %in% igno)) %>%
+  ggplot(aes(species, carbon_mass))  + geom_point() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+
+```
+
+```{r}
+
+xd %>% filter(species == "Aptenodytes patagonicus") %>% select(species, log10_popsize)
+
+xd %>% filter(genus == "Equus") %>% select(species, log10_popsize, log10_range)
+
+```
+
+
+```{r}
+
+
+"Homo sapiens"
+"Bos taurus"
+"Ovis aries"
+"Capra hircus"
+
+```
+
+
+```{r}
 
 # using the Bar-On weights
 baron_d <- baron_d %>% 

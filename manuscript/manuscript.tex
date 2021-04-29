@@ -812,14 +812,18 @@ high-$N_c$ taxa. In the extreme scenario in which only one subpopulation was
 sampled, $F_\text{ST}$ would need to be close to one for population subdivision
 alone to sufficiently reduce the total population heterozygosity to explain the
 orders-of-magnitude shortfall between predicted and observed diversity levels.
-Yet, across-taxa surveys indicate that $F_\text{ST}$ is almost never this high
-within species \parencite{Roux2016-lm}.  Still, future work could quantify the
-extent to which spatial processes contribute to Lewontin's Paradox. For
-example, high-$N_c$ taxa usually experience range expansions, likely with
-repeated founder effects and local extinction/recolonization dynamics that
-doubtlessly depress diversity. In particular, with the appropriate data, one
-could estimate the empirical relationship between dispersal distance, range
-size, and coalescent effective population size across taxa.
+This is because the equation for $F_{ST}$ can be rearranged such that $H_S =
+(1-F_{ST})H_T$, where $H_S$ and $H_S$ are the subpopulation and total
+population heterozygosities; if $H_T = 4N_c\mu$, then only $F_{ST} \approx 1$
+can reduce $H_S$ several orders of magnitude. Yet, across-taxa surveys indicate
+that $F_\text{ST}$ is almost never this high within species
+\parencite{Roux2016-lm}.  Still, future work could quantify the extent to which
+spatial processes contribute to Lewontin's Paradox. For example, high-$N_c$
+taxa usually experience range expansions, likely with repeated founder effects
+and local extinction/recolonization dynamics that doubtlessly depress
+diversity. In particular, with the appropriate data, one could estimate the
+empirical relationship between dispersal distance, range size, and coalescent
+effective population size across taxa.
 
 In this study, I have focused entirely on assessing the role of linked
 selection, rather than demography, in reducing diversity across taxa. In
@@ -1174,13 +1178,13 @@ supporting me during this work, and Graham Coop for inspiration and helpful
 feedback during socially distanced nature walks at Yolo Basin. I thank Jessica
 Stapley for kindly providing the recombination map length data, and Yaniv
 Brandvain, Amy Collins, Doc Edge, Tyler Kent, Chuck Langley, Matt Osmond, Sally
-Otto, Jeff Ross-Ibarra, Aaron Stern, Anastasia Teterina, Michael Turelli, and
-my Kern-Ralph labmates for helpful discussions. Sarah Friedman, Katherine Corn,
-and Josef Uyeda provided very useful advice about phylogenetic comparative
-methods; yet I take full responsibility for any shortcomings of my analysis.  I
-would like to also thank UO librarian Dean Walton for helping me track down
-some rather difficult to find older papers. This work was supported by an NIH
-Grant (1R01GM117241) awarded to Andrew Kern.
+Otto, Jeff Ross-Ibarra, Aaron Stern, Anastasia Teterina, Michael Turelli,
+Margot Wood, and my Kern-Ralph labmates for helpful discussions. Sarah
+Friedman, Katherine Corn, and Josef Uyeda provided very useful advice about
+phylogenetic comparative methods; yet I take full responsibility for any
+shortcomings of my analysis.  I would like to also thank UO librarian Dean
+Walton for helping me track down some rather difficult to find older papers.
+This work was supported by an NIH Grant (1R01GM117241) awarded to Andrew Kern.
 
 \section*{Appendix}
 
@@ -1397,7 +1401,11 @@ alleles across the genome under mutation-selection balance
 \setcounter{figure}{0}
 \renewcommand{\thefigure}{S\arabic{figure}}
 
-\section*{Supplementary Table and Figures}
+\section*{Supplementary Information}
+
+\section{Population Size Validation}
+
+
 
 \section{Diversity and IUCN Red List Status}
 \begin{table}[ht]
