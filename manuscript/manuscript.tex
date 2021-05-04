@@ -1405,7 +1405,22 @@ alleles across the genome under mutation-selection balance
 
 \section{Population Size Validation}
 
+\subsection{Biomass Analysis}
 
+
+
+
+If we have $T$ species, their biomass is $B = \sum_{i=1}^T N_i M_i$ where $N_i$
+is their census size and $M_i$ is their wet body mass. In my dataset, I
+approximate $N_i$ as the product of a species $i$'s range $R_i$ and their
+predicted population density from wet body mass $D_i = \beta_0 + \beta_1 M_i$.
+The biomass in my sample, $B'$ is the sum above with some weights $w_i \in \{0,
+1\}$; we can write:
+
+\begin{align}
+  B' &= \sum_{i=1}^T w_i N_i M_i \\
+    &= \sum_{i=1}^T w_i R_i (\beta_0 + \beta_1 M_i ) M_i \\
+\end{align}
 
 \section{Diversity and IUCN Red List Status}
 \begin{table}[ht]

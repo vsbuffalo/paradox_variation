@@ -205,7 +205,6 @@ d <- d %>%
                 range = ifelse(is.nan(range), NA, range)) %>%
          select(-range_cd) 
 stopifnot(nrow(d) == length(unique(d$species)))
-stop()
 
 #### Get Taxonomical Info
 # get the taxonomial datas from taxadb (via Catalog of Life)

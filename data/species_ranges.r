@@ -379,10 +379,10 @@ ranges_df[ranges_df$species == 'Argopecten irradians', ]$range <- argo_area
 # 
 # since this is a correction to Corbett Detig's data, which hasn't been 
 # merged in yet, I add this row first.
-stop()
 eqfp <- tibble(key = "Equus ferus przewalskii", 
                species = "Equus ferus przewalskii",
                dataset = "Corbett-Detig", is_terrestrial = TRUE, 
+               genus="Equus", 
                is_terrestrial_orig = TRUE, n_occ = NA, range = NA)
 ranges_df <- rbind(ranges_df, eqfp)
 geom_mean <- function(x) prod(x)^(1/length(x))

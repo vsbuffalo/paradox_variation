@@ -265,18 +265,89 @@ What proportion are terrestrial?
 
 prop.table(table(d$is_terrestrial))
 
-```
-
-Based on the predictions of Mora et al. 2011
-
-```{r}
-
 nspecies <- c(terrestrial= 7.770e6, marine=2.15e5)
 prop.table(nspecies)
 
 ```
 
-So, marine species are over represented in my dataset.
+Number of species is based on the predictions of Mora et al. 2011. So, marine
+species are over represented in my dataset.
+
+
+This study doesn't have per-class or phylum data, so I build a quick dataset
+here from a few sources:
+
+```{r}
+
+# sources, 
+# https://www.environment.gov.au/system/files/pages/2ee3f4a1-f130-465b-9c7a-79373680a067/files/nlsaw-2nd-complete.pdf
+nsd <- tribble(~ class, ~ total_species, 
+               "Echinoidea", 940,
+               "Holothuroidea", 1430,
+               "Insecta", 1e6,
+               "Aves",  9990,
+               "Mammalia", 5487,
+               "Clitellata", 8e3, # wikipedia
+               "Amphibia", 6515,
+               "Demospongiae", 8800, # wikipedia
+               "Teleostei", 30e3, # wikipedia
+               "Bivalvia", 10e3,  # https://ucmp.berkeley.edu/taxa/inverts/mollusca/bivalvia.php
+               "Malacostraca", 40e3, # wikipedia
+               "Branchiopoda", 800, # animaldiversity.org
+               "Gastropoda", prod(c(40e3, 100e3))^(1/2), # https://ucmp.berkeley.edu/taxa/inverts/mollusca/gastropoda.php
+               "Chromadorea", 2124, # ITIS
+               "Reptilia", 8734,
+               "Ascidiacea", 2300, # wikipedia
+               "Anthozoa", 6e3, # wikipedia
+               "Euchelicerata", 77000, # wikipedia
+               "Holostei", 8, # wikipedia
+               "Anopla", 600, # wikipedia
+               "Arachnida", 102248,
+               "Ophiuroidea",  2064, # https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0031940#
+               "Polychaeta", 10000, # https://animaldiversity.org/accounts/Polychaeta/
+               "Cephalopoda", 800, # https://ucmp.berkeley.edu/taxa/inverts/mollusca/cephalopoda.php
+             "Maxillopoda", 14e3 # https://www.sciencedirect.com/topics/agricultural-and-biological-sciences/maxillopoda
+)
+
+```
+
+Now, compare to the number of species by class/phylum in my data set:
+
+```{r}
+
+# phyla / class mapping 
+phyla_class <- dt_dps %>% select(phylum, class) %>% group_by(phylum, class) %>% 
+  distinct()
+
+nsd %>% 
+  dt_dps %>% 
+  select(phylum, species) %>% group_by(phylum)  
+
+# by phyla
+dnsp_phyla <- dt_dps %>% 
+  filter(is.finite(log10_popsize), is.finite(log10_body_mass_pred)) %>%
+  select(phylum, species) %>% group_by(phylum) %>% 
+               summarize(nspecies=n()) 
+
+# by class
+dnsp_class <- dt_dps %>% 
+  filter(is.finite(log10_popsize), is.finite(log10_body_mass_pred)) %>%
+  select(class, species) %>% group_by(class) %>% 
+               summarize(nspecies=n())
+
+dnsp_class %>%
+  ggplot(aes(class, log10(frac), size=log10(total_species))) + geom_point() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+
+By phylum:
+
+```{r}
+
+dnsp_phyla %>%
+  ggplot(aes(phylum, log10(frac), size=log10(total_species))) + geom_point() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
 
 Now we do a simple biomass analysis -- back of the envelop type stuff.
 
@@ -294,7 +365,7 @@ differently, often basing their conversion on the carbon of a single individual
 ```{r}
 
 # only complete data
-xd <- d %>% filter(is.finite(log10_body_mass))
+xd <- dt_dps 
 
 # https://bionumbers.hms.harvard.edu/bionumber.aspx?&id=107256 
 # 18-23% of human body is carbon; his is close to the Bar-On et al. (2018) 
@@ -302,7 +373,7 @@ xd <- d %>% filter(is.finite(log10_body_mass))
 prop_carbon <- 0.15 # from Bar-On et al.
 
 # 1Gt = 1e12 kg
-xd$carbon_mass <- (prop_carbon*(10^xd$pred_log10_body_mass) / 1e3 * # to kg
+xd$carbon_mass <- (prop_carbon*(10^xd$log10_body_mass_pred) / 1e3 * # to kg
                    10^xd$log10_popsize) / 1e12
 
 # take my data set and find the total carbon biomass of species, grouped by phyla
@@ -333,6 +404,13 @@ baron_mine <- baron_d %>%
            # note, we need to reweight the original proportions as some phyla were
            # dropped because they are not in Bar-On's data set (e.g. Porifera, Echinoderms)
            mutate(prop_carbon_mass = prop_carbon_mass / sum(prop_carbon_mass))
+
+
+baron_mine %>% left_join(dnsp_phyla, by='phylum')  %>% select(nspecies.x, nspecies.y)
+  mutate(a=signif(total_carbon_mass / frac, 2)) %>% 
+  select(-bd_total_biomass) %>%
+  select(-total_log10_popsize, -nspecies.y) %>% as.data.frame
+
 
 ```
 
@@ -368,9 +446,11 @@ and chordates are overrepresented.
 What fraction of the total biomasses in Bar-On are present in my dataset?
 
 ```{r}
+
 baron_mine <- baron_mine %>% mutate(prop_bd_biomass = total_carbon_mass / bd_mass) 
 
 baron_mine %>% select(phylum, prop_bd_biomass)
+
 ```
 
 4% of chordate biomass in my dataset seems high -- let's look at it. 
@@ -399,7 +479,8 @@ mamd <- xd %>% filter(class == 'Mammalia')
 mamd$species  <- factor(mamd$species,
                         mamd$species[order(mamd$carbon_mass, decreasing=TRUE)], 
                         ordered=TRUE)
-igno <- c("Balaenoptera bonaerensis", "Homo sapiens", "Eschrichtius robustus")
+#igno <- c("Balaenoptera bonaerensis", "Homo sapiens", "Eschrichtius robustus")
+igno <- c()
 mamd %>% arrange(desc(carbon_mass)) %>% pull(species) 
 
 mamd %>% 
@@ -409,34 +490,36 @@ mamd %>%
 
 ```
 
-```{r}
+This seems reasonable... pre-whaling whales, humans, and their domesticates
+dominate. Wolves seem high, but this is a macro-ecological based approach that
+doesn't reflect hunting to low densities.
 
-xd %>% filter(species == "Aptenodytes patagonicus") %>% select(species, log10_popsize)
-
-xd %>% filter(genus == "Equus") %>% select(species, log10_popsize, log10_range)
-
-```
-
+Let's look at some random species:
 
 ```{r}
 
+of_interest = c("Aptenodytes patagonicus", "Equus caballus", "Equus ferus
+                przewalskii", "Homo sapiens", "Bos taurus", "Ovis aries", "Capra
+                hircus", "Canis lupus")
 
-"Homo sapiens"
-"Bos taurus"
-"Ovis aries"
-"Capra hircus"
+xd %>% filter(species %in% of_interest) %>% select(species, log10_popsize, log10_range)
 
 ```
+
+Ok, now let's look at total biomass. Since I have drastically different phylum
+represented here in my taxa sample than on earth, we need to reweight things.
+
 
 
 ```{r}
 
 # using the Bar-On weights
-baron_d <- baron_d %>% 
+# prop_carbon_mass is prop in my dataset
+baron_mine <- baron_mine %>% 
               mutate(reweight = bd_prop_mass / prop_carbon_mass) %>%
               mutate(reweighted_total_carbon_mass = reweight * total_carbon_mass) 
 
-total_sample_carbon_mass <- baron_d %>% pull(reweighted_total_carbon_mass) %>% sum()
+total_sample_carbon_mass <- baron_mine %>% pull(reweighted_total_carbon_mass) %>% sum()
 
 # total species here
 n <- nrow(xd)

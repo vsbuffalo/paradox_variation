@@ -222,7 +222,7 @@ taxon_fixes <- list(
      list(species="Kryptolebias marmoratus",
           kingdom='Animalia',
           phylum='Chordata',
-          class='Actinopterygii',
+          class='Teleostei',
           order='Cyprinodontiformes',
           family='Rivulidae'),
 
