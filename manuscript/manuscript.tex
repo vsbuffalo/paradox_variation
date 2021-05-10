@@ -3,6 +3,7 @@
 \RequirePackage[font=small,labelfont=bf]{caption}
 \RequirePackage{amsmath,amssymb,amsthm}
 \RequirePackage{mathtools}
+\RequirePackage{tabularx}
 \RequirePackage{graphicx}
 \RequirePackage[normalem]{ulem}
 \RequirePackage[hidelinks]{hyperref}
@@ -1405,22 +1406,49 @@ alleles across the genome under mutation-selection balance
 
 \section{Population Size Validation}
 
-\subsection{Biomass Analysis}
+The approximate census sizes I have estimated here
+
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[]{figures/species_counts.pdf}
+
+  \caption{}
+
+  \label{suppfig:species_counts}
+\end{figure}
+
+\begin{table}[ht]
+  \resizebox{\textwidth}{!}{%
+\centering
+\begin{tabular}{lr|rr|rrrr|r}
+  &  & \multicolumn{2}{c}{\bf Bar-On et al.}  & \multicolumn{4}{c}{\bf Present study}  &  \\
+  phylum & total species ($T$) & biomass ($B$) & prop. biomass & biomass ($b$) &  prop. biomass & num. species ($n$) &prop. total species ($f = \nicefrac{n}{T}$) & factor ($\nicefrac{b}{f B}$) \\
+  \hline
+  Arthropoda & $1.26 \times 10^{6}$ & 1.20 & 0.4635 & $2.77 \times 10^{-4}$ & 0.0100 &  68 & $5.41 \times 10^{-5}$ & 4.26 \\
+  Chordata & $5.41 \times 10^{4}$ & 0.87 & 0.3357 & $2.68 \times 10^{-2}$ & 0.9720 &  68 & $1.26 \times 10^{-3}$ & 24.50 \\
+  Annelida & $1.70 \times 10^{4}$ & 0.20 & 0.0772 & $1.24 \times 10^{-5}$ & 0.0005 &   3 & $1.76 \times 10^{-4}$ & 0.35 \\
+  Mollusca & $9.54 \times 10^{4}$ & 0.20 & 0.0772 & $4.47 \times 10^{-4}$ & 0.0162 &  13 & $1.36 \times 10^{-4}$ & 16.40 \\
+  Cnidaria & $1.60 \times 10^{4}$ & 0.10 & 0.0386 & $3.21 \times 10^{-5}$ & 0.0012 &   2 & $1.25 \times 10^{-4}$ & 2.57 \\
+  Nematoda & $2.50 \times 10^{4}$ & 0.02 & 0.0077 & $4.00 \times 10^{-6}$ & 0.0001 &   1 & $4.00 \times 10^{-5}$ & 5.00 \\
+\end{tabular}}
+
+  \caption{How the total carbon biomass estimates by phylum from
+    \textcite{Bar-On2018-kc} compare to the implied biomass estimates from this
+    study. All biomass estimates are carbon biomass, and the proportions are of
+    total biomass with respect to the study. The proportion of biomass in this
+    study compared to the Bar-On et al. estimates \textcite{Bar-On2018-kc}
+    indicates chordates are over-represented and arthropods are
+    under-represented in the present study. Total species by phylum estimates
+  are from
+\textcite{Reaka-Kudla1996-fe,Nicol1969-qx,Zhang2013-zc,Chapman2009-fw}. The
+ratio column is the ratio of total biomass implied by the $N_c$ estimates of
+each species in a phylum to the actual biomass of that phylum.}
+
+\end{table}
 
 
 
-
-If we have $T$ species, their biomass is $B = \sum_{i=1}^T N_i M_i$ where $N_i$
-is their census size and $M_i$ is their wet body mass. In my dataset, I
-approximate $N_i$ as the product of a species $i$'s range $R_i$ and their
-predicted population density from wet body mass $D_i = \beta_0 + \beta_1 M_i$.
-The biomass in my sample, $B'$ is the sum above with some weights $w_i \in \{0,
-1\}$; we can write:
-
-\begin{align}
-  B' &= \sum_{i=1}^T w_i N_i M_i \\
-    &= \sum_{i=1}^T w_i R_i (\beta_0 + \beta_1 M_i ) M_i \\
-\end{align}
 
 \section{Diversity and IUCN Red List Status}
 \begin{table}[ht]

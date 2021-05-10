@@ -6,6 +6,7 @@ library(readxl)
 library(igraph)
 library(units)
 
+geomean <- function(x) prod(x)^(1/length(x))
 source('../R/range_funcs.r')
 
 
@@ -178,10 +179,15 @@ ranges_df <- ranges %>% select(-occs, -taxon_key, -valid_geo) %>%
                select(-range_area)
 
 ## Manual fixes
+# to ensure we are assining *over*, or correcting a value, 
+# not creating a new entry, we use this
+is_entry <- function(species) stopifnot(any(ranges_df$species == species))
+
 # Human range size is just wrong. Occurrences weren't logged everywhere.
 earth_land_area <- 510.1e6 # km^2
 antartica_land_area <- 13.21e6 # km^2
 human_range <- earth_land_area - antartica_land_area
+is_entry('Homo sapiens')
 ranges_df[ranges_df$species == 'Homo sapiens', ]$range <- human_range
 
 # Nasonia vitripennis 
@@ -189,6 +195,7 @@ ranges_df[ranges_df$species == 'Homo sapiens', ]$range <- human_range
 us_land_area <- 9.834e6 # km^2
 europe_land_area <- 10.18e6  # km^2
 nv_range <- us_land_area + europe_land_area
+is_entry('Nasonia vitripennis')
 ranges_df[ranges_df$species == 'Nasonia vitripennis', ]$range <- nv_range
 
 # Caenorhabditis
@@ -196,6 +203,7 @@ ranges_df[ranges_df$species == 'Nasonia vitripennis', ]$range <- nv_range
 # based on Frezel and Felix (2015)
 western_us <- 863400 # km^2 
 celegans_range <- western_us + europe_land_area
+is_entry('Caenorhabditis elegans')
 ranges_df[ranges_df$species == 'Caenorhabditis elegans', ]$range <- celegans_range
 
 # Pinus balfouriana
@@ -203,6 +211,7 @@ ranges_df[ranges_df$species == 'Caenorhabditis elegans', ]$range <- celegans_ran
 # https://en.wikipedia.org/wiki/Pinus_balfouriana#/media/File:Pinus_balfouriana_range_map_1.png
 ca_area <- 423971 # km^2
 pinus_bal_sel <- (174016 - 172459) / 174016 
+is_entry('Pinus balfouriana')
 ranges_df[ranges_df$species == 'Pinus balfouriana', ]$range <- ca_area* pinus_bal_sel
 
 # Pinus_massoniana
@@ -211,6 +220,7 @@ korea_rel_area <- 9758
 pinus_mas_rel_area <- 62666
 korea_area <- 100210 + 120540
 pinus_mas_area <- korea_area * pinus_mas_rel_area / korea_rel_area
+is_entry('Pinus massoniana')
 ranges_df[ranges_df$species == 'Pinus massoniana', ]$range <- pinus_mas_area
 
 # Pinus pinaster
@@ -218,6 +228,7 @@ pinus_pins_rel_area <- 20880
 germany_rel_area <- 101984
 germany_area <- 357000 # km^2
 pinus_pins_area <- pinus_pins_rel_area / germany_rel_area * germany_area
+is_entry('Pinus pinaster')
 ranges_df[ranges_df$species == 'Pinus pinaster', ]$range <- pinus_pins_area
 
 # Crassostrea gigas's distribution is coastal, which alpha hull 
@@ -227,6 +238,7 @@ crass_rel_area <- 15909
 australia_rel_area <- 3429
 australia_area <- 7.741e6
 crass_range <- crass_rel_area / australia_rel_area * australia_area
+is_entry('Crassostrea gigas')
 ranges_df[ranges_df$species == 'Crassostrea gigas', ]$range <- crass_range
 
 # Cystodytes dellechiajei's automated range is way off. 
@@ -237,6 +249,7 @@ ranges_df[ranges_df$species == 'Crassostrea gigas', ]$range <- crass_range
 cyst_rel_area <- 9538 
 australia_rel_area <- 4094
 cyst_range <- cyst_rel_area / australia_rel_area * australia_area
+is_entry('Cystodytes dellechiajei')
 ranges_df[ranges_df$species == 'Cystodytes dellechiajei', ]$range <- cyst_range
 
 
@@ -246,6 +259,7 @@ ranges_df[ranges_df$species == 'Cystodytes dellechiajei', ]$range <- cyst_range
 ciona_i_rel_area <- 2442
 australia_rel_area <- 4139
 ciona_i_range <- ciona_i_rel_area / australia_rel_area * australia_area
+is_entry('Ciona intestinalis')
 ranges_df[ranges_df$species == 'Ciona intestinalis', ]$range <- ciona_i_range
 
 # Hippocampus Kuda is off beacuse it's coastal
@@ -259,10 +273,12 @@ ranges_df[ranges_df$species == 'Ciona intestinalis', ]$range <- ciona_i_range
 hk_rel_area <- 3644
 australia_rel_area <- 4147  # roughly same map source as above
 hk_range <- hk_rel_area / australia_rel_area * australia_area
+is_entry('Hippocampus kuda')
 ranges_df[ranges_df$species == 'Hippocampus kuda', ]$range <- hk_range
 
 
 # from https://www.iucnredlist.org/species/2815/123789863
+is_entry('Bison bison')
 ranges_df[ranges_df$species == 'Bison bison', ]$range <- 143253
 
 # Some ranges were very poorly inferred, due mostly do low 
@@ -285,6 +301,7 @@ grivet_rel_area <- 1787
 saudia_arabia_rel_area <- 3136
 saudia_arabia_area <- 1.961e6 # km^2 -- wolfram alpha
 grivet_range <- grivet_rel_area / saudia_arabia_rel_area * saudia_arabia_area
+is_entry('Chlorocebus aethiops')
 ranges_df[ranges_df$species == 'Chlorocebus aethiops', ]$range <- grivet_range 
 
 
@@ -296,6 +313,7 @@ common_marmoset_rel_area <- 1630
 brazil_rel_area <- 12730 + common_marmoset_rel_area
 brazil_area <- 8.515e6 # km^2 wolfram alpha
 common_marmoset_area <- common_marmoset_rel_area / brazil_rel_area * brazil_area 
+is_entry('Callithrix jacchus')
 ranges_df[ranges_df$species == 'Callithrix jacchus', ]$range <- common_marmoset_area
 
 
@@ -307,9 +325,24 @@ ranges_df[ranges_df$species == 'Callithrix jacchus', ]$range <- common_marmoset_
 # https://www.iucnredlist.org/species/121097935/123797627#population
 # 
 # I use the data on that page, from Wich et al. (2016)
+is_entry('Pongo abelii')
 ranges_df[ranges_df$species == 'Pongo abelii', ]$range <- 16775 # km^2
 # https://www.iucnredlist.org/species/17975/123809220#text-fields
+is_entry('Pongo pygmaeus')
 ranges_df[ranges_df$species == 'Pongo pygmaeus', ]$range <- 97716 #km^2
+
+
+## Termites
+# the occurrence data is bad for these two species. Works well for flavipes
+#https://www.researchgate.net/figure/Geographic-distribution-of-Reticulitermes-species-Isoptera-Rhinotermitidae-in-western_fig1_226108638
+is_entry('Reticulitermes grassei')
+is_entry('Reticulitermes lucifugus')
+ret_grassei_rel <- 24005
+ret_lucif_rel <- 10064
+austria_area <- 32386
+austria_rel_area <- 4385
+ranges_df[ranges_df$species == 'Reticulitermes grassei', ]$range <- ret_grassei_rel / austria_rel_area * austria_area
+ranges_df[ranges_df$species == 'Reticulitermes lucifugus', ]$range <- log10(ret_lucif_rel / austria_rel_area * austria_area)
 
 
 ## Daphnia
@@ -333,17 +366,20 @@ ranges_df[ranges_df$genus == 'Daphnia', ]$range  <- PERCENT_LAKE * daphnia_range
 australia_rel_area <- 5307
 mars_rel_area <- 3102
 mars_area <- mars_rel_area  / australia_rel_area * australia_area
+is_entry('Marsupenaeus japonicus')
 ranges_df[ranges_df$species == 'Marsupenaeus japonicus', ]$range <- mars_area
 
 # second image in the range map pair
 lito_rel_area <- 6638
 australia_rel_area2 <- 5203 # 2, for the second map in this range map pair
 lito_area <- lito_rel_area / australia_rel_area2 * australia_area
+is_entry('Litopenaeus vannamei')
 ranges_df[ranges_df$species == 'Litopenaeus vannamei', ]$range <- lito_area
 
 panaeus_rel_area <- 7398
 australia_rel_area2 <- 5203 # 2, for the second map in this range map pair
 panaeus_area <- panaeus_rel_area / australia_rel_area2 * australia_area
+is_entry('Penaeus monodon')
 ranges_df[ranges_df$species == 'Penaeus monodon', ]$range <- panaeus_area
 
 ## Canis lupus
@@ -352,6 +388,7 @@ ranges_df[ranges_df$species == 'Penaeus monodon', ]$range <- panaeus_area
 australia_rel_area <- 1632
 canisl_rel_area <- 31281
 canisl_area <- canisl_rel_area  / australia_rel_area * australia_area
+is_entry('Canis lupus')
 ranges_df[ranges_df$species == 'Canis lupus', ]$range <- canisl_area
 
 
@@ -368,7 +405,26 @@ argo_rel_area <- 6864
 bahamas_rel_area <- 369
 bahamas_area <- 13880 # km2, wolfram alpha
 argo_area <- argo_rel_area / bahamas_rel_area * bahamas_area
+is_entry('Argopecten irradians')
 ranges_df[ranges_df$species == 'Argopecten irradians', ]$range <- argo_area
+
+## bird range fixes
+# Aquila clanga/pomarina -- from http://datazone.birdlife.org/species/factsheet/lesser-spotted-eagle-clanga-pomarina -- geometric mean of both species, since their diversity data is averaged
+is_entry('Aquila clanga')
+ranges_df[ranges_df$species == 'Aquila clanga', ]$range <- 5340000
+is_entry('Aquila pomarina')
+ranges_df[ranges_df$species == 'Aquila pomarina', ]$range <- 18100000
+
+# not a huge difference, but I'll use the birdlife value
+is_entry('Ficedula albicollis')
+ranges_df[ranges_df$species == 'Ficedula albicollis', ]$range <- 4430000
+# this range is muuuch smaller according to birdlife.org
+is_entry('Taeniopygia guttata')
+ranges_df[ranges_df$species == 'Taeniopygia guttata', ]$range <- 308000
+# again, not a huge difference but I'll use the birdlife.org values
+is_entry('Zonotrichia albicollis')
+ranges_df[ranges_df$species == 'Zonotrichia albicollis', ]$range <- 8040000
+
 
 ## Equus ferus przewalskii
 # from: https://ielc.libguides.com/sdzg/factsheets/przewalskishorse/behavior
@@ -385,19 +441,21 @@ eqfp <- tibble(key = "Equus ferus przewalskii",
                genus="Equus", 
                is_terrestrial_orig = TRUE, n_occ = NA, range = NA)
 ranges_df <- rbind(ranges_df, eqfp)
-geom_mean <- function(x) prod(x)^(1/length(x))
-ranges_df[ranges_df$species == 'Equus ferus przewalskii', ]$range <- geom_mean(0.01 * c(120, 2400)) + geom_mean(c(150, 825))
+is_entry('Equus ferus przewalskii')
+ranges_df[ranges_df$species == 'Equus ferus przewalskii', ]$range <- geomean(0.01 * c(120, 2400)) + geomean(c(150, 825))
 
 
 ## Metriaclima zebra, an endemic cichlid
 # Issue here is it's endemc in Lake Malawi, with few occurrences logged.
 # I just put the whole Lake Malawi area
 lake_malawi_area <- 29600 # km2
+is_entry('Metriaclima zebra')
 ranges_df[ranges_df$species == 'Metriaclima zebra', ]$range <- lake_malawi_area
 
 ## Fenneropenaeus chinensis, Chinese white shrimp
 # this is an obvoius outlier in the data, and has too few occurrences to
 # accurately infer the range of
+is_entry('Fenneropenaeus chinensis')
 ranges_df[ranges_df$species == 'Fenneropenaeus chinensis', ]$range <- NA
 
 # Let's fix the Drosophilids. 

@@ -279,8 +279,12 @@ here from a few sources:
 
 ```{r}
 
-# sources, 
+# main sources:
 # https://www.environment.gov.au/system/files/pages/2ee3f4a1-f130-465b-9c7a-79373680a067/files/nlsaw-2nd-complete.pdf
+# this is for the classes *in my dataset*
+
+geomean <- function(x) (prod(x))^(1/length(x))
+
 nsd <- tribble(~ class, ~ total_species, 
                "Echinoidea", 940,
                "Holothuroidea", 1430,
@@ -294,7 +298,7 @@ nsd <- tribble(~ class, ~ total_species,
                "Bivalvia", 10e3,  # https://ucmp.berkeley.edu/taxa/inverts/mollusca/bivalvia.php
                "Malacostraca", 40e3, # wikipedia
                "Branchiopoda", 800, # animaldiversity.org
-               "Gastropoda", prod(c(40e3, 100e3))^(1/2), # https://ucmp.berkeley.edu/taxa/inverts/mollusca/gastropoda.php
+               "Gastropoda", geomean(c(40e3, 100e3)), # https://ucmp.berkeley.edu/taxa/inverts/mollusca/gastropoda.php
                "Chromadorea", 2124, # ITIS
                "Reptilia", 8734,
                "Ascidiacea", 2300, # wikipedia
@@ -319,24 +323,65 @@ Now, compare to the number of species by class/phylum in my data set:
 phyla_class <- dt_dps %>% select(phylum, class) %>% group_by(phylum, class) %>% 
   distinct()
 
-nsd %>% 
-  dt_dps %>% 
-  select(phylum, species) %>% group_by(phylum)  
+# what are the total species by phyla? we join in the mapping from our data
+total_species_by_phyla <- nsd %>% right_join(phyla_class, by='class') %>% 
+  group_by(phylum) %>% summarize(total_species = sum(total_species, na.rm=TRUE))
 
+# these numbers are conditioning on classes we have in this study
+# we actually want all classes on *earth*; for this I use the table 
+# here from wikipedia
+# https://en.wikipedia.org/wiki/Animal#Numbers_and_habitats
+total_species_by_phyla2 <- tribble(~ phylum, ~ total_species,
+                                   "Annelida", 17e3,
+                                   "Arthropoda", 1.257e6,
+                                   "Chordata", geomean(c(45e3, 65e3)),
+                                   "Cnidaria", 16e3,
+                                   "Echinodermata", 7.5e3,
+                                   "Mollusca", geomean(c(85e3, 107e3)),
+                                   "Nematoda", 25e3,
+                                   "Nemertea", 1300,
+                                   "Porifera", 10800)
+
+# and by phyla? again joining in by the mapping in our data
+# conditioning on classes in my dataset
+total_species_by_class <- nsd %>% right_join(phyla_class, by='class') %>% 
+  group_by(class) %>% summarize(total_species = sum(total_species, na.rm=TRUE))
+
+# how different are the number of species when we compare the dataset 
+# further up, conditioning on classes in my dataset, versus the dataset
+# immediately above, from Wikipedia?
+total_species_by_phyla %>% left_join(total_species_by_phyla2, by='phylum') %>%
+  mutate(ratio = total_species.x / total_species.y)
+
+```
+
+Nothing terribly off here; nematodes is the only sizeable difference.
+
+
+```{r}
+## now join in the total species in our dataset
 # by phyla
 dnsp_phyla <- dt_dps %>% 
+  left_join(total_species_by_phyla2) %>%
   filter(is.finite(log10_popsize), is.finite(log10_body_mass_pred)) %>%
-  select(phylum, species) %>% group_by(phylum) %>% 
-               summarize(nspecies=n()) 
+  select(phylum, species, total_species) %>% group_by(phylum, total_species) %>% 
+  summarize(nspecies=n()) %>% 
+  mutate(frac = nspecies / total_species)
 
 # by class
 dnsp_class <- dt_dps %>% 
+  left_join(total_species_by_class) %>%
   filter(is.finite(log10_popsize), is.finite(log10_body_mass_pred)) %>%
-  select(class, species) %>% group_by(class) %>% 
-               summarize(nspecies=n())
+  select(phylum, class, species, total_species) %>% group_by(phylum, class, total_species) %>% 
+  summarize(nspecies=n()) %>%
+  mutate(frac = nspecies / total_species)
 
 dnsp_class %>%
-  ggplot(aes(class, log10(frac), size=log10(total_species))) + geom_point() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  ggplot(aes(class, log10(frac), size=log10(total_species))) + 
+  geom_point() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+# this would make a cool supp plot, saving data
+write_tsv(dnsp_class, file='../data/species_by_class.tsv')
 
 ```
 
@@ -345,7 +390,8 @@ By phylum:
 ```{r}
 
 dnsp_phyla %>%
-  ggplot(aes(phylum, log10(frac), size=log10(total_species))) + geom_point() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+  ggplot(aes(phylum, log10(frac), size=log10(total_species))) + 
+  geom_point() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ```
 
@@ -405,16 +451,37 @@ baron_mine <- baron_d %>%
            # dropped because they are not in Bar-On's data set (e.g. Porifera, Echinoderms)
            mutate(prop_carbon_mass = prop_carbon_mass / sum(prop_carbon_mass))
 
-
-baron_mine %>% left_join(dnsp_phyla, by='phylum')  %>% select(nspecies.x, nspecies.y)
-  mutate(a=signif(total_carbon_mass / frac, 2)) %>% 
+# join everything
+biomass <- baron_mine %>% left_join(dnsp_phyla, by='phylum')  %>% 
+  # 
+  mutate(factor=signif(total_carbon_mass / (bd_mass * frac), 3)) %>% 
   select(-bd_total_biomass) %>%
-  select(-total_log10_popsize, -nspecies.y) %>% as.data.frame
+  select(-total_log10_popsize) 
+
+stopifnot(all(biomass$nspecies.x == biomass$nspecies.y))
+biomass <- biomass %>% rename(nspecies = nspecies.x) %>%
+  select(-nspecies.y, -total)
+
+write_tsv(biomass, file='../data/biomass.tsv')
+
+
+bm_tbl <- biomass %>% mutate(total_species = as.integer(total_species)) %>%
+           select(phylum, total_species, bd_mass, bd_prop_mass, 
+                  total_carbon_mass, prop_carbon_mass, nspecies, frac, factor)
+           
+
+print(xtable(bm_tbl, digits=c(1, 2, -2, 2, 4, -2, 4, 2, -2, 2)), 
+      include.rownames=FALSE,
+      tabular.environment='tabular',
+      math.style.exponents=TRUE, type='latex')
 
 
 ```
 
-How are the proportions?
+Things look relatively good here -- nothing is off by several orders of
+magnitude unless there's only 1-3 species sampled.
+
+How are the proportions of biomass by taxa?
 
 ```{r}
 
@@ -505,48 +572,6 @@ of_interest = c("Aptenodytes patagonicus", "Equus caballus", "Equus ferus
 xd %>% filter(species %in% of_interest) %>% select(species, log10_popsize, log10_range)
 
 ```
-
-Ok, now let's look at total biomass. Since I have drastically different phylum
-represented here in my taxa sample than on earth, we need to reweight things.
-
-
-
-```{r}
-
-# using the Bar-On weights
-# prop_carbon_mass is prop in my dataset
-baron_mine <- baron_mine %>% 
-              mutate(reweight = bd_prop_mass / prop_carbon_mass) %>%
-              mutate(reweighted_total_carbon_mass = reweight * total_carbon_mass) 
-
-total_sample_carbon_mass <- baron_mine %>% pull(reweighted_total_carbon_mass) %>% sum()
-
-# total species here
-n <- nrow(xd)
-total_animal_species <- sum(nspecies)
-
-print(paste0("fraction of animal species in this data set: ", 
-             signif(n/total_animal_species, 2)))
-
-# Bar-On et al. (2018) estimate is 2Gt C
-# 1e12 kg = 1Gt
-total_animal_cmass <- 2 
-
-# if the species here were random
-signif(total_animal_cmass * n / total_animal_species, 2)
-signif(total_sample_carbon_mass, 2)
-
-0.058 / total_animal_cmass
-
-```
-
-Note: initially it was my plan to see if we could get a sense of what fraction
-of the total biomass this dataset contains (which is about 3%). This seems
-unreasonably high, even after reweighting as above. The problem is that the
-3.4e-5 fraction of animal species is obviously not a random sample based on
-size / population, and includes humans, domesticated species, etc. -- this
-probably is accentuated by the overabundance of chordates compared arthropods
-here.
 
 
 ## Stan Model for Map Length and log10 Population Size

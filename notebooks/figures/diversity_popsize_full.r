@@ -21,8 +21,11 @@ phi <- mean(rstan:::extract(dps_fit, pars='phi')$phi)
 beta <- mean(rstan:::extract(dps_fit, pars='beta')$beta)
 
 # alias this -- less typing
-d <- da_dps
+d <- da_dps %>% filter(species != 'Equus ferus przewalskii')
 
+#d = read_tsv('../../data/combined_data.tsv')
+#d %>% filter(class == 'Aves') %>% select(species, log10_range, log10_popsize)
+ 
 # what to include
 # x <- d$pred_log10_N  # the simplistic unregularized version
 x <- d$log10_popsize
@@ -38,11 +41,36 @@ coords <- ellipse(mu=center, sigma=sigma, alpha=0.35, draw=FALSE)
 
 label <- !as.logical(point.in.polygon(x, y, coords[, 1], coords[, 2]))
 # add in all drosophila
-keep_sps <- c("Homo sapiens", "Apis mellifera", "Canis lupus")
-label <- (label | d$family == 'Drosophilidae') | label %in% keep_sps
+keep_sps <- c("Homo sapiens", "Apis mellifera", "Canis lupus", "Caenorhabditis elegans")
+drosoph <- c(
+             "Drosophila americana", 
+             "Drosophila ananassae", 
+             #"Drosophila arizonae",
+             #"Drosophila bipectinata", 
+             #"Drosophila buzzatii",  
+             #"Drosophila kikkawai",
+             #"Drosophila malerkotliana", 
+             "Drosophila melanogaster", 
+             "Drosophila miranda",
+             "Drosophila mojavensis", 
+             #"Drosophila novamexicana", 
+             #"Drosophila parabipectinata",
+             "Drosophila persimilis", 
+             "Drosophila pseudoobscura", 
+             "Drosophila sechellia",
+             "Drosophila simulans", 
+             "Drosophila subobscura")
+
+label <- (label | label %in% drosoph) | label %in% keep_sps
 # contained <- rep(TRUE, length(x))
 
 d$label <- ifelse(label, d$species, "")
+
+# ignore a cluster of points a little over Nc=10^8
+# which has human
+#ignore <- c('Aquila clanga', 'Reticulitermes lucifugus', 'Reticulitermes grassei')
+#d$label <- ifelse(d$label %in% ignore, "", d$label)
+
 
 # simplify some species name (Leffler data has combined them in some cases)
 d$label[d$species == 'Gorilla beringei/gorilla'] <- "Gorilla gorilla"
@@ -52,11 +80,13 @@ d$label[d$species == 'Aquila clanga/pomarina'] <- "Aquila clanga"
 
 set.seed(2)
 
-xlims <- c(4, 18)
+xlims <- c(4, 16)
+ylims <- c(-4.1, 0)
+
 
 REPEL_CACHED_FILE <- 'repel_full.tsv'
-# FORCE <- TRUE
-FORCE <- FALSE
+FORCE <- TRUE
+#FORCE <- FALSE
 if (FORCE || !file.exists(REPEL_CACHED_FILE)) {
   p <- ggplot(d) + 
     geom_point(aes(log10_popsize, log10_diversity, 
@@ -64,15 +94,16 @@ if (FORCE || !file.exists(REPEL_CACHED_FILE)) {
     geom_text_repel(data=d,
                     mapping=aes(log10_popsize, log10_diversity, 
                                 label=label, text=species), 
-                                size=1.7, 
-                                point.padding=0.38, 
-                                force = 2,
-                                min.segment.length=0.3,
+                                size=2.1,
+                                point.padding=10, 
+                                force = 1.5,
+                                min.segment.length=0.5,
                                 seed=1,
-                                box.padding=0.2, 
+                                box.padding=1e-1, 
+                                ylims=ylims,
                                 max.iter=1000000, xlim=xlims) +
     xlim(xlims[1], xlims[2]) + theme(legend.position = "none") + 
-    ylim(-4.1, 0)
+    ylim(ylims[1], ylims[2])
   
   repel_pos <- extract_ggrepel(p)
   write_tsv(repel_pos, path=REPEL_CACHED_FILE)
@@ -94,11 +125,19 @@ if (output)
 
 par(mar=c(4, 4, 1, 2))
 
-has_label <- d$label != ""
 tx <- repel_pos$x
 ty <- repel_pos$y
+tl <- repel_pos$label
+
+td <- repel_pos %>% 
+       left_join(d %>% select(label, x=log10_popsize, y=log10_diversity),
+                 by='label', suffix=c('_text', '_point')) %>%
+       as_tibble() %>% filter(is.finite(x_point), is.finite(y_point))
+
+print(sprintf("number of labels: %d", nrow(td)))
+
 plot(x, y, col=phyla_cols[d$phylum], type='n', axes=FALSE,
-     ylab='', xlab='', ylim=c(-4.1, 0), xlim=xlims) 
+     ylab='', xlab='', ylim=ylims, xlim=xlims) 
 
 # abline(a=log10(1e-8 * 4), b=1, lty=2, col='cornflowerblue')
 # text(6, -0.9, latex2exp:::TeX("$\\mu = 10^{-8}$"), cex=0.5, col='cornflowerblue', xpd=TRUE)
@@ -152,19 +191,18 @@ if (Kalleles == 4 || Kboth) {
 # y <- predict(div_fit, newdata=data.frame(log10_popsize=logN))
 # lines(logN, y, lty=2)
 # abline(dps_ols, lty=2, col='gray52')
-z <- seq(3, 18, length.out=100)
+z <- seq(xlims[1], xlims[2], length.out=100)
 lines(z, phi + beta*z, lty=2, col='cornflowerblue')
 lines(z, coef(dps_ols)[1] + z*coef(dps_ols)[2], lty=2, col='gray52')
 
 adjust <- 0
-xc <- x[has_label]
-yc <- y[has_label]
-segments(xc, yc, tx, ty, col=alpha('gray42', 0.5), lwd=0.5)
+with(td,
+     segments(x_point, y_point, x_text, y_text, col=alpha('gray42', 0.5), lwd=0.5))
 points(x, y, pch=21, cex=1.3, lwd=0.4,
        bg=phyla_cols[d$phylum], col='white')
-text(tx, ty, d$label[has_label], cex=0.29)
+with(td, text(x_text, y_text, label, cex=0.29))
 # boxed.labels(tx, ty, d$label[has_label], cex=0.5, border=FALSE, xpad=1, ypad=1)
-xseq <- seq(4, 18, 2)
+xseq <- seq(4, 16, 2)
 axis(1, xseq, 
      labels=latex2exp::TeX(sprintf("$10^{%d}$", xseq)), 
      padj = -1,

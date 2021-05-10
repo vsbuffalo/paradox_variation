@@ -59,34 +59,34 @@ Daphnia pulicaria	Arthropoda	0.002	intronic	0.02458	Freshwater	Partial selfing	N
 Daphnia pulicaria	Arthropoda	0.002	synonymous	0.01587	Freshwater	Partial selfing	Narrow endemic	Daphnia
 Dasypus novemcinctus	Chordata	0.7	synonymous	0.00153	Terrestrial	Obligatory outcrossing	Broad endemic	Dasypus
 Daubentonia madagascariensis	Chordata	0.4064	synonymous	7.3e-4	Terrestrial	Obligatory outcrossing	Island	Daubentonia
-Drosophila americana	Arthropoda	0.0025409090909090906	intronic	0.01786	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
-Drosophila americana	Arthropoda	0.0025409090909090906	synonymous	0.0252	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
-Drosophila ananassae	Arthropoda	0.0025409090909090906	synonymous	0.0236	Terrestrial	Partial selfing	Cosmopolitan	Drosophila
-Drosophila arizonae	Arthropoda	0.0025409090909090906	mixed	0.008285	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
-Drosophila bipectinata	Arthropoda	0.0025409090909090906	non-coding	0.020099999999999996	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
-Drosophila bogotana	Arthropoda	0.0025409090909090906	non-coding	0.00622	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
-Drosophila buzzatii	Arthropoda	0.0025409090909090906	anonymous	0.01936	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
-Drosophila kikkawai	Arthropoda	0.0025409090909090906	silent	0.0323	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
-Drosophila malerkotliana	Arthropoda	0.0025409090909090906	non-coding	0.0168	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila americana	Arthropoda	0.00265	intronic	0.01786	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila americana	Arthropoda	0.00265	synonymous	0.0252	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila ananassae	Arthropoda	0.00265	synonymous	0.0236	Terrestrial	Partial selfing	Cosmopolitan	Drosophila
+Drosophila arizonae	Arthropoda	0.00265	mixed	0.008285	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila bipectinata	Arthropoda	0.00265	non-coding	0.020099999999999996	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila bogotana	Arthropoda	0.00265	non-coding	0.00622	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila buzzatii	Arthropoda	0.00265	anonymous	0.01936	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila kikkawai	Arthropoda	0.00265	silent	0.0323	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila malerkotliana	Arthropoda	0.00265	non-coding	0.0168	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
 Drosophila melanogaster	Arthropoda	0.0025	non-coding	0.0172	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
 Drosophila melanogaster	Arthropoda	0.0025	synonymous	0.0232	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
 Drosophila miranda	Arthropoda	0.00295	intronic	0.0037	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
 Drosophila miranda	Arthropoda	0.00295	non-coding	0.0036	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
 Drosophila miranda	Arthropoda	0.00295	synonymous	0.00597	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
-Drosophila mojavensis	Arthropoda	0.0025409090909090906	mixed	0.00781	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
-Drosophila navojoa	Arthropoda	0.0025409090909090906	mixed	0.00804	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
-Drosophila novamexicana	Arthropoda	0.0025409090909090906	non-coding	0.00202	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
-Drosophila parabipectinata	Arthropoda	0.0025409090909090906	non-coding	0.013300000000000001	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
-Drosophila persimilis	Arthropoda	0.0025409090909090906	non-coding	0.00777	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
-Drosophila pseudoananassae	Arthropoda	0.0025409090909090906	non-coding	0.018340000000000002	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila mojavensis	Arthropoda	0.00265	mixed	0.00781	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila navojoa	Arthropoda	0.00265	mixed	0.00804	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila novamexicana	Arthropoda	0.00265	non-coding	0.00202	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila parabipectinata	Arthropoda	0.00265	non-coding	0.013300000000000001	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
+Drosophila persimilis	Arthropoda	0.00265	non-coding	0.00777	Terrestrial	Obligatory outcrossing	Narrow endemic	Drosophila
+Drosophila pseudoananassae	Arthropoda	0.00265	non-coding	0.018340000000000002	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
 Drosophila pseudoobscura	Arthropoda	0.0026	intronic	0.012	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
 Drosophila pseudoobscura	Arthropoda	0.0026	non-coding	0.011000000000000001	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
 Drosophila pseudoobscura	Arthropoda	0.0026	synonymous	0.02265	Terrestrial	Obligatory outcrossing	Broad endemic	Drosophila
-Drosophila sechellia	Arthropoda	0.0025409090909090906	silent	9.6e-4	Terrestrial	Obligatory outcrossing	Island	Drosophila
-Drosophila simulans	Arthropoda	0.0021	intronic	0.0212	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
-Drosophila simulans	Arthropoda	0.0021	non-coding	0.0204	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
-Drosophila simulans	Arthropoda	0.0021	synonymous	0.0352	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
-Drosophila subobscura	Arthropoda	0.0025409090909090906	silent	0.00988	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila sechellia	Arthropoda	0.00265	silent	9.6e-4	Terrestrial	Obligatory outcrossing	Island	Drosophila
+Drosophila simulans	Arthropoda	0.0025	intronic	0.0212	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila simulans	Arthropoda	0.0025	non-coding	0.0204	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila simulans	Arthropoda	0.0025	synonymous	0.0352	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
+Drosophila subobscura	Arthropoda	0.00265	silent	0.00988	Terrestrial	Obligatory outcrossing	Cosmopolitan	Drosophila
 Eichhornia paniculata	Magnoliophyta	NA	silent	0.001396	Freshwater	Partial selfing	Broad endemic	Eichhornia
 Eschrichtius robustus	Chordata	11.8872	intronic	0.00117	Marine	Obligatory outcrossing	Broad endemic	Eschrichtius
 Eulemur coronatus	Chordata	0.3556	synonymous	0.0028100000000000004	Terrestrial	Obligatory outcrossing	Island	Eulemur

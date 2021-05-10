@@ -45,7 +45,11 @@ gbif_ranges.tsv: leffler_et_al_2012_updated.tsv stapley_et_al_2017_updated.tsv r
 combined_data.tsv combined_dataset_hier.Rdata calibrated_phylogeny.Rdata post_pred_draws.Rdata: stapley_et_al_2017_updated.tsv leffler_et_al_2012_updated.tsv corbett_detig_2015_updated.tsv gbif_ranges.tsv combined_dataset.r taxonomy_fixes.r
 	Rscript combined_dataset.r
 
+
 clean-cache:
+	rm -f popsize_chains.Rdata post_pred_draws.Rdata gbif_ranges.tsv
+
+clean-cache-all:
 	rm -f popsize_chains.Rdata combined_tree.Rdata
 	rm -f datelife.Rdata combined_data_hier.Rdata 
 	# rm -f redlist.Rdata  ## this almost never needs to be cleaned

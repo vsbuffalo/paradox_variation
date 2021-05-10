@@ -18,7 +18,8 @@ supp_figures: $(MSFIGDIR)/range_categories.pdf $(MSFIGDIR)/iucn_redlist_ranges.p
               $(MSFIGDIR)/diversity_popsize_redlist.pdf \
               $(MSFIGDIR)/Nc_figure.pdf \
               $(MSFIGDIR)/figure_3_alt.pdf \
-              $(MSFIGDIR)/linked_sel_params.pdf
+              $(MSFIGDIR)/linked_sel_params.pdf \
+              $(MSFIGDIR)/species_counts.pdf
 
 clean_repel:
 	rm -f repel_genome_size_popsize.tsv repel_genome_size_maplength.tsv repel_full.tsv repel.tsv
@@ -102,6 +103,10 @@ diversity_range_bodymass.pdf: diversity_range_bodymass.r ../../data/main_dataset
 linked_sel_params.pdf: ../../data/sweep_param_ests.tsv ../../data/shapiro_et_al_2007.tsv linked_sel_params.r
 	Rscript linked_sel_params.r
 
+species_counts.pdf: ../../data/species_by_class.tsv species_counts.r
+	Rscript species_counts.r
+
+
 
 #../../manuscript/figures/diversity_body_size.pdf 
 # ../../manuscript/figures/map_length_body_size.pdf ../../manuscript/figures/map_length_body_size_bayesian.pdf ../../manuscript/figures/fecundity_body_size.pdf 
@@ -168,6 +173,10 @@ $(MSFIGDIR)/Nc_figure.pdf: Nc_figure.pdf
 
 $(MSFIGDIR)/linked_sel_params.pdf: linked_sel_params.pdf
 	cp $< $(MSFIGDIR)
+
+$(MSFIGDIR)/species_counts.pdf: species_counts.pdf
+	cp $< $(MSFIGDIR)
+
 
 
 # ../../manuscript/figures/map_length_body_size.pdf: map_length_body_size.pdf ../../data/body_size_map_length.Rdata
