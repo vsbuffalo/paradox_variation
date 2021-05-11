@@ -19,7 +19,8 @@ d <- read_tsv('../../data/combined_data.tsv') %>%
       mutate(log10_genome_size = log10(genome_size)) %>% 
       filter_at(vars(log10_genome_size, log10_popsize), 
                 ~ is.finite(.)) %>% 
-      filter(species != "Ambystoma tigrinum")
+      filter(species != "Ambystoma tigrinum") %>%
+      filter(species != "Equus ferus przewalskii")
 
 
 # what to include
@@ -32,7 +33,7 @@ plot(x, y)
 X <- cbind(x, y)
 center <- colMeans(X)
 sigma <- cov(X)
-coords <- ellipse(mu=center, sigma=sigma, alpha=0.3,
+coords <- ellipse(mu=center, sigma=sigma, alpha=0.35,
                   draw=FALSE)
 
 label <- !as.logical(point.in.polygon(x, y, coords[, 1], coords[, 2]))
@@ -42,7 +43,7 @@ d$label <- ifelse(label, d$species, "")
 
 set.seed(2)
 
-xlims <- c(3.9, 18)
+xlims <- c(3.9, 16)
 
 REPEL_CACHED_FILE <- 'repel_genome_size_popsize.tsv'
 # FORCE <- TRUE
@@ -54,12 +55,12 @@ if (FORCE || !file.exists(REPEL_CACHED_FILE)) {
     geom_text_repel(data=d,
                     mapping=aes(log10_popsize, log10_genome_size, 
                                 label=label, text=species),
-                                size=1.5, 
-                                point.padding=0.6, 
+                                size=2.1, 
+                                point.padding=10, 
                                 force=2,
-                                min.segment.length=0.4,
+                                min.segment.length=0.1,
                                 seed=1,
-                                box.padding=0.6, 
+                                box.padding=1.3e-1, 
                                 max.iter=100000, xlim=xlims) +
     xlim(xlims[1], xlims[2]) + theme(legend.position = "none")
   repel_pos <- extract_ggrepel(p)
@@ -80,9 +81,16 @@ if (output)
 
 par(mar=c(4, 4, 2, 2))
 
-has_label <- d$label != ""
 tx <- repel_pos$x
 ty <- repel_pos$y
+tl <- repel_pos$label
+
+td <- repel_pos %>% 
+       left_join(d %>% select(label, x=log10_popsize, y=log10_genome_size),
+      by='label', suffix=c('_text', '_point')) %>%
+       as_tibble() %>% filter(is.finite(x_point), is.finite(y_point))
+
+
 plot(x, y, col=phyla_cols[d$phylum], 
      type='n', axes=FALSE, ylim=c(-1.2, 1),
      ylab='', xlab='', xlim=xlims) 
@@ -94,11 +102,12 @@ logN <- seq(3, 16, length.out=100)
 # lines(logN, y, lty=2)
 abline(fit, lty=2, lwd=1.2, col=alpha('gray52', 0.5))
 
-dfit <- d %>% group_by(phylum) %>%
+dfit <- 
+  d %>% group_by(phylum) %>%
      nest() %>%
      mutate(n = map_int(data, nrow)) %>%
      filter(n > 5) %>%
-     mutate(fit = map(data, ~ lm(log10_genome_size ~ log10_popsize, .)))
+     mutate(fit = purrr:::map(data, ~ lm(log10_genome_size ~ log10_popsize, .)))
 
 ave_lines <- FALSE
 if (ave_lines) {
@@ -111,13 +120,13 @@ if (ave_lines) {
   }
 }
 
+
 adjust <- 0
-xc <- x[has_label]
-yc <- y[has_label]
-segments(xc, yc, tx, ty, col=alpha('gray42', 0.5), lwd=0.5)
+with(td,
+     segments(x_point, y_point, x_text, y_text, col=alpha('gray42', 0.5), lwd=0.5))
 points(x, y, pch=21, cex=1.3, lwd=0.4,
        bg=phyla_cols[d$phylum], col='white')
-text(tx, ty, d$label[has_label], cex=0.3)
+with(td, text(x_text, y_text, label, cex=0.29))
 
 # boxed.labels(tx, ty, d$label[has_label], cex=0.5, border=FALSE, xpad=1, ypad=1)
 xseq <- seq(4, 16, 2)

@@ -124,7 +124,7 @@ lines(z, coef(drn_ols)[1] + coef(drn_ols)[2]*z, lwd=1.2, lty=2, col='gray42')
 title(ylab="pairwise diversity", line=2.8, cex.lab=1.2)
 title(xlab=latex2exp::TeX("range (km^2)"), line=2, cex.lab=1.2)
 
-legend(2, 0, names(phyla_cols), fill=phyla_cols,
+legend(2.6, 0, names(phyla_cols), fill=phyla_cols,
        bty='n', border=0, cex=0.7, ncol=3)
 
 

@@ -86,8 +86,8 @@ ylims <- c(-4.1, 0)
 
 
 REPEL_CACHED_FILE <- 'repel_full.tsv'
-FORCE <- TRUE
-#FORCE <- FALSE
+#FORCE <- TRUE
+FORCE <- FALSE
 if (FORCE || !file.exists(REPEL_CACHED_FILE)) {
   p <- ggplot(d) + 
     geom_point(aes(log10_popsize, log10_diversity, 

@@ -26,7 +26,7 @@ y <- d$diversity
 
 set.seed(2)
 
-xlims <- c(4, 18)
+xlims <- c(4, 16)
 
 fit <- lm(y ~ x)
 
@@ -88,7 +88,7 @@ if (Kalleles == 4 || Kboth) {
 
 points(x, y, pch=21, cex=1.3, lwd=0.4,
        bg=phyla_cols[d$phylum], col='white')
-xseq <- seq(4, 18, 2)
+xseq <- seq(4, 16, 2)
 axis(1, xseq, 
      labels=latex2exp::TeX(sprintf("$10^{%d}$", xseq)), 
      padj = -1,
@@ -119,8 +119,8 @@ title(xlab=latex2exp::TeX("approximate population size"), line=2.5, cex.lab=1.2)
 #            max(ld$log10_size[z], na.rm=TRUE), -1.05 + 0.005*i, 
 #            col=phyla_cols[i], lwd=2)
 # }
-phyla_cols_s <- phyla_cols[unique(d$phylum)]
-legend(14, 0.075, names(phyla_cols_s), fill=phyla_cols_s,
+phyla_cols_s <- phyla_cols[sort(unique(d$phylum))]
+legend(12.5, 0.075, names(phyla_cols_s), fill=phyla_cols_s,
        bty='n', border=0, cex=0.6, ncol=2)
 
 if (output) dev.off()

@@ -31,7 +31,7 @@ phyla_cols_s <- phyla_cols[unique(dca_noself$phylum)]
 legend(8, -1, names(phyla_cols_s), 
        fill=phyla_cols_s, bty='n', border=0, cex=0.6, ncol=2)
 
-xseq <- seq(6, 18, 2)
+xseq <- seq(6, 16, 2)
 axis(1, xseq, 
      labels=latex2exp::TeX(sprintf("$10^{%d}$", xseq)), 
      padj = -0.9,
@@ -47,7 +47,7 @@ title(ylab="diversity",
 plot(dml_full$log10_popsize, log10(dml_full$Ne_N_RHH_BGS), 
      axes=FALSE, pch=19,
      col=wes_palette("Darjeeling1")[3],
-     xlim=c(6, 18))
+     xlim=c(6, 16))
 
 points(dca_noself$log10_popsize, log10(1-dca_noself$impact_of_sel), pch=19, 
        col=wes_palette("Darjeeling1")[1])
@@ -71,7 +71,7 @@ axis(2, yseq,
 #      col=phyla_cols[dca$phylum])
 
 cols = wes_palette('Darjeeling1')[1:3]
-legend(6, -10, 
+legend(6, -8, 
        c( latex2exp::TeX("Corbett-Detig et al."),
          latex2exp::TeX("RHH + BGS, $N = \\pi / 4\\mu$"),
          latex2exp::TeX("RHH + BGS, $N = N_c$")),

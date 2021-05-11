@@ -43,7 +43,8 @@ set.seed(2)
 xlims <- c(-1.2, 1)
 
 REPEL_CACHED_FILE <- 'repel_genome_size_maplength.tsv'
-if (TRUE || !file.exists(REPEL_CACHED_FILE)) {
+FORCE <- TRUE
+if (FORCE || !file.exists(REPEL_CACHED_FILE)) {
   p <- ggplot(d) + 
     geom_point(aes(log10_genome_size, log10_map_length, 
                    color=phylum), size=2) +
@@ -51,12 +52,12 @@ if (TRUE || !file.exists(REPEL_CACHED_FILE)) {
                     mapping=aes(log10_genome_size, 
                                 log10_map_length, 
                                 label=label),
-                                size=1.5, 
-                                point.padding=0.6, 
+                                size=2.1, 
+                                point.padding=10, 
                                 force=2,
-                                min.segment.length=0.4,
+                                min.segment.length=0.1,
                                 seed=1,
-                                box.padding=0.1, 
+                                box.padding=1.3e-1, 
                                 max.iter=100000, xlim=xlims) +
     xlim(xlims[1], xlims[2]) + theme(legend.position = "none")
   repel_pos <- extract_ggrepel(p)
@@ -77,9 +78,15 @@ if (output)
 
 par(mar=c(4, 4, 2, 2))
 
-has_label <- d$label != ""
 tx <- repel_pos$x
 ty <- repel_pos$y
+tl <- repel_pos$label
+
+td <- repel_pos %>% 
+       left_join(d %>% select(label, y=map_length, x=log10_genome_size),
+      by='label', suffix=c('_text', '_point')) %>%
+       as_tibble() %>% filter(is.finite(x_point), is.finite(y_point))
+
 plot(x, y, col=phyla_cols[d$phylum], 
      type='n', axes=FALSE, ylim=c(-0.3, 2),
      ylab='', xlab='', xlim=xlims) 
@@ -108,14 +115,12 @@ if (ave_lines) {
   }
 }
 
-adjust <- 0
-xc <- x[has_label]
-yc <- y[has_label]
-segments(xc, yc, tx, ty, col=alpha('gray42', 0.5), lwd=0.5)
+
+with(td,
+     segments(x_point, y_point, x_text, y_text, col=alpha('gray42', 0.5), lwd=0.5))
 points(x, y, pch=21, cex=1.3, lwd=0.4,
        bg=phyla_cols[d$phylum], col='white')
-text(tx, ty, d$label[has_label], cex=0.3)
-
+with(td, text(x_text, y_text, label, cex=0.29))
 # boxed.labels(tx, ty, d$label[has_label], cex=0.5, border=FALSE, xpad=1, ypad=1)
 xseq <- seq(-1, 1, 1)
 axis(1, xseq, 
