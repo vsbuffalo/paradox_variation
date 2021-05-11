@@ -83,7 +83,7 @@ ty <- repel_pos$y
 tl <- repel_pos$label
 
 td <- repel_pos %>% 
-       left_join(d %>% select(label, y=map_length, x=log10_genome_size),
+       left_join(d %>% select(label, y=log10_map_length, x=log10_genome_size),
       by='label', suffix=c('_text', '_point')) %>%
        as_tibble() %>% filter(is.finite(x_point), is.finite(y_point))
 
@@ -102,7 +102,7 @@ dfit <- d %>% group_by(phylum) %>%
      nest() %>%
      mutate(n = map_int(data, nrow)) %>%
      filter(n > 5) %>%
-     mutate(fit = map(data, ~ lm(log10_map_length ~ log10_genome_size, .)))
+     mutate(fit = purrr:::map(data, ~ lm(log10_map_length ~ log10_genome_size, .)))
 
 ave_lines <- TRUE 
 if (ave_lines) {

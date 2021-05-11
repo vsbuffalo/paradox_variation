@@ -3,7 +3,6 @@
 \RequirePackage[font=small,labelfont=bf]{caption}
 \RequirePackage{amsmath,amssymb,amsthm}
 \RequirePackage{mathtools}
-\RequirePackage{tabularx}
 \RequirePackage{graphicx}
 \RequirePackage[normalem]{ulem}
 \RequirePackage[hidelinks]{hyperref}
@@ -401,7 +400,7 @@ differences per basepair. Those that do, lynx (\emph{Lynx Lynx}), wolverine
 face habitat fragmentation and declining population sizes. These three species
 are all in the IUCN Red List, but are listed as least concern (though their
 presence in the Red List indicates they are of conservation interest). In
-Supplementary Material Section \namref{supinfo:div-iucn}, I explore more about
+Supplementary Material Section \Newnameref{supinfo:div-iucn}, I explore more about
 the relationships between IUCN Red List status, diversity, and population size.
 
 \subsection*{Phylogenetic Non-Independence and the Population Size Diversity Relationship}
@@ -1401,12 +1400,12 @@ The approximate census sizes I have estimated here
   &  & \multicolumn{2}{c}{\bf Bar-On et al.}  & \multicolumn{4}{c}{\bf Present study}  &  \\
   phylum & total species ($T$) & biomass ($B$) & prop. biomass & biomass ($b$) &  prop. biomass & num. species ($n$) &prop. total species ($f = \nicefrac{n}{T}$) & factor ($\nicefrac{b}{f B}$) \\
   \hline
-  Arthropoda & $1.26 \times 10^{6}$ & 1.20 & 0.4635 & $2.77 \times 10^{-4}$ & 0.0100 &  68 & $5.41 \times 10^{-5}$ & 4.26 \\
-  Chordata & $5.41 \times 10^{4}$ & 0.87 & 0.3357 & $2.68 \times 10^{-2}$ & 0.9720 &  68 & $1.26 \times 10^{-3}$ & 24.50 \\
-  Annelida & $1.70 \times 10^{4}$ & 0.20 & 0.0772 & $1.24 \times 10^{-5}$ & 0.0005 &   3 & $1.76 \times 10^{-4}$ & 0.35 \\
-  Mollusca & $9.54 \times 10^{4}$ & 0.20 & 0.0772 & $4.47 \times 10^{-4}$ & 0.0162 &  13 & $1.36 \times 10^{-4}$ & 16.40 \\
-  Cnidaria & $1.60 \times 10^{4}$ & 0.10 & 0.0386 & $3.21 \times 10^{-5}$ & 0.0012 &   2 & $1.25 \times 10^{-4}$ & 2.57 \\
-  Nematoda & $2.50 \times 10^{4}$ & 0.02 & 0.0077 & $4.00 \times 10^{-6}$ & 0.0001 &   1 & $4.00 \times 10^{-5}$ & 5.00 \\
+  Arthropoda & $1.26 \times 10^{6}$ & 1.20 & 0.4635 & $2.78 \times 10^{-4}$ & 0.0100 &  68 & $5.41 \times 10^{-5}$ & 4.29 \\ 
+  Chordata & $5.41 \times 10^{4}$ & 0.87 & 0.3357 & $2.70 \times 10^{-2}$ & 0.9719 &  68 & $1.26 \times 10^{-3}$ & 24.70 \\ 
+  Annelida & $1.70 \times 10^{4}$ & 0.20 & 0.0772 & $1.23 \times 10^{-5}$ & 0.0004 &   3 & $1.76 \times 10^{-4}$ & 0.35 \\ 
+  Mollusca & $9.54 \times 10^{4}$ & 0.20 & 0.0772 & $4.54 \times 10^{-4}$ & 0.0163 &  13 & $1.36 \times 10^{-4}$ & 16.60 \\ 
+  Cnidaria & $1.60 \times 10^{4}$ & 0.10 & 0.0386 & $3.14 \times 10^{-5}$ & 0.0011 &   2 & $1.25 \times 10^{-4}$ & 2.51 \\ 
+  Nematoda & $2.50 \times 10^{4}$ & 0.02 & 0.0077 & $3.89 \times 10^{-6}$ & 0.0001 &   1 & $4.00 \times 10^{-5}$ & 4.87 \\ 
 \end{tabular}}
 
   \caption{How the total carbon biomass estimates by phylum from
@@ -1460,27 +1459,26 @@ Vulnerable, EN is Endangered, and CR is Critically Endangered.}
   \centering
   \begin{tabular}{rrrr}
     \hline
- & mean & 2.5 \% & 97.5 \% \\ 
+     & mean & 2.5 \% & 97.5 \% \\ 
  \hline
-    $\beta_0$ & -2.70 & -3.00 & -2.40 \\ 
-    $\beta_{LC}$ & -0.37 & -0.55 & -0.19 \\ 
-    $\beta_{NT}$ & -0.19 & -0.80 & 0.41 \\ 
-    $\beta_{VU}$ & -0.31 & -0.81 & 0.19 \\ 
-    $\beta_{EN}$ & -0.39 & -0.71 & -0.06 \\ 
+    $\beta_0$ & -2.80 & -3.20 & -2.50 \\ 
+    $\beta_{LC}$ & -0.39 & -0.57 & -0.21 \\ 
+    $\beta_{NT}$ & -0.22 & -0.83 & 0.39 \\ 
+    $\beta_{VU}$ & -0.34 & -0.84 & 0.16 \\ 
+    $\beta_{EN}$ & -0.40 & -0.73 & -0.07 \\ 
     $\beta_{CR}$ & -0.03 & -0.65 & 0.59 \\ 
-    $\beta_{N_c}$ & 0.06 & 0.04 & 0.09 \\ 
+    $\beta_{N_c}$ &  0.08 & 0.05 & 0.11 \\ 
     \hline
   \end{tabular}
-
   \caption{TODO The regression estimates of full IUCN Red List population size model
     for diversity, $\log_{10}(\pi) = \beta_0 + \beta_{LC} LC + \beta_{NT} NT +
     \beta_{VU} VU + \beta_{EN} EN + \beta_{CR} CR + \beta_{N_c} \log_{10}(N_c)$;
     $df = 165$.  Using AIC to compare this full model to a reduced model of
     $\log_{10}(\pi) = \beta_0 + \beta_{N_c} \log_{10}(N_c)$, $AIC_\text{full} =
   203.99$, $AIC_\text{reduced} =212.46$. }
-
 \end{table}
 \label{supptable:tbl-1} 
+
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\textwidth]{figures/diversity_popsize_linear.pdf}
