@@ -52,6 +52,8 @@ clean-cache:
 clean-cache-all:
 	rm -f popsize_chains.Rdata combined_tree.Rdata
 	rm -f datelife.Rdata combined_data_hier.Rdata 
+	rm -f taxadb_species_ids.Rdata
+	rm -f taxadb_genera_ids.Rdata
 	# rm -f redlist.Rdata  ## this almost never needs to be cleaned
 
 clean:

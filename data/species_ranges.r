@@ -342,7 +342,7 @@ ret_lucif_rel <- 10064
 austria_area <- 32386
 austria_rel_area <- 4385
 ranges_df[ranges_df$species == 'Reticulitermes grassei', ]$range <- ret_grassei_rel / austria_rel_area * austria_area
-ranges_df[ranges_df$species == 'Reticulitermes lucifugus', ]$range <- log10(ret_lucif_rel / austria_rel_area * austria_area)
+ranges_df[ranges_df$species == 'Reticulitermes lucifugus', ]$range <- ret_lucif_rel / austria_rel_area * austria_area
 
 
 ## Daphnia

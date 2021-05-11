@@ -208,12 +208,30 @@ stopifnot(nrow(d) == length(unique(d$species)))
 
 #### Get Taxonomical Info
 # get the taxonomial datas from taxadb (via Catalog of Life)
-d <- d %>% mutate(id_raw=map_chr(clean_name(species), taxadb::get_ids)) 
+TAXADB_SPECIES_FILE <- 'taxadb_species_ids.Rdata'
+if (!file.exists(TAXADB_SPECIES_FILE)) {
+  taxadb_species_ids <- map_chr(clean_name(d$species), taxadb::get_ids)
+  save(taxadb_species_ids, file=TAXADB_SPECIES_FILE)
+} else {
+  load(TAXADB_SPECIES_FILE)
+}
+
+# merge in species ids
+d$id_raw <- taxadb_species_ids
+
 # find all missing IDs and get genera-level IDs
 missing_sps <- d$species[is.na(d$id_raw)]
 genera <- map_chr(missing_sps, extract_genus, genus_only=TRUE)
-genera_ids <- map(genera, taxadb::get_ids)
-d$id_raw[is.na(d$id_raw)] <- genera_ids
+
+TAXADB_GENERA_FILE <- 'taxadb_genera_ids.Rdata'
+if (!file.exists(TAXADB_GENERA_FILE)) {
+  taxadb_genera_ids <- map(genera, taxadb::get_ids)
+  save(taxadb_genera_ids, file=TAXADB_GENERA_FILE)
+} else {
+  load(TAXADB_GENERA_FILE)
+}
+
+d$id_raw[is.na(d$id_raw)] <- taxadb_genera_ids
 d <- d %>% mutate(id = map_int(id_raw, ~ as.integer(sub('ITIS:', '', .))))
  
 ## Lookup and merge in taxonomy 
@@ -287,6 +305,7 @@ if (!file.exists(REDLIST_FILE)) {
   load(REDLIST_FILE)
 }
 
+
 # get the occurrences / km2 out
 species <- map(rdl_entries, 'name') 
 species <- map_chr(species, ~ ifelse(is.null(.), NA, .))
@@ -313,6 +332,11 @@ redlist_cat[redlist_cat == 'LR/lc'] <- "LC"
 redlist_cat[redlist_cat == 'LR/nt'] <- "NT" # upgrade to NT
 redlist_cat[redlist_cat == 'LR/nt'] <- "LC"
 redlist_df <- tibble(species, redlist_cat)
+
+# for some insane reason Equus ferus przewalskii isn't CR, so we 
+# manually fix
+# source that it's CR: http://www.equids.org/aswhorse.php
+redlist_df[which(redlist_df$species == 'Equus ferus przewalskii'), 'redlist_cat'] <- "CR"
 
 # merge in IUCN cats 
 d <- d %>% left_join(redlist_df, by='species')  

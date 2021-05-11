@@ -589,7 +589,7 @@ tr_ml_ns <- keep.tip(tr_ml, dt_ml_ns$species)
 ml_cor_ns <- vcv(tr_ml_ns, cor=TRUE)
 
 # data for the log-normal fit
-log10_popsize_seq <- seq(5, 18, length.out=100)
+log10_popsize_seq <- seq(5, 15.2, length.out=100)
 ml_dat <- list(N = nrow(dt_ml_ns), 
               log10_popsize = dt_ml_ns$log10_popsize,
               map_length = dt_ml_ns$map_length, 
@@ -1790,6 +1790,10 @@ dml_full <- da_ml %>%
      mutate(J22 = dm_J22_Elyashiv2) %>%
      mutate(Ne_N_HK95 = HK95(map_length, U=dm_U)) %>% 
      mutate(Ne_N_HK95_strongBGS = HK95(map_length, U=10*dm_U)) %>% 
+     # RHH for comparison
+     mutate(Ne_N_RHH = RHH_BGS(1, L=map_length, N=10^log10_popsize,
+                                   B=1, gamma=dm_gamma, 
+                                   J22=J22)) %>%
      # both BGS and RHH
      mutate(Ne_N_RHH_BGS = RHH_BGS(1, L=map_length, N=10^log10_popsize,
                                    B=Ne_N_HK95, gamma=dm_gamma, 
@@ -1810,12 +1814,22 @@ dml_full <- da_ml %>%
      # 100-folder greater Nc
      mutate(Ne_N_RHH_BGS3 = RHH_BGS(1, L=map_length, N=100*10^log10_popsize,
                                    B=Ne_N_HK95, gamma=dm_gamma, 
-                                   J22=dm_J22_Elyashiv)) 
+                                   J22=J22)) 
 
 
 save(dml, dml_full, file='../data/linked_sel_div_changes.Rdata')
 
 ```
+
+What are the relative strengths of BGS and RHH?
+
+```{r}
+
+dml_full %>% mutate(ratio = log10(Ne_N_RHH / Ne_N_HK95)) %>% 
+  ggplot(aes(log10_popsize, ratio)) + geom_point()
+
+```
+
 
 
 ```
@@ -1865,7 +1879,7 @@ different figure, but this one is still interesting.
 ```{r}
 
 plot(dml$log10_popsize, dml$log10_diversity, pch=19, 
-                  xlim=c(5, 18),
+                  xlim=c(5, 16),
                   ylim=c(-3, 1))
 
 with(dml, segments(log10_popsize, log10_diversity, 

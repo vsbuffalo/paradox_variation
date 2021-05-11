@@ -400,33 +400,9 @@ differences per basepair. Those that do, lynx (\emph{Lynx Lynx}), wolverine
 (\emph{Gulo gulo}), and Massasauga rattlesnake (\emph{Sistrurus catenatus})
 face habitat fragmentation and declining population sizes. These three species
 are all in the IUCN Red List, but are listed as least concern (though their
-presence in the Red List indicates they are of conservation interest). I also
-investigated the relationship between species' IUCN Red List categories (an
-ordinal scale of how threatened a species is) and both diversity and population
-size, finding that species categorized as more threatened have both smaller
-population sizes and reduced diversity, compared to non-threatened species
-(Figure \ref{fig:figure-1-redlist}) consistent with past work
-\parencite{Spielman2004-mt}. A linear model of diversity regressed on
-population size has lower AIC when the IUCN Red List categories are included,
-and the estimates of the effect of IUCN status are all negative on diversity,
-though not all are significant in part because some categories have three or
-fewer species (Supplementary Table \ref{supptable:tbl-1}).
-
-\begin{figure}[t!]
-  \centering
-  \includegraphics[width=\textwidth]{figures/diversity_popsize_redlist.pdf}
-
-  \caption{A version of Figure \ref{fig:figure-1} with points colored by their
-    IUCN Red List conservation status. Margin boxplots show the diversity and
-    population size ranges (thin lines) and interquartile ranges (thick lines)
-    for each category. NA/DD indicates no IUCN Red List entry, or Red List
-  status Data Deficient; LC is Least Concern, NT is Near Threatened, VU is
-Vulnerable, EN is Endangered, and CR is Critically Endangered.}
-
-  \label{fig:figure-1-redlist}
-\end{figure}
-
-
+presence in the Red List indicates they are of conservation interest). In
+Supplementary Material Section \namref{supinfo:div-iucn}, I explore more about
+the relationships between IUCN Red List status, diversity, and population size.
 
 \subsection*{Phylogenetic Non-Independence and the Population Size Diversity Relationship}
 
@@ -1451,6 +1427,35 @@ each species in a phylum to the actual biomass of that phylum.}
 
 
 \section{Diversity and IUCN Red List Status}
+\label{supinfo:div-iucn}
+
+I also investigated the relationship between species' IUCN Red List categories
+(an ordinal scale of how threatened a species is) and both diversity and
+population size, finding that species categorized as more threatened have both
+smaller population sizes and reduced diversity, compared to non-threatened
+species (Supplementary Figure \ref{suppfig:figure-1-redlist}) consistent with
+past work \parencite{Spielman2004-mt}. A linear model of diversity regressed on
+population size has lower AIC when the IUCN Red List categories are included,
+and the estimates of the effect of IUCN status are all negative on diversity,
+though not all are significant in part because some categories have three or
+fewer species (Supplementary Table \ref{supptable:tbl-1}).
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=\textwidth]{figures/diversity_popsize_redlist.pdf}
+
+  \caption{A version of Figure \ref{fig:figure-1} with points colored by their
+    IUCN Red List conservation status. Margin boxplots show the diversity and
+    population size ranges (thin lines) and interquartile ranges (thick lines)
+    for each category. NA/DD indicates no IUCN Red List entry, or Red List
+  status Data Deficient; LC is Least Concern, NT is Near Threatened, VU is
+Vulnerable, EN is Endangered, and CR is Critically Endangered.}
+
+  \label{suppfig:figure-1-redlist}
+\end{figure}
+
+
+
 \begin{table}[ht]
   \centering
   \begin{tabular}{rrrr}

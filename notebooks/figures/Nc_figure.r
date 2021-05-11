@@ -21,7 +21,8 @@ phi <- mean(rstan:::extract(dps_fit, pars='phi')$phi)
 beta <- mean(rstan:::extract(dps_fit, pars='beta')$beta)
 
 # alias this -- less typing
-d <- da_dps %>% filter(!is.na(log10_popsize)) %>% 
+d <- da_dps %>% filter(species != 'Equus ferus przewalskii') %>%
+  filter(!is.na(log10_popsize)) %>% 
       group_by(phylum) %>%  
       mutate(n = n(), phyla_mean = mean(log10_popsize)) %>%
       filter(n > 5) %>%
@@ -35,7 +36,7 @@ d %>% ggplot() + geom_density(aes(log10_popsize, fill=phylum), binwidth=0.7, alp
 # what to include
 # x <- d$pred_log10_N  # the simplistic unregularized version
 lx <- 4
-ux <- 18
+ux <- 16
 
 
 output <- TRUE
@@ -88,7 +89,7 @@ labs[1:3] <- latex2exp::TeX(sprintf("  $10^{%d}$", xseq[1:3]))
 axis(3, xseq, labels=labs, 
      line=1.4,  padj=3,
      las=1, tck=0.01)
-axis(3, xseq, labels=rep("", 8),
+axis(3, xseq, labels=rep("", 7),
      tck=-0.01,
      line=1.4)
 
@@ -130,7 +131,7 @@ labs <- labs[or]
 text(ys, xs, labs, srt=0, pos=sides, cex=0.5, xpd=TRUE)
 
 phyla_cols_s <- phyla_cols[unique(d$phylum)]
-legend(14, 32, names(phyla_cols_s), fill=phyla_cols_s,
+legend(13, 32, names(phyla_cols_s), fill=phyla_cols_s,
        bty='n', border=0, cex=0.7, ncol=1)
 
 

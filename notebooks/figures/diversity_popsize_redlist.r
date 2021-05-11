@@ -33,7 +33,7 @@ d$redlist_cat <- factor(d$redlist_cat, levels=iucn_levels)
 x <- d$log10_popsize
 y <- d$log10_diversity
 
-xlims <- c(4, 18)
+xlims <- c(4, 16)
 plot(x, y)
 
 output <- TRUE
@@ -55,7 +55,7 @@ plot(x, y, col=iucn_cols[d$redlist_cat], type='n', axes=FALSE,
 adjust <- 0
 points(x, y, pch=21, cex=1.3, lwd=0.4,
        bg=iucn_cols[d$redlist_cat], col='white')
-xseq <- seq(4, 18, 2)
+xseq <- seq(4, 16, 2)
 axis(1, xseq, 
      labels=latex2exp::TeX(sprintf("$10^{%d}$", xseq)), 
      padj = -1,
@@ -70,7 +70,7 @@ axis(2, yseq,
 
 y <- -0
 m <- 0.12
-x <- 18
+x <- 16
 n <- 0.25
 for (i in seq_along(iucn_levels)) {
   status <- iucn_levels[[i]]

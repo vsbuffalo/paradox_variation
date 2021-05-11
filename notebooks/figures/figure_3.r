@@ -44,11 +44,12 @@ pred  <- colMeans(mu_ln_fit)
 social <- da_ml$social
 
 da_ml <- da_ml %>% filter(phylum != 'Nematoda')
+#filter(species != 'Equus ferus przewalskii') %>%
 
 plot(map_length ~ log10_popsize, da_ml, type='n', 
      axes=FALSE,
      ylim=c(0, 60),
-     xlim=c(6, 18), 
+     xlim=c(6, 15), 
      ylab="", 
      xlab="")
 ci_polygon(x, fit=ln_fit, par='mu_rep', col=scales::alpha('gray88', 0.4))
@@ -92,7 +93,7 @@ title(ylab="recombination map length (Morgans)",
 
 
 
-xseq <- seq(6, 18, 2)
+xseq <- seq(6, 14, 2)
 axis(1, xseq, 
      labels=latex2exp::TeX(sprintf("$10^{%d}$", xseq)), 
      padj = -0.9,
@@ -161,14 +162,14 @@ Nc <- dml$log10_popsize
 plot(Nc, log10(dml$pi_RHH_BGS_1em9), xlab='', 
      type='n', axes=FALSE,
      ylab='', ylim=c(-3.25, 0),
-     xlim=c(4, 18),
+     xlim=c(4, 15),
      col=phyla_cols[da_ml$phylum], pch=1)
 logN <- seq(0, max(Nc), length.out=100)
 y1 <- (log10(4e-8) + logN - log10(1 + 4/3 * 4e-8 * 10^logN))
 y2 <- (log10(4e-9) + logN - log10(1 + 4/3 * 4e-9 * 10^logN))
 polygon(c(logN, rev(logN)), c(y1, rev(y2)), border=NA, 
         col=scales::alpha('gray88', 0.4))
-lines(x <- seq(10, 18), rep(log10(3/4), length(x)), col='gray88', 
+lines(x <- seq(10, 15), rep(log10(3/4), length(x)), col='gray88', 
       lty=2, lwd=0.1, lend=1)
 
 convex_interval <- function(x, y1, y2, n=100, df=10, 
@@ -232,7 +233,7 @@ text(9.5, -0.6, latex2exp::TeX("$\\pi_{BGS+HH}$"), cex=0.8)
 # dml <- dml %>%  rowwise() %>%
   # mutate(y = mean(log10(pi_RHH_BGS_1em8), log10(pi_RHH_BGS_1em9)))
 # l <- loess(y ~ log10_popsize, dml, span=0.2)
-z <- seq(4, 18, length.out=100)
+z <- seq(4, 15.1, length.out=100)
 # lines(z, predict(l, data.frame(log10_popsize=z)))
 da_dps2 <- da_dps %>% filter(phylum %in% unique(da_ml$phylum)) %>%
                       # no point in having one nematode, C. elegans
@@ -253,11 +254,11 @@ points(da_dps2$log10_popsize, da_dps2$log10_diversity, pch=19,
 title(xlab="approximate population size", line=1.8)
 mtext("   diversity (differences per bp)", line=1.7, side=2, xpd=TRUE)
 
-axis(1, seq(4, 18, 2), line=0.3,
+axis(1, seq(4, 14, 2), line=0.3,
      padj = -0.9,
      cex.axis=0.8,
      tck=-0.02,
-     labels=latex2exp::TeX(sprintf("$10^{%d}$", seq(4, 18, 2))))
+     labels=latex2exp::TeX(sprintf("$10^{%d}$", seq(4, 14, 2))))
 axis(2, seq(0, -3), 
      las=1, 
      cex.axis=0.8,
@@ -268,7 +269,7 @@ axis(2, seq(0, -3),
 mtext("B", 3, at=4.2, line=-0, cex=1.4, font=2)
 
 phyla_cols_s <- phyla_cols[unique(da_ml$phylum)]
-legend(8, 0.6, names(phyla_cols_s), fill=phyla_cols_s,
+legend(6, 0.6, names(phyla_cols_s), fill=phyla_cols_s,
        bty='n', border=0, cex=0.6, ncol=3, xpd=TRUE)
 
 

@@ -24,7 +24,7 @@ beta <- mean(rstan:::extract(dps_fit, pars='beta')$beta)
 d <- da_dps %>% filter(species != 'Equus ferus przewalskii')
 
 #d = read_tsv('../../data/combined_data.tsv')
-#d %>% filter(class == 'Aves') %>% select(species, log10_range, log10_popsize)
+#d %>% filter(genus == 'Reticulitermes') %>% select(species, log10_range, log10_popsize)
  
 # what to include
 # x <- d$pred_log10_N  # the simplistic unregularized version
@@ -75,10 +75,11 @@ d$label <- ifelse(label, d$species, "")
 # simplify some species name (Leffler data has combined them in some cases)
 d$label[d$species == 'Gorilla beringei/gorilla'] <- "Gorilla gorilla"
 d$label[d$species == 'Pongo abelii/pygmaeus'] <- "Pongo abelii"
+d$label[d$species == 'Varecia variegata variegata'] <- 'Varecia variegata'
 d$label[d$species == 'Nomascus gabriellae/leucogenys'] <- "Nomascus gabriellae"
 d$label[d$species == 'Aquila clanga/pomarina'] <- "Aquila clanga"
 
-set.seed(2)
+set.seed(3)
 
 xlims <- c(4, 16)
 ylims <- c(-4.1, 0)
@@ -96,10 +97,11 @@ if (FORCE || !file.exists(REPEL_CACHED_FILE)) {
                                 label=label, text=species), 
                                 size=2.1,
                                 point.padding=10, 
-                                force = 1.5,
-                                min.segment.length=0.5,
+                                push_force = 1,
+                                pull_force = 2,
+                                min.segment.length=0.1,
                                 seed=1,
-                                box.padding=1e-1, 
+                                box.padding=1.3e-1, 
                                 ylims=ylims,
                                 max.iter=1000000, xlim=xlims) +
     xlim(xlims[1], xlims[2]) + theme(legend.position = "none") + 
@@ -191,7 +193,7 @@ if (Kalleles == 4 || Kboth) {
 # y <- predict(div_fit, newdata=data.frame(log10_popsize=logN))
 # lines(logN, y, lty=2)
 # abline(dps_ols, lty=2, col='gray52')
-z <- seq(xlims[1], xlims[2], length.out=100)
+z <- seq(3.5, xlims[2], length.out=100)
 lines(z, phi + beta*z, lty=2, col='cornflowerblue')
 lines(z, coef(dps_ols)[1] + z*coef(dps_ols)[2], lty=2, col='gray52')
 

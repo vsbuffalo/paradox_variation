@@ -35,10 +35,10 @@ par(mar=c(2, 1, 2, 1), oma=rep(0, 4))
 
 post_plot(phi, main=latex2exp::TeX('intercept ($\\phi$)'), 
           bs_ci=dps_bs_cis[1, ])
-text(-3.7, 1.23, 'OLS', cex=0.9, xpd=TRUE)
+text(-3.84, 1.23, 'OLS', cex=0.9, xpd=TRUE)
 post_plot(beta, main=latex2exp::TeX('slope ($\\beta$)'), 
           bs_ci=dps_bs_cis[2, ])
-text(0.125, 20.3, 'OLS', cex=0.9)
+text(0.158, 18, 'OLS', cex=0.9)
 post_plot(lambda, main=latex2exp::TeX('phylo. signal ($\\lambda$)'),
            xlim=c(0, 1))
 
