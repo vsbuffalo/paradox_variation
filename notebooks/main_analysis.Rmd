@@ -466,11 +466,12 @@ write_tsv(biomass, file='../data/biomass.tsv')
 
 
 bm_tbl <- biomass %>% mutate(total_species = as.integer(total_species)) %>%
+           mutate(over = prop_carbon_mass / bd_prop_mass) %>%
            select(phylum, total_species, bd_mass, bd_prop_mass, 
-                  total_carbon_mass, prop_carbon_mass, nspecies, frac, factor)
+                  total_carbon_mass, prop_carbon_mass, nspecies, over, frac, factor)
            
 
-print(xtable(bm_tbl, digits=c(1, 2, -2, 2, 4, -2, 4, 2, -2, 2)), 
+print(xtable(bm_tbl, digits=c(1, 2, -2, 2, 4, -2, 4, 2, 2, -2, 2)), 
       include.rownames=FALSE,
       tabular.environment='tabular',
       math.style.exponents=TRUE, type='latex')

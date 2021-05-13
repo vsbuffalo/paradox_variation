@@ -1381,48 +1381,84 @@ alleles across the genome under mutation-selection balance
 
 \section{Population Size Validation}
 
-The approximate census sizes I have estimated here
-
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[]{figures/species_counts.pdf}
-
-  \caption{}
-
-  \label{suppfig:species_counts}
-\end{figure}
+I validated the approximate census sizes I have estimated here using a few
+approaches. First, to check broad consistency, I compared the implied biomass
+from my estimates of body mass and census size per species with estimates of
+the total carbon biomass on earth by phylum \parencite{Bar-On2018-kc}. For
+species $i$ with wet body mass $m_i$ and census size $N_i$, the implied biomass
+is $m_i N_i$. For all species in a phylum $S$, this total sample biomass is
+$b_S = \sum_{i \in S} m_i N_i$. I then compare this wet biomass to the carbon
+biomasses by phylum by \textcite{Bar-On2018-kc}. Across animal species, the
+ratio of dry to wet body mass, and carbon body mass dry body mass varies
+little. In their study, Bar-On et al. assume wet body mass has a 70\% water
+content, and 50\% of dry body mass is carbon mass, leading to a wet body mass
+to carbon mass factor of $\nicefrac{1-0.7}{0.5} = 0.15$. I use this factor to
+convert the total wet biomass to carbon biomass per phylum. 
 
 \begin{table}[ht]
   \resizebox{\textwidth}{!}{%
 \centering
-\begin{tabular}{lr|rr|rrrr|r}
-  &  & \multicolumn{2}{c}{\bf Bar-On et al.}  & \multicolumn{4}{c}{\bf Present study}  &  \\
-  phylum & total species ($T$) & biomass ($B$) & prop. biomass & biomass ($b$) &  prop. biomass & num. species ($n$) &prop. total species ($f = \nicefrac{n}{T}$) & factor ($\nicefrac{b}{f B}$) \\
+\begin{tabular}{lr|rr|rrrrr|r}
+  &  & \multicolumn{2}{c}{\bf Bar-On et al.}  & \multicolumn{5}{c}{\bf Present study}  &  \\
+  phylum & total species ($T$) & biomass ($B$) & prop. biomass & biomass ($b$) &  prop. biomass & num. species ($n$) & factor overrepresented &prop. total species ($f = \nicefrac{n}{T}$) & factor ($\nicefrac{b}{f B}$) \\
   \hline
-  Arthropoda & $1.26 \times 10^{6}$ & 1.20 & 0.4635 & $2.78 \times 10^{-4}$ & 0.0100 &  68 & $5.41 \times 10^{-5}$ & 4.29 \\ 
-  Chordata & $5.41 \times 10^{4}$ & 0.87 & 0.3357 & $2.70 \times 10^{-2}$ & 0.9719 &  68 & $1.26 \times 10^{-3}$ & 24.70 \\ 
-  Annelida & $1.70 \times 10^{4}$ & 0.20 & 0.0772 & $1.23 \times 10^{-5}$ & 0.0004 &   3 & $1.76 \times 10^{-4}$ & 0.35 \\ 
-  Mollusca & $9.54 \times 10^{4}$ & 0.20 & 0.0772 & $4.54 \times 10^{-4}$ & 0.0163 &  13 & $1.36 \times 10^{-4}$ & 16.60 \\ 
-  Cnidaria & $1.60 \times 10^{4}$ & 0.10 & 0.0386 & $3.14 \times 10^{-5}$ & 0.0011 &   2 & $1.25 \times 10^{-4}$ & 2.51 \\ 
-  Nematoda & $2.50 \times 10^{4}$ & 0.02 & 0.0077 & $3.89 \times 10^{-6}$ & 0.0001 &   1 & $4.00 \times 10^{-5}$ & 4.87 \\ 
+  Arthropoda & $1.26 \times 10^{6}$ & 1.20 & 0.4635 & $2.78 \times 10^{-4}$ & 0.0100 &  68 & 0.02 & $5.41 \times 10^{-5}$ & 4.29 \\
+  Chordata & $5.41 \times 10^{4}$ & 0.87 & 0.3357 & $2.70 \times 10^{-2}$ & 0.9719 &  68 & 2.90 & $1.26 \times 10^{-3}$ & 24.70 \\
+  Annelida & $1.70 \times 10^{4}$ & 0.20 & 0.0772 & $1.23 \times 10^{-5}$ & 0.0004 &   3 & 0.01 & $1.76 \times 10^{-4}$ & 0.35 \\
+  Mollusca & $9.54 \times 10^{4}$ & 0.20 & 0.0772 & $4.54 \times 10^{-4}$ & 0.0163 &  13 & 0.21 & $1.36 \times 10^{-4}$ & 16.60 \\
+  Cnidaria & $1.60 \times 10^{4}$ & 0.10 & 0.0386 & $3.14 \times 10^{-5}$ & 0.0011 &   2 & 0.03 & $1.25 \times 10^{-4}$ & 2.51 \\
+  Nematoda & $2.50 \times 10^{4}$ & 0.02 & 0.0077 & $3.89 \times 10^{-6}$ & 0.0001 &   1 & 0.02 & $4.00 \times 10^{-5}$ & 4.87 \\
 \end{tabular}}
-
   \caption{How the total carbon biomass estimates by phylum from
     \textcite{Bar-On2018-kc} compare to the implied biomass estimates from this
     study. All biomass estimates are carbon biomass, and the proportions are of
     total biomass with respect to the study. The proportion of biomass in this
     study compared to the Bar-On et al. estimates \textcite{Bar-On2018-kc}
-    indicates chordates are over-represented and arthropods are
-    under-represented in the present study. Total species by phylum estimates
-  are from
-\textcite{Reaka-Kudla1996-fe,Nicol1969-qx,Zhang2013-zc,Chapman2009-fw}. The
-ratio column is the ratio of total biomass implied by the $N_c$ estimates of
-each species in a phylum to the actual biomass of that phylum.}
-
+    indicates chordates are overrepresented and arthropods are underrepresented
+    in the present study; the factor that each phylum is overrepresented is
+    given in the eighth column. Total species by phylum estimates are from
+    \textcite{Reaka-Kudla1996-fe,Nicol1969-qx,Zhang2013-zc,Chapman2009-fw}. The
+    ratio column is the ratio of total biomass implied by the $N_c$ estimates
+    of each species in a phylum to the actual biomass of that phylum.}
+    \label{supp:biomass-tbl}
 \end{table}
 
 
+First, I compared the relative carbon biomass in this study to the relative
+carbon biomass on earth per phylum. This shows that this study's sample is over
+represents chordate biomass (by a factor of $\approx 3$), and under represents
+in arthropod biomass (by a factor of $0.02$) relative to the proportion of
+carbon biomass of these phyla on earth (see column eight of Supplementary Table
+\ref{supp:biomass-tbl}. Second, to check whether the carbon biomass per phylum
+in the sample was broadly consistent with the total on earth by phylum ($B_S$
+for phylum $S$), I calculated the expected sample biomass if species were
+sampled randomly from the total species in a phylum, ($B_S \times
+\nicefrac{n_S}{T_S}$, where $n_S$ is the total number of species in the sample
+in phylum $S$, $T_S$ is the total number of species in phylum $S$ on earth).
+The fraction of total species on earth included in the sample in this study is
+depicted in Supplementary Figure \ref{suppfig:species_counts}.  
+
+Next, I look at the ratio of sample biomass per phylum, $b_S$ to this expected
+biomass per phylum (Supplementary Table \ref{supp:biomass-tbl}). The
+consistency is quite close for this rough approach and the non-random sample of
+taxa included in this study. The carbon biomass estimates for chordates implied
+by the census size estimates are $\approx 25$-fold higher than expected, but is
+well within reasonable expectations given that the chordate sample includes
+many larger-bodied domesticated species (and is a biased sample in other ways).
+Similarly, the implied arthropod carbon biomass is quite close to what one
+would expect. Overall, these values indicate that the census size estimates
+here do not lead to implied biomasses per phylum that are outside the range of
+plausibility.
+
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[]{figures/species_counts.pdf}
+  \caption{The fraction of total species on earth included in this study's
+  sample, per class. The color of the points represents phylum, and the size of
+the point represents the absolute number of species by class.}
+  \label{suppfig:species_counts}
+\end{figure}
 
 
 \section{Diversity and IUCN Red List Status}
