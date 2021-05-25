@@ -216,7 +216,7 @@ d  %>% ggplot(aes(hcn, map_length)) + geom_point() +
 
 ```
 
-Body size and map length: 
+Body size and chromosome number: 
 
 ```{r}
 
@@ -227,6 +227,19 @@ d %>%
   xlab('log10(size)')
 
 ```
+
+Range and map length: 
+
+```{r}
+
+d %>% 
+  filter_at(vars(hcn, log10_size), ~ !is.na(.)) %>%
+  ggplot(aes(log10_range, map_length, color=phylum)) + geom_point() + 
+  geom_smooth(method='lm') + ylab('map length (Morgans)') + 
+  xlab('log10(size)')
+
+```
+
 
 Morgans per chromosome by chromosome number:
 
@@ -527,8 +540,10 @@ First the top mammalian species by biomass:
 
 ```{r}
 
-xd %>% filter(class == 'Mammalia') %>% arrange(desc(carbon_mass)) %>% 
-  select(species, carbon_mass) %>% 
+xd %>% 
+  filter(class == 'Mammalia') %>% 
+  arrange(desc(carbon_mass)) %>% 
+  select(species, carbon_mass, log10_popsize) %>% 
   as.data.frame()
 
 ```

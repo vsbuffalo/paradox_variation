@@ -84,6 +84,8 @@
 \begin{document}
 \maketitle
 
+% TODO recheck node height and other p-values
+
 
 % Neutral theory predicts that genetic diversity increases with population size,
 % yet observed levels of diversity across species vary only two orders of
@@ -101,8 +103,9 @@
 % observed relationship between diversity and census sizes across species.
 
 \begin{abstract} 
-  Under neutral theory, genetic diversity in an equilibrium population
-  is expected to increase with population size. However, observed levels of
+
+  Under neutral theory, genetic diversity in an equilibrium population is
+  expected to increase with population size. However, observed levels of
   diversity across metazoans vary only two orders of magnitude, while census
   population sizes ($N_c$) are expected to vary over several. This unexpectedly
   narrow range of diversity is a longstanding enigma in evolutionary genetics
@@ -111,14 +114,13 @@
   species, yet tests of this hypothesis seem to fall short of explaining the
   orders-of-magnitude reduction in diversity observed in nature. In this work,
   I revisit Lewontin's Paradox and assess whether current models of linked
-  selection are likely to constrain diversity to this extent.  To quantify the
-  discrepancy between pairwise diversity and census population sizes across
+  selection are capable of constraining diversity to this extent. To quantify
+  the discrepancy between pairwise diversity and census population sizes across
   species, I combine genetic data from 172 metazoan taxa with estimates of
   census sizes from geographic occurrence data and population densities
   estimated from body mass.  Next, I fit the relationship between
   previously-published estimates of genomic diversity and these approximate
-  census sizes to quantify Lewontin's Paradox. While previous across-taxa
-  population genetic studies have avoided accounting for phylogenetic
+  census sizes to quantify Lewontin's Paradox. To account for phylogenetic
   non-independence, I use phylogenetic comparative methods to investigate the
   diversity census size relationship, estimate phylogenetic signal, and explore
   how diversity changes along the phylogeny. I consider whether the reduction
@@ -127,8 +129,8 @@
   Since the impact of linked selection is mediated by recombination map length,
   I also investigate how map lengths vary with census sizes. I find species
   with large census sizes have shorter map lengths, leading these species to
-  experience greater reductions in diversity due to linked selection. Even
-  after using high estimates of the strength of sweeps and background
+  likely experience greater reductions in diversity due to linked selection.
+  Even after using high estimates of the strength of sweeps and background
   selection, I find linked selection likely cannot explain the shortfall
   between predicted and observed diversity levels across metazoan species.
   Furthermore, the predicted diversity under linked selection does not fit the
@@ -145,17 +147,18 @@ between lineages (pairwise diversity, $\pi$) is determined by the balance of
 new mutations and their loss by genetic drift
 \parencite{Kimura1964-ul,Malecot1948-zv,Wright1931-fl}. In particular, the
 expected diversity at neutral sites in a panmictic population of $N_c$ diploids
-is expected to be $\pi \approx 4N_c \mu$, where $\mu$ is per generation
-mutation rate. Given that metazoan germline mutation rates only differ 10-fold
-($10^{-8}$--$10^{-9}$, \cite{Kondrashov2010-fi,Lynch2010-ki}), and census sizes
-vary over several orders of magnitude, one would expected under neutral theory
-that heterozygosity should also vary over several orders of magnitude. However,
-early allozyme surveys revealed that heterozygosity levels across a wide range
-of species varied just an order of magnitude \parencite[][p.
-208]{Lewontin1974-jb}; this anomaly is known as Lewontin's ``Paradox of
-Variation". With modern sequencing-based estimates of $\pi$ across taxa ranging
-over only three orders of magnitude ($0.01$--$10\%$, \cite{Leffler2012-zj}),
-Lewontin's paradox has persisted unresolved through the genomics era.
+is expected to be $\pi \approx 4N_c \mu$, where $\mu$ is the per basepair per
+generation mutation rate. Given that metazoan germline mutation rates only
+differ 10-fold ($10^{-8}$--$10^{-9}$, \cite{Kondrashov2010-fi,Lynch2010-ki}),
+and census sizes vary over several orders of magnitude, one would expected
+under neutral theory that heterozygosity should also vary over several orders
+of magnitude. However, early allozyme surveys revealed that heterozygosity
+levels across a wide range of species varied just an order of magnitude
+\parencite[][p.  208]{Lewontin1974-jb}; this is known as Lewontin's ``Paradox
+of Variation".  With modern sequencing-based estimates of $\pi$ across taxa
+ranging over only three orders of magnitude ($0.01$--$10\%$,
+\cite{Leffler2012-zj}), Lewontin's paradox has persisted unresolved through the
+genomics era.
 
 From the beginning, explanations for Lewontin's Paradox have been framed in
 terms of the neutralist--selectionist controversy
@@ -170,9 +173,10 @@ census size, $N_c$. By contrast, the selectionist view is that the direct and
 indirect effects of linked selection suppress diversity levels across taxa,
 specifically because the impact of linked selection is greater in large
 populations. Undoubtedly, these opposing views represent a false dichotomy, as
-population genomic studies have uncovered complex demographic histories that
-impact diversity within a species (e.g. \cite{Zhao2013-vd,Palkopoulou2015-bg}),
-as well as evidence that selection depresses genome-wide diversity (e.g.
+population genomic studies have uncovered both complex demographic histories
+that impact diversity within a species (e.g.
+\cite{Zhao2013-vd,Palkopoulou2015-bg}) and evidence that selection depresses
+genome-wide diversity (e.g.
 \cite{Elyashiv2016-vt,Begun1992-ey,Aguade1989-jx,McVicker2009-ax}). 
 
 \subsection*{Possible Explanations of Lewontin's Paradox}
@@ -206,19 +210,20 @@ events, which reduces effective population size
 \parencite{Maruyama1980-xz,Slatkin1977-kd}. 
 
 While chance demographic events like bottlenecks and recent expansions have
-long-term impacts on diversity (equilibrium is reached on the order of size of
-the population), characteristics of the breeding structure such as high
-variance ($V_w$) or skew in reproductive success  also suppress diversity below
-the levels predicted by the census size \parencite{Wright1938-tv}. In species
-like marine animals, females are highly fecund, and dispersing larvae face
-extremely low survivorship, leading to high variance in reproductive success
+long-term impacts on diversity (since mutation-drift equilibrium is reached on
+the order of size of the population), characteristics of the breeding structure
+such as high variance ($V_w$) or skew in reproductive success  also suppress
+diversity below the levels predicted by the census size
+\parencite{Wright1938-tv}. For example, in many marine animals,
+females are highly fecund, and dispersing larvae face extremely low
+survivorship, leading to high variance in reproductive success
 \parencite{Waples2018-kb,Waples2013-wi,Hedgecock2011-ku,Hauser2008-fd}. Such
 ``sweepstakes" reproductive systems can lead to remarkably small ratios of
 effective population size to census population size (e.g. $\nicefrac{N_e}{N_c}$
 can range from $10^{-6}$--$10^{-2}$), since $\nicefrac{N_e}{N} \approx
 \nicefrac{1}{V_w}$
 \parencite{Hedgecock1994-gs,Wright1938-tv,Nunney1993-ef,Nunney1996-wy}, and
-require multiple-merger coalescent processes  to describe their genealogies
+require multiple-merger coalescent processes to describe their genealogies
 \parencite{Eldon2006-ui}. Overall, these reproductive systems diminish the
 diversity in many species, but seem unlikely to explain Lewontin's Paradox
 broadly across metazoans.
@@ -226,7 +231,7 @@ broadly across metazoans.
 Alternatively, selective processes, and in particular the indirect effects of
 selection on linked neutral variation, could explain the observed narrow range
 of diversity. The earliest mathematical model of hitchhiking was proffered as a
-solution to Lewontin's Paradox \parencite{Maynard_Smith1974-zr}.  Since,
+explanation of Lewontin's Paradox \parencite{Maynard_Smith1974-zr}.  Since,
 empirical observations have demonstrated that linked selection shapes patterns
 of genome-wide diversity, as evidenced by the correlation between recombination
 and diversity in a variety of species
@@ -249,12 +254,12 @@ beneficial mutations regularly enter and sweep through the population, trapping
 lineages and forcing them to coalesce
 \parencite{Kaplan1989-sc,Gillespie2000-mh}. In general, decoupling occurs under
 these hitchhiking models when the rate of coalescence due to selection is much
-greater than the rate of neutral coalescence \parencite[equation
-22]{Coop2012-cd}. Other selection models cannot alone decouple diversity from
-population size, \emph{ceteris paribus}. For example, the reduction in
-diversity predicted under background selection and polygenic fitness variation
-is a proportion reduction in population size, mediated by the total
-recombination map length
+greater than the rate of neutral coalescence \parencite[e.g.][equation
+22]{Coop2012-cd}. Other linked selection models are proportional to population
+size, and thus cannot decouple diversity, all else equal. For example, models
+of background selection and polygenic fitness variation predict diversity is
+proportional to population size, mediated by the total recombination map length
+and the deleterious mutation rate or fitness variation
 \parencite{Charlesworth1993-gb,Nicolaisen2012-vs,Nordborg1996-nq,Robertson1961-ho,Santiago1995-hx,Santiago1998-bs}.
 
 \subsection*{Recent Approaches Towards Solving Lewontin's Paradox}
@@ -262,10 +267,10 @@ recombination map length
 Recently, \textcite{Corbett-Detig2015-gt} used population genomic data to
 estimate the reduction in diversity due to background selection and hitchhiking
 across 40 species, and showed the impact of selection increases with two
-proxies of census population size, species range and with body size. These
-authors argued this is evidence that selection could explain Lewontin's
-Paradox; however, in a re-analysis, \textcite{Coop2016-gx} demonstrated that
-the observed scale of these reductions is insufficient to explain the
+proxies of census population size, species range and with body size. They
+argued this is evidence that selection could explain Lewontin's Paradox;
+however, in a re-analysis, \textcite{Coop2016-gx} demonstrated that the
+observed scale of these reductions is insufficient to explain the
 orders-of-magnitude shortfall between observed and expected levels of diversity
 across species. Other recent work has found that certain life history
 characteristics related to parental investment, such as propagule size, are
@@ -282,35 +287,35 @@ species. To address these shortcomings, I first estimate census sizes by
 combining predictions of population density based on body size with ranges
 estimated from geographic occurrence data. Using these estimates, I quantify
 the relationship between census size and previously-published genomic diversity
-estimates across 172 metazoan taxa within nine phyla, which provides a sense of
-the scale of the divergence between $\pi$ and $N_c$ that leads to Lewontin's
+estimates across 172 metazoan taxa within nine phyla, to provide a sense of the
+scale of the divergence between $\pi$ and $N_c$ that leads to Lewontin's
 Paradox. 
 
-Past work looking at the relationship between $\pi$ and $N_c$ has largely
-ignored phylogenetic non-independence across taxa
-\parencite{Felsenstein1985-an}. To address this shortcoming, I account for
-phylogenetic non-independence across taxa using a synthetic time-calibrated
-phylogeny and phylogenetic comparative methods (PCMs). Moreover,
-\textcite{Lynch2011-qv} has argued that since coalescent times are much less
-than divergence times, considering phylogenetic non-independence is unnecessary
-for traits like effective population size. Using PCMs, I test this conjecture
-by estimating phylogenetic signal in the diversity census size relationship,
-and investigating how these traits evolve along the phylogeny.
+Past work looking at the relationship between $\pi$ and $N_c$ has been unable
+to account for phylogenetic non-independence across taxa
+\parencite{Felsenstein1985-an}. To address this shortcoming, I use phylogenetic
+comparative methods (PCMs) with a synthetic time-calibrated phylogeny to
+account for shared phylogenetic history. Moreover, it is disputed whether
+considering phylogenetic non-independence is necessary in population genetics,
+since coalescent times are much less than divergence times
+\parencite{Whitney2010-ud,Lynch2011-qv}. Using PCMs, I address this by
+estimating the degree of phylogenetic signal in the diversity census size
+relationship, and investigating how these traits evolve along the phylogeny.
 
 Finally, I explore whether the predicted reductions of diversity under
-background selection and recurrent hitchhiking are sufficiently strong 
-to resolve Lewontin's Paradox. These predicted reductions in diversity across
-species are generously estimated using selection strength parameters from
-\emph{Drosophila melanogaster}, a species known to be strongly affected by
-linked selection. Given the effects of linked selection are mediated by
-recombination map length, I investigate how recombination map lengths vary with
-census population size using data from a previously-published survey
-\parencite{Stapley2017-fs}. I find map lengths are typically shorter in
-large--census-size species, increasing the effects of linked selection in these
-species, which might further decouple diversity from census size. Still, I find
-the combined impact of these selection models with available parameter
-estimates falls short in explaining Lewontin's Paradox, and discuss future
-avenues through which the Paradox of Variation could be fully resolved.
+background selection and recurrent hitchhiking are sufficiently strong to
+resolve Lewontin's Paradox. These predicted reductions in diversity across
+species are estimated using strong selection parameters from \emph{Drosophila
+melanogaster}, a species known to be strongly affected by linked selection.
+Given the effects of linked selection are mediated by recombination map length,
+I investigate how recombination map lengths vary with census population size
+using data from a previously-published survey \parencite{Stapley2017-fs}. I
+find map lengths are typically shorter in large--census-size species,
+increasing the effects of linked selection in these species, which might
+further decouple diversity from census size. Still, I find the combined impact
+of these selection models with available parameter estimates falls short in
+explaining Lewontin's Paradox, and discuss future avenues through which the
+Paradox of Variation could be fully resolved.
 
 \section*{Results}
 
@@ -330,7 +335,7 @@ A major impediment in quantifying Lewontin's Paradox has been estimating census
 population sizes across many taxa, especially for extremely abundant,
 cosmopolitan species that define the upper limit of ranges. Previous work has
 surveyed the literature for census size estimates
-\parencite{Nei1984-zi,Soule1976-he,Frankham1996-yb}, or used range and body
+\parencite{Nei1984-zi,Soule1976-he,Frankham1996-yb}, or used range or body
 size or qualitative categories as proxies for census size
 \parencite{Corbett-Detig2015-gt,Leffler2012-zj}. To quantify the relationship
 between genomic estimates of diversity and census population sizes, I first
@@ -339,15 +344,21 @@ approximate census population sizes for 172 metazoan taxa (Figure
 using a previously-observed linear relationship that holds across metazoans
 (Supplementary Figure \ref{suppfig:damuth};
 \cite{Damuth1981-st,Damuth1987-sg}). Then, from geographic occurrence data, I
-estimate range sizes. Finally, I estimate population size as the product of
+estimate range sizes.  Finally, I estimate population size as the product of
 these predicted densities and range estimates (see Methods:
 \Newnameref{sec:methods-popsize}). Note that the relationship between
 population density and body size is driven by energy budgets, and thus reflects
-macroecological equilibria \parencite{Damuth1987-sg}; consequently, population
-sizes for taxa like humans and their domesticated species are underestimated.
-While these methods to estimate census size are crude and approximate, they can
-be efficiently calculated for numerous taxa and are sufficient to estimate the
-scale of Lewontin's Paradox.
+macroecological equilibria \parencite{Damuth1987-sg}. Consequently, population
+sizes are underestimated for taxa like humans and their domesticated species,
+and overestimated for species with anthropogenically reduced densities or
+patchy ranges. For example, the population size of \emph{Lynx lynx} is likely
+around 50,000 \parencite{Iucn2020-ap} which is around two orders of magnitude
+smaller than my estimate. Additionally, the range size estimates do not
+consider whether an area has unsuitable habitat, and thus may be overestimates
+for species with particular niches or patchy habitats. While these methods to
+estimate census size are crude and approximate, they can be efficiently
+calculated for numerous taxa and are sufficient to estimate the scale of
+Lewontin's Paradox.
 
 \subsection*{Quantifying Lewontin's Paradox}
 
@@ -376,11 +387,12 @@ To determine which ecological or evolutionary processes could decouple
 diversity from census population size, we first need to quantify this
 relationship across a wide variety of taxa. Previous work has found there is a
 significant relationship between heterozygosity and the logarithm of population
-size, but these studies relied on heterozygosity measured from allozyme data
-\parencite{Soule1976-he,Frankham1996-yb,Nei1984-zi}. Here, I confirm these
-findings using pairwise diversity estimates from genomic sequence data and the
-estimated census sizes (Figure \ref{fig:figure-1}). The pairwise diversity
-estimates are from three sources: \textcite{Leffler2012-zj},
+size or range size, but these studies relied on heterozygosity measured from
+allozyme data
+\parencite{Soule1976-he,Frankham1996-yb,Nei1984-zi,Leffler2012-zj}. Here, I
+confirm these findings using pairwise diversity estimates from genomic sequence
+data and the estimated census sizes (Figure \ref{fig:figure-1}). The pairwise
+diversity estimates are from three sources: \textcite{Leffler2012-zj},
 \textcite{Corbett-Detig2015-gt}, and \textcite{Romiguier2014-bp}, and are
 predominantly from either synonymous or non-coding DNA (see Methods:
 \Newnameref{sec:methods-diversity}). Overall, an ordinary least squares (OLS)
@@ -400,15 +412,19 @@ differences per basepair. Those that do, lynx (\emph{Lynx Lynx}), wolverine
 face habitat fragmentation and declining population sizes. These three species
 are all in the IUCN Red List, but are listed as least concern (though their
 presence in the Red List indicates they are of conservation interest). In
-Supplementary Material Section \Newnameref{supinfo:div-iucn}, I explore more about
-the relationships between IUCN Red List status, diversity, and population size.
+Supplementary Material Section \Newnameref{supinfo:div-iucn}, I explore more
+about the relationships between IUCN Red List status, diversity, and population
+size.
 
 \subsection*{Phylogenetic Non-Independence and the Population Size Diversity Relationship}
 
-In quantifying Lewontin's Paradox, I have additionally fit some simple trait
-evolution models that account for phylogenetic non-independence, investigated
+One limitation of using ordinary least squares is that shared phylogenetic
+history can create correlation structure in the residuals, which violates an
+assumption of the regression model
+\parencite{Felsenstein1985-an,Revell2010-mf}. To address this shortcoming, I
+fit this relationship using a phylogenetic mixed-effects model, investigated
 whether there is a signal of phylogenetic non-independence, estimated the
-continuous trait values on the phylogeny, and assessed how diversity and
+continuous trait values on the phylogeny, and explored how diversity and
 population size evolve. Prior population genetic comparative studies have
 lacked time-calibrated phylogenies and assumed unit branch lengths
 \parencite{Whitney2010-ud}, a shortcoming that has drawn criticism
@@ -446,15 +462,17 @@ Using a phylogenetic mixed-effects model
 \parencite{Lynch1991-tp,Hadfield2010-ql,De_Villemereuil2014-kt} implemented in
 Stan \parencite{Carpenter2017-xi,Stan_Development_Team2020-ea}, I estimated the
 linear relationship between diversity and population size (on a log-log scale)
-accounting for phylogeny, for the 166 taxa with non-missing data and present in
-the synthetic chronogram. As with the non-phylogenetic regression, this
-relationship was positive and significant (95\% credible interval $0.04,
-0.11$), though somewhat attenuated compared to the OLS estimates (Figure
-\ref{fig:figure-2}B). Since the population size estimates are based on range
-and body mass, they are essentially a composite trait; fitting phylogenetic
-mixed-effects models separately on body mass and range indicates these have
-significant negative and positive effects, respectively (Supplementary Figure
-\ref{suppfig:figure-div-range-bodymass}).
+accounting for phylogeny, for the 166 taxa without missing data and present in
+the synthetic chronogram. As with the linear regression, this relationship was
+positive and significant (95\% credible interval $0.04, 0.11$), though somewhat
+attenuated compared to the OLS estimates (Figure \ref{fig:figure-2}B). Since
+the population size estimates are based on range and body mass, they are
+essentially a composite trait; fitting phylogenetic mixed-effects models
+separately on body mass and range indicates these have significant negative and
+positive effects, respectively (Supplementary Figure
+\ref{suppfig:figure-div-range-bodymass}; see also Supplementary Figure
+\ref{suppfig:div_leffler} for the relationship between diversity and the range
+categories of \cite{Leffler2012-zj}).
 
 With the phylogenetic mixed-effects model, I also estimated the variance of the
 phylogenetic effect ($\sigma_p^2$) and the residual variance ($\sigma_r^2$),
@@ -470,39 +488,41 @@ diversity, the posterior mean of $\lambda = 0.67$ (90\% credible interval
 $[0.59, 0.75]$) indicates that the majority of the variance perhaps might be
 due to shared phylogenetic history (Figure \ref{fig:figure-2}B).
 
-A closer visual inspection of the estimated ancestral continuous values for
-diversity and population size on the phylogeny indicates the high phylogenetic
-signal seems to be driven in part by chordates having low diversity and small
+This high degree of phylogenetic signal suggests
+\citeauthor{Gillespie1991-qa}'s (1991) concern that the $\pi$--$N_c$
+relationship was driven by chordate-arthropod differences may be valid. A
+visual inspection of the estimated ancestral continuous values for diversity
+and population size on the phylogeny indicates the high phylogenetic signal
+seems to be driven in part by chordates having low diversity and small
 population sizes compared to non-chordates (Figure \ref{fig:figure-2}A). This
-suggests \citeauthor{Gillespie1991-qa}'s (1991) earlier critique that the
-$\pi$--$N_c$ relationship was driven by chordate-arthropod differences may be
-valid. This problem resembles Felsenstein's worst-case scenario
+problem resembles Felsenstein's worst-case scenario
 \parencite{Felsenstein1985-an,Uyeda2018-wf}, where a singular event on a
 lineage separating two clades generates a spurious association between two
-traits. To further investigate whether clade-level differences dominated the
-relationship between diversity and population size, I fit phylogenetic
-mixed-effects models to phyla-level subsets of the data for clades with
-sufficient sample sizes (see Methods: \Newnameref{sec:methods-pcm}). This
-analysis shows a significant positive relationship between diversity and
-population size in arthropods, and positive weak relationships in molluscs and
-chordates (Supplementary Figure \ref{suppfig:div_popsize_post_phyla}). Each of
-the 90\% credible intervals for slope overlap, indicating the relationship
-between $\pi$ and $N_c$ is similar across these clades.
+traits. 
 
-One limitation of the phylogenetic mixed-effects models employed here is that
-they assume traits evolve under constant-rate Brownian motion. To test this
-assumption, I performed node-height tests \parencite{Freckleton2006-ww}.
-Node-height tests regress the absolute values of the standardized contrasts
-between lineages against the branching time (since present) of these lineages.
-Under Brownian Motion (BM), standardized contrasts are estimates of the rate of
-character evolution \parencite{Felsenstein1985-an}; if a trait evolves under
-constant rate BM, this relationship should be flat. For both diversity and
-population size, node-height tests indicate a significant increase in the rate
-of evolution towards the present (robust regression p-values 0.028 and 0.00070
-respectively; Figure \ref{fig:figure-2}C).  Considering the constituents of the
-population size estimate, range and body mass, separately, the rate of
-evolution of range but not body mass shows a significant increase (p-value $1.9
-\times 10^{-7}$) towards the present. 
+To investigate whether clade-level differences dominated the relationship
+between diversity and population size, I fit phylogenetic mixed-effects models
+to phyla-level subsets of the data for clades with sufficient sample sizes (see
+Methods: \Newnameref{sec:methods-pcm}). This analysis shows a significant
+positive relationship between diversity and population size in arthropods, and
+positive weak relationships in molluscs and chordates (Supplementary Figure
+\ref{suppfig:div_popsize_post_phyla}). Each of the 90\% credible intervals for
+slope overlap, indicating the relationship between $\pi$ and $N_c$ is similar
+across these clades.
+
+Additionally, I have explored the rate of trait change through time using
+node-height tests \parencite{Freckleton2006-ww}. Node-height tests regress the
+absolute values of the standardized contrasts between lineages against the
+branching time (since present) of these lineages. Under Brownian Motion (BM),
+standardized contrasts are estimates of the rate of character evolution
+\parencite{Felsenstein1985-an}; if a trait evolves under constant rate BM, this
+relationship should be flat. For both diversity and population size,
+node-height tests indicate a significant increase in the rate of evolution
+towards the present (robust regression p-values 0.028 and 0.00070 respectively;
+Figure \ref{fig:figure-2}C). Considering the constituents of the population
+size estimate, range and body mass, separately, the rate of evolution of range
+but not body mass shows a significant increase (p-value $1.9 \times 10^{-7}$)
+towards the present. 
 
 Interestingly, the diversity node-height test reveals two rate shifts at deeper
 splits (Figure \ref{fig:figure-2}C, top left) around 570 Mya. These nodes
@@ -520,9 +540,9 @@ in diversity is mirrored in the population size node-height test (Figure
 \ref{fig:figure-2}C, top right). Rather, it appears a trait impacting diversity
 but not census size (e.g. mutation rate or offspring distributions) has
 experienced a shift on the lineage separating tunicates and vertebrates. At
-nearly 600 Mya, these deep nodes illustrate a counterexample to Lynch's claim
-that expected coalescent times do not share phylogenetic history because they
-are less than divergence times. 
+nearly 600 Mya, these deep nodes illustrate that expected coalescent times can
+share phylogenetic history, due to phylogenetic inertia in some combination of
+population size, reproductive system, and mutation rates.
 
 Finally, an important caveat is the increase in rate towards the tips could be
 caused by measurement noise. Inspecting the lineage pairs that lead to this
@@ -544,12 +564,13 @@ these to the observed relationship between $\pi$ and $N_c$.
 
 I quantify the effect of linked selection on diversity as the ratio of observed
 diversity ($\pi$) to the estimated diversity in the absence of linked selection
-($\pi_0$), $R = \nicefrac{\pi}{\pi_0}$. There are two difficulties in
-evaluating whether linked selection could resolve Lewontin's Paradox. The first
-difficulty is that $\pi_0$ is unobserved. Previous work has estimated $\pi_0$
-using methods that exploit the spatial heterogeneity in recombination and
-functional density across the genome to fit linked selection models that
-incorporate both hitchhiking and background selection
+($\pi_0$), $R = \nicefrac{\pi}{\pi_0}$. Here, $\pi_0$ would reflect demographic
+history and non-heritable variation in reproductive success. There are two
+difficulties in evaluating whether linked selection could resolve Lewontin's
+Paradox. The first difficulty is that $\pi_0$ is unobserved.  Previous work has
+estimated $\pi_0$ using methods that exploit the spatial heterogeneity in
+recombination and functional density across the genome to fit linked selection
+models that incorporate both hitchhiking and background selection
 \parencite{Elyashiv2016-vt,Corbett-Detig2015-gt}. The second difficulty is
 understanding of how $R$ varies across taxa, since we lack estimates of
 critical model parameters for most species. Still, I can address a key
@@ -561,7 +582,7 @@ selection across species, $\pi_{BGS+HH} = R \pi_0$, match the observed
 relationship in Figure \ref{fig:figure-1}? 
 
 Since we lack estimates of key linked selection parameters across species, I
-generously parameterize the hitchhiking and BGS models using estimates from
+parameterize the hitchhiking and BGS models using estimates from
 \emph{Drosophila melanogaster}, a species known to be strongly affected by
 linked selection \parencite{Sella2009-nx}. Under a generalized model of
 hitchhiking and background selection \parencite{Elyashiv2016-vt,Coop2012-cd}
@@ -591,15 +612,16 @@ they occur across the genome (c.f. $J_{2,2}$ in equation 15 of
 Parameterizing the model this way, I then set the key parameters that determine
 the impact of recurrent hitchhiking and background selection ($\gamma$, $J$,
 and $U$) to high values estimated from \emph{Drosophila melanogaster} by
-\textcite{Elyashiv2016-vt}. My estimate of $\gamma_\text{Dmel}$ based Elyashiv
-et al. implies a rate of sweeps per basepair of $\nu_\text{BP,Dmel} \approx
-2.34 \times 10^{-11}$, which is close to other estimates from \emph{D.
-melanogaster} (see Supplementary Figure \ref{suppfig:linked-sel-params}A). The
-rate of deleterious mutations per diploid genome, per generation is
-parameterized using the estimate from Elyashiv et al., $U_\text{Dmel} = 1.6$,
-which is a bit greater than previous estimates based on Bateman-Mukai
-approaches \parencite{Mukai1985-bc,Mukai1988-vs,Charlesworth1987-ab}. Finally,
-the probability that a lineage is trapped in a sweep, $J_\text{Dmel}$, is
+\textcite{Elyashiv2016-vt}. My estimate of the adaptive substitutions per
+generation ($\gamma_\text{Dmel}$) based Elyashiv et al. implies a rate of
+sweeps per basepair of $\nu_\text{BP,Dmel} \approx 2.34 \times 10^{-11}$, which
+is close to other estimates from \emph{D.  melanogaster} (see Supplementary
+Figure \ref{suppfig:linked-sel-params}A). The rate of deleterious mutations per
+diploid genome, per generation is parameterized using the estimate from
+Elyashiv et al., $U_\text{Dmel} = 1.6$, which is a bit greater than previous
+estimates based on Bateman-Mukai approaches
+\parencite{Mukai1985-bc,Mukai1988-vs,Charlesworth1987-ab}. Finally, the
+probability that a lineage is trapped in a sweep, $J_\text{Dmel}$, is
 calculated from the estimated genome-wide average coalescent rate due to sweeps
 from Elyashiv et al. (see Supplementary Figured
 \ref{suppfig:linked-sel-params}B and Methods:
@@ -614,12 +636,12 @@ size ($N_c$).
   \includegraphics[width=\textwidth]{figures/figure_3.pdf}
 
   \caption{(A) The observed relationship between recombination map length ($L$)
-    and census size ($N_c$) across 131 species with complete data and known
-    phylogeny. Triangle points indicate social taxa excluded from the model
+    and census size ($N_c$) across 136 species with complete data and known
+    phylogeny. Triangle points indicate six social taxa excluded from the model
     fitting since these have adaptively higher recombination map lengths
     \parencite{Wilfert2007-dx}. The dark gray line is the estimated
     relationship under a phylogenetic mixed-effects model, and the gray
-    interval is the 95\% posterior average.  (B) Points indicate the observed
+    interval is the 95\% posterior average. (B) Points indicate the observed
     $\pi$--$N_c$ relationship across taxa shown in Figure \ref{fig:figure-1},
     and the blue ribbon is the range of predicted diversity were $N_e = N_c$
     for $\mu = 10^{-8}$--$10^{-9}$,  and after accounting for the expected
@@ -680,17 +702,23 @@ Second, while hitchhiking and BGS can reduce predicted diversity levels for
 high-$N_c$ species ($N_c > 10^{14}$) to observed levels, this would imply
 available estimates of $\pi_0$ are underestimated by several orders of
 magnitude in \emph{Drosophila} (Supplementary Figured
-\ref{suppfig:corbett_detig}B). Overall, while linked selection could decouple
-diversity from census size for high-$N_c$ species, recurrent hitchhiking and
-background selection seem unlikely to explain the observed patterns of
-diversity across species under our understanding of the range of parameter
-estimates.
+\ref{suppfig:corbett_detig}B). The high reductions in $\pi$ predicted here
+(compared to those of \cite{Elyashiv2016-vt}) are a result of using $N_c$,
+rather than $N_e = \nicefrac{\pi_0}{4 \mu}$ in the denominator of Equation
+\eqref{eqn:div}, which leads to a very high rate of sweeps in the population.
+I do not consider selective interference, though the saturation of adaptive
+substitutions per Morgan would only act to limit the reduction in diversity
+\parencite{Weissman2012-aa}, and thus these results are conservative.
+Overall, while linked selection could decouple diversity from census size for
+high-$N_c$ species, recurrent hitchhiking and background selection seem
+unlikely to explain the observed patterns of diversity across species under our
+understanding of the range of parameter estimates.
 
 \section*{Discussion}
 
 Nearly fifty years after Lewontin's description of the Paradox of Variation,
 how evolutionary, life history, and ecological processes interact to constrain
-diversity across taxa to a narrow range remains a mystery.  Since Wright
+diversity across taxa to a narrow range remains a mystery. Since Wright
 (\citeyear{Wright1931-fl,Wright1938-tv}), population geneticists have
 appreciated that various demographic processes shrink effective population
 sizes compared to census sizes, yet it has remained unclear whether these
@@ -733,35 +761,46 @@ $\pi$--$N_c$ relationship.
 % TODO -- talk about diversity as a trait. What are the trail evolution
 % models?
 
-Lewontin's Paradox arises from a comparison of diversity across species, yet
-surprisingly, previous work on this problem has not considered the impact of
-phylogenetic non-independence. I have addressed this limitation, showing that
-diversity does have a significant positive relationship with census size, after
-accounting for shared phylogenetic history among taxa. Additionally, I find a
-high degree of phylogenetic signal, and that arthropods and chordates form
-clusters, showing previous concern about phylogenetic non-independence was
-warranted \parencite{Gillespie1991-qa}. Finally, this high degree of
-phylogenetic signal, as well as evidence of shifts in the rate of evolution of
-genetic diversity on deep timescales in molluscs and chordates, seem to
-contradict Lynch's (2011) claim that since coalescent times are much less than
-divergence times, they are not affected by shared phylogenetic history. 
+Lewontin's Paradox arises from a comparison of diversity across species, yet it
+has been disputed whether such comparisons require phylogenetic comparative
+methods. Extending previous work that has accounted for phylogeny in particular
+clades \parencite{Leffler2012-zj}, or using taxonomical-level averages
+\parencite{Romiguier2014-bp}, I show that the positive relationship between
+diversity and census size is significant using a mixed-effects model with a
+time-calibrated phylogeny. Additionally, I find a high degree of phylogenetic
+signal, evidence of deep shifts in the rate of evolution of genetic diversity,
+and that arthropods and chordates form clusters. Overall, this suggests that
+previous concerns about phylogenetic non-independence in comparative population
+genetic studies were warranted \parencite{Gillespie1991-qa,Whitney2010-ud}.
+Notably, Lynch (2011) has argued that PCMs for pairwise diversity are
+unnecessary, since mutation rate evolution is fast and thus free of
+phylogenetic inertia, sampling variance should exceed the variance due to
+phylogenetic shared history, and coalescent times are much less than divergence
+times. Since my findings suggest PCMs are necessary in some cases, it is
+worthwhile to address these points. 
 
-One can reconcile my findings with Lynch's claim by considering what
-evolutionary, ecological, life history, and demographic causal factors
-determine coalescent rates across species, and how these factors evolve across
-deep timescales. Lynch's conjecture that coalescent times should be free of
-phylogenetic signal may be true \emph{were we to condition} on these causal
-factors that could be affected by shared phylogenetic history. In contrast, my
-estimates of phylogenetic signal in diversity are not conditioned on these
+First, Lynch has correctly pointed out that while coalescent times are much
+less than divergence times and should be free of phylogenetic shared history,
+the factors that determine coalescent times (e.g.  mutation rates and effective
+population size) may not be (2011). In other words, coalescent times are free
+from phylogenetic shared history \emph{were we to condition} on these causal
+factors that could be affected by shared phylogenetic history. My estimates of
+phylogenetic signal in diversity, by contrast, are not conditioned on these
 factors. Importantly, even ``correcting for" phylogeny implicitly favors
 certain causal interpretations over others
 \parencite{Westoby1995-wz,Uyeda2018-wf}. Future work could try to untangle what
 causal factors determine coalescent times across species, as well as how these
-factors evolve across macroevolutionary timescales.
+factors evolve across macroevolutionary timescales. Second, it is a
+misconception that a fast rate of trait evolution necessarily reduces
+phylogenetic signal \parencite{Revell2008-in}, and that if either or both
+variables in a regression are free of phylogenetic signal, PCMs are unnecessary
+\parencite{Revell2010-mf,Uyeda2018-wf}. The evidence of high phylogenetic
+signal found in this study suggests PCMs are needed, in part to avoid spurious
+results from phylogenetic pseudoreplication.
 
-Furthermore, beyond just accounting for phylogenetic non-independence,
+Finally, beyond just accounting for phylogenetic non-independence,
 macroevolution and phylogenetic comparative methods are a promising way to
-approach across-species population genomic questions.  For example, one could
+approach across-species population genomic questions. For example, one could
 imagine that diversification processes could contribute to Lewontin's Paradox.
 If large-$N_c$ species were to have a rate of speciation that is greater than
 the rate at which mutation and drift reach equilibrium (which is indeed slower
@@ -821,9 +860,18 @@ solve Lewontin's Paradox. Still, I find that even after parameterizing
 hitchhiking and background selection with strong selection parameter estimates
 from \emph{Drosophila melanogaster}, the predicted patterns of diversity under
 linked selection poorly fit observed patterns of diversity across species.
-While this suggests these two common modes of linked selection seem unlikely to
-explain across-taxa patterns of diversity, there are three major potential
-limitations of my approach that need further evaluation. 
+This result extends the analysis by \textcite{Coop2016-gx} showing that levels
+of $\pi_0$ estimated by \textcite{Corbett-Detig2015-gt} are not decoupled from
+genome-wide average $\pi$, as would occur if linked selection were to explain
+Lewontin's Paradox. Here, my analysis goes a step further and suggests that
+models of recurrent hitchhiking and background selection are not capable of
+explaining the observed relationship between $\pi$ and census size, in part
+because mid-$N_c$ species have sufficiently long recombination map lengths to
+diminish even strong selection. This finding supports the idea the levels of
+diversity across species are primarily determined by past demographic
+fluctuations. Overall, while this suggests these two common modes of linked
+selection seem unlikely to explain across-taxa patterns of diversity, there are
+three major potential limitations of my approach that need further evaluation. 
 
 First, I approximate the reduction in diversity using homogeneous background
 selection and recurrent hitchhiking models
@@ -838,21 +886,22 @@ accounts for the actual position of substitutions, annotation features, and
 recombination rate heterogeneity (though it should be noted that these both use
 the same parameter estimates). Furthermore, even though my model fails to
 capture the heterogeneity of functionality density and recombination rate in
-real genomes, it is still extraordinary conservative, giving linked selection
-the best possible chance to decouple diversity from census size and explain
-Lewontin's Paradox. This is in part because the strong selection parameter
-estimates from \emph{Drosophila melanogaster} used, but also because I assume
-that the effective population size is the census size. Even then, this
-decoupling only occurs in very high--census-size species, and implies that the
-diversity in the absence of linked selection, $\pi_0$, is currently
-underestimated by several orders of magnitude. Moreover, the study of
-\textcite{Corbett-Detig2015-gt} did consider recombination rate and functional
-density heterogeneity in estimating the reduction due to linked selection
-across species, yet their predicted reductions are orders of magnitude weaker
-than those considered here by assuming that $N_e = N_c$ (Supplementary Figure
-\ref{suppfig:corbett_detig}B).  Overall, even with more realistic models of
-linked selection, current models of linked selection seem fundamentally unable
-to fit the diversity--census-size relationship.
+real genomes, it is still extraordinary conservative, likely overestimating the
+effects of linked selection to see if it could be capable of decoupling
+diversity from census size and explain Lewontin's Paradox. This is in part
+because the strong selection parameter estimates from \emph{Drosophila
+melanogaster} used, but also because I assume that the effective population
+size is the census size.  Even then, this decoupling only occurs in very
+high--census-size species, and implies that the diversity in the absence of
+linked selection, $\pi_0$, is currently underestimated by several orders of
+magnitude. Moreover, the study of \textcite{Corbett-Detig2015-gt} did consider
+recombination rate and functional density heterogeneity in estimating the
+reduction due to linked selection across species, yet their predicted
+reductions are orders of magnitude weaker than those considered here by
+assuming that $N_e = N_c$ (Supplementary Figure \ref{suppfig:corbett_detig}B).
+Overall, even with more realistic models of linked selection, current models of
+linked selection seem fundamentally unable to fit the diversity--census-size
+relationship.
 
 Second, my model here only considers hard sweeps, and ignores the contribution
 of soft sweeps (e.g. from standing variation or recurrent mutations;
@@ -867,19 +916,21 @@ sweeps \parencite{Coop2012-cd}. Second, in the limit where most fitness
 variation is due to weak soft sweeps from standing variation scattered across
 the genome (i.e. due to polygenic fitness variation), levels of diversity are
 well approximated by quantitative genetic linked selection models (QGLS
-\cite{Robertson1961-ho,Santiago1995-hx,Santiago1998-bs}). The reduction in
-diversity under these models is nearly identical to that under background
-selection models, in part because deleterious alleles at mutation-selection
-balance constitute a considerable component of fitness variation (see Appendix
-Section \ref{app:bgs}; \cite{Charlesworth2000-km,Charlesworth2015-am}).
-Finally, I also disregarded the interaction of sweeps and spatial processes.
-For populations spread over wide ranges, limited dispersal slows the spread of
-sweeps, allowing for new beneficial alleles to arise, spread, and compete
-against other segregating beneficial variants
-\parencite{Ralph2015-kl,Ralph2010-ki}. Through limited dispersal should act to
-``soften sweeps" and not impact my findings for the reasons described above,
-future work could investigate how these processes impact diversity in ways not
-captured by hard sweep models.
+\cite{Robertson1961-ho,Santiago1995-hx,Santiago1998-bs}). Third, the parameters
+from \textcite{Elyashiv2016-vt} are robust to many types of sweeps that result
+in a substitution (e.g. see p. 19 of their Supplementary Online Materials).
+The reduction in diversity under these models is nearly identical to that under
+background selection models, in part because deleterious alleles at
+mutation-selection balance constitute a considerable component of fitness
+variation (see Appendix Section \ref{app:bgs};
+\cite{Charlesworth2000-km,Charlesworth2015-am}).  Finally, I also disregarded
+the interaction of sweeps and spatial processes.  For populations spread over
+wide ranges, limited dispersal slows the spread of sweeps, allowing for new
+beneficial alleles to arise, spread, and compete against other segregating
+beneficial variants \parencite{Ralph2015-kl,Ralph2010-ki}. Through limited
+dispersal should act to ``soften sweeps" and not impact my findings for the
+reasons described above, future work could investigate how these processes
+impact diversity in ways not captured by hard sweep models.
 
 Third, other selective processes, such as fluctuating selection or hard
 selective events, could reduce diversity in ways not captured by the background
@@ -899,26 +950,26 @@ data.
 
 \subsection*{Measures of Effective Population Size, Timescales, and Lewontin's Paradox}
 
-Lewontin's Paradox shows the extent to which the effective population sizes
+Lewontin's Paradox describes the extent to which the effective population sizes
 implied by diversity, $\widetilde{N}_e$, diverge from census population sizes.
 However, there are a variety other effective population size estimates
 calculable from different data and summary statistics
 \parencite{Wang2016-mi,Caballero1994-ao,Caballero2020-wm,Galtier2020-fb}. These
-include estimators based on the observed decay in linkage disequilibrium or
-temporal estimators that use the variance in allele frequency change. These
-alternate estimators capture summaries of the effective population size on
-shorter timescales than coalescent-based estimators \parencite{Wang2005-wy},
-and thus could be used to tease out processes that impact the $N_e$-$N_c$
-relationship in the more recent past. 
+include estimators based on the site frequency spectrum, observed decay in
+linkage disequilibrium, or temporal estimators that use the variance in allele
+frequency change. These alternate estimators capture summaries of the effective
+population size on shorter timescales than coalescent-based estimators
+\parencite{Wang2005-wy}, and thus could be used to tease apart processes that
+impact the $N_e$-$N_c$ relationship in the more recent past. 
 
 Temporal $N_e$ estimators already play an important role in understanding
 another summary of the $N_e$-$N_c$ relationship: the ratio
 $\nicefrac{N_e}{N_c}$, which is an important quantity in conservation genetics
 \parencite{Frankham1995-xz,Mace1991-ai} and in understanding evolution in
-highly-fecund marine species. Surveys of the $\nicefrac{N_e}{N_c}$ relationship
-across taxa indicate mean $\nicefrac{N_e}{N_c}$ is on order of $\approx 0.1$
-\parencite{Frankham1995-xz,Palstra2008-rt,Palstra2012-vy}, though the
-uncertainty in these estimates is high, and some species with sweepstakes
+highly fecund marine species. Surveys of the short-term $\nicefrac{N_e}{N_c}$
+relationship across taxa indicate mean $\nicefrac{N_e}{N_c}$ is on order of
+$\approx 0.1$ \parencite{Frankham1995-xz,Palstra2008-rt,Palstra2012-vy}, though
+the uncertainty in these estimates is high, and some species with sweepstakes
 reproduction systems like Pacific Oyster (\emph{Crassostrea gigas}) can have
 $\nicefrac{N_e}{N_c} \approx 10^{-6}$. Estimates of the $\nicefrac{N_e}{N_c}$
 ratio are an important, and under appreciated piece of solving Lewontin's
@@ -989,9 +1040,9 @@ size contractions transpire and depress diversity, even if a species is
 undisturbed by climatic shifts or mass extinctions? Overall, patterns of
 diversity across taxa are determined by many overlaid evolutionary and
 ecological processes occurring on vastly different timescales. Lewontin's
-Paradox of Variation may persist unresolved for some time because the solution
-requires synthesis and model building at the intersection of all these
-disciplines.
+Paradox of Variation may persist unresolved for some time because the
+explanation requires synthesis and model building at the intersection of all
+these disciplines.
 
 
 \section*{Methods}
@@ -1010,8 +1061,8 @@ silent, intronic, and non-coding sites. All types of diversity estimates from
 since the variability of diversity across functional categories is much less
 than the diversity across taxa. Multiple diversity estimates per taxa were
 averaged. The total recombination map length data were from both
-\citeauthor{Stapley2017-fs} (2017; 30 taxa), and
-\citeauthor{Corbett-Detig2015-gt} (2015; 11 taxa). Both studies used
+\citeauthor{Stapley2017-fs} (2017; 127 taxa), and
+\citeauthor{Corbett-Detig2015-gt} (2015; 9 taxa). Both studies used
 sex-averaged recombination maps estimated with cross-based approaches; in some
 cases errors in the original data were found, documented, and corrected. These
 studies also included genome size estimates used to create Supplementary
@@ -1075,8 +1126,8 @@ descriptions \textcite{Leffler2012-zj} (Supplementary Figure
 \ref{suppfig:range-cats}) and compared my $\alpha$-shape method to a subset of
 taxa with range estimates from IUCN Red List
 (\cite{Chamberlain2020-tv,Iucn2020-ap}; Supplementary Figure
-\ref{suppfig:redlist-ranges}). Each census population size is then estimated as
-the product of range and density. 
+\ref{suppfig:redlist-ranges}). Each census population size
+is then estimated as the product of range and density. 
 
 \subsection*{Phylogenetic Comparative Methods}
 \label{sec:methods-pcm}
@@ -1085,7 +1136,7 @@ Of the full dataset of 172 taxa with diversity and population size estimates, a
 synthetic calibrated phylogeny was created for 166 species that appear in
 phylogenies in DateLife project \parencite{OMeara2020-ds,Sanchez-Reyes2019-io}.
 This calibrated synthetic phylogeny was then subset for the analyses based on
-what species had non-missing trait data. The diversity-population size
+what species had complete trait data. The diversity-population size
 relationship assessed by a linear phylogenetic mixed-effects model implemented
 in Stan \parencite{Stan_Development_Team2020-ea}, according to the methods
 described in (\cite{De_Villemereuil2014-kt}, see
@@ -1158,9 +1209,11 @@ Otto, Jeff Ross-Ibarra, Aaron Stern, Anastasia Teterina, Michael Turelli,
 Margot Wood, and my Kern-Ralph labmates for helpful discussions. Sarah
 Friedman, Katherine Corn, and Josef Uyeda provided very useful advice about
 phylogenetic comparative methods; yet I take full responsibility for any
-shortcomings of my analysis.  I would like to also thank UO librarian Dean
-Walton for helping me track down some rather difficult to find older papers.
-This work was supported by an NIH Grant (1R01GM117241) awarded to Andrew Kern.
+shortcomings of my analysis. Finally, I am indebted to helpful feedback from
+Guy Sella, Matt Pennell, and two other anonymous reviewers. I would like to
+also thank UO librarian Dean Walton for helping me track down some rather
+difficult to find older papers. This work was supported by an NIH Grant
+(1R01GM117241) awarded to Andrew Kern.
 
 \section*{Appendix}
 
@@ -1265,7 +1318,7 @@ basepair per generation is $\nu_\text{BP} = \nicefrac{\alpha m}{GT}$, so
 \begin{align}
   S &= \frac{\nu_\text{BP}}{r_\text{BP}} \int_0^{L} \exp(-r \tau(\bar{s}, N)) dr
 \end{align}
-
+%
 This is analogous to the second term of \textcite{Coop2012-cd} equation 17,
 with $k = i = 2$ and $x = 1$ (e.g.  conditioning on a sweep to fixation). Note
 that there appears to be a factor of two error in \textcite{Elyashiv2016-vt}
@@ -1426,7 +1479,7 @@ convert the total wet biomass to carbon biomass per phylum.
 
 First, I compared the relative carbon biomass in this study to the relative
 carbon biomass on earth per phylum. This shows that this study's sample is over
-represents chordate biomass (by a factor of $\approx 3$), and under represents
+represents chordate biomass (by a factor of $\mathord{\sim}3$), and under represents
 in arthropod biomass (by a factor of $0.02$) relative to the proportion of
 carbon biomass of these phyla on earth (see column eight of Supplementary Table
 \ref{supp:biomass-tbl}. Second, to check whether the carbon biomass per phylum
@@ -1442,13 +1495,65 @@ Next, I look at the ratio of sample biomass per phylum, $b_S$ to this expected
 biomass per phylum (Supplementary Table \ref{supp:biomass-tbl}). The
 consistency is quite close for this rough approach and the non-random sample of
 taxa included in this study. The carbon biomass estimates for chordates implied
-by the census size estimates are $\approx 25$-fold higher than expected, but is
+by the census size estimates are $\mathord{\sim}25$-fold higher than expected, but is
 well within reasonable expectations given that the chordate sample includes
 many larger-bodied domesticated species (and is a biased sample in other ways).
 Similarly, the implied arthropod carbon biomass is quite close to what one
 would expect. Overall, these values indicate that the census size estimates
 here do not lead to implied biomasses per phylum that are outside the range of
 plausibility.
+
+Additionally, note that the body mass based estimates of density for
+\emph{Drosophila} are similar to previously used estimates in surveys of census
+size and diversity. \textcite{Nei1984-zi} suggested a maximum of 5
+\emph{Drosophila} per $\text{m}^2$, including regions of the range that are not
+inhabitable. Across \emph{Drosophila}, the body mass based estimates suggest
+$10^{6.7}-10^{7.6}$ individuals per $\text{km}^2$, or $4.5-36.3$ individuals
+per $\text{m}^2$, which are consistent with this previous estimate.
+\citeauthor{Nei1984-zi}'s estimates of \emph{Drosophila pseudoobscura}'s census
+size are four orders of magnitude smaller than mine, but their approach uses a
+speculated ratio of population sizes of different \emph{Drosophila} species
+rather than range sizes \parencite[p. 81]{Nei1984-zi}.
+
+As another consistency check, I looked at the rank order of mammals by biomass.
+Whale species have the first and third highest biomass with 11.4 and 3.8
+megatons of carbon biomass (for \emph{Balaenoptera bonaerensis} and
+\emph{Eschrichtius robustus}, respectively). While this seems high, a recent
+study shows that across whale species, pre-whaling carbon biomass was at the
+tens of megatons level \parencite[Table 1 and Figure 1]{Pershing2010-fh}.
+Given that my census size estimates represent populations at a macroecological
+equilibrium, they would not reflect reduced density due to whaling or other
+anthropogenic causes. Humans had the second largest biomass, followed by wolf
+species (\emph{Canis lupus} and \emph{C. latrans}); as with whales, the
+population sizes for wolf species represent pre-anthropogenic densities and are
+overestimates compared to current population sizes as expected. 
+
+Finally, there are other estimates of approximate population sizes for some
+species that I compared my estimates to. The United Nation's FAOSTAT database
+estimates the total number of horses (\emph{Equus caballus}) on earth as
+$\mathord{\sim}60$ million; the estimate in this study is close to 40 million.
+For other domesticated species like chicken (\emph{Gallus gallus}), estimates
+range from 25 million to 19.6 billion
+\parencite{noauthor_2021-gc,Robinson2014-sx}; the present study's estimate lies
+in the middle at $\mathord{\sim}175$ million. Again, this is a known limitation
+of this method, as the range is estimated from occurrence data and does not
+consider species' niches. This present study's estimate of the number of king
+penguins (\emph{Aptenodytes patagonicus}) is about 3 million; the population
+size was recently estimated as 2.23 million pairs \parencite{Shirihai2008-ft}.
+
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[]{figures/diversity_leffler_ranges.pdf}
+
+  \caption{Pairwise diversity grouped by the range categories from
+  \textcite{Leffler2012-zj}, with point size indicating the predicted
+   population density. The vertical lines are the range category group means.}
+
+  \label{suppfig:div_leffler}
+\end{figure}
+
+
 
 
 \begin{figure}[!htb]
@@ -1459,6 +1564,10 @@ plausibility.
 the point represents the absolute number of species by class.}
   \label{suppfig:species_counts}
 \end{figure}
+
+\section{Sensitivity Analysis}
+
+
 
 
 \section{Diversity and IUCN Red List Status}

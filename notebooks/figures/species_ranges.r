@@ -13,15 +13,24 @@ d <- read_tsv('../../data/combined_data.tsv') %>%
        # space the groups
        mutate(xpos = 1:nrow(.) + 1.2*as.integer(range_cat)-1)
 
+means <- d %>% group_by(range_cat) %>% 
+  filter(is.finite(log10_range)) %>%
+  summarize(xmin=min(xpos), 
+            xmax=max(xpos),
+            log10_range = mean(log10_range, na.rm=TRUE))
+
 
 
 opar <- par(no.readonly=TRUE)
 # pdf('range_descriptions.pdf', width=8, height=5)
 pdf('range_categories.pdf', width=5, height=8)
 
+
 par(mar=c(4, 1, 0, 5))
 cols <- wes_palette('Darjeeling1')[c(5, 2, 3, 1, 4)]
-plot(d$log10_range, d$xpos, pch = 19, col=cols[d$range_cat], 
+plot(d$log10_range, d$xpos, pch = 21, bg=cols[d$range_cat], 
+     lwd=0.7,
+     col='white',
      xlab = '',
      ylab = '', axes=FALSE, xlim=c(2, 9))
 ylabs = seq(2, 8, 2)
@@ -29,6 +38,14 @@ axis(1, ylabs, labels=latex2exp::TeX(sprintf("$10^{%d}$", ylabs)),
      cex.axis=0.8,
      line=0.5,
      tck=-0.01, padj=-1)
+
+
+with(means, segments(y0=xmin, y1=xmax, 
+                     x0=log10_range, x1=log10_range,
+                     col=cols[range_cat], lwd=1, lty=1))
+
+
+
 text(y=d$xpos, x=8.8, labels=d$species, 
      col=cols[d$range_cat], xpd=TRUE, 
      las=1, srt=0, adj=0, cex=0.3)

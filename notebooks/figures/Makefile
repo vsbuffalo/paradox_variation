@@ -19,7 +19,8 @@ supp_figures: $(MSFIGDIR)/range_categories.pdf $(MSFIGDIR)/iucn_redlist_ranges.p
               $(MSFIGDIR)/Nc_figure.pdf \
               $(MSFIGDIR)/figure_3_alt.pdf \
               $(MSFIGDIR)/linked_sel_params.pdf \
-              $(MSFIGDIR)/species_counts.pdf
+              $(MSFIGDIR)/species_counts.pdf \
+              $(MSFIGDIR)/diversity_leffler_ranges.pdf
 
 clean_repel:
 	rm -f repel_genome_size_popsize.tsv repel_genome_size_maplength.tsv repel_full.tsv repel.tsv
@@ -44,7 +45,11 @@ diversity_pcm.pdf: node_heights.pdf popsize_tree.pdf div_popsize_post.pdf
 	# dumby rule
 	echo "You need to run Illustator!"
 
-range_categories.pdf: species_ranges.r ../../data/combined_data.tsv
+diversity_leffler_ranges.pdf: species_ranges.r ../../data/combined_data.tsv diversity_leffler_ranges.r
+	Rscript diversity_leffler_ranges.r
+
+
+range_categories.pdf: species_ranges.r ../../data/combined_data.tsv species_ranges.r
 	Rscript species_ranges.r
 
 iucn_redlist_ranges.pdf: redlist_ranges.r ../../data/redlist_popsizes.tsv
@@ -124,6 +129,9 @@ $(MSFIGDIR)/diversity_popsize_full.pdf: diversity_popsize_full.pdf
 	cp $< $(MSFIGDIR)
 
 $(MSFIGDIR)/iucn_redlist_ranges.pdf: iucn_redlist_ranges.pdf
+	cp $< $(MSFIGDIR)
+
+$(MSFIGDIR)/diversity_leffler_ranges.pdf: diversity_leffler_ranges.pdf
 	cp $< $(MSFIGDIR)
 
 $(MSFIGDIR)/range_categories.pdf: range_categories.pdf
