@@ -750,6 +750,14 @@ summary(dps_ols)
 
 ```
 
+What percent increase in pi is that for each order of magnitude change in N?
+
+```{r}
+signif(100 * 10^(coef(dps_ols)[2] - 1), 2)
+ols_cis <- confint(dps_ols)[2, ]
+signif(100 * 10^(ols_cis - 1), 2)
+```
+
 The chains mixed well. For quality assurance I compare this to a PGLS, to check
 my Stan model is working not too differently than a pre-packaged solution.
 
@@ -1142,6 +1150,13 @@ dvnh <- node_height(dt_dps$diversity, multi2di(tr_dps))
 save(psnh, rnnh, bmnh, dvnh, file='../data/nodeheights.Rdata')
 
 ```
+
+Significance?
+
+```{r}
+sapply(list(popsize=psnh, range=rnnh, bodymass=bmnh, diversity=dvnh), function(x) x$pval)
+```
+
 
 Just to ensure there's nothing weird going on, let's simulate
 Brownian motion 1000 times and see how many times we see a
