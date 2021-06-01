@@ -76,7 +76,8 @@
 \addbibresource{biblio.bib}
 
 
-\title{Why do species get a thin slice of $\pi$? Revisiting Lewontin's Paradox of Variation}
+\title{Natural Selection is Unlikely to Explain Why Species Get a Thin Slice of $\pi$}
+%\title{Why do species get a thin slice of $\pi$? Revisiting Lewontin's Paradox of Variation}
 
 \author{Vince Buffalo}
 \affil[]{\footnotesize University of Oregon, Institute of Ecology and Evolution\\Eugene, Oregon \\ \href{mailto:vsbuffalo@gmail.com}{vsbuffalo@gmail.com}}
@@ -329,7 +330,7 @@ between genomic estimates of diversity and census population sizes, I first
 approximate census population sizes for 172 metazoan taxa (Figure
 \ref{fig:figure-nc}). My approach predicts population densities from body sizes
 using a previously-observed linear relationship that holds across metazoans
-(Supplementary Figure \ref{suppfig:damuth};
+(Figure 1-figure supplement 1 \ref{suppfig:damuth};
 \cite{Damuth1981-st,Damuth1987-sg}). Then, from geographic occurrence data, I
 estimate range sizes.  Finally, I estimate population size as the product of
 these predicted densities and range estimates (see Methods:
@@ -391,21 +392,20 @@ relationship on a log-log scale fits the data well (Figure \ref{fig:figure-1}).
 The OLS slope estimate is significant and implies a 13\% percent increase in
 differences per basepair for every order of magnitude census size grows (95\%
 confidence interval $[12\%, 14\%]$, adjusted $R^2 = 0.26$; see also the OLS fit
-per-phyla, Supplementary Figure \ref{suppfig:figure-1-ave}). 
+per-phyla, Figure 1-figure supplement \ref{suppfig:figure-1-ave}). 
 
 Notably, this relationship has few outliers and is relatively homoscedastic.
 This is in part because of the log-log scale, in contrast to previous work
-\parencite{Nei1984-zi,Soule1976-he}; see Supplementary Figure
-\ref{suppfig:figure-1-linear} for a version on a log-linear scale. However, it
-is noteworthy that few taxa have diversity estimates below $10^{-3.5}$
-differences per basepair. Those that do, lynx (\emph{Lynx Lynx}), wolverine
-(\emph{Gulo gulo}), and Massasauga rattlesnake (\emph{Sistrurus catenatus})
-face habitat fragmentation and declining population sizes. These three species
-are all in the IUCN Red List, but are listed as least concern (though their
-presence in the Red List indicates they are of conservation interest). In
-Supplementary Material Section \Newnameref{supinfo:div-iucn}, I explore more
-about the relationships between IUCN Red List status, diversity, and population
-size.
+\parencite{Nei1984-zi,Soule1976-he}; see Figure 1-supplement figure 2 for a
+version on a log-linear scale. However, it is noteworthy that few taxa have
+diversity estimates below $10^{-3.5}$ differences per basepair. Those that do,
+lynx (\emph{Lynx Lynx}), wolverine (\emph{Gulo gulo}), and Massasauga
+rattlesnake (\emph{Sistrurus catenatus}) face habitat fragmentation and
+declining population sizes. These three species are all in the IUCN Red List,
+but are listed as least concern (though their presence in the Red List
+indicates they are of conservation interest). In Supplementary Information
+Section \Newnameref{supinfo:div-iucn}, I explore more about the relationships
+between IUCN Red List status, diversity, and population size.
 
 \subsection*{Phylogenetic Non-Independence and the Population Size Diversity Relationship}
 
@@ -536,9 +536,10 @@ share phylogenetic history, due to phylogenetic inertia in some combination of
 population size, reproductive system, and mutation rates.
 
 Finally, an important caveat is the increase in rate towards the tips could be
-caused by measurement noise. Inspecting the lineage pairs that lead to this
+caused by measurement noise, or possibly uncertainty or bias in the divergence
+time estimates deep in the tree. Inspecting the lineage pairs that lead to this
 increase in rate towards the tips indicates these represent plausible rate
-shifts, e.g. between cosmopolitan and endemic sister species like
+shifts, e.g.  between cosmopolitan and endemic sister species like
 \emph{Drosophila simulans} and \emph{Drosophila sechellia}; however, ruling out
 measurement noise entirely as an explanation would involve considering the
 uncertainty of diversity and population size estimates.
@@ -646,20 +647,20 @@ indicates phylum.}
 Previous work has found that the impact of linked selection increases with
 $N_c$ (\cite{Corbett-Detig2015-gt}; see also Supplementary Figure
 \ref{suppfig:corbett_detig}A), and it is often thought that this is driven by
-higher rates of adaptive substitutions in larger populations, despite equivocal
-evidence \parencite{Galtier2016-dq}. However, there is another mechanism by
-which species with larger population sizes might experience a greater impact of
-linked selection: recombinational map length, $L$, is known to correlate with
-body mass \parencite{Burt1987-tq} and thus varies inversely with population
-size. As this is a critical parameter that determines the genome-wide impact of
-both hitchhiking and background selection, I examine the relationship between
-recombination map length ($L$) and census population size ($N_c$) across taxa,
-using available estimates of map lengths across species
-\parencite{Stapley2017-fs,Corbett-Detig2015-gt}. I find a significant
-non-linear relationship using phylogenetic mixed-effects models (Figure
-\ref{fig:figure-3}A; see Methods: \Newnameref{sec:methods-pcm}). There is also
-a correlation between map length and genome size (Supplementary Figure
-\ref{supfig:genome_size_maplength}) and genome size and population size
+higher rates of adaptive substitutions in larger populations
+\parencite{Ohta1992-yi}, despite equivocal evidence \parencite{Galtier2016-dq}.
+However, there is another mechanism by which species with larger population
+sizes might experience a greater impact of linked selection: recombinational
+map length, $L$, is known to correlate with body mass \parencite{Burt1987-tq}
+and thus varies inversely with population size. As this is a critical parameter
+that determines the genome-wide impact of both hitchhiking and background
+selection, I examine the relationship between recombination map length ($L$)
+and census population size ($N_c$) across taxa, using available estimates of
+map lengths across species \parencite{Stapley2017-fs,Corbett-Detig2015-gt}. I
+find a significant non-linear relationship using phylogenetic mixed-effects
+models (Figure \ref{fig:figure-3}A; see Methods: \Newnameref{sec:methods-pcm}).
+There is also a correlation between map length and genome size (Supplementary
+Figure \ref{supfig:genome_size_maplength}) and genome size and population size
 (Supplementary Figure \ref{supfig:genome_size_popsize}). These findings are
 consistent with both the hypothesis that non-adaptive processes increase genome
 size in small-$N_e$ species \parencite{Lynch2003-bn} which in turn could
@@ -1142,7 +1143,7 @@ All \texttt{Rhat} \parencite{Vehtari2019-po} values were below 1.01 and the
 effective number of samples was over 1,000, consistent with good mixing;
 details about the model are available in the GitHub repository
 (\texttt{phylo\_mm\_lognormal.stan}). Continuous trait maps (Figure
-\ref{fig:figure-2}A and Supplementary Material Figure \ref{suppfig:biconmap})
+\ref{fig:figure-2}A and Supplementary Information Figure \ref{suppfig:biconmap})
 were created using \texttt{phytools} \parencite{Revell2012-zq}. Node-height
 tests were implemented based on the methods in \texttt{Geiger}
 \parencite{Pennell2014-nx,Harmon2008-tr}, and use robust regression to fit a
@@ -1416,8 +1417,6 @@ alleles across the genome under mutation-selection balance
 \renewcommand{\theequation}{S\arabic{equation}}
 \setcounter{section}{0}
 \renewcommand{\thesection}{S\arabic{section}}
-\setcounter{figure}{0}
-\renewcommand{\thefigure}{S\arabic{figure}}
 
 \section*{Supplementary Information}
 
@@ -1445,37 +1444,37 @@ convert the total wet biomass to carbon biomass per phylum.
   &  & \multicolumn{2}{c}{\bf Bar-On et al.}  & \multicolumn{5}{c}{\bf Present study}  &  \\
   phylum & total species ($T$) & biomass ($B$) & prop. biomass & biomass ($b$) &  prop. biomass & num. species ($n$) & factor overrepresented &prop. total species ($f = \nicefrac{n}{T}$) & factor ($\nicefrac{b}{f B}$) \\
   \hline
-  Arthropoda & $1.26 \times 10^{6}$ & 1.20 & 0.4635 & $2.78 \times 10^{-4}$ & 0.0100 &  68 & 0.02 & $5.41 \times 10^{-5}$ & 4.29 \\
-  Chordata & $5.41 \times 10^{4}$ & 0.87 & 0.3357 & $2.70 \times 10^{-2}$ & 0.9719 &  68 & 2.90 & $1.26 \times 10^{-3}$ & 24.70 \\
-  Annelida & $1.70 \times 10^{4}$ & 0.20 & 0.0772 & $1.23 \times 10^{-5}$ & 0.0004 &   3 & 0.01 & $1.76 \times 10^{-4}$ & 0.35 \\
-  Mollusca & $9.54 \times 10^{4}$ & 0.20 & 0.0772 & $4.54 \times 10^{-4}$ & 0.0163 &  13 & 0.21 & $1.36 \times 10^{-4}$ & 16.60 \\
-  Cnidaria & $1.60 \times 10^{4}$ & 0.10 & 0.0386 & $3.14 \times 10^{-5}$ & 0.0011 &   2 & 0.03 & $1.25 \times 10^{-4}$ & 2.51 \\
-  Nematoda & $2.50 \times 10^{4}$ & 0.02 & 0.0077 & $3.89 \times 10^{-6}$ & 0.0001 &   1 & 0.02 & $4.00 \times 10^{-5}$ & 4.87 \\
+  Arthropoda & $1.26 \times 10^{6}$ & 1.20 & 0.4635 & $2.80 \times 10^{-4}$ & 0.0102 &  68 & 0.02 & $5.41 \times 10^{-5}$ & 4.31 \\ 
+  Chordata & $5.41 \times 10^{4}$ & 0.87 & 0.3357 & $2.67 \times 10^{-2}$ & 0.9715 &  68 & 2.89 & $1.26 \times 10^{-3}$ & 24.40 \\ 
+  Annelida & $1.70 \times 10^{4}$ & 0.20 & 0.0772 & $1.23 \times 10^{-5}$ & 0.0004 &   3 & 0.01 & $1.76 \times 10^{-4}$ & 0.35 \\ 
+  Mollusca & $9.54 \times 10^{4}$ & 0.20 & 0.0772 & $4.56 \times 10^{-4}$ & 0.0166 &  13 & 0.21 & $1.36 \times 10^{-4}$ & 16.70 \\ 
+  Cnidaria & $1.60 \times 10^{4}$ & 0.10 & 0.0386 & $3.07 \times 10^{-5}$ & 0.0011 &   2 & 0.03 & $1.25 \times 10^{-4}$ & 2.45 \\ 
+  Nematoda & $2.50 \times 10^{4}$ & 0.02 & 0.0077 & $4.03 \times 10^{-6}$ & 0.0001 &   1 & 0.02 & $4.00 \times 10^{-5}$ & 5.03 \\
 \end{tabular}}
-  \caption{How the total carbon biomass estimates by phylum from
-    \textcite{Bar-On2018-kc} compare to the implied biomass estimates from this
-    study. All biomass estimates are carbon biomass, and the proportions are of
-    total biomass with respect to the study. The proportion of biomass in this
-    study compared to the Bar-On et al. estimates \textcite{Bar-On2018-kc}
-    indicates chordates are overrepresented and arthropods are underrepresented
-    in the present study; the factor that each phylum is overrepresented is
-    given in the eighth column. Total species by phylum estimates are from
-    \textcite{Reaka-Kudla1996-fe,Nicol1969-qx,Zhang2013-zc,Chapman2009-fw}. The
-    ratio column is the ratio of total biomass implied by the $N_c$ estimates
-    of each species in a phylum to the actual biomass of that phylum.}
-    \label{supp:biomass-tbl}
+\caption{How the total carbon biomass estimates by phylum from
+  \textcite{Bar-On2018-kc} compare to the implied biomass estimates from this
+  study. All biomass estimates are carbon biomass, and the proportions are of
+  total biomass with respect to the study. The proportion of biomass in this
+  study compared to the Bar-On et al. estimates \textcite{Bar-On2018-kc}
+  indicates chordates are overrepresented and arthropods are underrepresented
+  in the present study; the factor that each phylum is overrepresented is
+  given in the eighth column. Total species by phylum estimates are from
+  \textcite{Reaka-Kudla1996-fe,Nicol1969-qx,Zhang2013-zc,Chapman2009-fw}. The
+  ratio column is the ratio of total biomass implied by the $N_c$ estimates
+of each species in a phylum to the actual biomass of that phylum.}
+\label{supp:biomass-tbl}
 \end{table}
 
 
 First, I compared the relative carbon biomass in this study to the relative
-carbon biomass on earth per phylum. This shows that this study's sample is over
-represents chordate biomass (by a factor of $\mathord{\sim}3$), and under represents
-in arthropod biomass (by a factor of $0.02$) relative to the proportion of
-carbon biomass of these phyla on earth (see column eight of Supplementary Table
-\ref{supp:biomass-tbl}. Second, to check whether the carbon biomass per phylum
-in the sample was broadly consistent with the total on earth by phylum ($B_S$
-for phylum $S$), I calculated the expected sample biomass if species were
-sampled randomly from the total species in a phylum, ($B_S \times
+carbon biomass on earth per phylum. This shows that this study's sample over
+represents chordate biomass (by a factor of $\mathord{\sim}3$), and under
+represents in arthropod biomass (by a factor of $0.02$) relative to the
+proportion of carbon biomass of these phyla on earth (see column eight of
+Supplementary Table \ref{supp:biomass-tbl}. Second, to check whether the carbon
+biomass per phylum in the sample was broadly consistent with the total on earth
+by phylum ($B_S$ for phylum $S$), I calculated the expected sample biomass if
+species were sampled randomly from the total species in a phylum, ($B_S \times
 \nicefrac{n_S}{T_S}$, where $n_S$ is the total number of species in the sample
 in phylum $S$, $T_S$ is the total number of species in phylum $S$ on earth).
 The fraction of total species on earth included in the sample in this study is
@@ -1485,7 +1484,7 @@ Next, I look at the ratio of sample biomass per phylum, $b_S$ to this expected
 biomass per phylum (Supplementary Table \ref{supp:biomass-tbl}). The
 consistency is quite close for this rough approach and the non-random sample of
 taxa included in this study. The carbon biomass estimates for chordates implied
-by the census size estimates are $\mathord{\sim}25$-fold higher than expected, but is
+by the census size estimates are $\mathord{\sim}24$-fold higher than expected, but is
 well within reasonable expectations given that the chordate sample includes
 many larger-bodied domesticated species (and is a biased sample in other ways).
 Similarly, the implied arthropod carbon biomass is quite close to what one
@@ -1506,7 +1505,7 @@ speculated ratio of population sizes of different \emph{Drosophila} species
 rather than range sizes \parencite[p. 81]{Nei1984-zi}.
 
 As another consistency check, I looked at the rank order of mammals by biomass.
-Whale species have the first and third highest biomass with 11.4 and 3.8
+Whale species have the first and third highest biomass with 11.4 and 3.9
 megatons of carbon biomass (for \emph{Balaenoptera bonaerensis} and
 \emph{Eschrichtius robustus}, respectively). While this seems high, a recent
 study shows that across whale species, pre-whaling carbon biomass was at the
@@ -1516,7 +1515,7 @@ equilibrium, they would not reflect reduced density due to whaling or other
 anthropogenic causes. Humans had the second largest biomass, followed by wolf
 species (\emph{Canis lupus} and \emph{C. latrans}); as with whales, the
 population sizes for wolf species represent pre-anthropogenic densities and are
-overestimates compared to current population sizes as expected. 
+overestimates compared to current population sizes, as expected. 
 
 Finally, there are other estimates of approximate population sizes for some
 species that I compared my estimates to. The United Nation's FAOSTAT database
@@ -1542,8 +1541,6 @@ size was recently estimated as 2.23 million pairs \parencite{Shirihai2008-ft}.
 
   \label{suppfig:div_leffler}
 \end{figure}
-
-
 
 
 \begin{figure}[!htb]
@@ -1605,14 +1602,32 @@ Vulnerable, EN is Endangered, and CR is Critically Endangered.}
     $\beta_{N_c}$ &  0.08 & 0.05 & 0.11 \\ 
     \hline
   \end{tabular}
-  \caption{TODO The regression estimates of full IUCN Red List population size model
+  \caption{The regression estimates of full IUCN Red List population size model
     for diversity, $\log_{10}(\pi) = \beta_0 + \beta_{LC} LC + \beta_{NT} NT +
     \beta_{VU} VU + \beta_{EN} EN + \beta_{CR} CR + \beta_{N_c} \log_{10}(N_c)$;
     $df = 165$.  Using AIC to compare this full model to a reduced model of
     $\log_{10}(\pi) = \beta_0 + \beta_{N_c} \log_{10}(N_c)$, $AIC_\text{full} =
-  203.99$, $AIC_\text{reduced} =212.46$. }
+ 204.9$, $AIC_\text{reduced} = 216.4$. }
 \end{table}
 \label{supptable:tbl-1} 
+
+
+\section{Figure Supplement}
+
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{}
+\renewcommand{\figurename}{Figure 1-figure supplement 1}
+
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[]{figures/damuth.pdf}
+
+  \caption{The appendix table of \textcite{Damuth1987-sg}; the color indicates
+    Damuth's original group labels. The dashed line was estimated using a
+    lognormal regression model in Stan. References to each measurement are
+  available in \textcite{Damuth1987-sg}.}
+  \label{suppfig:damuth}
+\end{figure}
 
 \begin{figure}[!htb]
   \centering
@@ -1626,6 +1641,8 @@ Vulnerable, EN is Endangered, and CR is Critically Endangered.}
   \label{suppfig:figure-1-linear}
 \end{figure}
 
+
+
 \begin{figure}[!htb]
   \centering
   \includegraphics[width=\textwidth]{figures/diversity_popsize_averages.pdf}
@@ -1636,6 +1653,7 @@ Vulnerable, EN is Endangered, and CR is Critically Endangered.}
 
   \label{suppfig:figure-1-ave}
 \end{figure}
+
 
 
 \begin{figure}[!htb] \centering
@@ -1707,18 +1725,6 @@ Vulnerable, EN is Endangered, and CR is Critically Endangered.}
   \textcite{Leffler2012-zj}.}
 
   \label{suppfig:range-cats}
-\end{figure}
-
-\begin{figure}[!htb]
-  \centering
-  \includegraphics[]{figures/damuth.pdf}
-
-  \caption{The appendix table of \textcite{Damuth1987-sg}; the color indicates
-    Damuth's original group labels. The dashed line was estimated using a
-    lognormal regression model in Stan. References to each measurement are
-  available in \textcite{Damuth1987-sg}.}
-
-  \label{suppfig:damuth}
 \end{figure}
 
 \begin{figure}[!htb]
