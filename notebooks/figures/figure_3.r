@@ -44,6 +44,10 @@ pred  <- colMeans(mu_ln_fit)
 social <- da_ml$social
 
 da_ml <- da_ml %>% filter(phylum != 'Nematoda')
+
+da_ml %>% select(species, phylum, log10_popsize, map_length, social) %>%
+  write_tsv(file='popsize_maplen.tsv')
+
 #filter(species != 'Equus ferus przewalskii') %>%
 
 plot(map_length ~ log10_popsize, da_ml, type='n', 
@@ -151,6 +155,10 @@ dml <- dml_full %>%
 # ggplot(dml, aes(log10_popsize, log10(Ne_N_RHH_BGS))) + 
 #   geom_point()  +  
 #   geom_hline(yintercept=0)
+dml %>% select(species, phylum, log10_popsize, log10_diversity, map_length,
+                 pi_RHH_BGS_1em8,
+                 pi_RHH_BGS_1em9) %>%
+  write_tsv(file='diversity_popsize_linkedsel.tsv')
 
 dml %>% filter(species == "Drosophila melanogaster") %>% 
   select(Ne_N_HK95, Ne_N_RHH_BGS, pi_RHH_BGS_1em8, pi_RHH_BGS_1em9, 

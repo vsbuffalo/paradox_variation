@@ -21,6 +21,9 @@ phi <- mean(rstan:::extract(dps_fit, pars='phi')$phi)
 beta <- mean(rstan:::extract(dps_fit, pars='beta')$beta)
 
 # alias this -- less typing
+
+da_dps %>% select(species, phylum, log10_popsize, log10_diversity) %>%
+  write_tsv(file='diversity_popsize.tsv')
 d <- da_dps %>% filter(species != 'Equus ferus przewalskii')
 
 #d = read_tsv('../../data/combined_data.tsv')

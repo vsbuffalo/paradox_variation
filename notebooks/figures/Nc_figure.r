@@ -28,6 +28,9 @@ d <- da_dps %>% filter(species != 'Equus ferus przewalskii') %>%
       filter(n > 5) %>%
       arrange(phyla_mean, log10_popsize)
 
+d %>% select(species, phylum, log10_popsize) %>%
+  write_tsv(file='popsize_histogram.tsv')
+
 d %>% ggplot() + geom_histogram(aes(log10_popsize, fill=phylum), binwidth=0.7, alpha=0.5)
 
 
