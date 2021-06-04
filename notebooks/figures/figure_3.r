@@ -155,7 +155,7 @@ dml <- dml_full %>%
 # ggplot(dml, aes(log10_popsize, log10(Ne_N_RHH_BGS))) + 
 #   geom_point()  +  
 #   geom_hline(yintercept=0)
-dml %>% select(species, phylum, log10_popsize, log10_diversity, map_length,
+dml %>% select(species, phylum, log10_popsize, map_length,
                  pi_RHH_BGS_1em8,
                  pi_RHH_BGS_1em9) %>%
   write_tsv(file='diversity_popsize_linkedsel.tsv')
