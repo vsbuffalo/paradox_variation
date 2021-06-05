@@ -261,7 +261,7 @@ Paradox of Variation could be fully resolved.
 \subsection{Estimates of Census Population Size}
 
 \begin{figure}
-  \includegraphics[width=0.7\linewidth]{figures/Nc_figure.pdf}
+  \includegraphics[width=0.7\linewidth]{Nc_figure.pdf}
   \caption{The distribution of approximate census population sizes estimated by this
    study. Some phyla containing few species were excluded for clarity.}
    \label{fig:figure-nc}
@@ -271,12 +271,12 @@ Paradox of Variation could be fully resolved.
      source of this data is appendix table of \cite{Damuth1987-sg}; the color
      indicates Damuth's original group labels. The dashed line was estimated
      using a lognormal regression model in Stan. References to each measurement
-   are available in \cite{Damuth1987-sg}.}{\includegraphics[]{figures/damuth.pdf}}\label{figsupp:damuth}
+   are available in \cite{Damuth1987-sg}.}{\includegraphics[]{damuth.pdf}}\label{figsupp:damuth}
 
   \figsupp[The fraction of total species on earth included in this study's
   sample, per class.]{The color of the points represents phylum, and the size of
 the point represents the absolute number of species by
-class.}{\includegraphics{figures/species_counts.pdf}}\label{figsupp:species-counts}
+class.}{\includegraphics{species_counts.pdf}}\label{figsupp:species-counts}
 
 \figsupp[Validation of this paper's range estimates procedure against the IUCN Red List's range estimates.]{
   The correspondence between the ranges estimated with the alpha hull
@@ -284,19 +284,19 @@ class.}{\includegraphics{figures/species_counts.pdf}}\label{figsupp:species-coun
   of Occurrence for the subset of species in both datasets. Note that the
   IUCN Red List contains predominantly endangered species, which leads to
   ascertainment bias; still, the high correlation between the estimated
-ranges shows the alpha hull method works well.}{\includegraphics[]{figures/iucn_redlist_ranges.pdf}}\label{figsupp:redlist-ranges}
+ranges shows the alpha hull method works well.}{\includegraphics[]{iucn_redlist_ranges.pdf}}\label{figsupp:redlist-ranges}
 
 \figsupp[Validation of this paper's range estimates against the categorical labels of \cite{Leffler2012-zj}.]{
   The estimated ranges using GBIF occurrence data, ordered within and
   colored by the original range category labels assigned in
-\cite{Leffler2012-zj}.}{\includegraphics[]{figures/range_categories.pdf}}\label{figsupp:range-cats}
+\cite{Leffler2012-zj}.}{\includegraphics[]{range_categories.pdf}}\label{figsupp:range-cats}
 
   \figsupp[The relationship between body length (meters) and body mass (grams)
   in the \cite{Romiguier2014-bp} data set.]{The relationship between body
     length (meters) and body mass (grams) in the \cite{Romiguier2014-bp} data
     set. This is used to infer body masses for taxa. The gray dashed line is the
   line of best fit inferred using
-Stan.}{\includegraphics[]{figures/body_mass_length.pdf}}\label{figsupp:body-mass-length}
+Stan.}{\includegraphics[]{body_mass_length.pdf}}\label{figsupp:body-mass-length}
 
 \figdata{The population size estimates for 172 metazoan taxa.}
 
@@ -336,7 +336,7 @@ validation based on biomass and other approaches).
 
 \begin{figure}
   \begin{fullwidth}
-  \includegraphics[width=\linewidth]{figures/diversity_popsize_full.pdf}
+  \includegraphics[width=\linewidth]{diversity_popsize_full.pdf}
 
   \caption{A visualization of Lewontin's Paradox of Variation. Pairwise
     diversity (data from \cite{Leffler2012-zj}, \cite{Corbett-Detig2015-gt},
@@ -357,13 +357,13 @@ validation based on biomass and other approaches).
     \figsupp{A linear-log version of Figure 2. Points are colored by phylum,
       and the shaded region is the predicted neutral level of diversity
       assuming $N_e = N_c$ with mutation range ranging between $10^{-10} \le
-    \mu \le 10^{-8}$.}{\includegraphics[width=\textwidth]{figures/diversity_popsize_linear.pdf}}\label{figsupp:popsize-linear}
+    \mu \le 10^{-8}$.}{\includegraphics[width=\textwidth]{diversity_popsize_linear.pdf}}\label{figsupp:popsize-linear}
 
       \figsupp{A version of Figure 2 with OLS estimates per phylum. Diversity
       and approximate population size for 172 taxa, colored by phylum; the
     dashed lines indicate the non-phylogenetic OLS estimates of the
   relationship between population size and diversity grouped by
-phyla.}{\includegraphics[width=\textwidth]{figures/diversity_popsize_averages.pdf}}\label{figsupp:popsize-ave}
+phyla.}{\includegraphics[width=\textwidth]{diversity_popsize_averages.pdf}}\label{figsupp:popsize-ave}
 
   \figsupp{The posterior distributions and fitted relationship between
     diversity and both body mass and range size. The relationship between
@@ -375,12 +375,12 @@ phyla.}{\includegraphics[width=\textwidth]{figures/diversity_popsize_averages.pd
     colored by phyla. The gray dashed line is the non-phylogenetic standard
     regression estimate, and the blue dashed line is the relationship fit by
     the phylogenetic mixed-effects
-  model.}{\includegraphics[width=\textwidth]{figures/diversity_range_bodymass.pdf}}\label{figsupp:div-range-bodymass}
+  model.}{\includegraphics[width=\textwidth]{diversity_range_bodymass.pdf}}\label{figsupp:div-range-bodymass}
 
    \figsupp{Pairwise diversity grouped by the range categories from
     \cite{Leffler2012-zj}, with point size indicating the predicted population
     density. The vertical lines are the range category group
-  means.}{\includegraphics{figures/diversity_leffler_ranges.pdf}}\label{figsupp:div-leffler}
+  means.}{\includegraphics{diversity_leffler_ranges.pdf}}\label{figsupp:div-leffler}
   \end{fullwidth}
 \figdata{The diversity and population size dataset for 172 metazoan taxa.}
 \end{figure}
@@ -434,7 +434,7 @@ shared phylogenetic history (see Methods and Materials: \nameref{sec:methods-pcm
 
 \begin{figure}
   \begin{fullwidth}
-  \includegraphics[width=\linewidth]{figures/diversity_pcm.pdf}
+  \includegraphics[width=\linewidth]{diversity_pcm.pdf}
 
   \caption{(A) The ancestral continuous trait estimates for the population size
     and diversity (differences per bp, log scaled) across the phylogeny of 166
@@ -469,13 +469,13 @@ shared phylogenetic history (see Methods and Materials: \nameref{sec:methods-pcm
     not just those present in the phylogeny, since splitting the data by phyla
     reduces sample sizes (OLS with just the subset of taxa in the phylogeny is
     not significant for either chordates and arthropods). The vertical dashed
-  gray line indicates zero.}{\includegraphics[width=\textwidth]{figures/div_popsize_post_phyla.pdf}}\label{figsupp:div-popsize-post-phyla}
+  gray line indicates zero.}{\includegraphics[width=\textwidth]{div_popsize_post_phyla.pdf}}\label{figsupp:div-popsize-post-phyla}
 
-  \figsupp{The ancestral continuous trait estimates for diversity and population size with species labels.}{\includegraphics[width=\textwidth]{figures/biconmap_diversity.pdf}}\label{figsupp:anc-species}
+  \figsupp{The ancestral continuous trait estimates for diversity and population size with species labels.}{\includegraphics[width=\textwidth]{biconmap_diversity.pdf}}\label{figsupp:anc-species}
 
   \figsupp{The ancestral continuous trait estimates for recombination map
   length and diversity and population size with species
-labels.}{\includegraphics[width=\textwidth]{figures/biconmap.pdf}}\label{figsupp:anc-maplen}
+labels.}{\includegraphics[width=\textwidth]{biconmap.pdf}}\label{figsupp:anc-maplen}
 
   \end{fullwidth}
 \end{figure}
@@ -655,7 +655,7 @@ size ($N_c$).
 
 \begin{figure}[t!]
   \begin{fullwidth}
-  \includegraphics[width=\linewidth]{figures/figure_3.pdf}
+  \includegraphics[width=\linewidth]{figure_3.pdf}
 
   \caption{(A) The observed relationship between recombination map length ($L$)
     and census size ($N_c$) across 136 species with complete data and known
@@ -674,13 +674,13 @@ indicates phylum.}\label{fig:linksel}
   \figsupp{The relationship between genome size and approximate census
     population size. The dashed gray line indicates the OLS fit. Tiger
     salamander (\emph{Ambystoma tigrinum}) was excluded because of its
-  exceptionally large genome size (~30Gbp).}{\includegraphics[width=\textwidth]{figures/genome_size_popsize.pdf}}\label{figsupp:genome-size-Nc}
+  exceptionally large genome size (~30Gbp).}{\includegraphics[width=\textwidth]{genome_size_popsize.pdf}}\label{figsupp:genome-size-Nc}
 
   \figsupp{The relationship between genome size and recombination map length.
     The dashed gray line indicates the OLS fit for all taxa, and the dashed
     colored dashed lines indicate the linear relationship fit by phyla. Tiger
     salamander (\emph{Ambystoma tigrinum}) was excluded because of its
-  exceptionally large genome size (~30Gbp).}{\includegraphics[width=\textwidth]{figures/genome_size_maplength.pdf}}\label{figsupp:genome-size-maplen}
+  exceptionally large genome size (~30Gbp).}{\includegraphics[width=\textwidth]{genome_size_maplength.pdf}}\label{figsupp:genome-size-maplen}
 
   \figsupp[The relationship between $N_c$ and diversity in the
     \cite{Corbett-Detig2015-gt} data, and the relationship between estimated
@@ -704,7 +704,7 @@ indicates phylum.}\label{fig:linksel}
     Overall, using the census size, e.g.  $2N_cS$, leads to reductions in
     diversity that far exceed the empirical estimates of Corbett-Detig et al.
   and reasonable model-based predictions from
-$\widetilde{N}_e$.}{\includegraphics[width=\textwidth]{figures/corbett_detig.pdf}}\label{figsupp:reductions}
+$\widetilde{N}_e$.}{\includegraphics[width=\textwidth]{corbett_detig.pdf}}\label{figsupp:reductions}
 
 \figsupp{Comparison of the \emph{Drosophila} sweep parameters used in this study with parameters from other studies.
      (A) The estimate of the number of sweeps per basepair, per genome
@@ -716,7 +716,7 @@ $\widetilde{N}_e$.}{\includegraphics[width=\textwidth]{figures/corbett_detig.pdf
       dashed line is the sweep model parameterized by the genome-wide average
       sweep coalescent rate $2NS \approx 0.92$ from the classic sweep and
       background selection model of \cite{Elyashiv2016-vt} ($r_s$ in
-    Supplementary Table S6).}{\includegraphics[width=\textwidth]{figures/linked_sel_params.pdf}}\label{figsupp:linked-sel-params}
+    Supplementary Table S6).}{\includegraphics[width=\textwidth]{linked_sel_params.pdf}}\label{figsupp:linked-sel-params}
  
   \end{fullwidth}
 \figdata{The map length, population size, and linked selection estimates for 136 metazoan taxa.}
@@ -1362,165 +1362,6 @@ thank UO librarian Dean Walton for helping me track down some rather difficult
 to find older papers.  This work was supported by an NIH Grant (1R01GM117241)
 awarded to Andrew Kern.
 
-
-% \begin{figure}[!htb]
-%   \centering
-%   \includegraphics[width=\textwidth]{figures/diversity_popsize_linear.pdf}
-%   % figure 2-supplement 1
-%   \figsupp{A version of Figure \ref{fig:figure-1} with diversity on a linear,
-%     rather than log, scale. Points are colored by phylum, and the shaded region
-%     is the predicted neutral level of diversity assuming $N_e = N_c$ with mutation
-%   range ranging between $10^{-10} \le \mu \le 10^{-8}$. }
-
-%   \label{suppfig:figure-1-linear}
-% \end{figure}
-
-
-
-% \begin{figure}[!htb]
-%   \centering
-%   \includegraphics[width=\textwidth]{figures/diversity_popsize_averages.pdf}
-%   % figure 2-supplement 2
-%   \figsupp{Diversity and approximate population size for 172 taxa, colored by
-%     phylum; the dashed lines indicate the non-phylogenetic OLS estimates of the
-%   relationship between population size and diversity grouped by phyla.}
-
-%   \label{suppfig:figure-1-ave}
-% \end{figure}
-
-
-% \begin{figure}[!htb] \centering
-%   \includegraphics[width=\textwidth]{figures/diversity_range_bodymass.pdf}
-%   % figure 2-supplement 3
-%   \figsupp{The relationship between diversity (differences per basepair) and
-%     body mass (left) and range (right) across 172 species. The top row are
-%     posterior distributions of parameters estimated using the phylogenetic
-%     mixed-effects model using 166 taxa in the synthetic phylogeny for the
-%     intercept, slope, and phylogenetic signal from the mixed-effects model. The
-%     bottom row contain each species as a point, colored by phyla. The gray
-%     dashed line is the non-phylogenetic standard regression estimate, and the
-%     blue dashed line is the relationship fit by the phylogenetic mixed-effects
-%   model. }
-
-%   \label{suppfig:figure-div-range-bodymass}
-% \end{figure}
-
-
-% \begin{figure}[!htb]
-%   \centering
-%   \includegraphics[width=\textwidth]{figures/div_popsize_post_phyla.pdf}
-%   % figure 3-supplement 1
-%   \figsupp{The posterior distributions for the parameters of the phylogenetic
-%     mixed-effects model of diversity and population size (this is analogous to
-%     Figure \ref{fig:figure-2}B) fit separately on chordates ($n=68$), molluscs
-%     ($n=13$), and arthropods ($n=68$). The phylogenetic mixed-effects model for
-%     chordates indicated the best-fitting model had no residual variance
-%     ($\sigma_r^2 = 0$), so an alternate model without this variance component
-%     was used to ensure proper convergence; this model is shown in green.
-%     The light blue (green) shaded regions are the 90\% credible intervals, the
-%     blue (green) lines the posterior averages, the gray shaded regions the OLS
-%     bootstrap 95\% confidence intervals, and the gray lines the OLS estimate.
-%     Note that unlike Figure \ref{fig:figure-2}, the OLS estimate uses all taxa,
-%     not just those present in the phylogeny, since splitting the data by phyla
-%     reduces sample sizes (OLS with just the subset of taxa in the phylogeny is
-%     not significant for either chordates and arthropods). The vertical dashed
-%   gray line indicates zero.}
-
-%   \label{suppfig:div_popsize_post_phyla}
-% \end{figure}
-
-
-% \begin{figure}[!htb]
-%   \centering
-%   \includegraphics[width=\textwidth]{figures/biconmap_diversity.pdf}
-%   % figure 3-supplement 2
-%   \figsupp{}
-%   \label{suppfig:biconmap_diversity}
-% \end{figure}
-
-
-
-% \begin{figure}[!htb]
-%   \centering
-%   \includegraphics[width=\textwidth]{figures/biconmap.pdf}
-%   % figure 3-supplement 3
-%   \figsupp{}
-%   \label{suppfig:biconmap}
-% \end{figure}
-
-
-% \begin{figure}[!htb]
-%   \centering
-%   \includegraphics[width=\textwidth]{figures/genome_size_popsize.pdf}
-%   % figure 4-supplement 1
-%   \figsupp{The relationship between genome size and approximate census
-%     population size. The dashed gray line indicates the OLS fit. Tiger
-%     salamander (\emph{Ambystoma tigrinum}) was excluded because of its
-%   exceptionally large genome size (~30Gbp).}
-
-%   \label{supfig:genome_size_popsize}
-% \end{figure}
-
-
-% \begin{figure}[!htb]
-%   \centering
-%   \includegraphics[width=\textwidth]{figures/genome_size_maplength.pdf}
-%   % figure 4-supplement 2
-%   \figsupp{The relationship between genome size and recombination map length.
-%     The dashed gray line indicates the OLS fit for all taxa, and the dashed
-%     colored dashed lines indicate the linear relationship fit by phyla. Tiger
-%     salamander (\emph{Ambystoma tigrinum}) was excluded because of its
-%   exceptionally large genome size (~30Gbp).}
-%   \label{supfig:genome_size_maplength}
-% \end{figure}
-
-
-% \begin{figure}[!htb]
-%   \centering
-%   \includegraphics[width=\textwidth]{figures/corbett_detig.pdf}
-%   % figure 4-supplement 1
-%   \figsupp{(A) The diversity data from \textcite{Corbett-Detig2015-gt} and the
-%     census population size estimated here for metazoan taxa. (B) The
-%     reductions in diversity, $R = \nicefrac{N_e}{N}$, plotted against census
-%     size across species. The red points are the reductions estimated by
-%     \textcite{Corbett-Detig2015-gt}. This confirms
-%     \citeauthor{Corbett-Detig2015-gt}'s (2015) finding that the impact of
-%     selection ($I = 1-R$) increases with census population size (though, in the
-%     original paper size body size and range were used as separate proxy
-%     variables for census population size). The green and red points are the
-%     predicted reduction in diversity under the recurrent hitchhiking (RHH) and
-%     background selection (BGS) model using the \emph{Drosophila melanogaster}
-%     parameters as described in the main text.  The reduction in the diversity
-%     due to sweeps, from Equation \eqref{eqn:div}, is determined by the term
-%     $2NS$.  Green points treat $N$ as the implied effective population size
-%     from diversity $\widetilde{N}_e = \nicefrac{\widehat{\pi}}{4\mu}$, assuming
-%     $\mu = 10^{-9}$. Yellow points treat $N$ as the census size, $N = N_c$.
-%     Overall, using the census size, e.g.  $2N_cS$, leads to reductions in
-%     diversity that far exceed the empirical estimates of Corbett-Detig et al.
-%   and reasonable model-based predictions from $\widetilde{N}_e$.}
-%   \label{suppfig:corbett_detig}
-% \end{figure}
-
-
-% \begin{figure}[!htb]
-%   \centering
-%   \includegraphics[width=\textwidth]{figures/linked_sel_params.pdf}
-%   % figure 4-supplement 2
-%   \caption{(A) The estimate of the number of sweeps per basepair, per genome
-%     ($\nu_\text{BP}$) from Table 2 of \textcite{Elyashiv2016-vt} (the studies
-%     included are \cite{Li2006-xa,Andolfatto2007-uy,Macpherson2007-qt} and
-%     \cite{Jensen2008-vz}); the red point is my estimate used in
-%     this paper. (B) Points are the data from \textcite{Shapiro2007-gp}.  The
-%     blue line is the non-linear least squares fit to the data, and the green
-%     dashed line is the sweep model parameterized by the genome-wide average
-%     sweep coalescent rate $2NS \approx 0.92$ from the classic sweep and
-%   background selection model of \textcite{Elyashiv2016-vt} ($r_s$ in
-% Supplementary Table S6).}
-
-%   \label{suppfig:linked-sel-params}
-% \end{figure}
-
-
 \bibliography{biblio.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1771,7 +1612,7 @@ fewer species (Supplementary Table \ref{supptable:tbl-1}).
 
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{figures/diversity_popsize_redlist.pdf}
+  \includegraphics[width=\textwidth]{diversity_popsize_redlist.pdf}
   \captionof{figure}{A version of \FIG{pi-Nc} with points colored by their
     IUCN Red List conservation status. Margin boxplots show the diversity and
     population size ranges (thin lines) and interquartile ranges (thick lines)

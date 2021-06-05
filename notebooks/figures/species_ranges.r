@@ -49,7 +49,7 @@ with(means, segments(y0=xmin, y1=xmax,
 text(y=d$xpos, x=8.8, labels=d$species, 
      col=cols[d$range_cat], xpd=TRUE, 
      las=1, srt=0, adj=0, cex=0.3)
-legend(1.9, 126, range_cat_levels, fill=cols, 
+legend(2.1, 80, range_cat_levels, fill=cols, 
        bty='n', box.lwd=0, border=0, cex=1)
 
 title(xlab=latex2exp::TeX('estimated range ($km^2$)'), line=2.1)
