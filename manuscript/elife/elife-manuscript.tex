@@ -28,7 +28,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% ARTICLE SETUP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Quantifying Lewontin's Paradox Suggests Natural Selection is Unlikely to Explain the Narrow Range of Diversity Among Species}
+% \title{Quantifying Lewontin's Paradox Suggests Natural Selection is Unlikely to Explain the Narrow Range of Diversity Among Species}
+\title{Quantifying the Relationship Between Genetic Diversity and Population Size Suggests Natural Selection Cannot Explain Lewontin's Paradox}
+
 
 \author[1*]{Vince Buffalo}
 \affil[1]{Institute of Ecology and Evolution, University of Oregon, United States}
@@ -61,73 +63,73 @@
  current models of linked selection are capable of reducing diversity to this
  extent. To quantify the discrepancy between pairwise diversity and census
  population sizes across species, I combine previously-published estimates of
- pairwise diversity from 172 metazoan taxa with estimates of census sizes.
- Using phylogenetic comparative methods, I show this relationship is
- significant accounting for phylogeny, but with high phylogenetic signal and
- evidence that some lineages experience shifts in the evolutionary rate of
- diversity deep in the past. Additionally, I find a negative relationship
- between recombination map length and census size, suggesting abundant species
- have less recombination and experience greater reductions in diversity due to
- linked selection. However, I show that even using strong selection parameter
- estimates, models of linked selection are unlikely to explain the observed
- relationship between diversity and census sizes across species.
+ pairwise diversity from 172 metazoan taxa with newly derived estimates of
+ census sizes.  Using phylogenetic comparative methods, I show this
+ relationship is significant accounting for phylogeny, but with high
+ phylogenetic signal and evidence that some lineages experience shifts in the
+ evolutionary rate of diversity deep in the past. Additionally, I find a
+ negative relationship between recombination map length and census size,
+ suggesting abundant species have less recombination and experience greater
+ reductions in diversity due to linked selection. However, I show that even
+ assuming strong and abundant selection, models of linked selection are
+ unlikely to explain the observed relationship between diversity and census
+ sizes across species.
+
 \end{abstract}
 
 
 \section{Introduction}
 
 A longstanding mystery in evolutionary genetics is that the observed levels of
-genetic variation across sexual species are confined to an unexpectedly narrow
-range. Under neutral theory, the average number of nucleotide differences
-between lineages (pairwise diversity, $\pi$) is determined by the balance of
-new mutations and their loss by genetic drift
-\citep{Kimura1964-ul,Malecot1948-zv,Wright1931-fl}. In particular, the expected
-diversity at neutral sites in a panmictic population of $N_c$ diploids is
-expected to be $\pi \approx 4N_c \mu$, where $\mu$ is the per basepair per
-generation mutation rate. Given that metazoan germline mutation rates only
-differ 10-fold ($10^{-8}$--$10^{-9}$, \cite{Kondrashov2010-fi,Lynch2010-ki}),
-and census sizes vary over several orders of magnitude, one would expected
-under neutral theory that heterozygosity should also vary over several orders
-of magnitude. However, early allozyme surveys revealed that heterozygosity
-levels across a wide range of species varied just an order of magnitude
-\citep[][p. 208]{Lewontin1974-jb}; this is known as Lewontin's ``Paradox of
-Variation". With modern sequencing-based estimates of $\pi$ across taxa
-ranging over only three orders of magnitude ($0.01$--$10\%$,
-\cite{Leffler2012-zj}), Lewontin's paradox has persisted unresolved through the
-genomics era.
+genetic variation across sexual species span an unexpectedly narrow range.
+Under neutral theory, the average number of nucleotide differences between
+sequences (pairwise diversity, $\pi$) is determined by the balance of new
+mutations and their loss by genetic drift
+\citep{Kimura1964-ul,Malecot1948-zv,Wright1931-fl}. In particular, expected
+pairwise diversity at neutral sites in a panmictic population of $N_c$ diploids
+is $\pi \approx 4N_c \mu$, where $\mu$ is the per basepair per generation
+mutation rate. Given that metazoan germline mutation rates only differ 10-fold
+($10^{-8}$--$10^{-9}$, \cite{Kondrashov2010-fi,Lynch2010-ki}), and census sizes
+vary over several orders of magnitude, under neutral theory one would expect
+that pairwise diversity also vary over several orders of magnitude.  However,
+early allozyme surveys revealed that diversity levels across a wide range of
+species varied just an order of magnitude \citep[][p. 208]{Lewontin1974-jb};
+this is known as Lewontin's ``Paradox of Variation".  With modern
+sequencing-based estimates of $\pi$ across taxa ranging over only three orders
+of magnitude ($0.01$--$10\%$, \cite{Leffler2012-zj}), Lewontin's paradox
+remains unresolved through the genomics era.
 
-From the beginning, explanations for Lewontin's Paradox have been framed in
-terms of the neutralist--selectionist controversy
-\citep{Lewontin1974-jb,Kimura1984-ia,Gillespie1991-qa,Gillespie2001-mv}.
-The neutralist view is that beneficial alleles are sufficiently rare and
-deleterious alleles removed sufficiently quickly, that levels of genetic
+Early on, explanations for Lewontin's Paradox have been framed in terms of the
+neutralist--selectionist controversy
+\citep{Lewontin1974-jb,Kimura1984-ia,Gillespie1991-qa,Gillespie2001-mv}.  The
+neutralist view is that beneficial alleles are sufficiently rare and
+deleterious alleles are removed sufficiently quickly, that levels of genetic
 diversity are shaped predominantly by genetic drift and mutation
-\citep{Kimura1984-ia}. Specifically, \emph{non-selective} processes
-decouple the effective population size implied by observed levels of diversity
+\citep{Kimura1984-ia}. Specifically, \emph{non-selective} processes decouple
+the effective population size implied by observed levels of diversity
 $\widehat{\pi}$, $\widetilde{N}_e = \nicefrac{\widehat{\pi}}{4\mu}$, from the
-census size, $N_c$. By contrast, the selectionist view is that the direct and
-indirect effects of linked selection suppress diversity levels across taxa,
-specifically because the impact of linked selection is greater in large
-populations. Undoubtedly, these opposing views represent a false dichotomy, as
-population genomic studies have uncovered both complex demographic histories
-that impact diversity within a species (e.g.
-\cite{Zhao2013-vd,Palkopoulou2015-bg}) and evidence that selection depresses
-genome-wide diversity (e.g.
+census size, $N_c$. By contrast, the selectionist view is that direct selection
+and the indirect effects of selection on linked neutral diversity suppress
+diversity levels across taxa, specifically because the impact of linked
+selection is greater in large populations. Undoubtedly, these opposing views
+represent a false dichotomy, as population genomic studies have uncovered
+evidence for the substantial impact of both demographic history (e.g.
+\cite{Zhao2013-vd,Palkopoulou2015-bg}) and linked selection on genome-wide
+diversity (e.g.
 \cite{Elyashiv2016-vt,Begun1992-ey,Aguade1989-jx,McVicker2009-ax}). 
 
-\subsection{Possible Explanations of Lewontin's Paradox}
+\subsection{Possible Resolutions of Lewontin's Paradox}
 
 A resolution of Lewontin's Paradox would involve a mechanistic description and
 quantification of the evolutionary processes that prevent diversity from
 scaling with census sizes across species. This would necessarily connect to the
 broader literature on the empirical relationship between diversity and
-population size
-\citep{Frankham1996-yb,Nei1984-zi,Soule1976-he,Leroy2021-gy}, and the
-ecological and life history correlates of genetic diversity
-\citep{Nevo1978-wh,Powell1975-lg,Nevo1984-hp}. Three categories of
-processes stand out as potentially capable of decoupling census sizes from
-diversity: non-equilibrium demography, variance and skew in reproductive
-success, and selective processes.
+population size \citep{Frankham1996-yb,Nei1984-zi,Soule1976-he,Leroy2021-gy},
+and the ecological and life history correlates of genetic diversity
+\citep{Nevo1978-wh,Powell1975-lg,Nevo1984-hp}. Three categories of processes
+stand out as potentially capable of decoupling census sizes from diversity:
+non-equilibrium demography, variance and skew in reproductive success, and
+selective processes.
 
 It has long been appreciated that effective population sizes are typically less
 than census population sizes, tracing back to early debates between R.A. Fisher
@@ -145,114 +147,110 @@ that cosmopolitan species repeatedly endure extinction and recolonization
 events, which reduces effective population size
 \citep{Maruyama1980-xz,Slatkin1977-kd}. 
 
-While chance demographic events like bottlenecks and recent expansions have
-long-term impacts on diversity (since mutation-drift equilibrium is reached on
-the order of size of the population), characteristics of the breeding structure
-such as high variance ($V_w$) or skew in reproductive success continuously
-suppress diversity below the levels predicted by the census size
-\citep{Wright1938-tv}. For example, in many marine animals, females are
-highly fecund, and dispersing larvae face extremely low survivorship, leading
-to high variance in reproductive success
+While intermittent demographic events like bottlenecks and recent expansions
+have long-term impacts on diversity (since mutation-drift equilibrium is
+reached on the order of size of the population), characteristics of the
+breeding structure such as high variance ($V_w$) or skew in reproductive
+success continuously suppress diversity below the levels predicted by the
+census size \citep{Wright1938-tv}. For example, in many marine animals, females
+are highly fecund, and dispersing larvae face extremely low survivorship,
+leading to high variance in reproductive success
 \citep{Waples2018-kb,Waples2013-wi,Hedgecock2011-ku,Hauser2008-fd}. Such
 ``sweepstakes" reproductive systems can lead to remarkably small ratios of
-effective population size to census population size (e.g. $\nicefrac{N_e}{N_c}$
-can range from $10^{-6}$--$10^{-2}$), since $\nicefrac{N_e}{N} \approx
-\nicefrac{1}{V_w}$
-\citep{Hedgecock1994-gs,Wright1938-tv,Nunney1993-ef,Nunney1996-wy}, and
-require multiple-merger coalescent processes to describe their genealogies
+effective to census population size (e.g. $\nicefrac{N_e}{N_c}$ can range from
+$10^{-6}$--$10^{-2}$), since $\nicefrac{N_e}{N} \approx \nicefrac{1}{V_w}$
+\citep{Hedgecock1994-gs,Wright1938-tv,Nunney1993-ef,Nunney1996-wy}, and require
+multiple-merger coalescent processes to describe their genealogies
 \citep{Eldon2006-ui}. Overall, these reproductive systems diminish the
-diversity in many species, but seem unlikely to explain Lewontin's Paradox
+diversity in some species, but seem unlikely to explain Lewontin's Paradox
 broadly across metazoans.
 
 Alternatively, selective processes, and in particular the indirect effects of
-selection on linked neutral variation, could explain the observed narrow range
-of diversity. The earliest mathematical model of hitchhiking was proffered as a
-explanation of Lewontin's Paradox \citep{Maynard_Smith1974-zr}.  Since,
-empirical observations have demonstrated that linked selection shapes patterns
-of genome-wide diversity, as evidenced by the correlation between recombination
-and diversity in a variety of species
+selection on linked neutral variation, could potentially explain the observed
+narrow range of diversity. The earliest mathematical model of hitchhiking was
+proffered as a explanation of Lewontin's Paradox \citep{Maynard_Smith1974-zr}.
+Since, linked selection has been shown to impact diversity levels in a variety
+of species, as evidenced by the correlation between recombination and diversity
 \citep{Aguade1989-jx,Begun1992-ey,Cutter2003-tl,Stephan1998-hh,Cai2009-by}.
-Theoretic work to explain this pattern has considered diversity under a steady
-influx of new beneficial mutations (recurrent hitchhiking;
-\cite{Stephan1992-jc,Stephan1995-ry}), and purifying selection against new
+Theoretic work to explain this pattern has considered the impact of a steady
+influx of beneficial mutations (recurrent hitchhiking;
+\cite{Stephan1992-jc,Stephan1995-ry}), and purifying selection against
 deleterious mutations (background selection, BGS;
 \cite{Charlesworth1993-gb,Nordborg1996-nq,Hudson1994-oh,Hudson1995-xc}).
 Indeed, empirical work indicates background selection diminishes diversity
 around genic regions in a variety of species
-\citep{McVicker2009-ax,Hernandez2011-gs,Charlesworth1996-px}, and now
-efforts have shifted towards teasing apart the effects of positive and negative
+\citep{McVicker2009-ax,Hernandez2011-gs,Charlesworth1996-px}, and now efforts
+have shifted towards teasing apart the effects of positive and negative
 selection on genomic diversity \citep{Elyashiv2016-vt}.
 
-An important class of theoretic selection models pertaining to Lewontin's
+A class of models that are of particular interest in the context of Lewontin's
 Paradox are recurrent hitchhiking models that decouple diversity from the
-census population size. These models predict diversity when strongly selected
-beneficial mutations regularly enter and sweep through the population, trapping
-lineages and forcing them to coalesce
+census population size. These models predict diversity levels when strongly
+selected beneficial mutations regularly enter and sweep through the population,
+trapping lineages and forcing them to coalesce
 \citep{Kaplan1989-sc,Gillespie2000-mh}. In general, decoupling occurs under
 these hitchhiking models when the rate of coalescence due to selection is much
 greater than the rate of neutral coalescence \citep[e.g.][equation
-22]{Coop2012-cd}. Under other linked selection models, the resulting effective
-population size is proportional to population size, and thus these models
-cannot decouple diversity, all else equal. For example, models of background
-selection and polygenic fitness variation predict diversity is proportional to
-population size, mediated by the total recombination map length and the
-deleterious mutation rate or fitness variation
+22]{Coop2012-cd}. In contrast, under other linked selection models, the
+resulting effective population size is proportional to population size; these
+models cannot decouple diversity, all else equal. For example, models of
+background selection and polygenic fitness variation predict diversity is
+proportional to population size, mediated by the total recombination map length
+and the deleterious mutation rate or fitness variation
 \citep{Charlesworth1993-gb,Nicolaisen2012-vs,Nordborg1996-nq,Robertson1961-ho,Santiago1995-hx,Santiago1998-bs}.
 
-\subsection{Recent Approaches Towards Solving Lewontin's Paradox}
+\subsection{Recent Approaches Towards Resolving Lewontin's Paradox}
 
-Recently, \cite{Corbett-Detig2015-gt} used population genomic data to
-estimate the reduction in diversity due to background selection and hitchhiking
-across 40 species, and showed the impact of selection increases with two
-proxies of census population size, species range and with body size. They
-argued this is evidence that selection could explain Lewontin's Paradox;
-however, in a re-analysis, \cite{Coop2016-gx} demonstrated that the
-observed scale of these reductions is insufficient to explain the
-orders-of-magnitude shortfall between observed and expected levels of diversity
-across species. Other recent work has found that certain life history
-characteristics related to parental investment, such as propagule size, are
-good predictors diversity in animals \citep{Romiguier2014-bp,Chen2017-nf}.
-Nevertheless, while these diversity correlates are important clues, they do not
-propose a mechanism by which these traits act to constrain diversity within a
-few orders of magnitude. 
+Recently, \cite{Corbett-Detig2015-gt} used population genomic data to estimate
+the reduction in diversity due to background selection and hitchhiking across
+40 species, and showed that the impact of selection increases with two proxies
+of census population size, species range and with body size. Based on this
+evidence, they argued that selection could explain Lewontin's Paradox; however,
+in a re-analysis, \cite{Coop2016-gx} demonstrated that the observed magnitude
+of these reductions is insufficient to explain the orders-of-magnitude
+shortfall between observed and expected levels of diversity across species.
+Other recent work has found that life history characteristics related to
+parental investment, such as propagule size, are good predictors diversity in
+animals \citep{Romiguier2014-bp,Chen2017-nf}.  Nevertheless, while these
+diversity correlates are important clues, they do not propose a mechanism by
+which these traits act to constrain diversity within a few orders of magnitude. 
 
-Here, I revisit Lewontin's Paradox by integrating a variety of data sets and
-assessing the predicted reductions in diversity under different selection
-models. Prior surveys of genetic diversity either lacked census population size
-estimates, used allozyme-based measures of heterozygosity, or included fewer
-species. To address these shortcomings, I first estimate census sizes by
-combining predictions of population density based on body size with ranges
-estimated from geographic occurrence data. Using these estimates, I quantify
-the relationship between census size and previously-published genomic diversity
-estimates across 172 metazoan taxa within nine phyla, to provide a sense of the
-scale of the divergence between $\pi$ and $N_c$ that leads to Lewontin's
-Paradox. 
+Here, I revisit Lewontin's Paradox by integrating several data sets in order to
+compare the observed reductions between diversity and census size with the
+predicted relationship under different selection models. Prior surveys of
+genetic diversity either lacked census population size estimates, used
+allozyme-based measures of heterozygosity, or included fewer species. To
+address these shortcomings, I first estimate census sizes by combining
+predictions of population density based on body size with ranges estimated from
+geographic occurrence data. Using these estimates, I quantify the relationship
+between census size and previously-published genomic diversity estimates across
+172 metazoan taxa within nine phyla, thus characterizing the relationship
+between $\pi$ and $N_c$ that underlies Lewontin's Paradox. 
 
 Past work looking at the relationship between $\pi$ and $N_c$ has been unable
 to fully account for phylogenetic non-independence across taxa
-\citep{Felsenstein1985-an}. To address this shortcoming, I use phylogenetic
-comparative methods (PCMs) with a synthetic time-calibrated phylogeny to
-account for shared phylogenetic history. Moreover, it is disputed whether
-considering phylogenetic non-independence is necessary in population genetics,
-since coalescent times are much less than divergence times
-\citep{Whitney2010-ud,Lynch2011-qv}. Using PCMs, I address this by
-estimating the degree of phylogenetic signal in the diversity census size
-relationship, and investigating how these traits evolve along the phylogeny.
+\citep{Felsenstein1985-an}. To address this, I use phylogenetic comparative
+methods (PCMs) with a synthetic time-calibrated phylogeny to account for shared
+phylogenetic history. Moreover, it is disputed whether considering phylogenetic
+non-independence is necessary in population genetics, given that coalescent
+times within species are much less than divergence times
+\citep{Whitney2010-ud,Lynch2011-qv}. Using PCMs, I address this by estimating
+the degree of phylogenetic signal in the diversity census size relationship,
+and investigating how these traits evolve along the phylogeny.
 
 Finally, I explore whether the predicted reductions of diversity under
 background selection and recurrent hitchhiking are sufficiently strong to
-resolve Lewontin's Paradox. These predicted reductions in diversity across
-species are estimated using strong selection parameters from \emph{Drosophila
-melanogaster}, a species known to be strongly affected by linked selection.
-Given the effects of linked selection are mediated by recombination map length,
-I investigate how recombination map lengths vary with census population size
-using data from a previously-published survey \citep{Stapley2017-fs}. I
-find map lengths are typically shorter in large--census-size species,
-increasing the effects of linked selection in these species, which might
-further decouple diversity from census size. Still, I find the combined impact
-of these selection models with available parameter estimates falls short in
-explaining Lewontin's Paradox, and discuss future avenues through which the
-Paradox of Variation could be fully resolved.
+resolve Lewontin's Paradox. I do so using selection parameters from
+\emph{Drosophila melanogaster}, a species known to be strongly affected by
+linked selection. Given the effects of linked selection are mediated by
+recombination map length, I also investigate how recombination map lengths vary
+with census population size using data from a previously-published survey
+\citep{Stapley2017-fs}. I find map lengths are typically shorter in
+large--census-size species, increasing the effects of linked selection in these
+species, which could further decouple diversity from census size. Still, I find
+the combined impact of these modes of linked selection fall short in explaining
+Lewontin's Paradox, and discuss future avenues through which the Paradox of
+Variation could be fully resolved.
 
 
 \section{Results}
@@ -1351,15 +1349,15 @@ supporting me during this work, and Graham Coop for inspiration and helpful
 feedback during socially distanced nature walks at Yolo Basin. I thank Jessica
 Stapley for kindly providing the recombination map length data, and Yaniv
 Brandvain, Amy Collins, Doc Edge, Tyler Kent, Chuck Langley, Matt Osmond, Sally
-Otto, Jeff Ross-Ibarra, Aaron Stern, Anastasia Teterina, Michael Turelli,
-Margot Wood, and my Kern-Ralph labmates for helpful discussions. Sarah
-Friedman, Katherine Corn, and Josef Uyeda provided very useful advice about
-phylogenetic comparative methods; yet I take full responsibility for any
-shortcomings of my analysis. Finally, I am indebted to Guy Sella, Matt Pennell,
-and two other anonymous reviewers for helpful feedback. I would like to also
-thank UO librarian Dean Walton for helping me track down some rather difficult
-to find older papers.  This work was supported by an NIH Grant (1R01GM117241)
-awarded to Andrew Kern.
+Otto, Molly Przeworski, Jeff Ross-Ibarra, Aaron Stern, Anastasia Teterina,
+Michael Turelli, Margot Wood, and my Kern-Ralph labmates for helpful
+discussions. Sarah Friedman, Katherine Corn, and Josef Uyeda provided very
+useful advice about phylogenetic comparative methods; yet I take full
+responsibility for any shortcomings of my analysis. Finally, I am indebted to
+Guy Sella, Matt Pennell, and two other anonymous reviewers for helpful
+feedback. I would like to also thank UO librarian Dean Walton for helping me
+track down some rather difficult to find older papers.  This work was supported
+by an NIH Grant (1R01GM117241) awarded to Andrew Kern.
 
 \bibliography{biblio.bib}
 
