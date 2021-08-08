@@ -1830,13 +1830,15 @@ dml_full <- da_ml %>%
                                    B=Ne_N_HK95, gamma=dm_gamma, 
                                    J22=J22)) %>%
      mutate(Ne_N_RHH_BGS_strongsel = RHH_BGS(1, L=map_length, N=10^log10_popsize,
-                                             B=Ne_N_HK95, gamma=dm_gamma, 
-                                             J22=J22 * 10)) %>%
-
+                                             B=Ne_N_HK95, gamma=10*dm_gamma, 
+                                             J22=J22)) %>%
+     mutate(Ne_N_RHH_strongsel = RHH_BGS(1, L=map_length, N=10^log10_popsize,
+                                             B=1, gamma=10*dm_gamma, 
+                                             J22=J22)) %>%
      mutate(Ne_N_RHH_BGS_strongsel_strongBGS = RHH_BGS(1, L=map_length, 
                                                        N=10^log10_popsize,
-                                             B=Ne_N_HK95_strongBGS, gamma=dm_gamma, 
-                                             J22=J22 * 10)) %>%
+                                             B=Ne_N_HK95_strongBGS, gamma=10*dm_gamma, 
+                                             J22=J22)) %>%
      # 10-folder greater Nc
      mutate(Ne_N_RHH_BGS2 = RHH_BGS(1, L=map_length, N=10*10^log10_popsize,
                                    B=Ne_N_HK95, gamma=dm_gamma, 
