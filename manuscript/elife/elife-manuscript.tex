@@ -579,13 +579,13 @@ in some combination of population size, reproductive system, and mutation
 rates.
 
 Finally, an important caveat is the increase in rate towards the tips could be
-caused by measurement noise, or possibly that uncertainty or bias in the
-divergence time estimates deep in the tree. Inspecting the lineage pairs that
-lead to this increase in rate towards the tips indicates these represent
-plausible rate shifts, e.g.  between cosmopolitan and endemic sister species
-like \emph{Drosophila simulans} and \emph{Drosophila sechellia}; however,
-ruling out measurement noise entirely as an explanation would involve
-considering the uncertainty of diversity and population size estimates.
+caused by measurement noise, or possibly uncertainty or bias in the divergence
+time estimates deep in the tree. Inspecting the lineage pairs that lead to this
+increase in rate towards the tips indicates these represent plausible rate
+shifts, e.g.  between cosmopolitan and endemic sister species like
+\emph{Drosophila simulans} and \emph{Drosophila sechellia}; however, ruling out
+measurement noise entirely as an explanation would involve modeling the
+uncertainty of diversity and population size estimates.
 
 \subsection{Assessing the Impact of Linked Selection on Diversity Across Taxa}
 
@@ -606,30 +606,30 @@ Lewontin's Paradox. The first difficulty is that $\pi_0$ is unobserved.
 Previous work has estimated $\pi_0$ using methods that exploit the spatial
 heterogeneity in recombination and functional density across the genome to fit
 linked selection models that incorporate both hitchhiking and background
-selection \citep{Elyashiv2016-vt,Corbett-Detig2015-gt}. The second
-difficulty is understanding how $R$ varies across taxa, since we lack
-estimates of critical model parameters for most species. Still, I can address a
-key question: if diversity levels were determined by census sizes ($\pi_0 =
-4N_c \mu$), are the combined effects of background selection and recurrent
+selection \citep{Elyashiv2016-vt,Corbett-Detig2015-gt}. The second difficulty
+is understanding how $R$ varies across taxa, since we lack estimates of
+critical model parameters for most species. Still, I can address a key
+question: if diversity levels were determined by census sizes ($\pi_0 = 4N_c
+\mu$), would the combined effects of background selection and recurrent
 hitchhiking sufficient to reduce diversity to observed levels? Furthermore,
 does the relationship between census size and predicted diversity under linked
 selection across species, $\pi_{BGS+HH} = R \pi_0$, match the observed
 relationship in \FIG{pi-Nc}? 
 
-Since we lack estimates of key linked selection parameters across species, I
-parameterize the hitchhiking and BGS models using estimates from
-\emph{Drosophila melanogaster}, a species known to be strongly affected by
-linked selection \citep{Sella2009-nx}. Under a generalized model of
-hitchhiking and background selection \citep{Elyashiv2016-vt,Coop2012-cd}
-and assuming $N_e = N_c$, expected diversity is
+Since we lack estimates of selection parameters across species, I parameterize
+the hitchhiking and BGS models using estimates from \emph{Drosophila
+melanogaster}, a species known to be strongly affected by linked selection
+\citep{Sella2009-nx}. Under a generalized model of hitchhiking and background
+selection \citep{Elyashiv2016-vt,Coop2012-cd} and assuming $N_e = N_c$,
+the expected diversity is
 
 \begin{align} 
-  \pi_\text{BGS+HH} \approx \frac{\theta}{\nicefrac{1}{B(U, L)} + 2N_c S(\gamma, L, J)} 
+  \pi_\text{BGS+HH} \approx \frac{\theta}{\nicefrac{1}{B(U, L)} + 2N_c S(\gamma, J, L)} 
   \label{eqn:div} 
 \end{align}
 %
 where $\theta = 4N_c\mu$, $B(U,L)$ is the effect of background selection, and
-$S(\gamma, L, J)$ is the rate of coalescence caused by sweeps (c.f.
+$S(\gamma, J, L)$ is the rate of coalescence caused by sweeps (c.f.
 \cite{Elyashiv2016-vt}, equation 1, \cite{Coop2012-cd} equation 20). Under
 background selection models with recombination, the reduction is $B(U,L) =
 \exp(\nicefrac{-U}{L})$ where $U$ is the per diploid genome per generation
@@ -638,7 +638,7 @@ deleterious mutation rate, and $L$ is the recombination map length
 similar to models of effective population size under polygenic fitness
 variation, and can account for other modes of linked selection
 (\cite{Robertson1961-ho,Santiago1995-hx,Santiago1998-bs}, see Appendix 
-\ref{app:bgs}, \nameref{app:bgs}). The coalescent rate due to sweeps is $S(\gamma, L, J) =
+\ref{app:bgs}, \nameref{app:bgs}). The coalescence rate due to sweeps is $S(\gamma,J,L) =
 \nicefrac{\gamma}{L} J$, where $\gamma$ is the number of adaptive substitutions
 per generation, and $J$ is the probability a lineage is trapped by sweeps as
 they occur across the genome (c.f. $J_{2,2}$ in equation 15 of
@@ -646,24 +646,24 @@ they occur across the genome (c.f. $J_{2,2}$ in equation 15 of
 
 Parameterizing the model this way, I then set the key parameters that determine
 the impact of recurrent hitchhiking and background selection ($\gamma$, $J$,
-and $U$) to high values estimated from \emph{Drosophila melanogaster} by
-\cite{Elyashiv2016-vt}. My estimate of the adaptive substitutions per
-generation ($\gamma_\text{Dmel}$) based Elyashiv et al. implies a rate of
-sweeps per basepair of $\nu_\text{BP,Dmel} \approx 2.34 \times 10^{-11}$, which
-is close to other estimates from \emph{D.  melanogaster} (see
+and $U$) to strong selection values estimated for \emph{Drosophila
+melanogaster} by \cite{Elyashiv2016-vt}. My estimate of the adaptive
+substitutions per generation ($\gamma_\text{Dmel} \approx 2.3 \times 10^{-3}$)
+based Elyashiv et al.  implies a rate of sweeps per basepair of
+$\nu_\text{BP,Dmel} \approx 2.34 \times 10^{-11}$, which is close to other
+estimates from \emph{D.  melanogaster} (see
 \FIGSUPP[linksel]{linked-sel-params}A). The rate of deleterious mutations per
 diploid genome, per generation is parameterized using the estimate from
-Elyashiv et al., $U_\text{Dmel} = 1.6$, which is a bit greater than previous
+Elyashiv et al., $U_\text{Dmel} = 1.6$, which is slightly greater than previous
 estimates based on Bateman-Mukai approaches
 \citep{Mukai1985-bc,Mukai1988-vs,Charlesworth1987-ab}. Finally, the probability
-that a lineage is trapped in a sweep, $J_\text{Dmel}$, is calculated from the
-estimated genome-wide average coalescent rate due to sweeps from Elyashiv et
-al. (see \FIGSUPP[linksel]{linked-sel-params}B and Methods:
-\nameref{sec:methods-reduction} for more details on parameter estimates).
-Using these \emph{Drosophila} parameters, I then explore how the predicted
-range of diversity levels under background selection and recurrent hitchhiking
-varies across species with recombination map length ($L$) and census population
-size ($N_c$).
+that a lineage is trapped in a sweep, $J_\text{Dmel} \approx 4.5 \times
+10^{-4}$, is calculated from the estimated genome-wide average coalescence rate
+due to sweeps from Elyashiv et al. (see \FIGSUPP[linksel]{linked-sel-params}B
+and Methods: \nameref{sec:methods-reduction} for more details on parameter
+estimates).  Using these parameters, I then explore how the predicted range of
+diversity levels varies across species with recombination map length ($L$) and
+census population size ($N_c$).
 
 \begin{figure}[t!]
   \begin{fullwidth}
@@ -697,16 +697,20 @@ indicates phylum.}\label{fig:linksel}
   \figsupp{The observed $\pi$--$N_c$ relationship (points) across species
     compared to the predicted diversity (ribbons) under different modes of
     linked selection and parameters, for a range of mutation rates $\mu =$
-    $10^{-8}--10^{-9}$. In both subplots, the gray ribbon is the expected
+    $10^{-8}$--$10^{-9}$. In both subplots, the gray ribbon is the expected
     diversity if $N_e = N_c$. In (A), the predicted impact on diversity for
     four modes of linked selection are depicted: background selection (purple)
-    and hitchhiking (yellow) individually under the parameters in the
-    \FIG{linksel}B, and strong background selection (red) where
-    $U_\text{strongBGS} = 10 U_\text{Dmel} \approx 16$, and strong recurrent
-    hitchhiking, where $\gamma_\text{strongHH} = 10 \gamma_\text{Dmel} \approx
-    0.23$. (B) The combined strong background selection and strong hitchhiking
+    and hitchhiking (yellow) individually under the \emph{Drosophila
+    melanogaster} parameters as in \FIG{linksel}B, and strong background
+    selection (red) where $U_\text{strongBGS} = 10 U_\text{Dmel} \approx 16$,
+    and strong recurrent hitchhiking, where $\gamma_\text{strongHH} = 10
+    \gamma_\text{Dmel} \approx 0.23$. (B) The predicted diversity under the
+    combined effects of strong background selection and strong hitchhiking
     (orange) compared to the original predicted diversity as in \FIG{linksel}B
-(blue).}{\includegraphics[width=\textwidth]{figure_3_alt.pdf}}\label{figsupp:linked-sel-alt}
+    (blue). Overall, under strong background selection and hitchhiking
+    parameters, predicted diversity would be less than observed for high-$N_c$
+    species, indicating the poor fit to observed data is not sensitive to the choice of
+  \emph{Drosophila melanogaster} parameters.}{\includegraphics[width=\textwidth]{figure_3_alt.pdf}}\label{figsupp:linked-sel-alt}
 
 
   \figsupp[The relationship between $N_c$ and diversity in the
@@ -741,7 +745,7 @@ $\widetilde{N}_e$.}{\includegraphics[width=\textwidth]{corbett_detig.pdf}}\label
       this paper. (B) Points are the data from \cite{Shapiro2007-gp}.  The
       blue line is the non-linear least squares fit to the data, and the green
       dashed line is the sweep model parameterized by the genome-wide average
-      sweep coalescent rate $2NS \approx 0.92$ from the classic sweep and
+      sweep coalescence rate $2NS \approx 0.92$ from the classic sweep and
       background selection model of \cite{Elyashiv2016-vt} ($r_s$ in
     Supplementary Table S6).}{\includegraphics[width=\textwidth]{linked_sel_params.pdf}}\label{figsupp:linked-sel-params}
  
@@ -755,52 +759,50 @@ is often thought that this is driven by higher rates of adaptive substitutions
 in larger populations \citep{Ohta1992-yi}, despite equivocal evidence
 \citep{Galtier2016-dq}.  However, there is another mechanism by which species
 with larger population sizes might experience a greater impact of linked
-selection: recombinational map length, $L$, is known to correlate with body
-mass \citep{Burt1987-tq} and thus varies inversely with population size. As
-this is a critical parameter that determines the genome-wide impact of both
-hitchhiking and background selection, I examine the relationship between
-recombination map length ($L$) and census population size ($N_c$) across taxa,
-using available estimates of map lengths across species
+selection: recombination map length, $L$, is known to correlate with body mass
+\citep{Burt1987-tq} and thus varies inversely with population size. As this is
+a critical parameter that determines the genome-wide impact of both hitchhiking
+and background selection, I examine the relationship between recombination map
+length ($L$) and census population size ($N_c$) across taxa, using available
+estimates of map lengths across species
 \citep{Stapley2017-fs,Corbett-Detig2015-gt}. I find a significant non-linear
 relationship using phylogenetic mixed-effects models ( \FIG{linksel}A; see
 Methods and Materials: \nameref{sec:methods-pcm}).  There is also a correlation
 between map length and genome size (\FIGSUPP[linksel]{genome-size-maplen}) and
 genome size and population size (\FIGSUPP[linksel]{genome-size-Nc}). These
-findings are consistent with both the hypothesis that non-adaptive processes
+findings are consistent with the hypothesis that non-adaptive processes
 increase genome size in small-$N_e$ species \citep{Lynch2003-bn} which in turn
 could increase map lengths, as well as the hypothesis that map lengths are
 adaptively longer to more efficiently select against deleterious alleles
 \citep{Roze2021-ya}.  Overall, the negative relationship between map length and
-census size indicates linked selection is expected to be stronger in short map
-length, high-$N_c$ species.
+census size indicates linked selection is expected to be stronger in species
+with short map lengths, which are high-$N_c$ species.
 
 Then, I predict the expected diversity ($\pi_{BGS+HH}$) under background
-selection and hitchhiking, were $N_e= N_c$, and assuming all species had the
+selection and hitchhiking, assuming $N_e= N_c$ and that all species had the
 rate of sweeps and strength of BGS as \emph{D. melanogaster}. Since neutral
 mutation rates $\mu$ are unknown and vary across species, I calculate the range
 of predicted $\pi_{BGS+HH}$ estimates for $\mu = 10^{-8}$--$10^{-9}$ (using the
 four-alleles model, \cite{Tajima1996-rb}), and compare this to the observed
-relationship between $\pi$ and $N_c$ in \FIG{linksel}B.  Under these
-parameters, linked selection begins to appreciably depress diversity around
-$N_c \approx 10^9$, since $S \approx 10^{-8}$--$10^{-9}$ and linked selection
-dominates drift when $S > \nicefrac{1}{2N}$.  Overall, this reveals two
-problems for the hypothesis that linked selection could solve Lewontin's
-Paradox. First, low to mid-$N_c$ species (census sizes between
-$10^{4}$--$10^{10}$) have sufficiently long map lengths that their diversity
-levels are only moderately reduced by linked selection, leading to a wide gap
-between predicted and observed diversity levels. For this not to be the case,
-the parameters that determine the strength of background selection and
-recurrent hitchhiking would need to be \emph{higher} among these species than
-in \emph{Drosophila melanogaster}. This would require that the rate of adaptive
-mutations or the deleterious mutation rate be orders of magnitude higher for
-species within this range than in \emph{Drosophila}, which is incompatible with
-the rate of adaptive substitutions across species \citep{Galtier2016-dq} and
-mutation rates \citep{Lynch2010-ki}. Furthermore, linked selection has been
-quantified in humans, which fall in this census size range, and has been found
-to be relatively weak
+relationship between $\pi$ and $N_c$ in \FIG{linksel}B.  Under these parameters
+and assumptions, linked selection begins to appreciably constrain diversity for
+$N_c \gtrsim 10^7$, since $S(\gamma_\text{Dmel}, J_\text{Dmel}, L) \approx
+10^{-7}$--$10^{-8}$ and linked selection dominates drift when $S(\gamma, J, L)
+> \nicefrac{1}{2N}$. Overall, this reveals two problems for the hypothesis that
+linked selection could solve Lewontin's Paradox. First, low to mid-$N_c$
+species (census sizes between $10^{4}$--$10^{7}$) have sufficiently long map
+lengths that their diversity levels are only moderately reduced by linked
+selection, leading to a wide gap between predicted and observed diversity
+levels. For this not to be the case, the rate of adaptive mutations or the
+deleterious mutation rate would need to be orders of magnitude higher for
+species within this range than in \emph{Drosophila melanogaster}, which is
+incompatible with the rate of adaptive protein substitutions across species
+\citep{Galtier2016-dq} and overall mutation rates \citep{Lynch2010-ki}.
+Furthermore, linked selection has been quantified in humans, which fall in this
+census size range, and has been found to be relatively weak
 \citep{McVicker2009-ax,Hernandez2011-gs,Hellmann2008-ic,Cai2009-by,Boyko2008-tj}.
 Second, while hitchhiking and BGS can reduce predicted diversity levels for
-high-$N_c$ species ($N_c > 10^{10}$) to observed levels, this would imply
+high-$N_c$ species ($N_c > 10^{12}$) to observed levels, this would imply
 available estimates of $\pi_0$ are underestimated by several orders of
 magnitude in \emph{Drosophila} (\FIGSUPP[linksel]{reductions}B). The high
 reductions in $\pi$ predicted here (compared to those of
@@ -824,15 +826,15 @@ diversity across taxa to a narrow range remains a mystery. I revisit Lewontin's
 Paradox by first characterizing the relationship between genomic estimates of
 pairwise diversity and approximate census population size across 172 metazoan
 species. Previous surveys have used allozyme-based estimates, fewer taxa, or
-qualitative measures of population size. My estimates of census population
-sizes are quite approximate, since they use body size to predict density. An
-improved estimate might consider vagility (as \cite{Soule1976-he} did), though
-this is harder to do systematically across many taxa. Future work might also
-use other ecological information, such as total biomass, or species
-distribution modeling to improve census size estimates
-\citep{Bar-On2018-kc,Mora2011-wm}.  Still, it seems more accurate
-estimates would be unlikely to change the qualitative findings here, which
-resemble those of early surveys \citep{Nei1984-zi,Soule1976-he}.
+proxies of population size. My estimates of census population sizes are rough
+approximates, since they use body size to predict density. An improved estimate
+might account for vagility (as \cite{Soule1976-he} did), though this is harder
+to do systematically across many taxa. Future work might also use other
+ecological information, such as total biomass, or species distribution modeling
+to improve census size estimates \citep{Bar-On2018-kc,Mora2011-wm}.  Still, it
+seems more accurate estimates would be unlikely to change the qualitative
+findings here, which resemble those of early surveys
+\citep{Nei1984-zi,Soule1976-he}.
 
 One limitation of the dataset in this study is that diversity estimates are
 collated from a variety of sources rather than estimated with a single
@@ -1347,18 +1349,18 @@ year \citep{Obbard2012-on}, calculating there are $\gamma_\text{Dmel} =
 Given the length of the \emph{Drosophila} autosomes, $G$, this implies that the
 rate of beneficial substitutions per basepair, per generation is $\nu_{BP,Dmel}
 = \nicefrac{\gamma_\text{Dmel}}{G} = 2.34 \times 10^{-11}$. Finally, I estimate
-$J_\text{Dmel}$ from the estimate of genome-wide average rate of sweeps from
-Elyashiv et al. (Supplementary Table S6) and assuming \emph{Drosophila} $N_e =
-10^6$. These \emph{Drosophila melanogaster} hitchhiking parameter estimates are
-close to other previously-published estimates
-(\FIGSUPP[linksel]{linked-sel-params}). Finally, I use $U_\text{Dmel} = 1.6$,
-from \cite{Elyashiv2016-vt}. With these parameter estimates from \emph{D.
-melanogaster}, the recombination map lengths across species, and Equation
-\eqref{eqn:div}, I estimate $\pi_\text{BGS+HH}$ (assuming $N_c=N_c$) across all
-species. This leads to a range of predicted diversity ranges across species
-corresponding to $\mu=10^{-8}$--$10^{-9}$; to visualize these, I take a convex
-hull of all diversity ranges and smooth this with R's \texttt{smooth.spline}
-function.
+$J_\text{Dmel} \approx 4.5 \times 10^{-4}$ from the estimate of genome-wide
+average rate of sweeps from Elyashiv et al. (Supplementary Table S6) and
+assuming \emph{Drosophila} $N_e = 10^6$. These \emph{Drosophila melanogaster}
+hitchhiking parameter estimates are close to other previously-published
+estimates (\FIGSUPP[linksel]{linked-sel-params}). Finally, I use $U_\text{Dmel}
+= 1.6$, from \cite{Elyashiv2016-vt}. With these parameter estimates from
+\emph{D.  melanogaster}, the recombination map lengths across species, and
+Equation \eqref{eqn:div}, I estimate $\pi_\text{BGS+HH}$ (assuming $N_c=N_c$)
+across all species. This leads to a range of predicted diversity ranges across
+species corresponding to $\mu=10^{-8}$--$10^{-9}$; to visualize these, I take a
+convex hull of all diversity ranges and smooth this with R's
+\texttt{smooth.spline} function.
 
 
 % \subsection{Key Resources Table}
@@ -1439,7 +1441,7 @@ Since I use \emph{Drosophila melanogaster} parameter estimates from
 simple model above. They estimate $S$ in \emph{Drosophila melanogaster} using a
 composite likelihood model that considers hitchhiking and background selection
 simultaneously, using substitutions and stratifying by annotation.  For a
-neutral position at site $x$, the coalescent rate due to sweeps is given by
+neutral position at site $x$, the coalescence rate due to sweeps is given by
 Elyashiv et al.'s equation 3, 
 
 \begin{align}
@@ -1510,7 +1512,7 @@ species. In Elyashiv et al, they consider the number of substitutions per
 generation in genic regions only; it should be noted that the number of coding
 basepairs varies little across species. For convenience, I define $\gamma =
 \nicefrac{\alpha m}{T}$ as the number of adaptive substitutions per generation
-per entire genome, such that $S(\gamma, L, J) = \nicefrac{\gamma}{L} \; J$ used
+per entire genome, such that $S(\gamma, J, L) = \nicefrac{\gamma}{L} \; J$ used
 in the main text. Using the estimates of $m \approx 4.5 \times 10^{5}$, $\alpha
 \approx 0.42$, and $T \approx 8.4 \times 10^{7}$ from the Supplementary
 Material of Elyashiv et al., I arrive at $\gamma \approx 0.00226$ adaptive
