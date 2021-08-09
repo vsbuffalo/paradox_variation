@@ -515,7 +515,7 @@ variance of the phylogenetic effect ($\sigma_p^2$) and the residual variance
 comparison to Pagel's $\lambda$). If the residuals were free of correlations
 due to shared phylogenetic history, then $\lambda = 0$ and all the variance
 could be explained by evolution on the tips; this is analogous to Lynch's
-conjecture that coalescent times should be free of phylogenetic signal
+conjecture that coalescence times should be free of phylogenetic signal
 (\citeyear{Lynch2011-qv}). In the relationship between population size and
 diversity, the posterior mean of $\lambda = 0.67$ (90\% credible interval
 $[0.58, 0.75]$) indicates a majority of the variance perhaps might be
@@ -574,7 +574,7 @@ diversity is mirrored in the population size node-height test (Figure
 census size (e.g. mutation rate or offspring distributions) has experienced a
 shift on the lineage separating tunicates and vertebrates. At nearly 600 Mya,
 these deep nodes illustrate that expected effective population sizes (and thus
-coalescent times) can share phylogenetic history, due to phylogenetic inertia
+coalescence times) can share phylogenetic history, due to phylogenetic inertia
 in some combination of population size, reproductive system, and mutation
 rates.
 
@@ -808,15 +808,31 @@ magnitude in \emph{Drosophila} (\FIGSUPP[linksel]{reductions}B). The high
 reductions in $\pi$ predicted here (compared to those of
 \cite{Elyashiv2016-vt}) are a result of using $N_c$, rather than $N_e =
 \nicefrac{\pi_0}{4 \mu}$ in the denominator of Equation \eqref{eqn:div}, which
-leads to a very high rate of sweeps in the population.  I do not consider
+leads to a very high rate of sweeps in the population. I do not consider
 selective interference, though the saturation of adaptive substitutions per
 Morgan would only act to limit the reduction in diversity
-\citep{Weissman2012-aa}, and thus these results are conservative.  Overall,
-while linked selection could decouple diversity from census size for high-$N_c$
-species, recurrent hitchhiking and background selection seem unlikely to
-explain the observed patterns of diversity across species under our
-understanding of the range of parameter estimates.
+\citep{Weissman2012-aa}, and thus these results are conservative.  
 
+Finally, the poor fit between observed and predicted levels of diversity across
+species is not remedied by stronger selection parameters. In
+\FIGSUPP[linksel]{linked-sel-alt}B, I increase both selection parameters $U$
+and $\gamma$ ten-fold each, and find the same qualitative pattern: on a log-log
+scale the relationship between $N_c$ and $\pi$ is linear, while the predicted
+diversity under linked selection is non-linear with $N_c$. Under this ten-fold
+higher selection regime, there is more overlap between observed and predicted
+levels of diversity, but diversity is severely \emph{under-predicted} for
+high-$N_c$ species. Additionally, this would imply that selection in
+low-to-mid-$N_c$ species is ten-folder higher than estimated in
+\emph{Drosophila melanogaster}, which is implausible.
+
+Overall, predicted levels of diversity under models of recurrent hitchhiking
+and background selection fit the observed relationship between $N_c$ and $\pi$
+poorly, and this is not overly sensitive to parameter choice. These findings
+extend the argument of \cite{Coop2016-gx}, showing that not only are previous
+empirical estimates of the impact of linked selection unable to explain
+Lewontin's Paradox, but it is unlikely current linked selection models under a
+wide range of selection parameters are capable of explaining the observed
+patterns of diversity across species.
 
 \section{Discussion}
 
@@ -836,19 +852,18 @@ seems more accurate estimates would be unlikely to change the qualitative
 findings here, which resemble those of early surveys
 \citep{Nei1984-zi,Soule1976-he}.
 
-One limitation of the dataset in this study is that diversity estimates are
-collated from a variety of sources rather than estimated with a single
-bioinformatic pipeline. This leads to technical noise across diversity
-estimates; perhaps the relationship between $\pi$ and $N_c$ found here could be
-tighter with a standardized bioinformatic pipeline. In addition to this
-technical variation, there might be systematic bioinformatic sources of bias in
-diversity estimates. For example high-diversity sequences may fail to align to
-the reference genome and end up unaccounted for, leading to a downward bias.
-Alternatively, high-diversity sequences might map to the reference genome, but
-adjacent mis-matching SNPs might be mistaken for a short insertion or deletion.
-While these issues might adversely affect the estimates in high-diversity
-species, it is unlikely they will qualitatively change the observed
-$\pi$--$N_c$ relationship.
+One limitation of this study is that diversity estimates are collated from a
+variety of sources rather than estimated with a single bioinformatic pipeline.
+This leads to technical noise across diversity estimates; perhaps the
+relationship between $\pi$ and $N_c$ found here could be tighter with a
+standardized bioinformatic pipeline. In addition, there might be systematic
+bioinformatic sources of bias: for example high-diversity sequences may fail to
+align to the reference genome and end up unaccounted for, leading to a downward
+bias.  Alternatively, a high-diversity sequences might map to the reference
+genome, but adjacent mis-matching SNPs might be mistaken for a short insertion
+or deletion.  While these issues might affect estimates in high-diversity
+species, it is unlikely to change the qualitative relationship between
+$\pi$--$N_c$.
 
 \subsection{Macroevolution and Across-Taxa Population Genomics}
 
@@ -869,28 +884,30 @@ genetic studies were warranted \citep{Gillespie1991-qa,Whitney2010-ud}.
 Notably, Lynch (2011) has argued that PCMs for pairwise diversity are
 unnecessary, since mutation rate evolution is fast and thus free of
 phylogenetic inertia, sampling variance should exceed the variance due to
-phylogenetic shared history, and coalescent times are much less than divergence
-times. Since my findings suggest PCMs are necessary in some cases, it is
-worthwhile to address these points. 
+phylogenetic shared history, and coalescence times are much shorter than
+divergence times. Since my findings suggest PCMs are necessary in some cases,
+it is worthwhile to address these points. 
 
-First, Lynch has correctly pointed out that while coalescent times are much
+First, Lynch has correctly pointed out that while coalescence times are much
 less than divergence times and should be free of phylogenetic shared history,
-the factors that determine coalescent times (e.g.  mutation rates and effective
-population size) may not be (2011). In other words, coalescent times are free
-from phylogenetic shared history \emph{were we to condition} on these causal
-factors that could be affected by shared phylogenetic history. My estimates of
-phylogenetic signal in diversity, by contrast, are not conditioned on these
-factors. Importantly, even ``correcting for" phylogeny implicitly favors
-certain causal interpretations over others
-\citep{Westoby1995-wz,Uyeda2018-wf}. Future work could try to untangle what
-causal factors determine coalescent times across species, as well as how these
+the factors that determine coalescence times (e.g.  mutation rates and
+effective population size) may not be (2011). In other words, coalescence times
+are free from phylogenetic shared history \emph{were we to condition} on these
+causal factors that could be affected by shared phylogenetic history. My
+estimates of phylogenetic signal in diversity, by contrast, are not conditioned
+on these factors. Importantly, even ``correcting for" phylogeny implicitly
+favors certain causal interpretations over others
+\citep{Westoby1995-wz,Uyeda2018-wf}.  Future work could try to untangle what
+causal factors determine coalescence times across species, as well as how these
 factors evolve across macroevolutionary timescales. Second, it is a
 misconception that a fast rate of trait evolution necessarily reduces
-phylogenetic signal \citep{Revell2008-in}, and that if either or both
-variables in a regression are free of phylogenetic signal, PCMs are unnecessary
-\citep{Revell2010-mf,Uyeda2018-wf}. The evidence of high phylogenetic
-signal found in this study suggests PCMs are needed, in part to avoid spurious
-results from phylogenetic pseudoreplication.
+phylogenetic signal \citep{Revell2008-in}, and that if either or both variables
+in a regression are free of phylogenetic signal, PCMs are unnecessary
+\citep{Revell2010-mf,Uyeda2018-wf}. The evidence of high phylogenetic signal
+found in this study suggests PCMs are necessary when fitting the relationship
+between $N_c$ and $\pi$ in order to account for correlated residuals among
+closely-related species, and to avoid spurious results from phylogenetic
+pseudoreplication.
 
 Finally, beyond just accounting for phylogenetic non-independence,
 macroevolution and phylogenetic comparative methods are a promising way to
@@ -904,47 +921,6 @@ bottlenecks were constant across taxa, lineage-specific diversification
 processes could lead certain clades to be systematically further from
 demographic equilibrium, and thus have lower diversity than expected for their
 census population size. 
-
-\subsection{Spatial and Demographic Processes}
-
-One limitation of this study is the inability to quantify the impact of spatial
-population genetic processes on the relationship between diversity and census
-population sizes across taxa. The genomic diversity estimates collated in this
-study unfortunately lack details about the sampling process and spatial data,
-which can have a profound impact on population genomic summary statistics
-\citep{Battey2020-lc}. These issues could systematically bias species-wide
-diversity estimates; for example, if diversity estimates from a cosmopolitan
-species were primarily from a single subpopulation, diversity would be an
-underestimate relative to the entire population. However, biased spatial
-sampling alone seems incapable of explaining the $\pi$-$N_c$ divergence in
-high-$N_c$ taxa. In the extreme scenario in which only one subpopulation was
-sampled, $F_\text{ST}$ would need to be close to one for population subdivision
-alone to sufficiently reduce the total population heterozygosity to explain the
-orders-of-magnitude shortfall between predicted and observed diversity levels.
-This is because the equation for $F_{ST}$ can be rearranged such that $H_S =
-(1-F_{ST})H_T$, where $H_S$ and $H_S$ are the subpopulation and total
-population heterozygosities; if $H_T = 4N_c\mu$, then only $F_{ST} \approx 1$
-can reduce $H_S$ several orders of magnitude. Yet, across-taxa surveys indicate
-that $F_\text{ST}$ is almost never this high within species
-\citep{Roux2016-lm}.  Still, future work could quantify the extent to which
-spatial processes contribute to Lewontin's Paradox. For example, high-$N_c$
-taxa usually experience range expansions, likely with repeated founder effects
-and local extinction/recolonization dynamics that doubtlessly depress
-diversity. In particular, with the appropriate data, one could estimate the
-empirical relationship between dispersal distance, range size, and coalescent
-effective population size across taxa.
-
-In this study, I have focused entirely on assessing the role of linked
-selection, rather than demography, in reducing diversity across taxa. In
-contrast to demographic models, models of linked selection have comparatively
-fewer parameters and more readily permit rough estimates of diversity
-reductions across taxa. Still, a full resolution of Lewontin's Paradox would
-require understanding how the demographic processes across taxa with incredibly
-heterogeneous ecologies and life histories transform $N_c$ into $N_e$. With
-population genomic data becoming available for more species, this could involve
-systematically inferring the demographic histories of tens of species and
-looking for correlations in the frequency and size of bottlenecks with $N_c$
-across species.
 
 \subsection{How could selection still explain Lewontin's Paradox?}
 
@@ -1042,6 +1018,48 @@ remains unaccounted for in this study, is periodic hard selective events. These
 selective events could occur regularly in a species' history yet be
 indistinguishable from demographic bottlenecks with just population genomic
 data. 
+
+\subsection{Spatial and Demographic Processes}
+
+One limitation of this study is the inability to quantify the impact of spatial
+population genetic processes on the relationship between diversity and census
+population sizes across taxa. The genomic diversity estimates collated in this
+study unfortunately lack details about the sampling process and spatial data,
+which can have a profound impact on population genomic summary statistics
+\citep{Battey2020-lc}. These issues could systematically bias species-wide
+diversity estimates; for example, if diversity estimates from a cosmopolitan
+species were primarily from a single subpopulation, diversity would be an
+underestimate relative to the entire population. However, biased spatial
+sampling alone seems incapable of explaining the $\pi$-$N_c$ divergence in
+high-$N_c$ taxa. In the extreme scenario in which only one subpopulation was
+sampled, $F_\text{ST}$ would need to be close to one for population subdivision
+alone to sufficiently reduce the total population heterozygosity to explain the
+orders-of-magnitude shortfall between predicted and observed diversity levels.
+This is because the equation for $F_{ST}$ can be rearranged such that $H_S =
+(1-F_{ST})H_T$, where $H_S$ and $H_S$ are the subpopulation and total
+population heterozygosities; if $H_T = 4N_c\mu$, then only $F_{ST} \approx 1$
+can reduce $H_S$ several orders of magnitude. Yet, across-taxa surveys indicate
+that $F_\text{ST}$ is almost never this high within species
+\citep{Roux2016-lm}.  Still, future work could quantify the extent to which
+spatial processes contribute to Lewontin's Paradox. For example, high-$N_c$
+taxa usually experience range expansions, likely with repeated founder effects
+and local extinction/recolonization dynamics that doubtlessly depress
+diversity. In particular, with the appropriate data, one could estimate the
+empirical relationship between dispersal distance, range size, and coalescent
+effective population size across taxa.
+
+In this study, I have focused entirely on assessing the role of linked
+selection, rather than demography, in reducing diversity across taxa. In
+contrast to demographic models, models of linked selection have comparatively
+fewer parameters and more readily permit rough estimates of diversity
+reductions across taxa. Still, a full resolution of Lewontin's Paradox would
+require understanding how the demographic processes across taxa with incredibly
+heterogeneous ecologies and life histories transform $N_c$ into $N_e$. With
+population genomic data becoming available for more species, this could involve
+systematically inferring the demographic histories of tens of species and
+looking for correlations in the frequency and size of bottlenecks with $N_c$
+across species.
+
 
 \subsection{Measures of Effective Population Size, Timescales, and Lewontin's Paradox}
 
