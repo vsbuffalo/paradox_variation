@@ -29,6 +29,7 @@
 %%% ARTICLE SETUP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \title{Quantifying Lewontin's Paradox Suggests Natural Selection is Unlikely to Explain the Narrow Range of Diversity Among Species}
+
 \title{Quantifying the Relationship Between Genetic Diversity and Population Size Suggests Natural Selection Cannot Explain Lewontin's Paradox}
 
 
@@ -485,16 +486,24 @@ Using a phylogenetic mixed-effects model
 \citep{Carpenter2017-xi,Stan_Development_Team2020-ea}, I estimated the linear
 relationship between diversity and population size (on a log-log scale)
 accounting for phylogeny, for the 166 taxa without missing data and present in
-the synthetic chronogram. This phylogenetic mixed-effects model can account for
-correlated residuals among more closely related species when estimating the
-relationship between $N_c$ and $\pi$, but does not assume there is phylogenetic
-signal in either of these variables. Since the phylogenetic mixed-effects model
-simultaneously estimates the degree of phylogenetic structure in the residuals
-while fitting the relationship between $N_c$ and $\pi$, this model's estimates
-would match those found by ordinary least squares if the residuals were
-distributed independently. Overall, this approach is conservative, making no
-assumptions about the source of the phylogenetic signal while accounting for
-violations of the regression model due to dependence among the residuals (see
+the synthetic chronogram. This type of model is needed because closely-related
+species may differ from the average trend between $N_c$ and $\pi$ in similar
+ways due to shared phylogenetic history, similar life history traits, etc., and
+thus do not represent independent observations as is assumed by the standard
+regression model. This is a form of phylogenetic pseudoreplication, and can be
+accounted for with a phylogenetic mixed-effects model. The phylogenetic
+mixed-effects model does not assume that there is phylogenetic structure in
+either $N_c$ or $\pi$ (which itself is not a violation of the standard
+regression model, \cite{Revell2010-mf} and \cite{Uyeda2018-wf}), but rather
+accounts for phylogenetic correlations structure in the residuals if any is
+present. Importantly, phylogenetic mixed-effects models simultaneously estimate
+the degree of phylogenetic structure in the residuals while fitting the
+relationship between $N_c$ and $\pi$. If the residuals are distributed
+independently, the estimated relationship would be similar to that found by
+ordinary least squares, and the estimated phylogenetic signal would be zero.
+Overall, this approach is conservative, making no assumptions about the source
+of the phylogenetic signal while accounting for violations of the regression
+model due to dependence among the residuals if present (see
 \cite{Revell2010-mf} for a discussion of this).
 
 As with the linear regression, I find this relationship is positive and
@@ -512,14 +521,12 @@ variance of the phylogenetic effect ($\sigma_p^2$) and the residual variance
 ($\sigma_r^2$), these can be used to estimate the phylogenetic signal, $\lambda
 = \nicefrac{\sigma_p^2}{(\sigma_p^2 + \sigma_r^2)}$
 (\cite{Lynch1991-tp,De_Villemereuil2014-kt}; see \cite{Freckleton2002-ly} for a
-comparison to Pagel's $\lambda$). If the residuals were free of correlations
-due to shared phylogenetic history, then $\lambda = 0$ and all the variance
-could be explained by evolution on the tips; this is analogous to Lynch's
-conjecture that coalescence times should be free of phylogenetic signal
-(\citeyear{Lynch2011-qv}). In the relationship between population size and
-diversity, the posterior mean of $\lambda = 0.67$ (90\% credible interval
-$[0.58, 0.75]$) indicates a majority of the variance perhaps might be
-due to shared phylogenetic history (\FIG{pcm}B).
+comparison to Pagel's $\lambda$). When residuals are free of correlations due
+to shared phylogenetic history, then $\lambda = 0$ and all the variance could
+be explained by evolution or noise on the tips. In the relationship between
+population size and diversity, the posterior mean of $\lambda = 0.67$ (90\%
+credible interval $[0.58, 0.75]$) indicates a majority of the variance perhaps
+might be due to shared phylogenetic history (\FIG{pcm}B).
 
 This high degree of phylogenetic signal suggests
 \citeauthor{Gillespie1991-qa}'s (1991) concern that the $\pi$--$N_c$
@@ -527,11 +534,10 @@ relationship was driven by chordate-arthropod differences may be valid. A
 visual inspection of the estimated ancestral continuous values for diversity
 and population size on the phylogeny indicates the high phylogenetic signal
 seems to be driven in part by chordates having low diversity and small
-population sizes compared to non-chordates (\FIG{pcm}A). This
-problem resembles Felsenstein's worst-case scenario
-\citep{Felsenstein1985-an,Uyeda2018-wf}, where a singular event on a
-lineage separating two clades generates a spurious association between two
-traits. 
+population sizes compared to non-chordates (\FIG{pcm}A). This problem resembles
+Felsenstein's worst-case scenario \citep{Felsenstein1985-an,Uyeda2018-wf},
+where a singular event on a lineage separating two clades generates a spurious
+association between two traits. 
 
 To investigate whether clade-level differences dominated the relationship
 between diversity and population size, I fit phylogenetic mixed-effects models
@@ -823,10 +829,10 @@ higher selection regime, there is more overlap between observed and predicted
 levels of diversity, but diversity is severely \emph{under-predicted} for
 high-$N_c$ species. Additionally, this would imply that selection in
 low-to-mid-$N_c$ species is ten-folder higher than estimated in
-\emph{Drosophila melanogaster}, which is implausible. Overall, predicted
-levels of diversity under models of recurrent hitchhiking and background
-selection fit the observed relationship between $N_c$ and $\pi$ poorly, and
-this is not overly sensitive to parameter choice.
+\emph{Drosophila melanogaster}, which is implausible. Overall, this suggests
+that present models of linked selection, even with very strong selection across
+species, are qualitatively incapable of matching the observed relationship
+between $N_c$ and $\pi$ and thus cannot explain Lewontin's Paradox.
 
 \section{Discussion}
 
@@ -888,9 +894,9 @@ the factors that determine coalescence times (e.g.  mutation rates and
 effective population size) may not be (2011). In other words, coalescence times
 are free from phylogenetic shared history \emph{were we to condition} on these
 causal factors that could be affected by shared phylogenetic history. My
-estimates of phylogenetic signal in diversity, by contrast, are not conditioned
-on these factors. Importantly, even ``correcting for" phylogeny implicitly
-favors certain causal interpretations over others
+estimates of phylogenetic signal in the residuals, by contrast, are not
+conditioned on these factors. Importantly, even ``correcting for" phylogeny
+implicitly favors certain causal interpretations over others
 \citep{Westoby1995-wz,Uyeda2018-wf}.  Future work could try to untangle what
 causal factors determine coalescence times across species, as well as how these
 factors evolve across macroevolutionary timescales. Second, it is a
@@ -1058,36 +1064,38 @@ with $N_c$ across species.
 
 Lewontin's Paradox describes the extent to which the effective population sizes
 implied by diversity, $\widetilde{N}_e$, diverge from census population sizes.
-However, there are a variety other effective population size estimates
+However, there are a variety other effective population size estimators
 calculable from different data and summary statistics
 \citep{Wang2016-mi,Caballero1994-ao,Caballero2020-wm,Galtier2020-fb}. These
 include estimators based on the site frequency spectrum, observed decay in
 linkage disequilibrium, or temporal estimators that use the variance in allele
-frequency change. These alternate estimators capture summaries of the effective
-population size on shorter timescales than coalescent-based estimators
-\citep{Wang2005-wy}, and thus could be used to tease apart processes that
-impact the $N_e$-$N_c$ relationship in the more recent past. 
+frequency change through time. These various estimators capture different
+summaries of effective population size on shorter timescales than
+coalescent-based estimators (see \cite{Wang2005-wy} for a review), and thus
+could be used to tease apart processes that impact the $N_e$-$N_c$ relationship
+in the more recent past. 
 
 Temporal $N_e$ estimators already play an important role in understanding
 another summary of the $N_e$-$N_c$ relationship: the ratio
 $\nicefrac{N_e}{N_c}$, which is an important quantity in conservation genetics
-\citep{Frankham1995-xz,Mace1991-ai} and in understanding evolution in
-highly fecund marine species. Surveys of the short-term $\nicefrac{N_e}{N_c}$
+\citep{Frankham1995-xz,Mace1991-ai} and in understanding evolution in highly
+fecund marine species. Surveys of the short-term $\nicefrac{N_e}{N_c}$
 relationship across taxa indicate mean $\nicefrac{N_e}{N_c}$ is on order of
-$\approx 0.1$ \citep{Frankham1995-xz,Palstra2008-rt,Palstra2012-vy}, though
-the uncertainty in these estimates is high, and some species with sweepstakes
+$\approx 0.1$ \citep{Frankham1995-xz,Palstra2008-rt,Palstra2012-vy}, though the
+uncertainty in these estimates is high, and some species with sweepstakes
 reproduction systems like Pacific Oyster (\emph{Crassostrea gigas}) can have
-$\nicefrac{N_e}{N_c} \approx 10^{-6}$. Estimates of the $\nicefrac{N_e}{N_c}$
-ratio are an important, yet under appreciated piece of solving Lewontin's
-Paradox. For example, if $N_e$ is estimated from the allele frequency change
-across a single generation (i.e. \cite{Waples1989-sj}), $\nicefrac{N_e}{N_c}$
-constrains the variance in reproductive success
-\citep{Wright1938-tv,Nunney1993-ef,Nunney1996-wy}. This implies that apart
-from species with sweepstakes reproductive systems, the variance in
-reproductives success each generation (whether heritable or non-heritable) is
-likely insufficient to significantly contribute to constraining
-$\widetilde{N}_e$ for most taxa. Still, further work is needed to characterize
-(1) how $\nicefrac{N_e}{N_c}$ varies with $N_c$ across taxa (though see
+$\nicefrac{N_e}{N_c} \approx 10^{-6}$ \citep{Hedgecock1994-gs}. Estimates of
+the $\nicefrac{N_e}{N_c}$ ratio may be an important, yet under appreciated
+piece of solving Lewontin's Paradox. For example, if $N_e$ is estimated from
+the allele frequency change across a single generation (i.e.
+\cite{Waples1989-sj}), $\nicefrac{N_e}{N_c}$ constrains estimates of the
+variance in reproductive success
+\citep{Wright1938-tv,Nunney1993-ef,Nunney1996-wy}. This implies that apart from
+species with sweepstakes reproductive systems, the variance in reproductive
+success each generation (whether heritable or non-heritable) is likely
+insufficient to significantly contribute to constraining $\widetilde{N}_e$ for
+most taxa. Still, further work is needed to characterize (1) how
+$\nicefrac{N_e}{N_c}$ varies with $N_c$ across taxa (though see
 \cite{Palstra2012-vy}, Figure 2), and (2) the variance of $\nicefrac{N_e}{N_c}$
 over longer time spans (i.e. how periodic sweepstakes reproductive events act
 to constrain $N_e$). Overall, characterizing how $\nicefrac{N_e}{N_c}$ varies
@@ -1098,30 +1106,30 @@ be predictive of diversity levels across taxa
 
 Finally, short-term temporal $N_e$ estimators may play an important role in
 resolving Lewontin's Paradox. These estimators, along with short-term estimates
-of the impact of linked selection \citep{Buffalo2019-qs,Buffalo2020-my},
-can inform us how much diversity is depressed across shorter timescales, free
-from the rare strong selective events or severe bottlenecks that impact
+of the impact of linked selection \citep{Buffalo2019-qs,Buffalo2020-my}, can
+inform us how much diversity is depressed by selection on shorter timescales,
+free from the rare strong selective events or severe bottlenecks that impact
 pairwise diversity. It could be that in any one generation, selection
 contributes more to the variance of allele frequency changes than drift, yet
 across-taxa patterns in diversity are better explained processes acting
 sporadically on longer timescales, such as colonization, founder effects, and
 bottlenecks. Thus, the pairwise diversity may not give us the best picture of
 the generation to generation evolutionary processes acting in a population to
-change allele frequencies. Furthermore, certain observed adaptations are
-inexplicable given implied long-term coalescent effective population sizes, and
-are only possible if short-term effective population sizes are orders of
-magnitude larger \citep{Karasov2010-fb,Barton2010-pi}.
+change allele frequencies. Furthermore, certain observed adaptations occur at a
+pace that is inexplicable given small effective population sizes implied by
+diversity, and are only possible if short-term effective population sizes are
+orders of magnitude larger \citep{Karasov2010-fb,Barton2010-pi}.
 
 \subsection{Conclusions}
 
 In \emph{Building a Science of Population Biology}
 (\citeyear{Lewontin2004-fb}), Lewontin laments the difficulty of uniting
 population genetics and population ecology into a cohesive discipline of
-population biology. Lewontin's Paradox of Variation remains a critical unsolved
-problem at the nexus of these two different disciplines: across species, we
-fail to understand the processes that connect a central parameter of population
-ecology, census size, to a central parameter of population genetics, effective
-population size. Given that selection seems to fall short in explaining
+population biology. Lewontin's Paradox of Variation remains a major unsolved
+problem at the nexus of these two different disciplines: we fail to understand
+the processes that connect a central parameter of population ecology, census
+size, to a central parameter of population genetics, effective population size
+across species. Given that selection seems to fall short in resolving
 Lewontin's Paradox, a full resolution will require a mechanistic understanding
 the ecological, life history, and macroevolutionary processes that connect
 $N_c$ to $N_e$ across taxa. While I have focused exclusively on metazoan taxa
@@ -1133,19 +1141,19 @@ etc.).
 Looking at Lewontin's Paradox through an macroecological and macroevolutionary
 lens begets interesting questions outside of the traditional realm of
 population genetics.  Here, I have found that diversity and $N_c$ have a
-surprisingly consistent relationship without many outliers, despite the wildly
-disparate ecologies, life histories, and evolutionary histories of the taxa
-included. Furthermore, taxa with very large census sizes have surprisingly low
-diversity. Is this explained by macroevolutionary processes, such as different
-rates of speciation for large-$N_c$ taxa? Or, are the levels of diversity we
-observe today an artifact of our timing relative to the last glacial maximum,
-or the last major extinction? Did large-$N_c$ prehistoric animal populations
-living in other geological eras have higher levels of diversity than our
-present taxa? Or, does ecological competition occur on shorter timescales such
-that strong population size contractions transpire and depress diversity, even
-if a species is undisturbed by climatic shifts or mass extinctions? Overall,
-patterns of diversity across taxa are determined by many overlaid evolutionary
-and ecological processes occurring on vastly different timescales. Lewontin's
+consistent relationship without many outliers, despite the wildly disparate
+ecologies, life histories, and evolutionary histories of the taxa included.
+Furthermore, taxa with very large census sizes have surprisingly low diversity.
+Is this explained by macroevolutionary processes, such as different rates of
+speciation for large-$N_c$ taxa? Or, are the levels of diversity we observe
+today an artifact of our timing relative to the last glacial maximum, or the
+last major extinction? Did large-$N_c$ prehistoric animal populations living in
+other geological eras have higher levels of diversity than our present taxa?
+Or, does ecological competition occur on shorter timescales such that strong
+population size contractions transpire and depress diversity, even if a species
+is undisturbed by climatic shifts or mass extinctions? Overall, patterns of
+diversity across taxa are determined by many overlaid evolutionary and
+ecological processes occurring on vastly different timescales. Lewontin's
 Paradox of Variation may persist unresolved for some time because the
 explanation requires synthesis and model building at the intersection of all
 these disciplines.
@@ -1422,7 +1430,7 @@ by
           &\approx \frac{\theta}{\nicefrac{1}{B} + 2NS} 
 \end{align}
 %
-(cf. equation 1 \cite{Elyashiv2016-vt}, and equation 20 of \cite{Coop2012-cd}).
+(cf. equation 1 \cite{Elyashiv2016-vt}, equation 4 of \cite{Kim2000-ep}, and equation 20 of \cite{Coop2012-cd}, ).
 The BGS component is given by \cite{Hudson1995-xc},
 
 \begin{align}
@@ -1435,9 +1443,10 @@ and the hitchhiking component is
   S = \frac{\nu_\text{BP}}{r_\text{BP}} J
 \end{align}
 %
-(cf. \cite{Coop2012-cd} equation 20) where $J$ is the probability that two
-lineages coalesce down to one, given sweeps occur uniformly along the genome.
-Under this homogeneous sweep model, $J$ is 
+(cf. \cite{Coop2012-cd} equation 20) where $\nu_\text{BP}$ and $r_\text{BP}$
+are the substitutions and recombination per basepair respectively, $J$ is the
+probability that two lineages coalesce down to one, given sweeps occur
+uniformly along the genome.  Under this homogeneous sweep model, $J$ is 
 
 \begin{align}
   J = \int_0^L q_f(r)^2 dr 
@@ -1459,12 +1468,13 @@ Elyashiv et al.'s equation 3,
   S(x) = \frac{1}{T} \sum_{i_S} \alpha(i_S) \sum_{y \in a(i_S)} \int \exp(-r(x, y) \tau(s, N)) g(s | i_S) ds
 \end{align}
 %
-where $T$ is the number of generations that substitutions accrue, $i_S = 1,
-\ldots, I_S$ is the annotation class (e.g. exons, introns, UTRs), $\alpha(i_S)$
-is the fraction of substitutions in annotation class $i_S$ that are beneficial,
-$a(i_S)$ is the set of all substitutions in annotation class $i_S$, $\tau(s,
-N)$ is the fixation time of a site with additive effect $s$, and $g(s | i_S)$
-is the distribution of selection coefficients for annotation class $i_S$. 
+where $T$ is the length of the lineage (in generations) on which substitutions
+accrue, $i_S = 1, \ldots, I_S$ is the annotation class (e.g. exons, introns,
+UTRs), $\alpha(i_S)$ is the fraction of substitutions in annotation class $i_S$
+that are beneficial, $a(i_S)$ is the set of all substitutions in annotation
+class $i_S$, $\tau(s, N)$ is the fixation time of a site with additive effect
+$s$, and $g(s | i_S)$ is the distribution of selection coefficients for
+annotation class $i_S$. 
 
 Note, that we can recover the model of \cite{Coop2012-cd} from this
 expression. Suppose there is only one annotation class, and $\alpha$ fraction
