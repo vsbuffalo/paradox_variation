@@ -90,7 +90,7 @@ if (!file.exists(OCC_FILE)) {
 message('done.')
 
 
-## for citation (grr, GBIF makes this hard)
+# ## for citation (grr, GBIF makes this hard)
 # keys <- unlist(map(uniq_species_df$taxon_key, 'key'))
 # dwld <- occ_download(
 #   pred_in("taxonKey", keys),

@@ -24,7 +24,7 @@ axis(2, xlabs, labels=latex2exp::TeX(sprintf("$10^{%d}$", xlabs)),
      cex.axis=0.8, line=0.5)
 corr <- cor(drl$log10_eoo_km2, drl$log10_range, use='pairwise.complete')
 corpval <- cor.test(drl$log10_eoo_km2, drl$log10_range, use='pairwise.complete')$p.value
-xpos <- 6.5
+xpos <- 6.2
 ypos <- 4.5
 text(xpos, ypos + .2, latex2exp::TeX(sprintf('$\\rho = %.2f$', round(corr, 2))), 
      cex=0.8, adj=0)
